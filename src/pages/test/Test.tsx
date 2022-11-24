@@ -6,12 +6,13 @@ import s from "./Test.module.css"
 import XSelect from "../../components/select/XSelect";
 import XRadio from "../../components/radio/XRadio";
 import {mockSelect} from "../../data/selectOptions";
+import {setPageTitle} from "../../services/pageTitle";
 
 export const Test = () => {
     const {setTitle} = useContext(HeaderTitleContext);
     useEffect(() => {
         setTitle('Testing components page')
-        document.title = 'Tests';
+        setPageTitle('Tests');
     }, [])
 
     const alertHandler = () => alert('🏄‍')
