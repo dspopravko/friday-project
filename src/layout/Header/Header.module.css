@@ -1,0 +1,17 @@
+.header {
+    height: 60px;
+    background: hsl(0, 0%, 96%);
+}
+.buttonContainer {
+    margin: 0 auto;
+    height: 60px;
+    max-width: var(--appWidth);
+    display: flex;
+    justify-content: space-between;
+}
+.titleContainer {
+    font-size: 1.6rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}

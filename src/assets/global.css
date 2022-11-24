@@ -1,0 +1,51 @@
+:root {
+    --shade-b-1: hsl(206, 50%, 10%);
+    --shade-b-2: hsl(206, 100%, 15%);
+    --shade-b-3: hsl(206, 100%, 20%);
+    --shade-b-4: hsl(206, 100%, 25%);
+    --shade-b-5: hsl(206, 100%, 30%);
+    --shade-b-6: hsl(206, 80%, 35%);
+    --shade-b-7: hsl(206, 75%, 40%);
+    --shade-b-8: hsl(206, 75%, 45%);
+    --shade-b-9: hsl(206, 75%, 50%);
+    --shade-b-10: hsl(206, 75%, 55%);
+    --shade-b-11: hsl(206, 75%, 60%);
+    --shade-b-12: hsl(206, 75%, 65%);
+    --shade-b-13: hsl(206, 75%, 70%);
+    --shade-b-14: hsl(206, 75%, 75%);
+    --shade-b-15: hsl(206, 75%, 80%);
+    --shade-b-16: hsl(206, 75%, 85%);
+    --shade-b-17: hsl(206, 75%, 90%);
+    --shade-b-18: hsl(206, 75%, 95%);
+
+    --shade-r-1: hsl(0, 49%, 10%);
+    --shade-r-2: hsl(0, 100%, 15%);
+    --shade-r-3: hsl(0, 100%, 20%);
+    --shade-r-4: hsl(0, 100%, 25%);
+    --shade-r-5: hsl(0, 100%, 30%);
+    --shade-r-6: hsl(0, 80%, 35%);
+    --shade-r-7: hsl(0, 75%, 40%);
+}
+
+.bg-1 { background: var(--shade-b-1) }
+.bg-2 { background: var(--shade-b-2) }
+.bg-3 { background: var(--shade-b-3) }
+.bg-4 { background: var(--shade-b-4) }
+.bg-5 { background: var(--shade-b-5) }
+.bg-6 { background: var(--shade-b-6) }
+
+:root {
+    --background-color: hsl(0, 0%, 100%);
+    --text-color: hsl(0, 0%, 25%);
+    --border-color: hsl(228, 8%, 20%);
+    --border-radius: .3rem;
+    --regular-font: Roboto, sans-serif;
+    --monospace-font: 'Roboto Mono', monospace;
+    --form-field-bg: hsl(0, 0%, 95%);
+    --form-field-color: hsl(228, 8%, 12%);
+    --link-color: hsl(206, 89%, 45%);
+    --appWidth: 1080px
+}
+a.active {
+    color: red;
+}
