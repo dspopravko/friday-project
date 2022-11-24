@@ -8,9 +8,15 @@ export const Error404 = () => {
         setTitle('💃')
     }, [])
     return (
-        <div>
-            <h1>Error 404!</h1>
+        <div className="pageContainer">
+            <div className={s.container}>
+
+            <h1>Error 404</h1>
+
             Page not found
+               <span style={{fontSize: "36px", padding: '20px'}}>👨‍🔧</span>
+
+            </div>
         </div>
     );
 }

@@ -1,6 +1,7 @@
 import React, {ReactNode, useEffect, useState} from 'react';
 import {Sidebar} from "./Sidebar/Sidebar";
 import {Header} from "./Header/Header";
+import {Footer} from "./Footer/Footer";
 
 type LayoutPropsType = {
     children: ReactNode
@@ -17,10 +18,11 @@ export const Layout = (props: LayoutPropsType) => {
     }, [open])
 
     return (
-        <div>
+        <>
             <Sidebar open={open} handleClose={handleClose}/>
             <Header handleOpen={handleOpen}/>
             <div>{props.children}</div>
-        </div>
+            <Footer/>
+        </>
     );
 }

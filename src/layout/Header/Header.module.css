@@ -1,6 +1,7 @@
 .header {
     height: 60px;
     background: hsl(0, 0%, 96%);
+    box-shadow: var(--header-shadow)
 }
 .buttonContainer {
     margin: 0 auto;

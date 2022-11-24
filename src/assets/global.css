@@ -25,6 +25,10 @@
     --shade-r-5: hsl(0, 100%, 30%);
     --shade-r-6: hsl(0, 80%, 35%);
     --shade-r-7: hsl(0, 75%, 40%);
+
+    --container-shadow:  0 0px 4px rgba(0, 0, 0, .15);
+    --header-shadow: 0 -2px 8px rgba(0, 0, 0, .35);
+    --footer-shadow: 0 2px 8px rgba(0, 0, 0, .35);
 }
 
 .bg-1 { background: var(--shade-b-1) }

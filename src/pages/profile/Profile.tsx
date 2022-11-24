@@ -9,8 +9,8 @@ export const Profile = () => {
         setPageTitle('Profile');
     }, [])
     return (
-        <div>
-            Profile
+        <div className="pageContainer">
+            <h1 style={{marginTop: '20px'}}>Profile</h1>
         </div>
     );
 }
