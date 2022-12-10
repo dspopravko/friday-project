@@ -1,12 +1,12 @@
 import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
-import {Login} from "../pages/authentication/login/Login";
-import {PasswordNew} from "../pages/authentication/passwordNew/PasswordNew";
+import {Login} from "../features/auth/components/login/Login";
+import {PasswordNew} from "../features/auth/components/passwordNew/PasswordNew";
 import {LoginWrapper} from "../pages/authentication/LoginWrapper";
 import {Profile} from "../pages/profile/Profile";
 import {Error404} from "../pages/error404/Error404";
-import {Registration} from "../pages/authentication/registration/Registration";
-import {PasswordRestore} from "../pages/authentication/passwordRestore/PasswordRestore";
+import {Registration} from "../features/auth/components/registration/Registration";
+import {PasswordRestore} from "../features/auth/components/passwordRestore/PasswordRestore";
 import {Test} from "../pages/test/Test";
 import {PATH} from "../data/paths";
 

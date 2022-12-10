@@ -6,7 +6,9 @@ import {Layout} from "../layout/Layout";
 import {Pages} from "../layout/Pages";
 import {HeaderTitleContext} from '../context/context';
 import {Provider} from "react-redux";
-import {store} from "../state/Store";
+import {store} from "../state/store";
+import {theme} from "../assets/mui-theme";
+import {ThemeProvider} from "@mui/material";
 
 function App() {
     const [title, setTitle] = useState('')
@@ -16,11 +18,13 @@ function App() {
                 <HeaderTitleContext.Provider
                     value={{title, setTitle}}
                 >
-                    <Provider store={store}>
-                        <Layout>
-                            <Pages/>
-                        </Layout>
-                    </Provider>
+                    <ThemeProvider theme={theme}>
+                        <Provider store={store}>
+                            <Layout>
+                                <Pages/>
+                            </Layout>
+                        </Provider>
+                    </ThemeProvider>
                 </HeaderTitleContext.Provider>
             </HashRouter>
         </div>

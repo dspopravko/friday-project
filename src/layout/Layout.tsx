@@ -1,26 +1,17 @@
-import React, {ReactNode, useEffect, useState} from 'react';
-import {Sidebar} from "./Sidebar/Sidebar";
+import React, {ReactNode} from 'react';
 import {Header} from "./Header/Header";
 import {Footer} from "./Footer/Footer";
+import {ErrorSnackbar} from "../common/errorSnackbar/ErrorSnackbar";
 
 type LayoutPropsType = {
     children: ReactNode
 }
 
 export const Layout = (props: LayoutPropsType) => {
-    const [open, setOpen] = useState(false)
-    const handleClose = () => setOpen(false)
-    const handleOpen = () => setOpen(true)
-
-    useEffect(() => {
-        open && (document.body.style.overflow = 'hidden')
-        !open && (document.body.style.overflow = 'initial')
-    }, [open])
-
     return (
         <>
-            <Sidebar open={open} handleClose={handleClose}/>
-            <Header handleOpen={handleOpen}/>
+            <ErrorSnackbar/>
+            <Header/>
             <div>{props.children}</div>
             <Footer/>
         </>
