@@ -1,7 +1,8 @@
 import {createSlice, Dispatch, PayloadAction} from "@reduxjs/toolkit";
 import {authApi} from "./services/auth-api";
 import {authPayload} from "./services/models/auth-payload";
-import {handleServerNetworkError} from "../../services/error-notification";
+import {handleAxiosError} from "../../services/error-notification";
+import {AxiosError} from "axios";
 
 type userType = {
     _id: string
@@ -42,8 +43,10 @@ export const authMe = () => async (dispatch: Dispatch) => {
         await authApi.me()
         dispatch(authSlice.actions.setAuth(true))
     } catch (e) {
-        dispatch(authSlice.actions.setAuth(false))
-        if (e instanceof Error) handleServerNetworkError(e, dispatch)
+        if (e instanceof AxiosError && e.code !== "ERR_NETWORK") {
+            dispatch(authSlice.actions.setAuth(false))
+        }
+        handleAxiosError(e, dispatch) // возможно нам не нужна обработка ошибок для me запроса, зачем нам нотификации при запуске приложения
     }
 }
 export const login = (payload: authPayload) => async (dispatch: Dispatch) => {
@@ -58,8 +61,7 @@ export const login = (payload: authPayload) => async (dispatch: Dispatch) => {
         }
         dispatch(authSlice.actions.setUser(user))
     } catch (e) {
-        console.log(e)
-        if (e instanceof Error) handleServerNetworkError(e, dispatch)
+        handleAxiosError(e, dispatch)
     }
 }
 export const logout = () => async (dispatch: Dispatch) => {
@@ -67,7 +69,7 @@ export const logout = () => async (dispatch: Dispatch) => {
         await authApi.logout()
         dispatch(authSlice.actions.setAuth(false))
     } catch (e) {
-        if (e instanceof Error) handleServerNetworkError(e, dispatch)
+        handleAxiosError(e, dispatch)
     }
 }
 
