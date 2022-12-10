@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import './App.css';
-import './assets/global.css'
+import '../assets/css/global.css'
 import {HashRouter} from "react-router-dom";
-import {Layout} from "./layout/Layout";
-import {Pages} from "./layout/Pages";
-import {HeaderTitleContext} from './context/context';
+import {Layout} from "../layout/Layout";
+import {Pages} from "../layout/Pages";
+import {HeaderTitleContext} from '../context/context';
 import {Provider} from "react-redux";
-import {store} from "./state/Store";
+import {store} from "../state/Store";
 
 function App() {
     const [title, setTitle] = useState('')

@@ -1,10 +1,10 @@
 import React, {useContext, useEffect} from 'react';
-import XButton from "../../components/button/XButton";
+import XButton from "../../common/components/button/XButton";
 import {HeaderTitleContext} from "../../context/context";
-import XInput from "../../components/input/XInput";
+import XInput from "../../common/components/input/XInput";
 import s from "./Test.module.css"
-import XSelect from "../../components/select/XSelect";
-import XRadio from "../../components/radio/XRadio";
+import XSelect from "../../common/components/select/XSelect";
+import XRadio from "../../common/components/radio/XRadio";
 import {mockSelect} from "../../data/selectOptions";
 import {setPageTitle} from "../../services/pageTitle";
 

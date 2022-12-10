@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import s from './Header.module.css'
 import {HeaderTitleContext} from "../../context/context";
-import XButton from "../../components/button/XButton";
+import XButton from "../../common/components/button/XButton";
 
 type HeaderPropsType = {
     handleOpen: () => void
