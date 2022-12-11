@@ -1,9 +1,16 @@
 import React from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { useAppDispatch } from '../../../../../state/store'
+import { useAppDispatch, useAppSelector } from '../../../../../state/store'
 import { login } from '../../../authSlice'
 import s from './LoginForm.module.css'
-import { Button } from '@mui/material'
+import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().min(8).max(32).required(),
+})
 
 type LoginData = {
   email: string
@@ -13,30 +20,52 @@ type LoginData = {
 
 export const LoginForm = () => {
   const dispatch = useAppDispatch()
-
+  const isFetching = useAppSelector((state) => state.auth.isFetching)
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm<LoginData>()
-  const onSubmit: SubmitHandler<LoginData> = (data) => dispatch(login(data))
+  } = useForm<LoginData>({
+    mode: 'onTouched',
+    resolver: yupResolver(schema),
+  })
 
-  console.log(watch('email')) // watch input value by passing the name of it
+  const onSubmit: SubmitHandler<LoginData> = (data) => dispatch(login(data))
 
   return (
     <div style={{ margin: '0 auto', width: '50%' }}>
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-        <input
-          defaultValue="nya-admin@nya.nya"
+        <TextField
+          label="email"
+          margin="normal"
+          autoComplete={'username'}
+          helperText={errors.email?.message}
+          error={!!errors.email?.message}
           {...register('email', { required: true })}
         />
-        <input
-          defaultValue="1qazxcvBG"
+        <TextField
+          type="password"
+          label="password"
+          margin="normal"
+          autoComplete={'password'}
+          helperText={errors.password?.message}
+          error={!!errors.password?.message}
           {...register('password', { required: true })}
         />
-        {errors.password && <span>This field is required</span>}
-        <Button variant={'contained'} type="submit">
+
+        <FormControlLabel
+          label={'Remember me'}
+          sx={{
+            marginLeft: 0,
+            paddingTop: '6px',
+            paddingBottom: '10px',
+          }}
+          control={
+            <Checkbox {...register('rememberMe', { required: false })} />
+          }
+        />
+
+        <Button variant={'contained'} disabled={isFetching} type="submit">
           Login in
         </Button>
       </form>

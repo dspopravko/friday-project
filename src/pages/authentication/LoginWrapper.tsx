@@ -17,8 +17,7 @@ export const LoginWrapper = () => {
     <div className="pageContainer">
       <div className={s.loginWrapper}>
         <div className={s.heading}>Login wrapper</div>
-        Some mock state from redux isAuth : {isAuth ? 'True' : 'False'}. Passing
-        through the context to the outlet 👇
+        Login: nya-admin@nya.nya <br /> Password: 1qazxcvBG
       </div>
       <Outlet context={{ isAuth: isAuth }} />
     </div>
