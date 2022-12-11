@@ -64,9 +64,7 @@ export const Profile = () => {
         <Typography className={styles.email} component={'p'}>
           {user.email}
         </Typography>
-        <XButton className={styles.btn} onClick={logoutHandler}>
-          Log out
-        </XButton>
+        <XButton onClick={logoutHandler}>Log out</XButton>
       </Card>
     </Grid>
   )

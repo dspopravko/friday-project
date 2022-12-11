@@ -39,10 +39,17 @@ export const Test = () => {
       <div className={s.container}>
         <div className={s.item}>
           Buttons:
-          <XButton onClick={authCorrect}>Auth (correct login:password)</XButton>
-          <XButton onClick={checkMe}>check me</XButton>
-          <XButton onClick={logoutHandler} xType={'secondary'}>
+          <XButton onClick={authCorrect} type={'primary'}>
+            Auth (correct login:password)
+          </XButton>
+          <XButton onClick={checkMe} type={'secondary'}>
+            check me
+          </XButton>
+          <XButton onClick={logoutHandler} type={'delete'}>
             Logout
+          </XButton>
+          <XButton onClick={logoutHandler} disabled>
+            Disabled
           </XButton>
         </div>
         <div className={s.item}>
