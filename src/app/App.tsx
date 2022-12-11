@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
-import './App.css'
 import '../assets/css/global.css'
+import './App.css'
+import React, { useState } from 'react'
 import { HashRouter } from 'react-router-dom'
+import { HeaderTitleContext } from '../context/context'
 import { Layout } from '../layout/Layout'
 import { Pages } from '../layout/Pages'
-import { HeaderTitleContext } from '../context/context'
 import { Provider } from 'react-redux'
+import { ThemeProvider } from '@mui/material'
 import { store } from '../state/store'
 import { theme } from '../assets/mui-theme'
-import { ThemeProvider } from '@mui/material'
 
 function App() {
   const [title, setTitle] = useState('')

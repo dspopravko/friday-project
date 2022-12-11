@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import s from './Header.module.css'
 import { HeaderTitleContext } from '../../context/context'
-import XButton from '../../common/components/button/XButton'
 import { useAppSelector } from '../../state/store'
 import { ProfileSmall } from '../../common/profileSmall/ProfileSmall'
 import { useNavigate } from 'react-router-dom'
 import { PATH } from '../../data/paths'
+import { Button } from '@mui/material'
 
 export const Header = () => {
   const { title } = useContext(HeaderTitleContext)
@@ -20,7 +20,9 @@ export const Header = () => {
         {isAuth ? (
           <ProfileSmall />
         ) : (
-          <XButton onClick={handleSignIn}>Sign in</XButton>
+          <Button variant={'contained'} onClick={handleSignIn}>
+            Sign in
+          </Button>
         )}
       </div>
     </div>

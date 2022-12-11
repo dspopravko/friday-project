@@ -6,8 +6,6 @@ type ThemeContextType = {
 }
 const DefaultState = {
   title: 'Loading...',
-  setTitle: (title: string) => {
-    console.log(title)
-  },
+  setTitle: () => undefined,
 }
 export const HeaderTitleContext = createContext<ThemeContextType>(DefaultState)
