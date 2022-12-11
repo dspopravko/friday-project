@@ -5,15 +5,17 @@ import { useAppDispatch, useAppSelector } from '../../state/store'
 import {
   Avatar,
   Badge,
+  Box,
+  Card,
   Grid,
   IconButton,
-  Paper,
   Typography,
 } from '@mui/material'
-import s from './profile.module.css'
+import styles from './profile.module.css'
 import CameraAltIcon from '@mui/icons-material/CameraAlt'
 import XButton from '../../common/components/button/XButton'
 import { logout } from '../../features/auth/authSlice'
+import { EditNameUser } from '../../common/components/editNameUser/EditNameUser'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
@@ -28,10 +30,14 @@ export const Profile = () => {
     dispatch(logout)
   }
 
+  const onOpenChange = () => {
+    console.log('dsdsd') // заглушка для prettera нужно за диспачить новое имя в state
+  }
+
   return (
     <Grid container justifyContent={'center'} alignItems={'center'}>
-      <Paper className={s.pageContainer}>
-        <Typography className={s.title} variant={'h5'}>
+      <Card className={styles.pageContainer}>
+        <Typography className={styles.title} variant={'h5'}>
           Personal Information
         </Typography>
         <Badge
@@ -52,16 +58,16 @@ export const Profile = () => {
             sx={{ width: 96, height: 96 }}
           />
         </Badge>
-        <Typography className={s.name} component={'p'}>
-          {user.name}
-        </Typography>
-        <Typography className={s.email} component={'p'}>
+        <Box className={styles.name}>
+          <EditNameUser value={user.name} onChange={onOpenChange} />
+        </Box>
+        <Typography className={styles.email} component={'p'}>
           {user.email}
         </Typography>
-        <XButton className={s.btn} onClick={logoutHandler}>
+        <XButton className={styles.btn} onClick={logoutHandler}>
           Log out
         </XButton>
-      </Paper>
+      </Card>
     </Grid>
   )
 }
