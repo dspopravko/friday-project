@@ -1,11 +1,10 @@
 .loginWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 20px;
-    padding: 20px 0;
-    background: var(--shade-b-18);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+  padding: 20px 0;
+  background: var(--shade-b-18);
 }
 .heading {
-
 }

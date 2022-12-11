@@ -1,18 +1,18 @@
 .header {
-    height: 60px;
-    background: hsl(0, 0%, 96%);
-    box-shadow: var(--header-shadow)
+  height: 60px;
+  background: hsl(0, 0%, 96%);
+  box-shadow: var(--header-shadow);
 }
 .buttonContainer {
-    margin: 0 auto;
-    height: 60px;
-    max-width: var(--appWidth);
-    display: flex;
-    justify-content: space-between;
+  margin: 0 auto;
+  height: 60px;
+  max-width: var(--appWidth);
+  display: flex;
+  justify-content: space-between;
 }
 .titleContainer {
-    font-size: 1.6rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
+  font-size: 1.6rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
 }

@@ -1,34 +1,50 @@
 .button {
-    width: 118px;
-    min-height: 36px;
-    border: none;
-    border-radius: 3px;
-    margin: 2px;
-    font-family: "Montserrat", sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 18px;
-    letter-spacing: 0;
-    color: var(--background-color);
-    transition: ease 0.1s;
+  width: 118px;
+  min-height: 36px;
+  border: none;
+  border-radius: 3px;
+  margin: 2px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0;
+  color: var(--background-color);
+  transition: ease 0.1s;
 }
 
 .button.disabled {
-    background: var(--shade-b-4);
-    opacity: 0.5;
+  background: var(--shade-b-4);
+  opacity: 0.5;
 }
 
 .secondary {
-    color: #0066CC;
-    border: 1px solid #0066CC;
-    background: transparent;
+  color: #0066cc;
+  border: 1px solid #0066cc;
+  background: transparent;
 }
 
-.red { background: var(--shade-r-6) }
-.red:hover { background: var(--shade-r-6) }
-.red:active { background: var(--shade-r-6) }
-.default { background: var(--shade-b-6) }
-.default:hover { background: var(--shade-b-7) }
-.default:active { background: var(--shade-b-5) }
-.secondary:hover { background: var(--shade-b-18) }
-.secondary:active { background: var(--shade-b-17) }
+.red {
+  background: var(--shade-r-6);
+}
+.red:hover {
+  background: var(--shade-r-6);
+}
+.red:active {
+  background: var(--shade-r-6);
+}
+.default {
+  background: var(--shade-b-6);
+}
+.default:hover {
+  background: var(--shade-b-7);
+}
+.default:active {
+  background: var(--shade-b-5);
+}
+.secondary:hover {
+  background: var(--shade-b-18);
+}
+.secondary:active {
+  background: var(--shade-b-17);
+}

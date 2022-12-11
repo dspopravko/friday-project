@@ -1,10 +1,8 @@
 .radio {
-
 }
 
 .radio::before {
 }
-
 
 .radio:checked::before {
 }
@@ -13,8 +11,8 @@
 }
 
 .options {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
 }

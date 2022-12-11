@@ -1,11 +1,13 @@
-import {createContext} from "react";
+import { createContext } from 'react'
 
 type ThemeContextType = {
-    title: string
-    setTitle: (title: string) => void
+  title: string
+  setTitle: (title: string) => void
 }
 const DefaultState = {
-    title: 'Loading...',
-    setTitle: (title: string) => {}
+  title: 'Loading...',
+  setTitle: (title: string) => {
+    console.log(title)
+  },
 }
 export const HeaderTitleContext = createContext<ThemeContextType>(DefaultState)

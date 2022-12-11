@@ -1,3 +1,1 @@
-export const cardsApi = {
-
-}
+export const cardsApi = {}

@@ -1,12 +1,12 @@
 .footer {
-    position: absolute;
-    bottom: 0;
-    background: hsl(0, 0%, 96%);
-    height: 100px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    box-shadow: var(--footer-shadow)
+  position: absolute;
+  bottom: 0;
+  background: hsl(0, 0%, 96%);
+  height: 100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  box-shadow: var(--footer-shadow);
 }
