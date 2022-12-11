@@ -1,0 +1,32 @@
+.pageContainer {
+    box-sizing: border-box;
+    width: 413px;
+    height: 360px;
+    margin: 60px 0 0 0;
+}
+
+.title {
+    padding: 30px 0;
+}
+
+.name {
+    padding: 15px 0;
+}
+
+.email {
+    opacity: 0.5;
+}
+
+.btn {
+    width: 127px;
+    height: 36px;
+    margin: 30px 0 35px 0;
+    border-radius: 30px;
+    box-shadow: 0px 2px 10px rgba(109, 109, 109, 0.25), inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+    outline: none;
+    border: none;
+}
+
+.btn:hover {
+    background-color: var(--shade-b-16);
+}
