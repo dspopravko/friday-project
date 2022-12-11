@@ -16,3 +16,10 @@
   display: flex;
   align-items: center;
 }
+.back {
+  position: absolute;
+  top: 70px;
+  display: flex;
+  align-items: center;
+  transform: translate(-15px, 0);
+}

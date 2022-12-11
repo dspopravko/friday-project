@@ -5,7 +5,8 @@ import { useAppSelector } from '../../state/store'
 import { ProfileSmall } from '../../common/profileSmall/ProfileSmall'
 import { useNavigate } from 'react-router-dom'
 import { PATH } from '../../data/paths'
-import { Button } from '@mui/material'
+import { Button, Fab } from '@mui/material'
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 
 export const Header = () => {
   const { title } = useContext(HeaderTitleContext)
@@ -16,6 +17,22 @@ export const Header = () => {
   return (
     <div className={s.header}>
       <div className={s.buttonContainer}>
+        <div className={s.back}>
+          <Fab
+            variant="extended"
+            sx={{
+              backgroundColor: 'hsla(0,0%,100%,0.5)',
+              boxShadow: '0',
+              textTransform: 'none',
+              '&:hover': {
+                background: '#FFF',
+              },
+            }}
+          >
+            <KeyboardBackspaceIcon sx={{ mr: 1 }} />
+            Back to Packs List
+          </Fab>
+        </div>
         <div className={s.titleContainer}>{title || 'Loading...'}</div>
         {isAuth ? (
           <ProfileSmall />
