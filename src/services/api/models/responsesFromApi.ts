@@ -7,12 +7,10 @@ export type commonError<T, U> = {
   query?: T
   body?: U
 }
-
 export type registerError = commonError<
   { email: string; password: string },
-  any
+  unknown
 >
-
 export type registerAlreadyExists = {
   error: string
   email: string
@@ -27,28 +25,7 @@ export type registerValidationError<T> = {
   emailRegExp: T
   passwordRegExp: string
 }
-
-export type registerSuccess = {
-  addedUser: {
-    _id: string
-    email: string
-    rememberMe: boolean
-    isAdmin: boolean
-    name: string
-    verified: boolean
-    publicCardPacksCount: number
-    created: Date
-    updated: Date
-    __v: number
-  }
-}
-
-export type meFalse = {
-  error: string
-  in: string
-}
-
-export type loginSuccess = {
+export type apiUserType = {
   _id: string
   email: string
   rememberMe: boolean
@@ -58,6 +35,16 @@ export type loginSuccess = {
   publicCardPacksCount: number
   created: Date
   updated: Date
+  __v: number
+}
+export type registerSuccess = {
+  addedUser: apiUserType
+}
+export type meFalse = {
+  error: string
+  in: string
+}
+export type loginSuccess = apiUserType & {
   __v: number
   token: string
   tokenDeathTime: number

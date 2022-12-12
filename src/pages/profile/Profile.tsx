@@ -2,20 +2,12 @@ import React, { useContext, useEffect } from 'react'
 import { HeaderTitleContext } from '../../context/context'
 import { setPageTitle } from '../../services/pageTitle'
 import { useAppDispatch, useAppSelector } from '../../state/store'
-import {
-  Avatar,
-  Badge,
-  Box,
-  Card,
-  Grid,
-  IconButton,
-  Typography,
-} from '@mui/material'
+import { Box, Card, Grid, Typography } from '@mui/material'
 import styles from './profile.module.css'
-import CameraAltIcon from '@mui/icons-material/CameraAlt'
 import XButton from '../../common/components/button/XButton'
 import { EditNameUser } from '../../common/components/editNameUser/EditNameUser'
 import { logout } from '../../features/auth/authThunks'
+import { ProfilePhoto } from './updateProfile'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
@@ -40,24 +32,7 @@ export const Profile = () => {
         <Typography className={styles.title} variant={'h5'}>
           Personal Information
         </Typography>
-        <Badge
-          badgeContent={
-            <IconButton>
-              <CameraAltIcon />
-            </IconButton>
-          }
-          showZero
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
-          }}
-        >
-          <Avatar
-            alt={'Foto user'}
-            src={user.avatar}
-            sx={{ width: 96, height: 96 }}
-          />
-        </Badge>
+        <ProfilePhoto />
         <Box className={styles.name}>
           <EditNameUser value={user.name} onChange={onOpenChange} />
         </Box>
