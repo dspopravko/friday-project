@@ -1,27 +1,13 @@
 import React from 'react'
-import { Button } from '@mui/material'
+import { Button, ButtonProps } from '@mui/material'
 import { theme } from '../../../assets/mui-theme'
-import { ExtendButtonBase } from '@mui/material/ButtonBase'
-import { ButtonTypeMap } from '@mui/material/Button/Button'
 
-//всю типизацию надо рефакторить и делать нормально, с передачей event
-type DefaultButtonPropsType = ExtendButtonBase<ButtonTypeMap>
-
-type XButtonPropsType = Omit<DefaultButtonPropsType, 'type'> & {
+type XButtonPropsType = Omit<ButtonProps, 'type'> & {
   type?: 'primary' | 'secondary' | 'delete'
-  disabled?: boolean
   children?: React.ReactNode
-  onClick?: () => void
-  onBlur?: () => void
-  ClassName?: string
 }
 
-const SuperButton: React.FC<XButtonPropsType> = ({
-  type,
-  disabled,
-  ClassName,
-  ...rest
-}) => {
+const XButton: React.FC<XButtonPropsType> = ({ type, disabled, ...rest }) => {
   return (
     <Button
       {...rest}
@@ -48,4 +34,4 @@ const SuperButton: React.FC<XButtonPropsType> = ({
   )
 }
 
-export default SuperButton
+export default XButton
