@@ -36,7 +36,7 @@ export const authApi = {
       { user: string; blockedCardPacksCount: number }
     >('auth/me', blockData)
   },
-  updateUser(data: userUpdateData) {
+  updateUser(data: userUpdateData & authPayload) {
     return instance.post<userUpdateData, AxiosResponse<registerSuccess>>(
       'auth/login',
       data

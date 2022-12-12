@@ -5,12 +5,13 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import PersonIcon from '@mui/icons-material/Person'
 import XButton from '../../../../common/components/button/XButton'
 import { logout } from '../../authThunks'
+import { useNavigate } from 'react-router-dom'
 
 export const ProfileSmall = () => {
   // const [open, setOpen] = useState(true)
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.auth.user)
-
+  const navigate = useNavigate()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const openMui = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -51,7 +52,7 @@ export const ProfileSmall = () => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem>
+        <MenuItem onClick={() => navigate('profile')}>
           <PersonIcon />
           Profile
         </MenuItem>

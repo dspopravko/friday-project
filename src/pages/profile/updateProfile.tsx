@@ -1,18 +1,23 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { useState } from 'react'
 import {
   Avatar,
   Badge,
   Box,
+  Button,
   IconButton,
   Input,
   Modal,
+  TextField,
   Typography,
 } from '@mui/material'
 import CameraAltIcon from '@mui/icons-material/CameraAlt'
-import { useAppSelector } from '../../state/store'
-import XButton from '../../common/components/button/XButton'
-import { authApi } from '../../features/auth/services/auth-api'
+import { useAppDispatch, useAppSelector } from '../../state/store'
 import { fileToBase64 } from '../../services/fileToBase64'
+import { updateProfile } from '../../features/auth/authThunks'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import s from '../../features/auth/components/login/form/LoginForm.module.css'
 
 const style = {
   position: 'absolute',
@@ -23,27 +28,52 @@ const style = {
   bgcolor: 'background.paper',
   boxShadow: 24,
   p: 4,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '10px',
+}
+
+const schema = yup.object().shape({
+  name: yup.string().min(3),
+  password: yup.string().min(8).max(32).required(),
+})
+
+type LoginData = {
+  name?: string
+  password: string
+  avatar: FileList
 }
 
 export const ProfilePhoto = () => {
   const user = useAppSelector((state) => state.auth.user)
+  const dispatch = useAppDispatch()
   const [open, setOpen] = useState(false)
-  const [selectedFile, setSelectedFile] = useState<File>()
-  const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      setSelectedFile(event.target.files[0])
+
+  const handleSubmission = async (data: LoginData) => {
+    console.log(data.avatar[0])
+    let photo
+    if (data.avatar) {
+      photo = await fileToBase64(data.avatar[0])
     }
+
+    setOpen(false)
+    dispatch(
+      updateProfile({
+        name: data.name,
+        avatar: photo as string,
+        password: data.password,
+      })
+    )
   }
-  const handleSubmission = async () => {
-    if (!selectedFile) {
-      return
-    }
-    const photo = await fileToBase64(selectedFile)
-    await authApi.updateUser({
-      name: 'Demid',
-      avatar: photo as string,
-    })
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginData>({
+    mode: 'onTouched',
+    resolver: yupResolver(schema),
+  })
+  const onSubmit: SubmitHandler<LoginData> = (data) => handleSubmission(data)
   const handleClose = () => setOpen(false)
   const handleOpen = () => setOpen(true)
 
@@ -71,8 +101,33 @@ export const ProfilePhoto = () => {
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Choose photo
             </Typography>
-            <Input type={'file'} onChange={changeHandler} />
-            <XButton onClick={handleSubmission}>Upload this photo</XButton>
+            <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+              <Input
+                type={'file'}
+                {...register('avatar', { required: false })}
+              />
+              <TextField
+                label="name"
+                margin="normal"
+                autoComplete={'username'}
+                helperText={errors.name?.message}
+                error={!!errors.name?.message}
+                {...register('name', { required: false })}
+              />
+              <TextField
+                type="password"
+                label="password"
+                margin="normal"
+                autoComplete={'password'}
+                helperText={errors.password?.message}
+                error={!!errors.password?.message}
+                {...register('password', { required: true })}
+              />
+
+              <Button variant={'contained'} type="submit">
+                Update profile
+              </Button>
+            </form>
           </Box>
         </Modal>
 
