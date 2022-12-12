@@ -1,10 +1,10 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../state/store'
 import { Avatar, Menu, MenuItem } from '@mui/material'
-import { logout } from '../../authSlice'
 import LogoutIcon from '@mui/icons-material/Logout'
 import PersonIcon from '@mui/icons-material/Person'
 import XButton from '../../../../common/components/button/XButton'
+import { logout } from '../../authThunks'
 
 export const ProfileSmall = () => {
   // const [open, setOpen] = useState(true)

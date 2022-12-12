@@ -9,7 +9,7 @@ export enum appStatus {
 export type errorType = string | null
 
 const initialState = {
-  status: appStatus.loading as appStatus,
+  status: appStatus.idle as appStatus,
   error: null as errorType,
 }
 

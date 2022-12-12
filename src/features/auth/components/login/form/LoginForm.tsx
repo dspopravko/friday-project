@@ -1,11 +1,11 @@
 import React from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useAppDispatch, useAppSelector } from '../../../../../state/store'
-import { login } from '../../../authSlice'
 import s from './LoginForm.module.css'
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { login } from '../../../authThunks'
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),

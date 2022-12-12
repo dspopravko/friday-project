@@ -1,8 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { authApi } from './services/auth-api'
-import { authPayload } from './services/models/auth-payload'
-import { handleAxiosError } from '../../services/error-notification'
-import { AxiosError } from 'axios'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { authMe, login, logout } from './authThunks'
 
 type userType = {
   _id: string
@@ -30,6 +27,15 @@ export const authSlice = createSlice({
     setUser(state, action: PayloadAction<userType>) {
       state.user = { ...state.user, ...action.payload }
     },
+    resetUser(state) {
+      state.user = {
+        _id: '',
+        name: '',
+        email: '',
+        publicCardPacksCount: 0,
+        avatar: '',
+      }
+    },
     setAuth(state, action: PayloadAction<boolean>) {
       state.isAuth = action.payload
     },
@@ -40,73 +46,57 @@ export const authSlice = createSlice({
       state.user.avatar = action.payload
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(authMe.fulfilled, (state, { payload }) => {
+      state.isAuth = true
+      state.isFetching = false
+      state.user = {
+        _id: payload._id,
+        name: payload.name,
+        email: payload.email,
+        publicCardPacksCount: payload.publicCardPacksCount,
+        avatar: state.user.avatar,
+      }
+    })
+    builder.addCase(authMe.pending, (state) => {
+      state.isFetching = true
+    })
+    builder.addCase(authMe.rejected, (state) => {
+      authSlice.caseReducers.resetUser(state)
+      state.isFetching = false
+      state.isAuth = false
+    })
+    builder.addCase(login.fulfilled, (state, { payload }) => {
+      state.isFetching = false
+      state.isAuth = true
+      state.user = {
+        _id: payload._id,
+        name: payload.name,
+        email: payload.email,
+        publicCardPacksCount: payload.publicCardPacksCount,
+        avatar: state.user.avatar,
+      }
+    })
+    builder.addCase(login.pending, (state) => {
+      state.isFetching = true
+    })
+    builder.addCase(login.rejected, (state) => {
+      state.isFetching = false
+      state.isAuth = false
+    })
+    builder.addCase(logout.fulfilled, (state) => {
+      authSlice.caseReducers.resetUser(state)
+      state.isFetching = false
+      state.isAuth = false
+    })
+    builder.addCase(logout.pending, (state) => {
+      state.isFetching = true
+    })
+    builder.addCase(logout.rejected, (state) => {
+      state.isFetching = false
+    })
+  },
 })
-
-export const authMe = createAsyncThunk(
-  'auth/me',
-  async (arg, { dispatch, getState }) => {
-    const state = getState() as { auth: typeof initialState }
-    if (state.auth.isFetching) {
-      return
-    }
-    try {
-      dispatch(authSlice.actions.setFetching(true))
-      await authApi.me()
-      dispatch(authSlice.actions.setAuth(true))
-    } catch (e) {
-      if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {
-        dispatch(authSlice.actions.setAuth(false))
-      }
-      handleAxiosError(e, dispatch) // возможно нам не нужна обработка ошибок для me запроса, зачем нам нотификации при запуске приложения
-    } finally {
-      dispatch(authSlice.actions.setFetching(false))
-    }
-  }
-)
-
-export const login = createAsyncThunk(
-  'auth/login',
-  async (payload: authPayload, { dispatch, getState }) => {
-    const state = getState() as { auth: typeof initialState }
-    if (state.auth.isFetching) {
-      return
-    }
-    try {
-      dispatch(authSlice.actions.setFetching(true))
-      const res = await authApi.login(payload)
-      dispatch(authSlice.actions.setAuth(true))
-      const user: userType = {
-        _id: res.data._id,
-        name: res.data.name,
-        email: res.data.email,
-        publicCardPacksCount: res.data.publicCardPacksCount,
-      }
-      dispatch(authSlice.actions.setUser(user))
-    } catch (e) {
-      handleAxiosError(e, dispatch)
-    } finally {
-      dispatch(authSlice.actions.setFetching(false))
-    }
-  }
-)
-export const logout = createAsyncThunk(
-  'auth/logout',
-  async (args, { dispatch, getState }) => {
-    const state = getState() as { auth: typeof initialState }
-    if (state.auth.isFetching) {
-      return
-    }
-    try {
-      dispatch(authSlice.actions.setFetching(true))
-      await authApi.logout()
-      dispatch(authSlice.actions.setAuth(false))
-    } catch (e) {
-      handleAxiosError(e, dispatch)
-    } finally {
-      dispatch(authSlice.actions.setFetching(false))
-    }
-  }
-)
 
 export const authReducer = authSlice.reducer
 

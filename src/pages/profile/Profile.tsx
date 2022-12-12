@@ -14,8 +14,8 @@ import {
 import styles from './profile.module.css'
 import CameraAltIcon from '@mui/icons-material/CameraAlt'
 import XButton from '../../common/components/button/XButton'
-import { logout } from '../../features/auth/authSlice'
 import { EditNameUser } from '../../common/components/editNameUser/EditNameUser'
+import { logout } from '../../features/auth/authThunks'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
@@ -27,7 +27,7 @@ export const Profile = () => {
   }, [])
 
   const logoutHandler = () => {
-    dispatch(logout)
+    dispatch(logout())
   }
 
   const onOpenChange = () => {

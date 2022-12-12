@@ -5,12 +5,13 @@ import { useAppSelector } from '../../state/store'
 import { ProfileSmall } from '../../features/auth/components/profileSmall/ProfileSmall'
 import { useNavigate } from 'react-router-dom'
 import { PATH } from '../../data/paths'
-import { Button, Fab } from '@mui/material'
+import { Button, Fab, LinearProgress } from '@mui/material'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 
 export const Header = () => {
   const { title } = useContext(HeaderTitleContext)
   const isAuth = useAppSelector((state) => state.auth.isAuth)
+  const appStatus = useAppSelector((state) => state.app.status)
   const navigate = useNavigate()
   const handleSignIn = () => navigate(PATH.LOGIN.MAIN)
 
@@ -42,6 +43,7 @@ export const Header = () => {
           </Button>
         )}
       </div>
+      {appStatus === 0 && <LinearProgress />}
     </div>
   )
 }

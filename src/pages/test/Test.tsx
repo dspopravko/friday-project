@@ -9,7 +9,7 @@ import { mockSelect } from '../../data/selectOptions'
 import { setPageTitle } from '../../services/pageTitle'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { authPayload } from '../../features/auth/services/models/auth-payload'
-import { authMe, login, logout } from '../../features/auth/authSlice'
+import { authMe, login, logout } from '../../features/auth/authThunks'
 
 export const Test = () => {
   const dispatch = useAppDispatch()
