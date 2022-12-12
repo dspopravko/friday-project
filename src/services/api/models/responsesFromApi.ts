@@ -36,6 +36,7 @@ export type apiUserType = {
   created: Date
   updated: Date
   __v: number
+  avatar?: string
 }
 export type registerSuccess = {
   addedUser: apiUserType

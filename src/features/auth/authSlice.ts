@@ -55,7 +55,7 @@ export const authSlice = createSlice({
         name: payload.name,
         email: payload.email,
         publicCardPacksCount: payload.publicCardPacksCount,
-        avatar: state.user.avatar,
+        avatar: payload.avatar || state.user.avatar,
       }
     })
     builder.addCase(authMe.pending, (state) => {
@@ -74,7 +74,7 @@ export const authSlice = createSlice({
         name: payload.name,
         email: payload.email,
         publicCardPacksCount: payload.publicCardPacksCount,
-        avatar: state.user.avatar,
+        avatar: payload.avatar || state.user.avatar,
       }
     })
     builder.addCase(login.pending, (state) => {
