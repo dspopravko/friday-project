@@ -8,11 +8,15 @@ import XButton from '../../common/components/button/XButton'
 import { EditNameUser } from '../../common/components/editNameUser/EditNameUser'
 import { logout } from '../../features/auth/authThunks'
 import { ProfilePhoto } from '../../features/auth/components/profile/profilePhoto'
+import { Navigate } from 'react-router-dom'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
   const { setTitle } = useContext(HeaderTitleContext)
-  const user = useAppSelector((state) => state.auth.user)
+  const auth = useAppSelector((state) => state.auth)
+  if (!auth.isAuth) {
+    return <Navigate to={'/login'} />
+  }
   useEffect(() => {
     setTitle('Profile')
     setPageTitle('Profile')
@@ -29,9 +33,9 @@ export const Profile = () => {
     )
   }
   const cards =
-    user.publicCardPacksCount > 10
-      ? `You have a ${user.publicCardPacksCount} cards! Continue in the same spirit`
-      : `You have ${user.publicCardPacksCount} cards.`
+    auth.user.publicCardPacksCount > 10
+      ? `You have a ${auth.user.publicCardPacksCount} cards! Continue in the same spirit`
+      : `You have ${auth.user.publicCardPacksCount} cards.`
 
   return (
     <Grid container justifyContent={'center'} alignItems={'center'}>
@@ -42,10 +46,10 @@ export const Profile = () => {
         <ProfilePhoto />{' '}
         {/*здесь лежит блок с аватаркой и кнопкой которая вызывает форму обновления профиля*/}
         <Box className={styles.name}>
-          <EditNameUser value={user.name} onChange={onOpenChange} />
+          <EditNameUser value={auth.user.name} onChange={onOpenChange} />
         </Box>
         <Typography className={styles.email} component={'p'}>
-          {user.email}
+          {auth.user.email}
         </Typography>
         <XButton onClick={logoutHandler}>Log out</XButton>
         <Typography component={'p'}>{cards}</Typography>

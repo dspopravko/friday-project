@@ -73,3 +73,19 @@ export const updateProfile = createAsyncThunk(
     }
   }
 )
+export const setNewPassword = createAsyncThunk(
+  'auth/setNewPassword', //наверное стоит вынести в отдельный slice, добавить в него состояние для редиректа на логин после успешного запроса
+  async (data: { password: string; resetPasswordToken: string }, thunkApi) => {
+    try {
+      const res = await authApi.setNewPassword(data)
+      return res.data
+    } catch (e) {
+      handleAxiosError(e, thunkApi.dispatch)
+      if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {
+        return thunkApi.rejectWithValue(e.response?.data)
+      } else {
+        throw e
+      }
+    }
+  }
+)

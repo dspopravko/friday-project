@@ -16,10 +16,10 @@ export const Pages = () => {
       <Route path={''} element={<Navigate to={PATH.PROFILE} />} />
       <Route path={PATH.LOGIN.MAIN} element={<LoginWrapper />}>
         <Route index element={<Login />} />
-        <Route path={PATH.LOGIN.NEWPASSWORD} element={<PasswordNew />} />
         <Route path={PATH.LOGIN.RESTORE} element={<PasswordRestore />} />
         <Route path={PATH.LOGIN.REGISTRATION} element={<Registration />} />
       </Route>
+      <Route path={`${PATH.NEWPASSWORD}/:token`} element={<PasswordNew />} />
       <Route path={PATH.PROFILE} element={<Profile />} />
       <Route path={PATH.TESTS} element={<Test />} />
 

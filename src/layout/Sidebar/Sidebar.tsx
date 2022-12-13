@@ -55,7 +55,7 @@ export const Sidebar = ({ open, handleClose }: SidebarPropsType) => {
           </NavLink>
           <NavLink
             replace
-            to={PATH.LOGIN.MAIN + '/' + PATH.LOGIN.NEWPASSWORD}
+            to={PATH.NEWPASSWORD + '/' + 'some-token'}
             onClick={handleClose}
             style={({ isActive }) => ({
               color: isActive ? activeColor : color,

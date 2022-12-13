@@ -42,6 +42,16 @@ export const authApi = {
       data
     )
   },
+  setNewPassword(data: { password: string; resetPasswordToken: string }) {
+    console.log(data)
+    return instance.post<
+      { password: string; resetPasswordToken: string },
+      AxiosResponse<{
+        info: string
+        error: string
+      }>
+    >('auth/set-new-password', data)
+  },
 }
 
 export type blockDataType = {
