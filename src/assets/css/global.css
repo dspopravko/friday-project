@@ -70,6 +70,15 @@ a.active {
   min-height: 372px;
   border-radius: 2px;
   margin: 60px auto 0  auto;
-  width: 50%;
-  padding: 35px 0 33px 0;
+  padding: 35px 38px 33px 38px;
+}
+@media only screen and (max-width: 600px)  {
+  .loginCanvas {
+    min-width: 350px;
+  }
+}
+@media only screen and (max-width: 460px)  {
+  .loginCanvas {
+    min-width: 300px;
+  }
 }
