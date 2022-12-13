@@ -1,13 +1,16 @@
 import React, { useContext, useEffect } from 'react'
 import { HeaderTitleContext } from '../../../../context/context'
 import s from '../login/form/LoginForm.module.css'
-import { Button, TextField } from '@mui/material'
+import { Button, Card, TextField, Typography } from '@mui/material'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { restorePassword } from '../../authThunks'
 import { useAppDispatch, useAppSelector } from '../../../../state/store'
 import * as yup from 'yup'
 import { restoreEmail } from './restoreEmail'
+import { NavLink } from 'react-router-dom'
+import { PATH } from '../../../../data/paths'
+import { theme } from '../../../../assets/mui-theme'
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -47,7 +50,8 @@ export const PasswordRestore = () => {
   }
 
   return (
-    <div style={{ margin: '0 auto', width: '50%' }}>
+    <Card className={'loginCanvas'}>
+      <Typography variant={'h5'}>Forgot your password?</Typography>
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <TextField
           label="email"
@@ -57,10 +61,43 @@ export const PasswordRestore = () => {
           error={!!errors.email?.message}
           {...register('email', { required: true })}
         />
+        <Typography
+          sx={{
+            opacity: 0.5,
+            textAlign: 'left',
+          }}
+          component={'p'}
+        >
+          Enter your email address and we will send you further instructions{' '}
+        </Typography>
         <Button variant={'contained'} disabled={isFetching} type="submit">
-          Submit
+          Send instructions
         </Button>
       </form>
-    </div>
+      <Typography textAlign={'center'}>
+        Did you remember your password?
+      </Typography>
+      <NavLink
+        replace
+        to={'/' + PATH.LOGIN.MAIN}
+        style={{
+          textDecoration: 'underline',
+          color: theme.palette.primary.light,
+          marginBottom: '20px',
+        }}
+      >
+        <Typography
+          variant={'h6'}
+          textAlign={'center'}
+          sx={{
+            '&:hover': {
+              fontWeight: '600',
+            },
+          }}
+        >
+          Try logging in
+        </Typography>
+      </NavLink>
+    </Card>
   )
 }

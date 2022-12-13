@@ -2,6 +2,13 @@ import { createTheme } from '@mui/material'
 import { blue, red, yellow } from '@mui/material/colors'
 
 export const theme = createTheme({
+  typography: {
+    fontFamily: ['-apple-system', 'Montserrat'].join(','),
+    fontWeightRegular: '500',
+    h5: {
+      fontWeight: '600',
+    },
+  },
   palette: {
     primary: {
       light: blue[700],

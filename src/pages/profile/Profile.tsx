@@ -3,7 +3,7 @@ import { HeaderTitleContext } from '../../context/context'
 import { setPageTitle } from '../../services/pageTitle'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { Box, Card, Grid, Typography } from '@mui/material'
-import styles from './profile.module.css'
+import s from './profile.module.css'
 import XButton from '../../common/components/button/XButton'
 import { EditNameUser } from '../../common/components/editNameUser/EditNameUser'
 import { logout } from '../../features/auth/authThunks'
@@ -39,20 +39,29 @@ export const Profile = () => {
 
   return (
     <Grid container justifyContent={'center'} alignItems={'center'}>
-      <Card className={styles.pageContainer}>
-        <Typography className={styles.title} variant={'h5'}>
+      <Card className={s.profileContainer}>
+        <Typography className={s.title} variant={'h5'}>
           Personal Information
         </Typography>
         <ProfilePhoto />{' '}
         {/*здесь лежит блок с аватаркой и кнопкой которая вызывает форму обновления профиля*/}
-        <Box className={styles.name}>
+        <Box className={s.name}>
           <EditNameUser value={auth.user.name} onChange={onOpenChange} />
         </Box>
-        <Typography className={styles.email} component={'p'}>
+        <Typography className={s.email} component={'p'}>
           {auth.user.email}
         </Typography>
-        <XButton onClick={logoutHandler}>Log out</XButton>
-        <Typography component={'p'}>{cards}</Typography>
+        <div style={{ margin: '20px' }}>
+          <XButton onClick={logoutHandler}>Log out</XButton>
+        </div>
+        <Typography
+          sx={{
+            marginTop: '24px',
+          }}
+          component={'p'}
+        >
+          {cards}
+        </Typography>
       </Card>
     </Grid>
   )

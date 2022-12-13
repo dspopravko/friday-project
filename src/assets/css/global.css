@@ -65,3 +65,11 @@
 a.active {
   color: red;
 }
+.loginCanvas {
+  min-width: 413px;
+  min-height: 372px;
+  border-radius: 2px;
+  margin: 60px auto 0  auto;
+  width: 50%;
+  padding: 35px 0 33px 0;
+}

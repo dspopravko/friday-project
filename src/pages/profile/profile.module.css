@@ -1,8 +1,8 @@
-.pageContainer {
-    box-sizing: border-box;
+.profileContainer {
     width: 413px;
     height: 400px;
     margin: 60px 0 0 0;
+    padding: 35px;
 }
 
 .title {
@@ -18,13 +18,13 @@
 }
 
 .btn {
-    width: 127px;
-    height: 36px;
-    margin: 30px 0 35px 0;
-    border-radius: 30px;
-    box-shadow: 0px 2px 10px rgba(109, 109, 109, 0.25), inset 0px 1px 0px rgba(255, 255, 255, 0.3);
-    outline: none;
-    border: none;
+    /*width: 127px;*/
+    /*height: 36px;*/
+    /*margin: 30px 0 35px 0;*/
+    /*border-radius: 30px;*/
+    /*box-shadow: 0 2px 10px rgba(109, 109, 109, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);*/
+    /*outline: none;*/
+    /*border: none;*/
 }
 
 .btn:hover {

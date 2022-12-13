@@ -57,7 +57,9 @@ export const authApi = {
       { email: string; from: string; message: string },
       AxiosResponse<{
         info: string
-        error: string
+        success: boolean
+        answer: boolean
+        html: boolean
       }>
     >('auth/forgot', data)
   },

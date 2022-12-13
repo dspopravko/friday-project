@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { HeaderTitleContext } from '../../../../context/context'
 import { useParams } from 'react-router-dom'
-import { Button, TextField, Typography } from '@mui/material'
+import { Button, Card, TextField, Typography } from '@mui/material'
 import { useAppDispatch, useAppSelector } from '../../../../state/store'
 import { setNewPassword } from '../../authThunks'
 import s from '../login/form/LoginForm.module.css'
@@ -44,23 +44,35 @@ export const PasswordNew = () => {
     )
 
   return (
-    <div>
-      <Typography> New Password</Typography>
-      Token is: {token}
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-        <TextField
-          type="password"
-          label="password"
-          margin="normal"
-          autoComplete={'password'}
-          helperText={errors.password?.message}
-          error={!!errors.password?.message}
-          {...register('password', { required: true })}
-        />
-        <Button variant={'contained'} disabled={isFetching} type="submit">
-          Submit
-        </Button>
-      </form>
+    <div className="pageContainer">
+      <Card className={'loginCanvas'}>
+        <Typography variant={'h5'}> Create new password</Typography>
+        Token is: {token}
+        <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+          <TextField
+            type="password"
+            label="password"
+            margin="normal"
+            autoComplete={'password'}
+            helperText={errors.password?.message}
+            error={!!errors.password?.message}
+            {...register('password', { required: true })}
+          />
+          <Typography
+            sx={{
+              opacity: 0.5,
+              textAlign: 'left',
+            }}
+            component={'p'}
+          >
+            Create new password and we will send you further instructions to
+            email
+          </Typography>
+          <Button variant={'contained'} disabled={isFetching} type="submit">
+            Create new password
+          </Button>
+        </form>
+      </Card>
     </div>
   )
 }
