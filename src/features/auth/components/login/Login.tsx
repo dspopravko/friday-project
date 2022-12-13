@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { HeaderTitleContext } from '../../../../context/context'
 import { LoginForm } from './form/LoginForm'
 import { useAppDispatch } from '../../../../state/store'
-import { authMe } from '../../authThunks'
+import { authMe } from '../../services/login/loginThunks'
 import { Card, Typography } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { PATH } from '../../../../data/paths'
@@ -28,7 +28,7 @@ export const Login = () => {
         <Typography textAlign={'center'}>Already have an account?</Typography>
         <NavLink
           replace
-          to={PATH.LOGIN.REGISTRATION}
+          to={PATH.LOGIN.SIGNUP}
           style={{
             textDecoration: 'underline',
             color: theme.palette.primary.light,

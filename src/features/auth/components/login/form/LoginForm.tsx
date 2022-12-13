@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { login } from '../../../authThunks'
+import { login } from '../../../services/login/loginThunks'
 import { NavLink } from 'react-router-dom'
 import { PATH } from '../../../../../data/paths'
 

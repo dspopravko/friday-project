@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { authMe, login, logout } from './authThunks'
+import { authMe, login, logout } from './loginThunks'
 
 type userType = {
   _id: string
@@ -20,8 +20,8 @@ const initialState = {
   },
 }
 
-export const authSlice = createSlice({
-  name: 'auth',
+export const loginSlice = createSlice({
+  name: 'login',
   initialState: initialState,
   reducers: {
     setUser(state, action: PayloadAction<userType>) {
@@ -62,7 +62,7 @@ export const authSlice = createSlice({
       state.isFetching = true
     })
     builder.addCase(authMe.rejected, (state) => {
-      authSlice.caseReducers.resetUser(state)
+      loginSlice.caseReducers.resetUser(state)
       state.isFetching = false
       state.isAuth = false
     })
@@ -85,7 +85,7 @@ export const authSlice = createSlice({
       state.isAuth = false
     })
     builder.addCase(logout.fulfilled, (state) => {
-      authSlice.caseReducers.resetUser(state)
+      loginSlice.caseReducers.resetUser(state)
       state.isFetching = false
       state.isAuth = false
     })
@@ -98,7 +98,7 @@ export const authSlice = createSlice({
   },
 })
 
-export const authReducer = authSlice.reducer
+export const authReducer = loginSlice.reducer
 
 export type AppReducerStateType = typeof initialState
-export const appReducer = authSlice.reducer
+export const appReducer = loginSlice.reducer

@@ -4,7 +4,7 @@ import { HeaderTitleContext } from '../../../../context/context'
 export const Registration = () => {
   const { setTitle } = useContext(HeaderTitleContext)
   useEffect(() => {
-    setTitle('Login page: registration')
+    setTitle('Login page: signUp')
   }, [])
   return <div>Registration</div>
 }

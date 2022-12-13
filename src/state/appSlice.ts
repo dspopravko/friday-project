@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { authSlice } from '../features/auth/authSlice'
+import { loginSlice } from '../features/auth/services/login/loginSlice'
 
 export enum appStatus {
   loading,
@@ -25,7 +25,7 @@ export const appSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(authSlice.actions.setAuth, (state) => {
+    builder.addCase(loginSlice.actions.setAuth, (state) => {
       state.status = appStatus.idle
     })
   },

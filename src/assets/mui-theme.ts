@@ -47,7 +47,6 @@ export const theme = createTheme({
           '&:hover': {
             backgroundColor: blue[700],
           },
-
           '&.Mui-disabled:hover': {
             cursor: 'not-allowed',
           },

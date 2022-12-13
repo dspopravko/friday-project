@@ -35,7 +35,7 @@ export const Sidebar = ({ open, handleClose }: SidebarPropsType) => {
             Login Page
           </NavLink>
           <NavLink
-            to={`${PATH.LOGIN.MAIN}/${PATH.LOGIN.REGISTRATION}`}
+            to={`${PATH.LOGIN.MAIN}/${PATH.LOGIN.SIGNUP}`}
             onClick={handleClose}
             style={({ isActive }) => ({
               color: isActive ? activeColor : color,

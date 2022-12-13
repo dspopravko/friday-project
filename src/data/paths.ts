@@ -1,7 +1,7 @@
 export const PATH = {
   LOGIN: {
     MAIN: 'login',
-    REGISTRATION: 'registration',
+    SIGNUP: 'signUp',
     RESTORE: 'forgot',
   },
   NEWPASSWORD: 'set-new-password',

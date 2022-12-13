@@ -6,7 +6,7 @@ import { Box, Card, Grid, Typography } from '@mui/material'
 import s from './profile.module.css'
 import XButton from '../../common/components/button/XButton'
 import { EditNameUser } from '../../common/components/editNameUser/EditNameUser'
-import { logout } from '../../features/auth/authThunks'
+import { logout } from '../../features/auth/services/login/loginThunks'
 import { ProfilePhoto } from '../../features/auth/components/profile/profilePhoto'
 import { Navigate } from 'react-router-dom'
 
@@ -14,14 +14,14 @@ export const Profile = () => {
   const dispatch = useAppDispatch()
   const { setTitle } = useContext(HeaderTitleContext)
   const auth = useAppSelector((state) => state.auth)
-  if (!auth.isAuth) {
-    return <Navigate to={'/login'} />
-  }
   useEffect(() => {
     setTitle('Profile')
     setPageTitle('Profile')
   }, [])
 
+  if (!auth.isAuth) {
+    return <Navigate to={'/login'} />
+  }
   const logoutHandler = () => {
     dispatch(logout())
   }

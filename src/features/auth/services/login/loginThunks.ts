@@ -1,13 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { authApi, userUpdateData } from './services/auth-api'
-import { handleAxiosError } from '../../services/error-notification'
+import { handleAxiosError } from '../../../../services/error-notification'
 import { AxiosError } from 'axios'
-import { authPayload } from './services/models/auth-payload'
-import { AppRootStateType } from '../../state/store'
+import { AppRootStateType } from '../../../../state/store'
+import { loginPayload, loginApi } from './login-api'
+import { profileApi, userUpdateData } from '../profile/profile-api'
+import { newPasswordApi } from '../newPassword/newPassword-api'
+import { restoreApi } from '../restore/restore-api'
 
-export const authMe = createAsyncThunk('auth/fetchMe', async (_, thunkApi) => {
+export const authMe = createAsyncThunk('login/fetchMe', async (_, thunkApi) => {
   try {
-    const res = await authApi.me()
+    const res = await loginApi.me()
     return res.data
   } catch (e) {
     if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {
@@ -17,12 +19,11 @@ export const authMe = createAsyncThunk('auth/fetchMe', async (_, thunkApi) => {
     }
   }
 })
-
 export const login = createAsyncThunk(
-  'auth/login',
-  async (data: authPayload, thunkApi) => {
+  'login/login',
+  async (data: loginPayload, thunkApi) => {
     try {
-      const res = await authApi.login(data)
+      const res = await loginApi.login(data)
       return res.data
     } catch (e) {
       handleAxiosError(e, thunkApi.dispatch)
@@ -34,9 +35,9 @@ export const login = createAsyncThunk(
     }
   }
 )
-export const logout = createAsyncThunk('auth/logout', async (_, thunkApi) => {
+export const logout = createAsyncThunk('login/logout', async (_, thunkApi) => {
   try {
-    const res = await authApi.logout()
+    const res = await loginApi.logout()
     return res.data
   } catch (e) {
     handleAxiosError(e, thunkApi.dispatch)
@@ -48,20 +49,20 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkApi) => {
   }
 })
 export const updateProfile = createAsyncThunk(
-  'auth/updateProfile',
+  'login/updateProfile',
   async (
     data: { name?: string; avatar?: string; password: string },
     thunkApi
   ) => {
     const state = thunkApi.getState() as AppRootStateType
     try {
-      const user: userUpdateData & authPayload = {
+      const user: userUpdateData & loginPayload = {
         avatar: data.avatar || state.auth.user.avatar,
         password: data.password,
         email: state.auth.user.email,
         name: data.name || state.auth.user.name,
       }
-      const res = await authApi.updateUser(user)
+      const res = await profileApi.updateUser(user)
       return res.data
     } catch (e) {
       handleAxiosError(e, thunkApi.dispatch)
@@ -74,10 +75,10 @@ export const updateProfile = createAsyncThunk(
   }
 )
 export const setNewPassword = createAsyncThunk(
-  'auth/setNewPassword', //наверное стоит вынести в отдельный slice, добавить в него состояние для редиректа на логин после успешного запроса
+  'login/setNewPassword', //наверное стоит вынести в отдельный slice, добавить в него состояние для редиректа на логин после успешного запроса
   async (data: { password: string; resetPasswordToken: string }, thunkApi) => {
     try {
-      const res = await authApi.setNewPassword(data)
+      const res = await newPasswordApi.setNewPassword(data)
       return res.data
     } catch (e) {
       handleAxiosError(e, thunkApi.dispatch)
@@ -90,10 +91,10 @@ export const setNewPassword = createAsyncThunk(
   }
 )
 export const restorePassword = createAsyncThunk(
-  'auth/restorePassword', //наверное стоит вынести в отдельный slice, добавить в него состояние для редиректа на логин после успешного запроса
+  'login/restorePassword', //наверное стоит вынести в отдельный slice, добавить в него состояние для редиректа на логин после успешного запроса
   async (data: { email: string; from: string; message: string }, thunkApi) => {
     try {
-      const res = await authApi.restorePassword(data)
+      const res = await restoreApi.restorePassword(data)
       return res.data
     } catch (e) {
       handleAxiosError(e, thunkApi.dispatch)

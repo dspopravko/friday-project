@@ -4,7 +4,7 @@ import { Avatar, Menu, MenuItem } from '@mui/material'
 import LogoutIcon from '@mui/icons-material/Logout'
 import PersonIcon from '@mui/icons-material/Person'
 import XButton from '../../../../../common/components/button/XButton'
-import { logout } from '../../../authThunks'
+import { logout } from '../../../services/login/loginThunks'
 import { useNavigate } from 'react-router-dom'
 
 export const ProfileHeaderButton = () => {

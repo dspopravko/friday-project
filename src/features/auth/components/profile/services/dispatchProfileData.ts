@@ -1,5 +1,5 @@
 import { fileToBase64 } from '../../../../../services/fileToBase64'
-import { updateProfile } from '../../../authThunks'
+import { updateProfile } from '../../../services/login/loginThunks'
 import { LoginData } from '../profilePhoto'
 import { AppDispatch } from '../../../../../state/store'
 
