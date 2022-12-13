@@ -17,7 +17,7 @@ export const Footer = () => {
       </NavLink>
 
       <NavLink
-        to={`${PATH.LOGIN.MAIN}/${PATH.LOGIN.REGISTRATION}`}
+        to={`${PATH.LOGIN.MAIN}/${PATH.LOGIN.SIGNUP}`}
         style={({ isActive }) => ({ color: isActive ? activeColor : color })}
       >
         Registration
