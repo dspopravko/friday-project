@@ -1,13 +1,13 @@
 import React from 'react'
-import { useAppDispatch, useAppSelector } from '../../../../state/store'
+import { useAppDispatch, useAppSelector } from '../../../../../state/store'
 import { Avatar, Menu, MenuItem } from '@mui/material'
 import LogoutIcon from '@mui/icons-material/Logout'
 import PersonIcon from '@mui/icons-material/Person'
-import XButton from '../../../../common/components/button/XButton'
-import { logout } from '../../authThunks'
+import XButton from '../../../../../common/components/button/XButton'
+import { logout } from '../../../authThunks'
 import { useNavigate } from 'react-router-dom'
 
-export const ProfileSmall = () => {
+export const ProfileHeaderButton = () => {
   // const [open, setOpen] = useState(true)
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.auth.user)

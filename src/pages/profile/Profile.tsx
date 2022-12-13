@@ -7,7 +7,7 @@ import styles from './profile.module.css'
 import XButton from '../../common/components/button/XButton'
 import { EditNameUser } from '../../common/components/editNameUser/EditNameUser'
 import { logout } from '../../features/auth/authThunks'
-import { ProfilePhoto } from './updateProfile'
+import { ProfilePhoto } from '../../features/auth/components/profile/profilePhoto'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
@@ -22,9 +22,16 @@ export const Profile = () => {
     dispatch(logout())
   }
 
-  const onOpenChange = () => {
-    console.log('dsdsd') // заглушка для prettera нужно за диспачить новое имя в state
+  const onOpenChange = (name: string) => {
+    alert(
+      name +
+        ', к сожалению бэк просит ещё и пароль, так что обновление только через формочку выше!'
+    )
   }
+  const cards =
+    user.publicCardPacksCount > 10
+      ? `You have a ${user.publicCardPacksCount} cards! Continue in the same spirit`
+      : `You have ${user.publicCardPacksCount} cards.`
 
   return (
     <Grid container justifyContent={'center'} alignItems={'center'}>
@@ -32,7 +39,8 @@ export const Profile = () => {
         <Typography className={styles.title} variant={'h5'}>
           Personal Information
         </Typography>
-        <ProfilePhoto />
+        <ProfilePhoto />{' '}
+        {/*здесь лежит блок с аватаркой и кнопкой которая вызывает форму обновления профиля*/}
         <Box className={styles.name}>
           <EditNameUser value={user.name} onChange={onOpenChange} />
         </Box>
@@ -40,6 +48,7 @@ export const Profile = () => {
           {user.email}
         </Typography>
         <XButton onClick={logoutHandler}>Log out</XButton>
+        <Typography component={'p'}>{cards}</Typography>
       </Card>
     </Grid>
   )

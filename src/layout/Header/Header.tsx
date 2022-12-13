@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import s from './Header.module.css'
 import { HeaderTitleContext } from '../../context/context'
 import { useAppSelector } from '../../state/store'
-import { ProfileSmall } from '../../features/auth/components/profileSmall/ProfileSmall'
+import { ProfileHeaderButton } from '../../features/auth/components/profile/HeaderButton/ProfileHeaderButton'
 import { useNavigate } from 'react-router-dom'
 import { PATH } from '../../data/paths'
 import { Button, Fab, LinearProgress } from '@mui/material'
@@ -36,7 +36,7 @@ export const Header = () => {
         </div>
         <div className={s.titleContainer}>{title || 'Loading...'}</div>
         {isAuth ? (
-          <ProfileSmall />
+          <ProfileHeaderButton />
         ) : (
           <Button variant={'contained'} onClick={handleSignIn}>
             Sign in
