@@ -44,6 +44,17 @@ export const theme = createTheme({
           '&.Mui-disabled:hover': {
             cursor: 'not-allowed',
           },
+          '&.MuiButton-outlined': {
+            border: 'none',
+            background: 'transparent',
+            color: 'black',
+          },
+          '&.MuiButton-outlined:hover': {
+            border: 'none',
+            boxShadow: '0 0px 6px rgba(0, 0, 0, .60)',
+            background: '#f1f1f1',
+            color: 'black',
+          },
         },
       },
     },

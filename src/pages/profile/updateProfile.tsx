@@ -5,7 +5,6 @@ import {
   Box,
   Button,
   IconButton,
-  Input,
   Modal,
   TextField,
   Typography,
@@ -18,6 +17,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import s from '../../features/auth/components/login/form/LoginForm.module.css'
+import XButton from '../../common/components/button/XButton'
 
 const style = {
   position: 'absolute',
@@ -48,9 +48,7 @@ export const ProfilePhoto = () => {
   const user = useAppSelector((state) => state.auth.user)
   const dispatch = useAppDispatch()
   const [open, setOpen] = useState(false)
-
   const handleSubmission = async (data: LoginData) => {
-    console.log(data.avatar[0])
     let photo
     if (data.avatar) {
       photo = await fileToBase64(data.avatar[0])
@@ -67,6 +65,8 @@ export const ProfilePhoto = () => {
   }
   const {
     register,
+    watch,
+    resetField,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginData>({
@@ -74,8 +74,20 @@ export const ProfilePhoto = () => {
     resolver: yupResolver(schema),
   })
   const onSubmit: SubmitHandler<LoginData> = (data) => handleSubmission(data)
-  const handleClose = () => setOpen(false)
+  const handleClose = () => {
+    setOpen(false)
+    resetField('password')
+    resetField('avatar')
+  }
   const handleOpen = () => setOpen(true)
+
+  let selectedFile
+  if (watch('avatar')) {
+    const item = watch('avatar').item(0)
+    if (item) {
+      selectedFile = item
+    }
+  }
 
   return (
     <div>
@@ -99,17 +111,31 @@ export const ProfilePhoto = () => {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Choose photo
+              Update profile
             </Typography>
             <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-              <Input
-                type={'file'}
-                {...register('avatar', { required: false })}
-              />
+              <Button variant="outlined" component="label">
+                Upload Photo
+                <input
+                  type="file"
+                  accept="image/png, image/jpeg"
+                  hidden
+                  {...register('avatar', { required: false })}
+                />
+              </Button>
+              {selectedFile && (
+                <div>
+                  {selectedFile.name}
+                  <XButton type={'delete'} onClick={() => resetField('avatar')}>
+                    delete
+                  </XButton>
+                </div>
+              )}
               <TextField
                 label="name"
                 margin="normal"
                 autoComplete={'username'}
+                defaultValue={user.name}
                 helperText={errors.name?.message}
                 error={!!errors.name?.message}
                 {...register('name', { required: false })}
