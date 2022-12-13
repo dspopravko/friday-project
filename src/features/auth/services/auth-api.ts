@@ -52,6 +52,15 @@ export const authApi = {
       }>
     >('auth/set-new-password', data)
   },
+  restorePassword(data: { email: string; from: string; message: string }) {
+    return instance.post<
+      { email: string; from: string; message: string },
+      AxiosResponse<{
+        info: string
+        error: string
+      }>
+    >('auth/forgot', data)
+  },
 }
 
 export type blockDataType = {
