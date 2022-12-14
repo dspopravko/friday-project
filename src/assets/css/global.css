@@ -65,3 +65,34 @@
 a.active {
   color: red;
 }
+.loginCanvas {
+  width: 413px;
+  min-height: 372px;
+  border-radius: 2px;
+  margin: 60px auto 0  auto;
+  padding: 35px 38px 33px 38px;
+}
+@media only screen and (max-width: 600px)  {
+  .loginCanvas {
+    width: 68vw;
+    padding: 35px 28px 33px 28px;
+  }
+}
+@media only screen and (max-width: 520px)  {
+  .loginCanvas {
+    width: 80vw;
+    padding: 35px 28px 33px 28px;
+  }
+}
+@media only screen and (max-width: 460px)  {
+  .loginCanvas {
+    width: 84vw;
+    padding: 20px 16px 20px 16px;
+  }
+}
+@media only screen and (max-width: 420px)  {
+  .loginCanvas {
+    width: 86vw;
+    padding: 16px 8px 16px 8px;
+  }
+}

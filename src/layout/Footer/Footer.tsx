@@ -17,7 +17,7 @@ export const Footer = () => {
       </NavLink>
 
       <NavLink
-        to={`${PATH.LOGIN.MAIN}/${PATH.LOGIN.REGISTRATION}`}
+        to={`${PATH.LOGIN.MAIN}/${PATH.LOGIN.SIGNUP}`}
         style={({ isActive }) => ({ color: isActive ? activeColor : color })}
       >
         Registration
@@ -33,7 +33,7 @@ export const Footer = () => {
 
       <NavLink
         replace
-        to={PATH.LOGIN.MAIN + '/' + PATH.LOGIN.NEWPASSWORD}
+        to={PATH.NEWPASSWORD + '/' + '3cv3-some-test-token-abcd-3f'}
         style={({ isActive }) => ({ color: isActive ? activeColor : color })}
       >
         New password

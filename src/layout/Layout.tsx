@@ -12,7 +12,9 @@ export const Layout = (props: LayoutPropsType) => {
     <>
       <ErrorSnackbar />
       <Header />
-      <div>{props.children}</div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        {props.children}
+      </div>
       <Footer />
     </>
   )

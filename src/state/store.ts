@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import thunkMiddleware from 'redux-thunk'
 import logger from 'redux-logger'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { authReducer } from '../features/auth/authSlice'
+import { authReducer } from '../features/auth/services/login/loginSlice'
 
 export type ReduxStateType = ReturnType<typeof rootReducer>
 

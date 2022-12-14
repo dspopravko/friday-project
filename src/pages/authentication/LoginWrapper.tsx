@@ -15,11 +15,11 @@ export const LoginWrapper = () => {
   }, [])
   return (
     <div className="pageContainer">
+      <Outlet context={{ isAuth: isAuth }} />
       <div className={s.loginWrapper}>
-        <div className={s.heading}>Login wrapper</div>
+        <div className={s.heading}>Test login:password</div>
         Login: nya-admin@nya.nya <br /> Password: 1qazxcvBG
       </div>
-      <Outlet context={{ isAuth: isAuth }} />
     </div>
   )
 }

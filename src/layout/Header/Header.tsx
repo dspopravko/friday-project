@@ -2,15 +2,16 @@ import React, { useContext } from 'react'
 import s from './Header.module.css'
 import { HeaderTitleContext } from '../../context/context'
 import { useAppSelector } from '../../state/store'
-import { ProfileSmall } from '../../common/profileSmall/ProfileSmall'
+import { ProfileHeaderButton } from '../../features/auth/components/profile/HeaderButton/ProfileHeaderButton'
 import { useNavigate } from 'react-router-dom'
 import { PATH } from '../../data/paths'
-import { Button, Fab } from '@mui/material'
+import { Button, Fab, LinearProgress } from '@mui/material'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 
 export const Header = () => {
   const { title } = useContext(HeaderTitleContext)
   const isAuth = useAppSelector((state) => state.auth.isAuth)
+  const appStatus = useAppSelector((state) => state.app.status)
   const navigate = useNavigate()
   const handleSignIn = () => navigate(PATH.LOGIN.MAIN)
 
@@ -35,13 +36,14 @@ export const Header = () => {
         </div>
         <div className={s.titleContainer}>{title || 'Loading...'}</div>
         {isAuth ? (
-          <ProfileSmall />
+          <ProfileHeaderButton />
         ) : (
           <Button variant={'contained'} onClick={handleSignIn}>
             Sign in
           </Button>
         )}
       </div>
+      {appStatus === 0 && <LinearProgress />}
     </div>
   )
 }

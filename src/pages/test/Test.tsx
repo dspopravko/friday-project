@@ -8,8 +8,12 @@ import XRadio from '../../common/components/radio/XRadio'
 import { mockSelect } from '../../data/selectOptions'
 import { setPageTitle } from '../../services/pageTitle'
 import { useAppDispatch, useAppSelector } from '../../state/store'
-import { authPayload } from '../../features/auth/services/models/auth-payload'
-import { authMe, login, logout } from '../../features/auth/authSlice'
+import {
+  authMe,
+  login,
+  logout,
+} from '../../features/auth/services/login/loginThunks'
+import { loginPayload } from '../../features/auth/services/login/login-api'
 
 export const Test = () => {
   const dispatch = useAppDispatch()
@@ -23,7 +27,7 @@ export const Test = () => {
   const checkMe = () => dispatch(authMe())
 
   const authCorrect = () => {
-    const auth: authPayload = {
+    const auth: loginPayload = {
       email: 'nya-admin@nya.nya',
       password: '1qazxcvBG',
     }
@@ -39,10 +43,17 @@ export const Test = () => {
       <div className={s.container}>
         <div className={s.item}>
           Buttons:
-          <XButton onClick={authCorrect}>Auth (correct login:password)</XButton>
-          <XButton onClick={checkMe}>check me</XButton>
-          <XButton onClick={logoutHandler} xType={'secondary'}>
+          <XButton onClick={authCorrect} type={'primary'}>
+            Auth (correct login:password)
+          </XButton>
+          <XButton onClick={checkMe} type={'secondary'}>
+            check me
+          </XButton>
+          <XButton onClick={logoutHandler} type={'delete'}>
             Logout
+          </XButton>
+          <XButton onClick={logoutHandler} disabled>
+            Disabled
           </XButton>
         </div>
         <div className={s.item}>
