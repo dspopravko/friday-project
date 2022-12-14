@@ -4,10 +4,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
-  max-width: 400px;
+  width: 100%;
 }
 .form > * {
-  border: 2px solid var(--shade-b-18);
   border-radius: 4px;
   padding: 10px;
   margin: 5px;
