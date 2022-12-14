@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
-  max-width: 400px;
+  width: 100%;
 }
 .form > * {
   border-radius: 4px;

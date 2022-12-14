@@ -44,7 +44,7 @@ export const ProfileHeaderButton = () => {
         }}
         anchorEl={anchorEl}
         open={openMui}
-        onClick={handleClose} //onClose не срабатывает по клику по MenuItem, так что наверное лучше повесить onClick
+        onClick={handleClose}
         sx={{
           transform: 'translate(0, 8px)',
         }}

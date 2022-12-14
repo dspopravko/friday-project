@@ -63,6 +63,7 @@ export const PasswordRestore = () => {
         />
         <Typography
           sx={{
+            maxWidth: '70vw',
             opacity: 0.5,
             textAlign: 'left',
           }}
