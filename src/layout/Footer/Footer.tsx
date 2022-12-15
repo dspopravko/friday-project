@@ -17,7 +17,7 @@ export const Footer = () => {
       </NavLink>
 
       <NavLink
-        to={`${PATH.LOGIN.MAIN}/${PATH.LOGIN.SIGNUP}`}
+        to={PATH.LOGIN.SIGNUP}
         style={({ isActive }) => ({ color: isActive ? activeColor : color })}
       >
         Registration
@@ -25,7 +25,7 @@ export const Footer = () => {
 
       <NavLink
         replace
-        to={PATH.LOGIN.MAIN + '/' + PATH.LOGIN.RESTORE}
+        to={PATH.LOGIN.RESTORE}
         style={({ isActive }) => ({ color: isActive ? activeColor : color })}
       >
         Restore password

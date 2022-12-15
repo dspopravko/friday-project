@@ -6,7 +6,6 @@ import XButton from '../../common/components/button/XButton'
 import { EditNameUser } from '../../common/components/editNameUser/EditNameUser'
 import { logout } from '../../features/auth/services/login/loginThunks'
 import { ProfilePhoto } from '../../features/auth/components/profile/profilePhoto'
-import { Navigate } from 'react-router-dom'
 import { setTitle } from '../../services/setHeaderTitle'
 import { cardsCheer } from '../../features/auth/services/profile/cardsСheer'
 
@@ -15,9 +14,6 @@ export const Profile = () => {
   setTitle('Profile', 'Profile')
   const auth = useAppSelector((state) => state.auth)
 
-  if (!auth.isAuth) {
-    return <Navigate to={'/login'} />
-  }
   const logoutHandler = () => {
     dispatch(logout())
   }
