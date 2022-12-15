@@ -2,11 +2,11 @@ import { handleAxiosError } from '../../../../../services/error-notification'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { regApi } from '../../../services/signUp/signUp-api'
 import { AxiosError } from 'axios'
-import { redirect } from 'react-router-dom'
 const initialState = {
   registered: false,
+  email: '',
+  errors: '',
 }
-export type SingUpType = typeof initialState
 
 export type RegType = {
   email: string
@@ -14,31 +14,43 @@ export type RegType = {
   passwordConfirmation: string
 }
 
-const slice = createSlice({
+export const signUpSlice = createSlice({
   name: 'reg',
   initialState: initialState,
   reducers: {
-    regAction(state, action: PayloadAction<SingUpType>) {
-      state.registered = action.payload.registered
+    setReg(state, action: PayloadAction<boolean>) {
+      state.registered = action.payload
     },
+    reset(state) {
+      state.registered = false
+      state.errors = ''
+      state.email = ''
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(signUp.fulfilled, (state, action) => {
+      state.registered = true
+      state.email = action.payload.email
+    })
+    builder.addCase(signUp.rejected, (state, action) => {
+      state.errors = JSON.stringify(action.payload)
+    })
   },
 })
 
-export const regReducer = slice.reducer
-export const { regAction } = slice.actions
+export const regReducer = signUpSlice.reducer
+export const { setReg } = signUpSlice.actions
 
 export const signUp = createAsyncThunk(
   'auth/register',
   async (data: RegType, thunkApi) => {
     try {
       const res = await regApi.reg(data)
-      console.log(res)
-      thunkApi.dispatch(regAction({ registered: true }))
-      // redirect('/login')
+      return res.data.addedUser
     } catch (e) {
       handleAxiosError(e, thunkApi.dispatch)
       if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {
-        return thunkApi.rejectWithValue(e.response?.data)
+        return thunkApi.rejectWithValue(e.response?.data.error)
       } else {
         throw e
       }

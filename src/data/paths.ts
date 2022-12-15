@@ -4,6 +4,7 @@ export const PATH = {
     SIGNUP: 'signUp',
     RESTORE: 'forgot',
   },
+  SUCCESS: 'success',
   NEWPASSWORD: 'set-new-password',
   PROFILE: 'profile',
   ERROR404: '404',

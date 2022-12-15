@@ -25,7 +25,7 @@ type PasswordRestoreDataType = {
 export const PasswordRestore = () => {
   const { setTitle } = useContext(HeaderTitleContext)
   useEffect(() => {
-    setTitle('Login page: restore password')
+    setTitle('Restore password')
   }, [])
 
   const {

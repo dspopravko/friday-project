@@ -1,4 +1,4 @@
-import { regReducer } from './../features/auth/components/signUp/form/registrationSlice'
+import { regReducer } from '../features/auth/components/signUp/form/signUpSlice'
 import { appReducer } from './appSlice'
 import { combineReducers } from 'redux'
 import { configureStore } from '@reduxjs/toolkit'

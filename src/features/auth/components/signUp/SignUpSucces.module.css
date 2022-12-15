@@ -1,0 +1,34 @@
+.progress {
+    margin-top: 100px;
+    position: relative;
+    height: 0;
+    width: 100%;
+    border-radius: 15px;
+}
+
+.progress .color {
+    position: absolute;
+    background-color: #62c997;
+    width: 0;
+    height: 10px;
+    border-radius: 2px;
+    animation: progress 5s infinite linear;
+}
+
+@keyframes progress {
+    0% {
+        width: 0;
+    }
+    25% {
+        width: 25%;
+    }
+    50% {
+        width: 50%;
+    }
+    75% {
+        width: 75%;
+    }
+    100% {
+        width: 100%;
+    }
+}

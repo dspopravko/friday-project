@@ -4,8 +4,8 @@ import { Button, TextField } from '@mui/material'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { useAppDispatch, useAppSelector } from '../../../../../state/store'
-import { signUp } from './registrationSlice'
-import s from './RegistrationForm.module.css'
+import { signUp } from './signUpSlice'
+import s from './SignUpForm.module.css'
 
 type RegistrationType = {
   email: string
@@ -23,7 +23,7 @@ const schema = yup.object().shape({
     .oneOf([yup.ref('password'), null], 'Passwords must match'),
 })
 
-export const RegistrationForm = () => {
+export const SignUpForm = () => {
   const dispatch = useAppDispatch()
   const isFetching = useAppSelector((state) => state.auth.isFetching)
   const {

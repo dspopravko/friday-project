@@ -1,20 +1,36 @@
 import { Card, Typography } from '@mui/material'
 import React, { useContext, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Navigate, NavLink } from 'react-router-dom'
 import { theme } from '../../../../assets/mui-theme'
 import { HeaderTitleContext } from '../../../../context/context'
 import { PATH } from '../../../../data/paths'
-import { RegistrationForm } from './form/RegistrationForm'
+import { SignUpForm } from './form/SignUpForm'
+import { useAppSelector } from '../../../../state/store'
 
-export const Registration = () => {
+export const SignUp = () => {
   const { setTitle } = useContext(HeaderTitleContext)
+  const reg = useAppSelector((state) => state.reg)
   useEffect(() => {
-    setTitle('Login page: signUp')
+    setTitle('Sign Up')
   }, [])
+
+  if (reg.registered) {
+    return <Navigate to={`/${PATH.LOGIN.MAIN}/${PATH.SUCCESS}`} />
+  }
+
   return (
     <Card className={'loginCanvas'}>
+      {/*<SuccessSignup />*/}
       <Typography variant={'h5'}>Sign up</Typography>
-      <RegistrationForm />
+      <SignUpForm />
+      <Typography
+        sx={{
+          mt: '10px',
+          color: theme.palette.error.dark,
+        }}
+      >
+        {reg.errors}
+      </Typography>
       <div
         style={{
           marginTop: '20px',
@@ -33,6 +49,7 @@ export const Registration = () => {
             variant={'h6'}
             textAlign={'center'}
             sx={{
+              mt: '4px',
               '&:hover': {
                 fontWeight: '600',
               },
