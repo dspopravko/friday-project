@@ -15,7 +15,7 @@ export const SignUp = () => {
   }, [])
 
   if (reg.registered) {
-    return <Navigate to={`/${PATH.LOGIN.MAIN}/${PATH.SUCCESS}`} />
+    return <Navigate to={'/' + PATH.SUCCESS} />
   }
 
   return (
