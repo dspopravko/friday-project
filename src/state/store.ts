@@ -1,3 +1,4 @@
+import { regReducer } from './../features/auth/components/signUp/form/registrationSlice'
 import { appReducer } from './appSlice'
 import { combineReducers } from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
@@ -11,6 +12,7 @@ export type ReduxStateType = ReturnType<typeof rootReducer>
 const rootReducer = combineReducers({
   app: appReducer,
   auth: authReducer,
+  reg: regReducer,
 })
 
 export const store = configureStore({

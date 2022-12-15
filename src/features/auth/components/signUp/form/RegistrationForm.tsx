@@ -18,9 +18,9 @@ const schema = yup.object().shape({
   password: yup.string().min(8).max(32).required(),
   passwordConfirmation: yup
     .string()
-    .test('passwords-match', 'Passwords must match', function (value) {
-      return this.parent.password === value
-    }),
+    .label('confirm password')
+    .required()
+    .oneOf([yup.ref('password'), null], 'Passwords must match'),
 })
 
 export const RegistrationForm = () => {
@@ -59,8 +59,8 @@ export const RegistrationForm = () => {
         type="password"
         label="confirm password"
         margin="normal"
-        helperText={errors.password?.message}
-        error={!!errors.password?.message}
+        helperText={errors.passwordConfirmation?.message}
+        error={!!errors.passwordConfirmation?.message}
         {...register('passwordConfirmation', { required: true })}
       />
       <Button variant={'contained'} disabled={isFetching} type="submit">

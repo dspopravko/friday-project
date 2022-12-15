@@ -1,8 +1,8 @@
 import { handleAxiosError } from '../../../../../services/error-notification'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { useAppDispatch } from '../../../../../state/store'
 import { regApi } from '../../../services/signUp/signUp-api'
 import { AxiosError } from 'axios'
+import { redirect } from 'react-router-dom'
 const initialState = {
   registered: false,
 }
@@ -33,7 +33,8 @@ export const signUp = createAsyncThunk(
     try {
       const res = await regApi.reg(data)
       console.log(res)
-      // dispatch(regAction({ registered: true }))
+      thunkApi.dispatch(regAction({ registered: true }))
+      // redirect('/login')
     } catch (e) {
       handleAxiosError(e, thunkApi.dispatch)
       if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {
