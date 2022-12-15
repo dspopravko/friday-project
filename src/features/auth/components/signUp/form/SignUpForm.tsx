@@ -4,8 +4,9 @@ import { Button, TextField } from '@mui/material'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { useAppDispatch, useAppSelector } from '../../../../../state/store'
-import { signUp } from './signUpSlice'
+import { signUp } from '../../../services/signUp/signUpSlice'
 import s from './SignUpForm.module.css'
+import { defaultSchema } from '../../../services/validationSchema'
 
 type RegistrationType = {
   email: string
@@ -14,8 +15,8 @@ type RegistrationType = {
 }
 
 const schema = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().min(8).max(32).required(),
+  email: defaultSchema.email,
+  password: defaultSchema.password,
   passwordConfirmation: yup
     .string()
     .label('confirm password')

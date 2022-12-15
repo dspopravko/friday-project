@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from 'react'
-import { HeaderTitleContext } from '../../../../context/context'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 import { Button, Card, TextField, Typography } from '@mui/material'
 import { useAppDispatch, useAppSelector } from '../../../../state/store'
@@ -8,9 +7,11 @@ import s from '../login/form/LoginForm.module.css'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { defaultSchema } from '../../services/validationSchema'
+import { setTitle } from '../../../../services/setHeaderTitle'
 
 const schema = yup.object().shape({
-  password: yup.string().min(8).max(32).required(),
+  password: defaultSchema.password,
 })
 
 type PasswordNewDataType = {
@@ -20,10 +21,7 @@ type PasswordNewDataType = {
 export const PasswordNew = () => {
   const { token } = useParams()
   const dispatch = useAppDispatch()
-  const { setTitle } = useContext(HeaderTitleContext)
-  useEffect(() => {
-    setTitle('Setup new password')
-  }, [])
+  setTitle('Setup new password')
 
   const isFetching = useAppSelector((state) => state.auth.isFetching)
   const {

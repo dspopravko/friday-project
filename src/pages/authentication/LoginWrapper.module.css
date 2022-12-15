@@ -1,5 +1,8 @@
 .loginWrapper {
-
+    border-radius: 2px;
+    background: #e8e8e8;
+    padding: 6px;
+    margin: 6px;
 }
 .heading {
 }

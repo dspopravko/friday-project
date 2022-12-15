@@ -11,15 +11,14 @@ import { restoreEmail } from './restoreEmail'
 import { NavLink } from 'react-router-dom'
 import { PATH } from '../../../../data/paths'
 import { theme } from '../../../../assets/mui-theme'
+import { defaultSchema } from '../../services/validationSchema'
 
 const schema = yup.object().shape({
-  email: yup.string().email().required(),
+  email: defaultSchema.email,
 })
 
 type PasswordRestoreDataType = {
-  email: string // кому восстанавливать пароль
-  // from: string //"test-front-admin <ai73a@yandex.by>", можно указать разработчика фронта)
-  // message: string // хтмп-письмо, вместо $token$ бэк вставит токен
+  email: string
 }
 
 export const PasswordRestore = () => {
@@ -39,11 +38,10 @@ export const PasswordRestore = () => {
   const dispatch = useAppDispatch()
   const isFetching = useAppSelector((state) => state.auth.isFetching)
   const onSubmit: SubmitHandler<PasswordRestoreDataType> = (data) => {
-    console.log('click')
     dispatch(
       restorePassword({
         email: data.email,
-        from: 'dspopravko',
+        from: 'https://t.me/dspopravko',
         message: restoreEmail,
       })
     )

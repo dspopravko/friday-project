@@ -1,6 +1,6 @@
-import { handleAxiosError } from '../../../../../services/error-notification'
+import { handleAxiosError } from '../../../../services/error-notification'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { regApi } from '../../../services/signUp/signUp-api'
+import { regApi } from './signUp-api'
 import { AxiosError } from 'axios'
 const initialState = {
   registered: false,

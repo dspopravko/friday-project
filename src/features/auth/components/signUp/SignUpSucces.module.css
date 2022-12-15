@@ -12,7 +12,7 @@
     width: 0;
     height: 10px;
     border-radius: 2px;
-    animation: progress 5s infinite linear;
+    animation: progress 5s linear;
 }
 
 @keyframes progress {

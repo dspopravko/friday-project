@@ -1,21 +1,20 @@
-import React, { useContext, useEffect } from 'react'
-import { HeaderTitleContext } from '../../../../context/context'
+import React from 'react'
 import { LoginForm } from './form/LoginForm'
-import { useAppDispatch } from '../../../../state/store'
-import { authMe } from '../../services/login/loginThunks'
+import { useAppSelector } from '../../../../state/store'
 import { Card, Typography } from '@mui/material'
-import { NavLink } from 'react-router-dom'
+import { Navigate, NavLink } from 'react-router-dom'
 import { PATH } from '../../../../data/paths'
 import { theme } from '../../../../assets/mui-theme'
+import { setTitle } from '../../../../services/setHeaderTitle'
+import { authMeHook } from '../../services/authMe'
 
 export const Login = () => {
-  const { setTitle } = useContext(HeaderTitleContext)
-  const dispatch = useAppDispatch()
-  useEffect(() => {
-    setTitle('Login page')
-    dispatch(authMe())
-  }, [])
-
+  const isAuth = useAppSelector((state) => state.auth.isAuth)
+  setTitle('Login', 'Login')
+  authMeHook()
+  if (isAuth) {
+    return <Navigate to={`/${PATH.PROFILE}`} />
+  }
   return (
     <Card className={'loginCanvas'}>
       <Typography variant={'h5'}>Sign in</Typography>

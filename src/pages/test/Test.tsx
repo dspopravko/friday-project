@@ -1,12 +1,10 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import XButton from '../../common/components/button/XButton'
-import { HeaderTitleContext } from '../../context/context'
 import XInput from '../../common/components/input/XInput'
 import s from './Test.module.css'
 import XSelect from '../../common/components/select/XSelect'
 import XRadio from '../../common/components/radio/XRadio'
 import { mockSelect } from '../../data/selectOptions'
-import { setPageTitle } from '../../services/pageTitle'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import {
   authMe,
@@ -14,16 +12,12 @@ import {
   logout,
 } from '../../features/auth/services/login/loginThunks'
 import { loginPayload } from '../../features/auth/services/login/login-api'
+import { setTitle } from '../../services/setHeaderTitle'
 
 export const Test = () => {
   const dispatch = useAppDispatch()
-  const { setTitle } = useContext(HeaderTitleContext)
   const isAuth = useAppSelector((state) => state.auth.isAuth)
-  useEffect(() => {
-    setTitle(`Tests, isAuth: ${isAuth}`)
-    setPageTitle(`Tests`)
-  }, [isAuth])
-
+  setTitle(`Tests, isAuth: ${isAuth}`, 'Tests')
   const checkMe = () => dispatch(authMe())
 
   const authCorrect = () => {

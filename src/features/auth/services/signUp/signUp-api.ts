@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios'
-import { RegType } from '../../components/signUp/form/signUpSlice'
+import { RegType } from './signUpSlice'
 import { instance } from '../../../../services/api/api'
 
 export interface AddedUser {

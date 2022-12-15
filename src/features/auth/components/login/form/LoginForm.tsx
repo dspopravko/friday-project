@@ -14,10 +14,11 @@ import * as yup from 'yup'
 import { login } from '../../../services/login/loginThunks'
 import { NavLink } from 'react-router-dom'
 import { PATH } from '../../../../../data/paths'
+import { defaultSchema } from '../../../services/validationSchema'
 
 const schema = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().min(8).max(32).required(),
+  email: defaultSchema.email,
+  password: defaultSchema.password,
 })
 
 type LoginData = {
