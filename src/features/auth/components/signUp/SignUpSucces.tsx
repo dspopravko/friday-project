@@ -14,7 +14,7 @@ export const SignUpSuccess = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(signUpSlice.actions.reset())
-    }, 5200)
+    }, 5000)
     return () => clearTimeout(timer)
   }, [])
   if (!reg.registered) {
@@ -38,7 +38,7 @@ export const SignUpSuccess = () => {
       </div>
       <Typography>
         Instruction was sent to:
-        <div style={{ fontWeight: 'bold', margin: '8px' }}>reg.email</div>
+        <div style={{ fontWeight: 'bold', margin: '8px' }}>{reg.email}</div>
         Please check your email!
       </Typography>
       <div className={s.progress}>
