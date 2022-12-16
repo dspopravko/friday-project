@@ -26,7 +26,7 @@ export const SignUpSuccess = () => {
   )
 }
 
-export function setResetTimeout(delay: number) {
+function setResetTimeout(delay: number) {
   const dispatch = useAppDispatch()
   useEffect(() => {
     const timer = setTimeout(() => {
