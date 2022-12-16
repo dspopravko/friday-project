@@ -8,7 +8,8 @@ export const dispatchProfileData = async (
   dispatch: AppDispatch
 ) => {
   let photo
-  if (data.avatar) {
+  if (data.avatar.item(0)) {
+    console.log('some avatar here')
     photo = await fileToBase64(data.avatar[0])
   }
   dispatch(
