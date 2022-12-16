@@ -21,7 +21,7 @@ export const Login = () => {
         <SuggestBlock
           question={"Don't have an account?"}
           suggestion={'Sign up'}
-          path={PATH.LOGIN.SIGNUP}
+          path={'/' + PATH.LOGIN.SIGNUP}
         />
       </div>
     </Card>

@@ -76,7 +76,7 @@ export const LoginForm = () => {
       <div style={{ marginBottom: '30px' }}>
         <NavLink
           replace
-          to={PATH.LOGIN.RESTORE}
+          to={'/' + PATH.LOGIN.RESTORE}
           style={{ textDecoration: 'none', color: '#000' }}
         >
           <Typography
