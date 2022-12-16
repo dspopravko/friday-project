@@ -40,7 +40,7 @@ export const logout = createAsyncThunk('login/logout', async (_, thunkApi) => {
   } catch (e) {
     handleAxiosError(e, thunkApi.dispatch)
     if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {
-      thunkApi.dispatch(authMe)
+      thunkApi.dispatch(authMe())
       return thunkApi.rejectWithValue(e.response?.data)
     } else {
       throw e
