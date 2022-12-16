@@ -17,13 +17,17 @@ export const PasswordRestore = () => {
     restored,
     errors: serverErrors,
     isFetching,
+    email,
   } = useAppSelector((state) => state.res)
 
   return (
     <Card className={'loginCanvas'}>
       {restored ? (
         <>
-          <SuccessBig GoTo={{ title: 'Sign In', path: '/' + PATH.LOGIN.MAIN }}>
+          <SuccessBig
+            GoTo={{ title: 'Sign In', path: '/' + PATH.LOGIN.MAIN }}
+            email={email}
+          >
             <Email />
           </SuccessBig>
         </>

@@ -7,14 +7,18 @@ const initialState = {
   isFetching: false,
   restored: false,
   errors: '',
+  email: '',
 }
 
 export const restorePasswordSlice = createSlice({
   name: 'restore',
   initialState: initialState,
   reducers: {
-    setRestorePassword(state, action: PayloadAction<boolean>) {
+    setRestorePasswordState(state, action: PayloadAction<boolean>) {
       state.restored = action.payload
+    },
+    setRestoreEmailValue(state, action: PayloadAction<string>) {
+      state.email = action.payload
     },
     reset(state) {
       state.isFetching = false
@@ -44,6 +48,9 @@ export const restorePassword = createAsyncThunk(
   async (data: restorePasswordPayloadType, thunkApi) => {
     try {
       const res = await restoreAPI.restorePassword(data)
+      thunkApi.dispatch(
+        restorePasswordSlice.actions.setRestoreEmailValue(data.email)
+      )
       return res.data
     } catch (e) {
       handleAxiosError(e, thunkApi.dispatch)
