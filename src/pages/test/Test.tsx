@@ -11,7 +11,7 @@ import {
   login,
   logout,
 } from '../../features/auth/services/login/loginThunks'
-import { loginPayload } from '../../features/auth/services/login/login-api'
+import { loginPayload } from '../../features/auth/services/login/loginAPI'
 import { setTitle } from '../../services/setHeaderTitle'
 
 export const Test = () => {
@@ -19,7 +19,6 @@ export const Test = () => {
   const isAuth = useAppSelector((state) => state.auth.isAuth)
   setTitle(`Tests, isAuth: ${isAuth}`, 'Tests')
   const checkMe = () => dispatch(authMe())
-
   const authCorrect = () => {
     const auth: loginPayload = {
       email: 'nya-admin@nya.nya',

@@ -1,64 +1,47 @@
+import React from 'react'
 import { Card, Typography } from '@mui/material'
-import React, { useContext, useEffect } from 'react'
-import { Navigate, NavLink } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { theme } from '../../../../assets/mui-theme'
-import { HeaderTitleContext } from '../../../../context/context'
 import { PATH } from '../../../../data/paths'
 import { SignUpForm } from './form/SignUpForm'
 import { useAppSelector } from '../../../../state/store'
+import { setTitle } from '../../../../services/setHeaderTitle'
+import { SuggestBlock } from '../common/suggestBlock'
 
 export const SignUp = () => {
-  const { setTitle } = useContext(HeaderTitleContext)
-  const reg = useAppSelector((state) => state.reg)
-  useEffect(() => {
-    setTitle('Sign Up')
-  }, [])
+  const { errors, registered } = useAppSelector((state) => state.reg)
+  setTitle('Sign Up')
 
-  if (reg.registered) {
+  if (registered) {
     return <Navigate to={'/' + PATH.SUCCESS} />
   }
 
   return (
-    <Card className={'loginCanvas'}>
-      {/*<SuccessSignup />*/}
-      <Typography variant={'h5'}>Sign up</Typography>
-      <SignUpForm />
-      <Typography
-        sx={{
-          mt: '10px',
-          color: theme.palette.error.dark,
-        }}
-      >
-        {reg.errors}
-      </Typography>
-      <div
-        style={{
-          marginTop: '20px',
-        }}
-      >
-        <Typography textAlign={'center'}>Already have an account?</Typography>
-        <NavLink
-          replace
-          to={'/' + PATH.LOGIN.MAIN}
-          style={{
-            textDecoration: 'underline',
-            color: theme.palette.primary.light,
+    <div className="pageContainer">
+      <Card className={'loginCanvas'}>
+        {/*<SuccessSignup />*/}
+        <Typography variant={'h5'}>Sign up</Typography>
+        <SignUpForm />
+        <Typography
+          sx={{
+            mt: '10px',
+            color: theme.palette.error.dark,
           }}
         >
-          <Typography
-            variant={'h6'}
-            textAlign={'center'}
-            sx={{
-              mt: '4px',
-              '&:hover': {
-                fontWeight: '600',
-              },
-            }}
-          >
-            Sign in
-          </Typography>
-        </NavLink>
-      </div>
-    </Card>
+          {errors}
+        </Typography>
+        <div
+          style={{
+            marginTop: '20px',
+          }}
+        >
+          <SuggestBlock
+            question={'Already have an account?'}
+            suggestion={'Sign in'}
+            path={'/' + PATH.LOGIN.MAIN}
+          />
+        </div>
+      </Card>
+    </div>
   )
 }

@@ -1,17 +1,12 @@
 import { handleAxiosError } from '../../../../services/error-notification'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { regApi } from './signUp-api'
+import { regApi, RegType } from './signUpAPI'
 import { AxiosError } from 'axios'
+
 const initialState = {
   registered: false,
   email: '',
   errors: '',
-}
-
-export type RegType = {
-  email: string
-  password: string
-  passwordConfirmation: string
 }
 
 export const signUpSlice = createSlice({

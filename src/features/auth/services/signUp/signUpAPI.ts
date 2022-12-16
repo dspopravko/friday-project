@@ -1,5 +1,4 @@
 import { AxiosResponse } from 'axios'
-import { RegType } from './signUpSlice'
 import { instance } from '../../../../services/api/api'
 
 export interface AddedUser {
@@ -15,6 +14,11 @@ export interface AddedUser {
   __v: number
 }
 
+export interface RegType {
+  email: string
+  password: string
+  passwordConfirmation: string
+}
 export const regApi = {
   reg(data: RegType) {
     return instance.post<RegType, AxiosResponse<{ addedUser: AddedUser }>>(

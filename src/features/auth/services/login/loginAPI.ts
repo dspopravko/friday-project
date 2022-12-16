@@ -1,6 +1,6 @@
 import { instance } from '../../../../services/api/api'
 import { AxiosResponse } from 'axios'
-import { apiUserType } from '../profile/profile-api'
+import { apiUserType } from '../profile/profileAPI'
 
 export type loginSuccess = apiUserType & {
   __v: number
@@ -11,7 +11,7 @@ export type loginPayload = {
   email: string
   password: string
 }
-export const loginApi = {
+export const loginAPI = {
   login(payload: loginPayload) {
     return instance.post<loginPayload, AxiosResponse<loginSuccess>>(
       'auth/login',

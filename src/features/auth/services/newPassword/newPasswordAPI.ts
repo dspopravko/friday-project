@@ -9,9 +9,8 @@ export type setNewPasswordPayloadType = {
   password: string
   resetPasswordToken: string
 }
-export const newPasswordApi = {
+export const newPasswordAPI = {
   setNewPassword(data: setNewPasswordPayloadType) {
-    console.log(data)
     return instance.post<
       setNewPasswordPayloadType,
       AxiosResponse<setNewPasswordSuccessType>

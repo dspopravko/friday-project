@@ -2,14 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { handleAxiosError } from '../../../../services/error-notification'
 import { AxiosError } from 'axios'
 import { AppRootStateType } from '../../../../state/store'
-import { loginPayload, loginApi } from './login-api'
-import { profileApi, userUpdateData } from '../profile/profile-api'
-import { newPasswordApi } from '../newPassword/newPassword-api'
-import { restoreApi } from '../restore/restore-api'
+import { loginPayload, loginAPI } from './loginAPI'
+import { profileAPI, userUpdateData } from '../profile/profileAPI'
 
 export const authMe = createAsyncThunk('login/fetchMe', async (_, thunkApi) => {
   try {
-    const res = await loginApi.me()
+    const res = await loginAPI.me()
     return res.data
   } catch (e) {
     if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {
@@ -23,7 +21,7 @@ export const login = createAsyncThunk(
   'login/login',
   async (data: loginPayload, thunkApi) => {
     try {
-      const res = await loginApi.login(data)
+      const res = await loginAPI.login(data)
       return res.data
     } catch (e) {
       handleAxiosError(e, thunkApi.dispatch)
@@ -37,7 +35,7 @@ export const login = createAsyncThunk(
 )
 export const logout = createAsyncThunk('login/logout', async (_, thunkApi) => {
   try {
-    const res = await loginApi.logout()
+    const res = await loginAPI.logout()
     return res.data
   } catch (e) {
     handleAxiosError(e, thunkApi.dispatch)
@@ -63,39 +61,7 @@ export const updateProfile = createAsyncThunk(
         email: state.auth.user.email,
         name: data.name || state.auth.user.name,
       }
-      const res = await profileApi.updateUser(user)
-      return res.data
-    } catch (e) {
-      handleAxiosError(e, thunkApi.dispatch)
-      if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {
-        return thunkApi.rejectWithValue(e.response?.data)
-      } else {
-        throw e
-      }
-    }
-  }
-)
-export const setNewPassword = createAsyncThunk(
-  'login/setNewPassword', //наверное стоит вынести в отдельный slice, добавить в него состояние для редиректа на логин после успешного запроса
-  async (data: { password: string; resetPasswordToken: string }, thunkApi) => {
-    try {
-      const res = await newPasswordApi.setNewPassword(data)
-      return res.data
-    } catch (e) {
-      handleAxiosError(e, thunkApi.dispatch)
-      if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {
-        return thunkApi.rejectWithValue(e.response?.data)
-      } else {
-        throw e
-      }
-    }
-  }
-)
-export const restorePassword = createAsyncThunk(
-  'login/restorePassword', //наверное стоит вынести в отдельный slice, добавить в него состояние для редиректа на логин после успешного запроса
-  async (data: { email: string; from: string; message: string }, thunkApi) => {
-    try {
-      const res = await restoreApi.restorePassword(data)
+      const res = await profileAPI.updateUser(user)
       return res.data
     } catch (e) {
       handleAxiosError(e, thunkApi.dispatch)

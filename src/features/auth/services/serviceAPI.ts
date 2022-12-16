@@ -7,7 +7,7 @@ type pingResponseType = {
   frontTime: number | string
   info: string
 }
-export const serviceApi = {
+export const serviceAPI = {
   ping(frontTime?: number) {
     return instance.post<null, AxiosResponse<pingResponseType>>('ping', {
       frontTime,

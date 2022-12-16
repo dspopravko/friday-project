@@ -21,6 +21,7 @@ module.exports = {
     camelcase: 'warn',
     curly: 'error',
     eqeqeq: 'warn',
-    'max-depth': ['warn', 3]
+    'max-depth': ['warn', 3],
+    'no-debugger': 'off'
   },
 }

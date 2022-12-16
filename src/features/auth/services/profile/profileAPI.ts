@@ -1,5 +1,5 @@
 import { instance } from '../../../../services/api/api'
-import { loginPayload } from '../login/login-api'
+import { loginPayload } from '../login/loginAPI'
 import { AxiosResponse } from 'axios'
 
 export type blockDataType = {
@@ -26,7 +26,7 @@ export type apiUserType = {
 export type registerSuccess = {
   addedUser: apiUserType
 }
-export const profileApi = {
+export const profileAPI = {
   block(blockData: blockDataType) {
     return instance.post<
       blockDataType,

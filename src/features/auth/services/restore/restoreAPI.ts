@@ -12,7 +12,7 @@ export type restorePasswordSuccessType = {
   answer: boolean
   html: boolean
 }
-export const restoreApi = {
+export const restoreAPI = {
   restorePassword(data: restorePasswordPayloadType) {
     return instance.post<
       restorePasswordPayloadType,
