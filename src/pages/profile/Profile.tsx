@@ -4,14 +4,14 @@ import { Box, Card, Grid, Typography } from '@mui/material'
 import s from './profile.module.css'
 import XButton from '../../common/components/button/XButton'
 import { EditNameUser } from '../../common/components/editNameUser/EditNameUser'
-import { logout } from '../../features/auth/services/login/loginThunks'
-import { ProfilePhoto } from '../../features/auth/components/profile/profilePhoto'
+import { logout } from '../../features/auth/login/services/loginThunks'
+import { ProfilePhoto } from '../../features/auth/profile/profilePhoto'
 import { setTitle } from '../../services/setHeaderTitle'
-import { cardsCheer } from '../../features/auth/services/profile/cardsСheer'
+import { cardsCheer } from '../../features/auth/profile/services/cardsСheer'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
-  setTitle('Profile', 'Profile')
+  setTitle('Profile')
   const auth = useAppSelector((state) => state.auth)
 
   const logoutHandler = () => {
@@ -33,7 +33,6 @@ export const Profile = () => {
           Personal Information
         </Typography>
         <ProfilePhoto />
-        {/*здесь лежит блок с аватаркой и кнопкой которая вызывает форму обновления профиля*/}
         <Box className={s.name}>
           <EditNameUser value={auth.user.name} onChange={onOpenChange} />
         </Box>

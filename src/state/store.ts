@@ -1,13 +1,13 @@
-import { regReducer } from '../features/auth/services/signUp/signUpSlice'
+import { regReducer } from '../features/auth/signUp/services/signUpSlice'
 import { appReducer } from './appSlice'
 import { combineReducers } from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
 import thunkMiddleware from 'redux-thunk'
 import logger from 'redux-logger'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { authReducer } from '../features/auth/services/login/loginSlice'
-import { restorePasswordReducer } from '../features/auth/services/restore/restorePasswordSlice'
-import { newPasswordReducer } from '../features/auth/services/newPassword/newPasswordSlice'
+import { authReducer } from '../features/auth/login/services/loginSlice'
+import { restorePasswordReducer } from '../features/auth/restore/services/restorePasswordSlice'
+import { newPasswordReducer } from '../features/auth/newPassword/services/newPasswordSlice'
 
 export type ReduxStateType = ReturnType<typeof rootReducer>
 

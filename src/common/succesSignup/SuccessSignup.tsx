@@ -2,7 +2,7 @@ import React from 'react'
 import { Alert, Snackbar } from '@mui/material'
 import { redirect } from 'react-router-dom'
 import { PATH } from '../../data/paths'
-import { setReg } from '../../features/auth/services/signUp/signUpSlice'
+import { setReg } from '../../features/auth/signUp/services/signUpSlice'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 
 export const SuccessSignup = () => {

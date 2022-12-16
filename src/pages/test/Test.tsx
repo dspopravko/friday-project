@@ -10,8 +10,8 @@ import {
   authMe,
   login,
   logout,
-} from '../../features/auth/services/login/loginThunks'
-import { loginPayload } from '../../features/auth/services/login/loginAPI'
+} from '../../features/auth/login/services/loginThunks'
+import { loginPayload } from '../../features/auth/login/services/loginAPI'
 import { setTitle } from '../../services/setHeaderTitle'
 
 export const Test = () => {
