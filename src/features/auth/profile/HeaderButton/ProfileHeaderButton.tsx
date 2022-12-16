@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 export const ProfileHeaderButton = () => {
   // const [open, setOpen] = useState(true)
   const dispatch = useAppDispatch()
-  const user = useAppSelector((state) => state.auth.user)
+  const user = useAppSelector((state) => state.profile.user)
   const navigate = useNavigate()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const openMui = Boolean(anchorEl)

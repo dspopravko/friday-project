@@ -5,27 +5,23 @@ import XButton from '../../../common/components/button/XButton'
 import { dispatchProfileData } from './services/dispatchProfileData'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { LoginData } from './profilePhoto'
+import { LoginData } from './updateProfileContainer'
 import { useAppDispatch, useAppSelector } from '../../../state/store'
 import * as yup from 'yup'
-
-type UpdateProfileFormPropsType = {
-  setOpen: (state: boolean) => void
-}
+import { defaultSchema } from '../common/validation/validationSchema'
 
 const schema = yup.object().shape({
   name: yup.string().min(3),
-  password: yup.string().min(8).max(32).required(),
+  password: defaultSchema.password,
 })
 // форма которая может изменять имя или аватарку профиля, обязателен только пароль
-export const UpdataProfileForm = ({ setOpen }: UpdateProfileFormPropsType) => {
-  const user = useAppSelector((state) => state.auth.user)
+export const UpdateProfileForm = () => {
+  const { user, pending } = useAppSelector((state) => state.profile)
   const dispatch = useAppDispatch()
   const handleSubmission = async (data: LoginData) => {
     await dispatchProfileData(data, dispatch)
     resetField('password')
     resetField('avatar')
-    setOpen(false)
   }
   const {
     register,
@@ -48,7 +44,13 @@ export const UpdataProfileForm = ({ setOpen }: UpdateProfileFormPropsType) => {
     }
   }
   return (
-    <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={s.form}
+      onSubmit={handleSubmit(onSubmit)}
+      style={{
+        opacity: pending ? '0.5' : '1',
+      }}
+    >
       <Button variant="outlined" component="label">
         Upload Photo
         <input
@@ -85,7 +87,7 @@ export const UpdataProfileForm = ({ setOpen }: UpdateProfileFormPropsType) => {
         {...register('password', { required: true })}
       />
 
-      <Button variant={'contained'} type="submit">
+      <Button type="submit" disabled={pending}>
         Update profile
       </Button>
     </form>

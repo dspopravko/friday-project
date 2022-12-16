@@ -1,7 +1,7 @@
 import { fileToBase64 } from '../../../../services/fileToBase64'
-import { LoginData } from '../profilePhoto'
+import { LoginData } from '../updateProfileContainer'
 import { AppDispatch } from '../../../../state/store'
-import { updateProfile } from './updateProfileThunk'
+import { updateProfile } from './profileThunk'
 
 export const dispatchProfileData = async (
   data: LoginData,

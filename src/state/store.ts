@@ -5,18 +5,20 @@ import { configureStore } from '@reduxjs/toolkit'
 import thunkMiddleware from 'redux-thunk'
 import logger from 'redux-logger'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { authReducer } from '../features/auth/login/services/loginSlice'
+import { loginReducer } from '../features/auth/login/services/loginSlice'
 import { restorePasswordReducer } from '../features/auth/restore/services/restorePasswordSlice'
 import { newPasswordReducer } from '../features/auth/newPassword/services/newPasswordSlice'
+import { profileReducer } from '../features/auth/profile/services/profileSlice'
 
 export type ReduxStateType = ReturnType<typeof rootReducer>
 
 const rootReducer = combineReducers({
   app: appReducer,
-  auth: authReducer,
+  auth: loginReducer,
   reg: regReducer,
   res: restorePasswordReducer,
   new: newPasswordReducer,
+  profile: profileReducer,
 })
 
 export const store = configureStore({

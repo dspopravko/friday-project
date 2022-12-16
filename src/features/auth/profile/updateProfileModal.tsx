@@ -1,6 +1,10 @@
 import React from 'react'
-import { Box, Modal, Typography } from '@mui/material'
-import { UpdataProfileForm } from './updataProfileForm'
+import { Box, IconButton, Modal, Typography } from '@mui/material'
+import { UpdateProfileForm } from './updateProfileForm'
+import { Close, DoneAll } from '@mui/icons-material'
+import { useAppSelector } from '../../../state/store'
+import { SuccessBig } from '../common/components/successBig'
+import { FormError } from '../common/components/formError'
 
 type ModalPropsType = {
   open: boolean
@@ -25,6 +29,7 @@ export const UpdateProfileModal = ({
   onClose,
   setOpen,
 }: ModalPropsType) => {
+  const { updateSuccess, errors } = useAppSelector((state) => state.profile)
   return (
     <Modal
       open={open}
@@ -33,10 +38,28 @@ export const UpdateProfileModal = ({
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
+        <div style={{ display: 'flex', justifyContent: 'right' }}>
+          <IconButton onClick={() => setOpen(false)}>
+            <Close />
+          </IconButton>
+        </div>
         <Typography id="modal-modal-title" variant="h6" component="h2">
           Update profile
         </Typography>
-        <UpdataProfileForm setOpen={setOpen} />
+        {updateSuccess ? (
+          <SuccessBig
+            title={'Profile has been successfully updated!'}
+            email={''}
+            description={''}
+          >
+            <DoneAll />
+          </SuccessBig>
+        ) : (
+          <>
+            <UpdateProfileForm />
+            <FormError error={errors} />
+          </>
+        )}
       </Box>
     </Modal>
   )
