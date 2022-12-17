@@ -2,10 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getPacksRequestType, packResponseType } from '../API/packsAPI'
 import { getPacks } from './packsThunk'
 
-export type packsType = Omit<packResponseType, '__v' | 'more_id'>
+export type PacksType = Omit<packResponseType, '__v' | 'more_id'>
 
 const initialState = {
-  packs: [] as Array<packsType>,
+  packs: [] as Array<PacksType>,
   queryParams: {} as getPacksRequestType,
   pending: false,
   errors: '',
