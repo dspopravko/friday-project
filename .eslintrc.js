@@ -22,6 +22,6 @@ module.exports = {
     curly: 'error',
     eqeqeq: 'warn',
     'max-depth': ['warn', 3],
-    'no-debugger': 'off'
+    'no-debugger': 'off',
   },
 }

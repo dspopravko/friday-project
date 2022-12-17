@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '../../state/store'
+import { useAppDispatch } from '../../state/store'
 import { Typography } from '@mui/material'
 import { getPacks } from '../../features/cards/packs/BLL/packsThunk'
+import { PacksTableContorls } from '../../features/cards/packs/VIEW/PacksTableContorls'
+import { PacksTable } from '../../features/cards/packs/VIEW/PacksTable'
 
 export const Packs = () => {
-  const { packs } = useAppSelector((state) => state.packs)
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(getPacks({}))
@@ -13,10 +14,8 @@ export const Packs = () => {
     <div>
       <Typography>Packs</Typography>
       <div>
-        {packs &&
-          packs.map((p) => {
-            return <div key={p._id}>{p.name}</div>
-          })}
+        <PacksTableContorls />
+        <PacksTable />
       </div>
     </div>
   )

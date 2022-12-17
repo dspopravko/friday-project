@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { packResponseType } from '../API/packsAPI'
+import { getPacksRequestType, packResponseType } from '../API/packsAPI'
 import { getPacks } from './packsThunk'
 
-type packsType = Omit<packResponseType, '__v' | 'more_id'>
+export type packsType = Omit<packResponseType, '__v' | 'more_id'>
 
 const initialState = {
   packs: [] as Array<packsType>,
+  queryParams: {} as getPacksRequestType,
   pending: false,
   errors: '',
 }
