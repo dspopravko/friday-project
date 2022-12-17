@@ -9,4 +9,6 @@ export const PATH = {
   PROFILE: 'profile',
   ERROR404: '404',
   TESTS: 'test',
+  CARDS: 'cards',
+  PACKS: 'packs',
 }

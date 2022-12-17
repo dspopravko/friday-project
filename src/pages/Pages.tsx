@@ -10,12 +10,16 @@ import { Test } from './test/Test'
 import { PATH } from '../data/paths'
 import { SignUpSuccess } from './signUpSuccess/SignUpSucces'
 import { PrivateRoutes } from './PrivateRoutes'
+import { Cards } from './cards/Cards'
+import { Packs } from './packs/Packs'
 
 export const Pages = () => {
   return (
     <Routes>
       <Route element={<PrivateRoutes />}>
         <Route path={PATH.PROFILE} element={<Profile />} />
+        <Route path={PATH.CARDS} element={<Cards />} />
+        <Route path={PATH.PACKS} element={<Packs />} />
       </Route>
       <Route path={PATH.LOGIN.MAIN} element={<Login />} />
       <Route path={PATH.LOGIN.RESTORE} element={<PasswordRestore />} />

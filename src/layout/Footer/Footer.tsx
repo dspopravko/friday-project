@@ -52,6 +52,18 @@ export const Footer = () => {
       >
         Profile
       </NavLink>
+      <NavLink
+        to={PATH.PACKS}
+        style={({ isActive }) => ({ color: isActive ? activeColor : color })}
+      >
+        Packs
+      </NavLink>
+      <NavLink
+        to={PATH.CARDS}
+        style={({ isActive }) => ({ color: isActive ? activeColor : color })}
+      >
+        Cards
+      </NavLink>
     </div>
   )
 }
