@@ -10,17 +10,8 @@ import { Test } from './test/Test'
 import { PATH } from '../data/paths'
 import { SignUpSuccess } from './signUpSuccess/SignUpSucces'
 import { PrivateRoutes } from './PrivateRoutes'
-import { useAppSelector } from '../state/store'
-import { appStatus } from '../state/appSlice'
-import { CircularProgress } from '@mui/material'
-import { authMeHook } from '../features/auth/common/hooks/authMeHook'
 
 export const Pages = () => {
-  const { status } = useAppSelector((state) => state.app)
-  authMeHook()
-  if (status === appStatus.loading) {
-    return <CircularProgress />
-  }
   return (
     <Routes>
       <Route element={<PrivateRoutes />}>
