@@ -6,7 +6,7 @@ export type DebouncedInputPropsType = {
   onEnter?: () => void
   error?: ReactNode
   spanClassName?: string
-  value: string
+  initialValue: string
 } & {
   onDebouncedChange?: (value: string) => void
 }
@@ -14,13 +14,15 @@ export type DebouncedInputPropsType = {
 export const DebouncedInput: React.FC<DebouncedInputPropsType> = ({
   onChangeText,
   onDebouncedChange,
-  value,
+  initialValue,
 }) => {
   const [timerId, setTimerId] = useState<number | undefined>(undefined)
+  const [value, setValue] = useState(initialValue)
 
   const onChangeTextCallback = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
+    setValue(e.target.value)
     onChangeText?.(e.currentTarget.value)
     if (onDebouncedChange) {
       timerId && clearTimeout(timerId)

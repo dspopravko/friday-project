@@ -13,7 +13,7 @@ export const shapeTableHead = (packs: Array<PacksType>) => {
     user_name: obj.user_name,
     _id: obj._id,
   }))
-  const a = reshapedObj[0]
+  return reshapedObj[0]
     ? Object.keys(reshapedObj[0]).map((key) => {
         // переназначаем дефолтный метод рендера из react-table, чтобы отрисовывалась картинка, а не ссылка
         switch (true) {
@@ -72,6 +72,4 @@ export const shapeTableHead = (packs: Array<PacksType>) => {
         return { Header: key, accessor: key }
       })
     : []
-  console.log(a)
-  return a
 }
