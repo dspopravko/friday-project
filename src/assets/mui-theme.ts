@@ -34,7 +34,6 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           color: '#ffffff',
-          margin: '6px',
           paddingLeft: '16px',
           paddingRight: '16px',
           boxShadow: '0 0px 8px rgba(0, 0, 0, .30)',
@@ -54,6 +53,14 @@ export const theme = createTheme({
             border: 'none',
             background: 'transparent',
             color: 'black',
+          },
+          '&.MuiButton-outlinedPrimary': {
+            border: 'none',
+            background: blue[700],
+            color: 'white',
+          },
+          '&.MuiButtonGroup-grouped': {
+            borderRadius: '2px',
           },
           '&.MuiButton-outlined:hover': {
             border: 'none',

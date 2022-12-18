@@ -8,7 +8,7 @@ export const packsAPI = {
   },
 }
 export type getPacksRequestType = {
-  packName: 'english'
+  packName: string
   min: number
   max: number
   sortPacks: string
