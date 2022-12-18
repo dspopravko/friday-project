@@ -4,10 +4,13 @@ import { useAppSelector } from '../../../../../state/store'
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 import { shapeTableHead } from './PacksTableHead'
 import { tableHooks } from './PacksTableActions'
+import { packResponseType } from '../../API/packsAPI'
+import { useNavigate } from 'react-router-dom'
+import { PATH } from '../../../../../data/paths'
 
 export function PacksTable() {
   const { packs } = useAppSelector((state) => state.packs)
-
+  const navigate = useNavigate()
   //использовать мемо - обязательное условие в документации к react-table
   const productsData = useMemo(() => [...(packs as Array<any>)], [packs])
   const productsColumns = useMemo(() => {
@@ -22,19 +25,15 @@ export function PacksTable() {
     tableHooks
   )
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-    // preGlobalFilteredRows,
-    // setGlobalFilter,
-    // state,
-  } = tableInstance
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    tableInstance
 
   const isEven = (idx: number) => idx % 2 === 0
 
+  const openCardsHandler = (props: unknown) => {
+    const typedRow = props as { original: packResponseType }
+    navigate(`/${PATH.CARDS}/${typedRow.original._id}`)
+  }
   return (
     <div style={{ maxWidth: '60vw', overflowX: 'auto' }}>
       <Table {...getTableProps()}>
@@ -67,6 +66,7 @@ export function PacksTable() {
             const { key, ...restProps } = row.getRowProps()
             return (
               <TableRow
+                onClick={() => openCardsHandler(row)}
                 key={key}
                 {...restProps}
                 style={{ background: isEven(idx) ? '#eaf3ee' : '' }}
@@ -75,7 +75,7 @@ export function PacksTable() {
                   const { key, ...restProps } = cell.getCellProps()
                   return (
                     <TableCell key={key} {...restProps}>
-                      {cell.render('Cell')}
+                      <>{cell.render('Cell')}</>
                     </TableCell>
                   )
                 })}

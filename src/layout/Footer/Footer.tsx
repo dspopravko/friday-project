@@ -58,6 +58,12 @@ export const Footer = () => {
       >
         Packs
       </NavLink>
+      <NavLink
+        to={PATH.CARDS}
+        style={({ isActive }) => ({ color: isActive ? activeColor : color })}
+      >
+        Cards
+      </NavLink>
     </div>
   )
 }
