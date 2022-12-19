@@ -11,6 +11,9 @@ export const packsAPI = {
         return { cardPacks, packsGeneral }
       })
   },
+  deletePack(data: string) {
+    return instance.delete<getPacksResponseType>('cards/pack?id=' + data)
+  },
 }
 export type getPacksRequestType = {
   packName: string
