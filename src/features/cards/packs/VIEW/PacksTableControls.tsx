@@ -4,6 +4,9 @@ import { getPacks } from '../BLL/packsThunk'
 import { createSearchParams, useSearchParams } from 'react-router-dom'
 import { DebouncedInput } from './Controls/SearchInput'
 import { Button, ButtonGroup } from '@mui/material'
+import { getPacksRequestType } from '../API/packsAPI'
+
+export let controlParams: Partial<getPacksRequestType>
 
 export const PacksTableControls = () => {
   const userID = useAppSelector((state) => state.profile.user._id)
@@ -17,6 +20,9 @@ export const PacksTableControls = () => {
     setSearchParams(a)
   }
 
+  useEffect(() => {
+    controlParams = params
+  }, [searchParams])
   useEffect(() => {
     if (!pending) {
       dispatch(getPacks(params))
