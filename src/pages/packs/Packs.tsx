@@ -5,6 +5,7 @@ import { PacksTable } from '../../features/cards/packs/VIEW/Table/PacksTable'
 import { getPacks } from '../../features/cards/packs/BLL/packsThunk'
 import { useAppDispatch } from '../../state/store'
 import { useSearchParams } from 'react-router-dom'
+import { TablePagination } from '../../features/cards/packs/VIEW/Controls/TablePagination'
 
 export const Packs = () => {
   const [searchParams] = useSearchParams()
@@ -19,6 +20,7 @@ export const Packs = () => {
       <div>
         <PacksTableControls />
         <PacksTable />
+        <TablePagination />
       </div>
     </div>
   )

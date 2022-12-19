@@ -30,7 +30,9 @@
     height: 48px;
     font-weight: bold;
 }
-
+.tableRow {
+    transition: 0.2s ease;
+}
 .tableRow:nth-child(even) {
     background-color: #f5f5f5;
 }
