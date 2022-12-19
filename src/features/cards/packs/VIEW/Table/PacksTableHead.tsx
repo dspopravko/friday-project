@@ -3,7 +3,12 @@ import { PacksType } from '../../BLL/packsSlice'
 
 //оформляем наши данные в колонки для react-tables, библиотека требует данные в виде массива объектов {Header: '', accessor: ''}
 //todo: написать решейпер для объекта, и вынести в отдельный файл
-export const shapeTableHead = (packs: Array<PacksType>) => {
+export const shapeTableHead = (
+  packs: Array<PacksType>,
+  sort: (newParams: { [param: string]: string }) => void,
+  params: unknown
+) => {
+  const typedParams = params as { sortPacks: string }
   const reshapedObj = packs.map((obj) => ({
     //задаём порядок колоннок
     deckCover: obj.deckCover,
@@ -19,7 +24,7 @@ export const shapeTableHead = (packs: Array<PacksType>) => {
         switch (true) {
           case key === 'deckCover':
             return {
-              Header: 'Image',
+              Header: 'Cover',
               accessor: key,
               Cell: ({ value }: { value: string }) => (
                 <img
@@ -37,7 +42,29 @@ export const shapeTableHead = (packs: Array<PacksType>) => {
             }
           case key === 'cardsCount':
             return {
-              Header: 'Cards count',
+              Header: () => {
+                let sortIcon = String.fromCharCode(10782)
+                if (typedParams.sortPacks === '1cardsCount') {
+                  sortIcon = String.fromCharCode(9650)
+                }
+                if (typedParams.sortPacks === '0cardsCount') {
+                  sortIcon = String.fromCharCode(9660)
+                }
+                return (
+                  <div
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      if (typedParams.sortPacks === '1cardsCount') {
+                        sort({ sortPacks: '0cardsCount' })
+                      } else {
+                        sort({ sortPacks: '1cardsCount' })
+                      }
+                    }}
+                  >
+                    Cards count {sortIcon}
+                  </div>
+                )
+              },
               accessor: key,
             }
           case key === 'user_name':
@@ -47,7 +74,29 @@ export const shapeTableHead = (packs: Array<PacksType>) => {
             }
           case key === 'updated':
             return {
-              Header: 'Last Updated',
+              Header: () => {
+                let sortIcon = String.fromCharCode(10782)
+                if (typedParams.sortPacks === '1updated') {
+                  sortIcon = String.fromCharCode(9650)
+                }
+                if (typedParams.sortPacks === '0updated') {
+                  sortIcon = String.fromCharCode(9660)
+                }
+                return (
+                  <div
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      if (typedParams.sortPacks === '1updated') {
+                        sort({ sortPacks: '0updated' })
+                      } else {
+                        sort({ sortPacks: '1updated' })
+                      }
+                    }}
+                  >
+                    Last Updated {sortIcon}
+                  </div>
+                )
+              },
               accessor: key,
               Cell: ({ value }: { value: string }) => (
                 <>

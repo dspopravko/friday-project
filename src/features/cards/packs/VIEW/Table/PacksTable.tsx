@@ -5,17 +5,27 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 import { shapeTableHead } from './PacksTableHead'
 import { tableHooks } from './PacksTableActions'
 import { packResponseType } from '../../API/packsAPI'
-import { useNavigate } from 'react-router-dom'
+import {
+  createSearchParams,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom'
 import { PATH } from '../../../../../data/paths'
 
 export function PacksTable() {
   const packs = useAppSelector((state) => state.packs.packsCurrent)
   const pending = useAppSelector((state) => state.packs.pending)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const params = Object.fromEntries(searchParams)
   const navigate = useNavigate()
+
+  const checkClick = (newParams: { [param: string]: string }) =>
+    setSearchParams(createSearchParams({ ...params, ...newParams }))
+
   //использовать мемо - обязательное условие в документации к react-table
   const productsData = useMemo(() => [...(packs as Array<any>)], [packs])
   const productsColumns = useMemo(() => {
-    return shapeTableHead(packs)
+    return shapeTableHead(packs, checkClick, params)
   }, [packs])
 
   const tableInstance = useTable(
