@@ -18,11 +18,7 @@ export const DoubleSliderWithInputs = ({
 
   const handleInput = (newParams: Array<{ [param: string]: string }>) => {
     isInitialized.current = true
-    const x = {}
-    newParams.forEach((paramObj) => {
-      Object.assign(x, paramObj)
-    })
-    setParams({ ...params, ...x })
+    setParams({ ...params, ...Object.assign({}, ...newParams) })
   }
 
   useEffect(() => {
@@ -54,10 +50,7 @@ export const DoubleSliderWithInputs = ({
             inputProps: {
               min: border[0],
               max: border[1],
-              style: {
-                padding: '0 0 0 10px',
-                height: 36,
-              },
+              style: { padding: '0 0 0 10px', height: 36 },
             },
           }}
           onChange={(e) => handleInput([{ min: e.target.value }])}
@@ -77,9 +70,7 @@ export const DoubleSliderWithInputs = ({
       />
       <div>
         <TextField
-          sx={{
-            p: '1px',
-          }}
+          sx={{ p: '1px' }}
           className={s.input}
           size="small"
           name="To"
@@ -90,11 +81,7 @@ export const DoubleSliderWithInputs = ({
             inputProps: {
               min: border[0],
               max: border[1],
-              style: {
-                padding: '0 0 0 10px',
-                height: 36,
-                width: 45,
-              },
+              style: { padding: '0 0 0 10px', height: 36, width: 45 },
             },
           }}
           onChange={(e) => handleInput([{ max: e.target.value }])}
