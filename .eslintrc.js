@@ -18,7 +18,7 @@ module.exports = {
   rules: {
     'no-nested-ternary': 'error',
     'no-duplicate-imports': 'error',
-    camelcase: 'warn',
+    camelcase: 'off',
     curly: 'error',
     eqeqeq: 'warn',
     'max-depth': ['warn', 3],

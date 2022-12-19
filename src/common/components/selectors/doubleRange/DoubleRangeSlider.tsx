@@ -6,21 +6,15 @@ import { theme } from '../../../../assets/mui-theme'
 type DoubleRangeSliderPropsType = {
   initialValue: number[]
   onChangeCommitted: (values: number[]) => void
-  min: number
-  max: number
+  border: number[]
+  current: number[]
 }
 
 export const DoubleRangeSlider = ({
   onChangeCommitted,
-  initialValue,
-  min,
-  max,
+  current,
+  border,
 }: DoubleRangeSliderPropsType) => {
-  const [value, setValue] = React.useState<number[]>(initialValue)
-
-  const handleChange = (event: Event, newValue: number | number[]) => {
-    setValue(newValue as number[])
-  }
   const onChangeCommittedHandler = (value: number | number[]) => {
     if (Array.isArray(value)) {
       onChangeCommitted(value)
@@ -29,9 +23,17 @@ export const DoubleRangeSlider = ({
     }
   }
   return (
-    <Box sx={{ width: 300 }}>
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 175,
+      }}
+    >
       <Slider
         sx={{
+          m: 0,
           width: 150,
           color: theme.palette.primary.main,
           '& .MuiSlider-thumb': {
@@ -45,11 +47,10 @@ export const DoubleRangeSlider = ({
             backgroundColor: theme.palette.primary.light,
           },
         }}
-        onChangeCommitted={(event, value) => onChangeCommittedHandler(value)}
-        value={value}
-        min={min}
-        max={max}
-        onChange={handleChange}
+        value={current}
+        min={border[0]}
+        max={border[1]}
+        onChange={(event, value) => onChangeCommittedHandler(value)}
         valueLabelDisplay="auto"
       />
     </Box>

@@ -15,6 +15,7 @@ export type PacksGeneralType = Omit<
 const initialState = {
   packsCurrent: [] as Array<PacksType>,
   packsGeneral: {} as PacksGeneralType,
+  packsMaxCardsCount: 100,
   queryParams: {} as getPacksRequestType,
   pending: false,
   errors: '',
@@ -38,6 +39,13 @@ export const packsSlice = createSlice({
     builder.addCase(getPacks.fulfilled, (state, action) => {
       state.packsCurrent = action.payload.cardPacks
       state.packsGeneral = action.payload.packsGeneral
+      if (
+        action.payload.packsGeneral.cardPacksTotalCount >
+        state.packsMaxCardsCount
+      ) {
+        state.packsMaxCardsCount =
+          action.payload.packsGeneral.cardPacksTotalCount
+      }
       state.pending = false
     })
   },

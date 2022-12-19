@@ -1,5 +1,6 @@
 import React, { ReactNode, useState } from 'react'
-import { Input } from '@mui/material'
+import { InputAdornment, TextField } from '@mui/material'
+import { SearchSharp } from '@mui/icons-material'
 
 export type DebouncedInputPropsType = {
   onChangeText?: (value: string) => void
@@ -7,6 +8,7 @@ export type DebouncedInputPropsType = {
   error?: ReactNode
   spanClassName?: string
   initialValue: string
+  placeholder?: string
 } & {
   onDebouncedChange?: (value: string) => void
 }
@@ -15,6 +17,7 @@ export const DebouncedInput: React.FC<DebouncedInputPropsType> = ({
   onChangeText,
   onDebouncedChange,
   initialValue,
+  placeholder = 'Search...',
 }) => {
   const [timerId, setTimerId] = useState<number | undefined>(undefined)
   const [value, setValue] = useState(initialValue || '')
@@ -34,5 +37,24 @@ export const DebouncedInput: React.FC<DebouncedInputPropsType> = ({
     }
   }
 
-  return <Input onChange={(e) => onChangeTextCallback(e)} value={value} />
+  return (
+    <TextField
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <SearchSharp sx={{ opacity: '0.5' }} />
+          </InputAdornment>
+        ),
+        inputProps: {
+          style: {
+            padding: 7,
+          },
+        },
+      }}
+      fullWidth
+      onChange={(e) => onChangeTextCallback(e)}
+      value={value}
+      placeholder={placeholder}
+    />
+  )
 }
