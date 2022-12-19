@@ -53,7 +53,7 @@ export const DoubleSliderWithInputs = ({
           InputProps={{
             inputProps: {
               min: border[0],
-              max: border[0],
+              max: border[1],
               style: {
                 padding: '0 0 0 10px',
                 height: 36,

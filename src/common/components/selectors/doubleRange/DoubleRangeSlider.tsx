@@ -29,6 +29,8 @@ export const DoubleRangeSlider = ({
         alignItems: 'center',
         justifyContent: 'center',
         width: 175,
+        mr: 1,
+        ml: 1,
       }}
     >
       <Slider
