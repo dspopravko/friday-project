@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 import { useAppSelector } from '../../../../../state/store'
-import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 import { shapeTableHead } from './PacksTableHead'
 import { tableHooks } from './PacksTableActions'
 import { packResponseType } from '../../API/packsAPI'
@@ -11,6 +10,7 @@ import {
   useSearchParams,
 } from 'react-router-dom'
 import { PATH } from '../../../../../data/paths'
+import s from './../../../common/Table.module.css'
 
 export function PacksTable() {
   const packs = useAppSelector((state) => state.packs.packsCurrent)
@@ -39,8 +39,6 @@ export function PacksTable() {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance
 
-  const isEven = (idx: number) => idx % 2 === 0
-
   const openCardsHandler = (props: unknown) => {
     const typedRow = props as { original: packResponseType }
     navigate(`/${PATH.CARDS}/${typedRow.original._id}`)
@@ -48,59 +46,54 @@ export function PacksTable() {
   return (
     <div
       style={{
-        maxWidth: '60vw',
+        display: 'flex',
+        width: '100%',
         overflowX: 'auto',
         opacity: pending ? '0.4' : '1',
       }}
     >
-      <Table {...getTableProps()}>
-        <TableHead
-          style={{
-            background: '#EFEFEF',
-            fontWeight: 'bold',
-            textTransform: 'capitalize',
-          }}
-        >
+      <table className={s.table} {...getTableProps()}>
+        <thead className={s.tableHead}>
           {headerGroups.map((headerGroup) => {
             const { key, ...restProps } = headerGroup.getHeaderGroupProps()
             return (
-              <TableRow key={key} {...restProps}>
+              <tr className={s.tableRow} key={key} {...restProps}>
                 {headerGroup.headers.map((column) => {
                   const { key, ...restProps } = column.getHeaderProps()
                   return (
-                    <th key={key} {...restProps}>
+                    <th className={s.tableCell} key={key} {...restProps}>
                       {column.render('Header')}
                     </th>
                   )
                 })}
-              </TableRow>
+              </tr>
             )
           })}
-        </TableHead>
-        <TableBody {...getTableBodyProps()}>
-          {rows.map((row, idx) => {
+        </thead>
+        <tbody className={s.tableBody} {...getTableBodyProps()}>
+          {rows.map((row) => {
             prepareRow(row)
             const { key, ...restProps } = row.getRowProps()
             return (
-              <TableRow
+              <tr
+                className={s.tableRow}
                 onClick={() => openCardsHandler(row)}
                 key={key}
                 {...restProps}
-                style={{ background: isEven(idx) ? '#eaf3ee' : '' }}
               >
                 {row.cells.map((cell) => {
                   const { key, ...restProps } = cell.getCellProps()
                   return (
-                    <TableCell key={key} {...restProps}>
+                    <td className={s.tableCell} key={key} {...restProps}>
                       <>{cell.render('Cell')}</>
-                    </TableCell>
+                    </td>
                   )
                 })}
-              </TableRow>
+              </tr>
             )
           })}
-        </TableBody>
-      </Table>
+        </tbody>
+      </table>
     </div>
   )
 }

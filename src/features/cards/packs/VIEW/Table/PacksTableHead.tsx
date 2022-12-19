@@ -1,5 +1,6 @@
 import React from 'react'
 import { PacksType } from '../../BLL/packsSlice'
+import cardsBlank from './../../../../../assets/cardsBlank.svg'
 
 //оформляем наши данные в колонки для react-tables, библиотека требует данные в виде массива объектов {Header: '', accessor: ''}
 //todo: написать решейпер для объекта, и вынести в отдельный файл
@@ -27,11 +28,18 @@ export const shapeTableHead = (
               Header: 'Cover',
               accessor: key,
               Cell: ({ value }: { value: string }) => (
-                <img
-                  alt={'pack_cover'}
-                  style={{ width: '50px', height: '50px' }}
-                  src={value}
-                />
+                <div style={{ width: '48px', height: '48px' }}>
+                  <img
+                    alt={'pack_cover'}
+                    style={{
+                      borderRadius: '20%',
+                      height: '100%',
+                      width: '100%',
+                      objectFit: 'cover',
+                    }}
+                    src={value || cardsBlank}
+                  />
+                </div>
               ),
               maxWidth: 70,
             }
