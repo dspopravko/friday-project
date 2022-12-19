@@ -1,4 +1,4 @@
 import { AppRootStateType } from '../../state/store'
 
 export const maxCardsInPacksCountSelector = (state: AppRootStateType) =>
-  state.packs.packsMaxCardsCount
+  state.packs.packsGeneral.maxCardsCount
