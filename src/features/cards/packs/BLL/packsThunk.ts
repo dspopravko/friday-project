@@ -7,8 +7,7 @@ export const getPacks = createAsyncThunk(
   'packs/get',
   async (data: Partial<getPacksRequestType>, thunkApi) => {
     try {
-      const res = await packsAPI.getPacks({ ...data })
-      return res.data
+      return await packsAPI.getPacks(data)
     } catch (e) {
       handleAxiosError(e, thunkApi.dispatch)
       if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {

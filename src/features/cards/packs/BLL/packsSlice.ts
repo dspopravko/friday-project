@@ -1,11 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { getPacksRequestType, packResponseType } from '../API/packsAPI'
+import {
+  getPacksRequestType,
+  getPacksResponseType,
+  packResponseType,
+} from '../API/packsAPI'
 import { getPacks } from './packsThunk'
 
 export type PacksType = Omit<packResponseType, '__v' | 'more_id'>
+export type PacksGeneralType = Omit<
+  getPacksResponseType,
+  'cardPacks' | 'token' | 'tokenDeathTime'
+>
 
 const initialState = {
-  packs: [] as Array<PacksType>,
+  packsCurrent: [] as Array<PacksType>,
+  packsGeneral: {} as PacksGeneralType,
   queryParams: {} as getPacksRequestType,
   pending: false,
   errors: '',
@@ -27,7 +36,8 @@ export const packsSlice = createSlice({
       state.pending = true
     })
     builder.addCase(getPacks.fulfilled, (state, action) => {
-      state.packs = action.payload.cardPacks
+      state.packsCurrent = action.payload.cardPacks
+      state.packsGeneral = action.payload.packsGeneral
       state.pending = false
     })
   },

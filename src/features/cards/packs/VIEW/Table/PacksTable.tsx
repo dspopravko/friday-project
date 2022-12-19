@@ -9,7 +9,8 @@ import { useNavigate } from 'react-router-dom'
 import { PATH } from '../../../../../data/paths'
 
 export function PacksTable() {
-  const { packs } = useAppSelector((state) => state.packs)
+  const packs = useAppSelector((state) => state.packs.packsCurrent)
+  const pending = useAppSelector((state) => state.packs.pending)
   const navigate = useNavigate()
   //использовать мемо - обязательное условие в документации к react-table
   const productsData = useMemo(() => [...(packs as Array<any>)], [packs])
@@ -35,7 +36,13 @@ export function PacksTable() {
     navigate(`/${PATH.CARDS}/${typedRow.original._id}`)
   }
   return (
-    <div style={{ maxWidth: '60vw', overflowX: 'auto' }}>
+    <div
+      style={{
+        maxWidth: '60vw',
+        overflowX: 'auto',
+        opacity: pending ? '0.4' : '1',
+      }}
+    >
       <Table {...getTableProps()}>
         <TableHead
           style={{

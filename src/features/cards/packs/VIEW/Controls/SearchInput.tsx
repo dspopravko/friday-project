@@ -17,7 +17,7 @@ export const DebouncedInput: React.FC<DebouncedInputPropsType> = ({
   initialValue,
 }) => {
   const [timerId, setTimerId] = useState<number | undefined>(undefined)
-  const [value, setValue] = useState(initialValue)
+  const [value, setValue] = useState(initialValue || '')
 
   const onChangeTextCallback = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>

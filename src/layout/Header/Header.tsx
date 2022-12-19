@@ -13,12 +13,12 @@ export const Header = () => {
   const isAuth = useAppSelector((state) => state.auth.isAuth)
   const navigate = useNavigate()
   const handleSignIn = () => navigate(PATH.LOGIN.MAIN)
-
   return (
     <div className={s.header}>
       <div className={s.buttonContainer}>
         <div className={s.back}>
           <Fab
+            onClick={() => history.back()}
             variant="extended"
             sx={{
               backgroundColor: 'hsla(0,0%,100%,0.5)',

@@ -1,12 +1,15 @@
 import { instance } from '../../../../services/api/api'
-import axiosThrottle from 'axios-request-throttle'
-axiosThrottle.use(instance, { requestsPerSecond: 0.5 })
 
 export const packsAPI = {
   getPacks(data: Partial<getPacksRequestType>) {
-    return instance.get<getPacksResponseType>('cards/pack', {
-      params: { ...data },
-    })
+    return instance
+      .get<getPacksResponseType>('cards/pack', {
+        params: { ...data },
+      })
+      .then((res) => {
+        const { cardPacks, ...packsGeneral } = res.data
+        return { cardPacks, packsGeneral }
+      })
   },
 }
 export type getPacksRequestType = {
