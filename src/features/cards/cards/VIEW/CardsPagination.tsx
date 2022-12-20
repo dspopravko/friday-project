@@ -1,10 +1,10 @@
 import React from 'react'
 import { Pagination } from '@mui/material'
-import { useAppSelector } from '../../../../../state/store'
-import { currentPageSelector, maxPageSelector } from '../../BLL/selectorsPacks'
 import { createSearchParams, useSearchParams } from 'react-router-dom'
+import { currentPageSelector, maxPageSelector } from '../BLL/selectorsCards'
+import { useAppSelector } from '../../../../state/store'
 
-export const TablePagination = () => {
+export const CardsPagination = () => {
   const currentPage = useAppSelector(currentPageSelector)
   const maxPage = useAppSelector(maxPageSelector)
   const [searchParams, setSearchParams] = useSearchParams()

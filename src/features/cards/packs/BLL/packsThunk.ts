@@ -1,7 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { handleAxiosError } from '../../../../services/error-notification'
 import { AxiosError } from 'axios'
-import { getPacksRequestType, packsAPI } from '../API/packsAPI'
+import {
+  getPacksRequestType,
+  packsAPI,
+  postPackRequestType,
+} from '../API/packsAPI'
 
 export const getPacks = createAsyncThunk(
   'packs/get',
@@ -29,6 +33,22 @@ export const deletePack = createAsyncThunk(
       await packsAPI.deletePack(data.packID)
       thunkApi.dispatch(getPacks(data.params))
       return data.packID
+    } catch (e) {
+      handleAxiosError(e, thunkApi.dispatch)
+      if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {
+        return thunkApi.rejectWithValue(e.response?.data.error)
+      } else {
+        throw e
+      }
+    }
+  }
+)
+
+export const postPack = createAsyncThunk(
+  'packs/post',
+  async (data: postPackRequestType, thunkApi) => {
+    try {
+      return await packsAPI.postPack(data)
     } catch (e) {
       handleAxiosError(e, thunkApi.dispatch)
       if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {

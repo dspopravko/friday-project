@@ -4,7 +4,7 @@ export const packsAPI = {
   getPacks(data: Partial<getPacksRequestType>) {
     return instance
       .get<getPacksResponseType>('cards/pack', {
-        params: { ...data },
+        params: data,
       })
       .then((res) => {
         const { cardPacks, ...packsGeneral } = res.data
@@ -12,11 +12,18 @@ export const packsAPI = {
       })
   },
   deletePack(packID: string) {
-    return instance.delete<getPacksResponseType>('cards/pack', {
+    return instance.delete<{
+      deletedCardsPack: packResponseType
+      token: string
+      tokenDeathTime: number
+    }>('cards/pack', {
       params: {
         id: packID,
       },
     })
+  },
+  postPack(data: postPackRequestType) {
+    return instance.post<getPacksResponseType>('cards/pack', data)
   },
 }
 export type getPacksRequestType = {
@@ -29,7 +36,11 @@ export type getPacksRequestType = {
   user_id: string
   block: boolean
 }
-
+export type postPackRequestType = {
+  name: string
+  deckCover?: string
+  private?: boolean
+}
 export type packResponseType = {
   _id: string
   user_id: string

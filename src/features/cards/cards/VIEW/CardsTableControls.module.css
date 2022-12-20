@@ -1,0 +1,17 @@
+.controlWrapper {
+    display: flex;
+    flex-direction: row;
+    min-width: 1000px;
+}
+.controlBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 4px;
+    margin: 4px;
+    gap: 10px;
+}
+.buttonGroup {
+
+}

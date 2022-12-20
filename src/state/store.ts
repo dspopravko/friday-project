@@ -10,6 +10,7 @@ import { restorePasswordReducer } from '../features/auth/restore/services/restor
 import { newPasswordReducer } from '../features/auth/newPassword/services/newPasswordSlice'
 import { profileReducer } from '../features/auth/profile/services/profileSlice'
 import { packsReducer } from '../features/cards/packs/BLL/packsSlice'
+import { cardsReducer } from '../features/cards/cards/BLL/cardsSlice'
 
 export type ReduxStateType = ReturnType<typeof rootReducer>
 
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   new: newPasswordReducer,
   profile: profileReducer,
   packs: packsReducer,
+  cards: cardsReducer,
 })
 
 export const store = configureStore({
