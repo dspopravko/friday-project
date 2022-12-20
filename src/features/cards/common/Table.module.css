@@ -43,6 +43,7 @@
 }
 
 .tableCell {
+    max-width: 250px;
     height: 48px;
     vertical-align: middle;
 }

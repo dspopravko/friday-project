@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
-import { useAppSelector } from '../../../../../state/store'
+import { useAppDispatch, useAppSelector } from '../../../../../state/store'
 import { shapeTableHead } from './PacksTableHead'
-import { tableHooks } from './PacksTableActions'
+import { tableHooksConstructor } from './PacksTableActions'
 import { packResponseType } from '../../API/packsAPI'
 import {
   createSearchParams,
@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom'
 import { PATH } from '../../../../../data/paths'
 import s from './../../../common/Table.module.css'
+import { deletePack } from '../../BLL/packsThunk'
 
 export function PacksTable() {
   const packs = useAppSelector((state) => state.packs.packsCurrent)
@@ -18,24 +19,36 @@ export function PacksTable() {
   const [searchParams, setSearchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
-  const checkClick = (newParams: { [param: string]: string }) =>
+  const checkClick = (newParams: { [param: string]: string }) => {
     setSearchParams(createSearchParams({ ...params, ...newParams }))
-
+  }
   //использовать мемо - обязательное условие в документации к react-table
   const productsData = useMemo(() => [...(packs as Array<any>)], [packs])
   const productsColumns = useMemo(() => {
     return shapeTableHead(packs, checkClick, params)
   }, [packs])
 
+  const tableRowAction = (type: string, packID: string) => {
+    switch (type) {
+      case 'delete':
+        dispatch(deletePack({ packID, params }))
+        break
+      case 'edit':
+        break
+      case 'learn':
+        break
+    }
+  }
+
   const tableInstance = useTable(
     {
       columns: productsColumns,
       data: productsData,
     },
-    tableHooks
+    tableHooksConstructor(tableRowAction)
   )
-
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance
 
@@ -43,6 +56,7 @@ export function PacksTable() {
     const typedRow = props as { original: packResponseType }
     navigate(`/${PATH.CARDS}/${typedRow.original._id}`)
   }
+
   return (
     <div
       style={{

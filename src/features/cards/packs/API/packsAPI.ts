@@ -11,8 +11,12 @@ export const packsAPI = {
         return { cardPacks, packsGeneral }
       })
   },
-  deletePack(data: string) {
-    return instance.delete<getPacksResponseType>('cards/pack?id=' + data)
+  deletePack(packID: string) {
+    return instance.delete<getPacksResponseType>('cards/pack', {
+      params: {
+        id: packID,
+      },
+    })
   },
 }
 export type getPacksRequestType = {

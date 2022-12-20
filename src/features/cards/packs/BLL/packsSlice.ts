@@ -4,7 +4,7 @@ import {
   getPacksResponseType,
   packResponseType,
 } from '../API/packsAPI'
-import { getPacks } from './packsThunk'
+import { deletePack, getPacks } from './packsThunk'
 
 export type PacksType = Omit<packResponseType, '__v' | 'more_id'>
 export type PacksGeneralType = Omit<
@@ -15,7 +15,7 @@ export type PacksGeneralType = Omit<
 const initialState = {
   packsCurrent: [] as Array<PacksType>,
   packsGeneral: {} as PacksGeneralType,
-  queryParams: {} as getPacksRequestType,
+  queryParams: {} as Partial<getPacksRequestType>,
   pending: false,
   errors: '',
 }
@@ -27,17 +27,32 @@ export const packsSlice = createSlice({
     setPending(state, action: PayloadAction<boolean>) {
       state.pending = action.payload
     },
+    setQueryParams(state, action: PayloadAction<Partial<getPacksRequestType>>) {
+      state.queryParams = action.payload
+    },
   },
   extraReducers: (builder) => {
-    builder.addCase(getPacks.rejected, (state) => {
+    builder.addCase(getPacks.fulfilled, (state, action) => {
+      state.packsCurrent = action.payload.cardPacks
+      state.packsGeneral = action.payload.packsGeneral
       state.pending = false
     })
     builder.addCase(getPacks.pending, (state) => {
       state.pending = true
     })
-    builder.addCase(getPacks.fulfilled, (state, action) => {
-      state.packsCurrent = action.payload.cardPacks
-      state.packsGeneral = action.payload.packsGeneral
+    builder.addCase(getPacks.rejected, (state) => {
+      state.pending = false
+    })
+    builder.addCase(deletePack.fulfilled, (state, action) => {
+      state.pending = false
+      state.packsCurrent = state.packsCurrent.filter(
+        (pack) => pack._id !== action.payload
+      )
+    })
+    builder.addCase(deletePack.pending, (state) => {
+      state.pending = true
+    })
+    builder.addCase(deletePack.rejected, (state) => {
       state.pending = false
     })
   },

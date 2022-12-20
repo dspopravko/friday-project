@@ -1,4 +1,3 @@
-import { controlParams } from './../VIEW/PacksTableControls'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { handleAxiosError } from '../../../../services/error-notification'
 import { AxiosError } from 'axios'
@@ -19,13 +18,17 @@ export const getPacks = createAsyncThunk(
     }
   }
 )
+type deletePackDataType = {
+  packID: string
+  params: Partial<getPacksRequestType>
+}
 export const deletePack = createAsyncThunk(
   'packs/delete',
-  async (data: string, thunkApi) => {
+  async (data: deletePackDataType, thunkApi) => {
     try {
-      const res = await packsAPI.deletePack(data)
-      const res2 = getPacks(controlParams)
-      return res.data
+      await packsAPI.deletePack(data.packID)
+      thunkApi.dispatch(getPacks(data.params))
+      return data.packID
     } catch (e) {
       handleAxiosError(e, thunkApi.dispatch)
       if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {
