@@ -6,6 +6,8 @@ import {
   Button,
   Checkbox,
   FormControlLabel,
+  IconButton,
+  InputAdornment,
   TextField,
   Typography,
 } from '@mui/material'
@@ -15,6 +17,7 @@ import { login } from '../services/loginThunks'
 import { NavLink } from 'react-router-dom'
 import { PATH } from '../../../../data/paths'
 import { defaultSchema } from '../../common/validation/validationSchema'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 
 const schema = yup.object().shape({
   email: defaultSchema.email,
@@ -28,6 +31,15 @@ type LoginData = {
 }
 
 export const LoginForm = () => {
+  const [showPassword, setShowPassword] = React.useState(false)
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show)
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault()
+  }
   const dispatch = useAppDispatch()
   const isFetching = useAppSelector((state) => state.auth.isFetching)
   const {
@@ -52,7 +64,21 @@ export const LoginForm = () => {
         {...register('email', { required: true })}
       />
       <TextField
-        type="password"
+        type={showPassword ? 'text' : 'password'}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
         label="password"
         margin="normal"
         autoComplete={'password'}

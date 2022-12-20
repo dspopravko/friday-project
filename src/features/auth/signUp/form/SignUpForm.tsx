@@ -1,12 +1,13 @@
 import React from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, TextField } from '@mui/material'
+import { Button, IconButton, InputAdornment, TextField } from '@mui/material'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { useAppDispatch, useAppSelector } from '../../../../state/store'
 import { signUp } from '../services/signUpSlice'
 import s from './SignUpForm.module.css'
 import { defaultSchema } from '../../common/validation/validationSchema'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 
 type RegistrationType = {
   email: string
@@ -25,6 +26,18 @@ const schema = yup.object().shape({
 })
 
 export const SignUpForm = () => {
+  const [showPassword, setShowPassword] = React.useState(false)
+  const [showPassword1, setShowPassword1] = React.useState(false)
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show)
+  const handleClickShowPassword1 = () => setShowPassword1((show) => !show)
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault()
+  }
+
   const dispatch = useAppDispatch()
   const isFetching = useAppSelector((state) => state.auth.isFetching)
   const {
@@ -49,7 +62,21 @@ export const SignUpForm = () => {
         {...register('email', { required: true })}
       />
       <TextField
-        type="password"
+        type={showPassword ? 'text' : 'password'}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
         label="password"
         margin="normal"
         helperText={errors.password?.message}
@@ -57,7 +84,21 @@ export const SignUpForm = () => {
         {...register('password', { required: true })}
       />
       <TextField
-        type="password"
+        type={showPassword1 ? 'text' : 'password'}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword1}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {showPassword1 ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
         label="confirm password"
         margin="normal"
         helperText={errors.passwordConfirmation?.message}
