@@ -14,7 +14,7 @@ export const PacksTableControls = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
 
-  const onChangeControls = (newParams: Array<{ [param: string]: string }>) =>
+  const updateParams = (newParams: Array<{ [param: string]: string }>) =>
     setSearchParams(
       createSearchParams({ ...params, ...Object.assign({}, ...newParams) })
     )
@@ -24,7 +24,7 @@ export const PacksTableControls = () => {
       <div className={s.controlBlock} style={{ flexGrow: 1 }}>
         <Typography>Search:</Typography>
         <DebouncedInput
-          onDebouncedChange={(input) => onChangeControls([{ packName: input }])}
+          onDebouncedChange={(input) => updateParams([{ packName: input }])}
           initialValue={params.packName}
           placeholder={'Provide your text'}
         />
@@ -36,16 +36,16 @@ export const PacksTableControls = () => {
             sx={{ width: '87px' }}
             color={params.user_id === userID ? 'primary' : 'secondary'}
             onClick={() => {
-              onChangeControls([{ user_id: userID }])
+              updateParams([{ user_id: userID }])
             }}
           >
             My
           </Button>
           <Button
             sx={{ width: '87px' }}
-            color={params.user_id === userID ? 'secondary' : 'primary'}
+            color={params.user_id ? 'secondary' : 'primary'}
             onClick={() => {
-              onChangeControls([{ user_id: '' }])
+              updateParams([{ user_id: '' }])
             }}
           >
             All
@@ -56,7 +56,7 @@ export const PacksTableControls = () => {
         <Typography>Number of cards</Typography>
         <DoubleSliderWithInputs
           border={[0, packsMaxCardsCount]}
-          onChangeCommitted={onChangeControls}
+          onChangeCommitted={updateParams}
         />
       </div>
     </div>

@@ -21,13 +21,13 @@ export function PacksTable() {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
-  const checkClick = (newParams: { [param: string]: string }) => {
+  const updateParams = (newParams: { [param: string]: string }) => {
     setSearchParams(createSearchParams({ ...params, ...newParams }))
   }
-  //использовать мемо - обязательное условие в документации к react-table
+
   const productsData = useMemo(() => [...(packs as Array<any>)], [packs])
   const productsColumns = useMemo(() => {
-    return shapeTableHead(packs, checkClick, params)
+    return shapeTableHead(packs, updateParams, params)
   }, [packs])
 
   const tableRowAction = (type: string, packID: string) => {
@@ -52,9 +52,16 @@ export function PacksTable() {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance
 
-  const openCardsHandler = (props: unknown) => {
-    const typedRow = props as { original: packResponseType }
-    navigate(`/${PATH.CARDS}/${typedRow.original._id}`)
+  const cellClickHandler = (cell: unknown, row: unknown) => {
+    const typedRow = row as { original: packResponseType }
+    const typedCell = cell as { column: { id: string } }
+    if (typedCell.column.id === 'user_name') {
+      updateParams({ user_id: typedRow.original.user_id })
+      return
+    }
+    if (typedCell.column.id !== 'Edit') {
+      navigate(`/${PATH.CARDS}/${typedRow.original._id}`)
+    }
   }
 
   return (
@@ -91,14 +98,24 @@ export function PacksTable() {
             return (
               <tr
                 className={s.tableRow}
-                onClick={() => openCardsHandler(row)}
+                // onClick={() => openCardsHandler(row)}
                 key={key}
                 {...restProps}
               >
                 {row.cells.map((cell) => {
                   const { key, ...restProps } = cell.getCellProps()
                   return (
-                    <td className={s.tableCell} key={key} {...restProps}>
+                    <td
+                      title={
+                        cell.column.id === 'user_name'
+                          ? 'Show this user packs'
+                          : ''
+                      }
+                      onClick={() => cellClickHandler(cell, row)}
+                      className={s.tableCell}
+                      key={key}
+                      {...restProps}
+                    >
                       <>{cell.render('Cell')}</>
                     </td>
                   )

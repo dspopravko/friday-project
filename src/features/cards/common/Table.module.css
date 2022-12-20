@@ -51,6 +51,20 @@
 .tableCell:first-child {
     padding-left: 35px;
 }
+.tableCell:nth-child(5) {
+    width: 150px;
+    transition: 0.1s ease;
+}
+.tableCell:nth-child(6) {
+    padding: 0;
+    width: 0;
+}
+.tableCell:nth-child(7) {
+    width: 110px;
+}
+.tableBody .tableCell:nth-child(5):hover {
+    font-weight: bold;
+}
 
 .tableCell:last-child {
     padding-right: 35px;

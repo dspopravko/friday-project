@@ -61,6 +61,7 @@ export const shapeTableHead = (
                 return (
                   <div
                     style={{ cursor: 'pointer' }}
+                    title={'Sort by cards count'}
                     onClick={() => {
                       if (typedParams.sortPacks === '1cardsCount') {
                         sort({ sortPacks: '0cardsCount' })
@@ -93,6 +94,7 @@ export const shapeTableHead = (
                 return (
                   <div
                     style={{ cursor: 'pointer' }}
+                    title={'Sort last updated date'}
                     onClick={() => {
                       if (typedParams.sortPacks === '1updated') {
                         sort({ sortPacks: '0updated' })
