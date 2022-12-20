@@ -1,8 +1,18 @@
 import { AppRootStateType } from '../../state/store'
+import { createSelector } from '@reduxjs/toolkit'
 
 export const maxCardsInPacksCountSelector = (state: AppRootStateType) =>
   state.packs.packsGeneral.maxCardsCount
 export const currentPageSelector = (state: AppRootStateType) =>
   state.packs.packsGeneral.page
-export const maxPageSelector = (state: AppRootStateType) =>
+const pageCount = (state: AppRootStateType) =>
   state.packs.packsGeneral.pageCount
+const cardsPacksTotalCount = (state: AppRootStateType) =>
+  state.packs.packsGeneral.cardPacksTotalCount
+
+export const maxPageSelector = createSelector(
+  [cardsPacksTotalCount, pageCount],
+  (total, page) => {
+    return Math.ceil(total / page)
+  }
+)
