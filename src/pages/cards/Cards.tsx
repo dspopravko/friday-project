@@ -1,13 +1,19 @@
 import React, { useEffect } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
-import { useAppDispatch } from '../../state/store'
+import { useAppDispatch, useAppSelector } from '../../state/store'
 import { getCards } from '../../features/cards/cards/BLL/cardsThunk'
 import { Typography } from '@mui/material'
 import { CardsTableControls } from '../../features/cards/cards/VIEW/CardsTableControls'
 import { CardsTable } from '../../features/cards/cards/VIEW/CardsTable'
-import { CardsPagination } from '../../features/cards/cards/VIEW/CardsPagination'
+import {
+  currentPageSelector,
+  maxPageSelector,
+} from '../../features/cards/cards/BLL/selectorsCards'
+import { TablePagination } from '../../features/cards/common/TablePagination'
 
 export const Cards = () => {
+  const currentPage = useAppSelector(currentPageSelector)
+  const maxPage = useAppSelector(maxPageSelector)
   const { id } = useParams()
   const [searchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
@@ -22,7 +28,7 @@ export const Cards = () => {
       <div>
         <CardsTableControls />
         <CardsTable />
-        <CardsPagination />
+        <TablePagination page={currentPage} maxPage={maxPage} />
       </div>
     </div>
   )

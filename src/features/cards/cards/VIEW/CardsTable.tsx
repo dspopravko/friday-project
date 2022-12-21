@@ -1,16 +1,18 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 import { shapeTableHead } from './CardsTableHead'
-import { tableHooksConstructor } from './CardsTableActions'
 import { createSearchParams, useSearchParams } from 'react-router-dom'
 import { useAppSelector } from '../../../../state/store'
 import { selectCards } from '../BLL/selectorsCards'
 import s from './../../common/Table.module.css'
 import { CircularProgress, Typography } from '@mui/material'
+import { userIdSelector } from '../../../../state/selectors'
+import { tableActionsConstructor } from '../../common/TableActionsConstructor'
 
 export function CardsTable() {
   const cards = useAppSelector(selectCards)
   const pending = useAppSelector((state) => state.cards.pending)
+  const userID = useAppSelector(userIdSelector)
   const [searchParams, setSearchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
 
@@ -40,7 +42,7 @@ export function CardsTable() {
       columns: productsColumns,
       data: productsData,
     },
-    tableHooksConstructor(tableRowAction)
+    tableActionsConstructor(tableRowAction, userID, true)
   )
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance

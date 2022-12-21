@@ -3,7 +3,7 @@ import { createSelector } from '@reduxjs/toolkit'
 
 export const selectCards = (state: AppRootStateType) => state.cards.cardsCurrent
 export const currentPageSelector = (state: AppRootStateType) =>
-  state.packs.packsGeneral.page
+  state.cards.cardsGeneral.page
 const pageCount = (state: AppRootStateType) =>
   state.cards.cardsGeneral.pageCount
 const cardsPacksTotalCount = (state: AppRootStateType) =>

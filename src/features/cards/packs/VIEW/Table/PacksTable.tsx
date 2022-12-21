@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 import { useAppDispatch, useAppSelector } from '../../../../../state/store'
 import { shapeTableHead } from './PacksTableHead'
-import { tableHooksConstructor } from './PacksTableActions'
+import { tableActionsConstructor } from '../../../common/TableActionsConstructor'
 import { packResponseType } from '../../API/packsAPI'
 import {
   createSearchParams,
@@ -12,10 +12,12 @@ import {
 import { PATH } from '../../../../../data/paths'
 import s from './../../../common/Table.module.css'
 import { deletePack } from '../../BLL/packsThunk'
+import { userIdSelector } from '../../../../../state/selectors'
 
 export function PacksTable() {
   const packs = useAppSelector((state) => state.packs.packsCurrent)
   const pending = useAppSelector((state) => state.packs.pending)
+  const userID = useAppSelector(userIdSelector)
   const [searchParams, setSearchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const navigate = useNavigate()
@@ -47,7 +49,7 @@ export function PacksTable() {
       columns: productsColumns,
       data: productsData,
     },
-    tableHooksConstructor(tableRowAction)
+    tableActionsConstructor(tableRowAction, userID)
   )
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance
