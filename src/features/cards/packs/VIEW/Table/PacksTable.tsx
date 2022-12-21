@@ -24,7 +24,7 @@ export function PacksTable() {
   const dispatch = useAppDispatch()
 
   const updateParams = (newParams: { [param: string]: string }) => {
-    setSearchParams(createSearchParams({ ...params, ...newParams }))
+    setSearchParams(createSearchParams({ ...params, ...newParams, page: '1' }))
   }
 
   const productsData = useMemo(() => [...(packs as Array<any>)], [packs])

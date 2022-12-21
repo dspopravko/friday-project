@@ -37,6 +37,7 @@ export const TablePagination = ({
         InputProps={{
           inputProps: {
             style: { padding: 5 },
+            max: maxPage,
           },
         }}
         size={'small'}
