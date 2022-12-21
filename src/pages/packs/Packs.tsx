@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Typography } from '@mui/material'
 import { PacksTableControls } from '../../features/cards/packs/VIEW/Controls/PacksTableControls'
 import { PacksTable } from '../../features/cards/packs/VIEW/Table/PacksTable'
 import { getPacks } from '../../features/cards/packs/BLL/packsThunk'
@@ -10,6 +9,7 @@ import {
   currentPageSelector,
   maxPageSelector,
 } from '../../features/cards/packs/BLL/selectorsPacks'
+import { AddPackButton } from '../../features/cards/packs/VIEW/AddPack/AddPackButton'
 
 export const Packs = () => {
   const currentPage = useAppSelector(currentPageSelector)
@@ -21,9 +21,9 @@ export const Packs = () => {
     dispatch(getPacks(params))
   }, [searchParams])
   return (
-    <div style={{ marginTop: 40 }}>
-      <Typography>Packs</Typography>
+    <div style={{ marginTop: 60 }}>
       <div>
+        <AddPackButton />
         <PacksTableControls />
         <PacksTable />
         <TablePagination page={currentPage} maxPage={maxPage} />

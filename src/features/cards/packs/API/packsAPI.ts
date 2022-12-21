@@ -12,18 +12,19 @@ export const packsAPI = {
       })
   },
   deletePack(packID: string) {
-    return instance.delete<{
-      deletedCardsPack: packResponseType
-      token: string
-      tokenDeathTime: number
-    }>('cards/pack', {
+    return instance.delete<
+      APIRootResponse & { deletedCardsPack: packResponseType }
+    >('cards/pack', {
       params: {
         id: packID,
       },
     })
   },
   postPack(data: postPackRequestType) {
-    return instance.post<getPacksResponseType>('cards/pack', data)
+    return instance.post<APIRootResponse & { newCardsPack: packResponseType }>(
+      'cards/pack',
+      data
+    )
   },
 }
 export type getPacksRequestType = {
@@ -40,6 +41,7 @@ export type postPackRequestType = {
   name: string
   deckCover?: string
   private?: boolean
+  cardsPack: []
 }
 export type packResponseType = {
   _id: string
@@ -53,8 +55,8 @@ export type packResponseType = {
   cardsCount: number
   type: string
   rating: number
-  created: string
-  updated: string
+  created: Date
+  updated: Date
   more_id: string
   __v: number
   deckCover: string
@@ -67,6 +69,9 @@ export type getPacksResponseType = {
   cardPacksTotalCount: number
   minCardsCount: number
   maxCardsCount: number
+} & APIRootResponse
+
+type APIRootResponse = {
   token: string
   tokenDeathTime: number
 }

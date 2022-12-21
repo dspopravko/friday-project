@@ -44,11 +44,17 @@ export const deletePack = createAsyncThunk(
   }
 )
 
+type postPackDataType = {
+  postData: postPackRequestType
+  params: Partial<getPacksRequestType>
+}
 export const postPack = createAsyncThunk(
   'packs/post',
-  async (data: postPackRequestType, thunkApi) => {
+  async (data: postPackDataType, thunkApi) => {
     try {
-      return await packsAPI.postPack(data)
+      const res = await packsAPI.postPack(data.postData)
+      thunkApi.dispatch(getPacks(data.params))
+      return res
     } catch (e) {
       handleAxiosError(e, thunkApi.dispatch)
       if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {
