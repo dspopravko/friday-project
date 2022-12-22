@@ -20,7 +20,7 @@ export const Cards = () => {
   const dispatch = useAppDispatch()
   useEffect(() => {
     id && dispatch(getCards({ cardsPack_id: id, ...params }))
-  }, [id, params])
+  }, [id, searchParams])
 
   return (
     <div style={{ marginTop: 40 }}>

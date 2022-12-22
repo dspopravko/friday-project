@@ -11,7 +11,7 @@ import {
 } from 'react-router-dom'
 import { PATH } from '../../../../../data/paths'
 import s from './../../../common/Table.module.css'
-import { deletePack } from '../../BLL/packsThunk'
+import { deletePack, updatePack } from '../../BLL/packsThunk'
 import { userIdSelector } from '../../../../../state/selectors'
 
 export function PacksTable() {
@@ -38,6 +38,15 @@ export function PacksTable() {
         dispatch(deletePack({ packID, params }))
         break
       case 'edit':
+        dispatch(
+          updatePack({
+            postData: {
+              name: prompt('input new title') || 'New title',
+              _id: packID,
+            },
+            params,
+          })
+        )
         break
       case 'learn':
         break

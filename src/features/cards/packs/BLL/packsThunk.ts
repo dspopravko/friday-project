@@ -3,6 +3,7 @@ import { handleAxiosError } from '../../../../services/error-notification'
 import { AxiosError } from 'axios'
 import {
   getPacksRequestType,
+  packResponseType,
   packsAPI,
   postPackRequestType,
 } from '../API/packsAPI'
@@ -55,6 +56,28 @@ export const postPack = createAsyncThunk(
       const res = await packsAPI.postPack(data.postData)
       thunkApi.dispatch(getPacks(data.params))
       return res
+    } catch (e) {
+      handleAxiosError(e, thunkApi.dispatch)
+      if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {
+        return thunkApi.rejectWithValue(e.response?.data.error)
+      } else {
+        throw e
+      }
+    }
+  }
+)
+type updatePackDataType = {
+  postData: Partial<packResponseType> & { _id: string }
+  params: Partial<getPacksRequestType>
+}
+export const updatePack = createAsyncThunk(
+  'packs/put',
+  async (data: updatePackDataType, thunkApi) => {
+    try {
+      const res = await packsAPI.updatePack(data.postData)
+      thunkApi.dispatch(getPacks(data.params))
+      console.log(res)
+      return true
     } catch (e) {
       handleAxiosError(e, thunkApi.dispatch)
       if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {

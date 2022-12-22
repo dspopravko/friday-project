@@ -24,8 +24,8 @@ export const TablePagination = ({
   return (
     <div style={{ marginTop: '20px', display: 'flex', alignItems: 'center' }}>
       <Pagination
-        page={page === undefined ? 1 : page}
-        count={maxPage === undefined ? 1 : maxPage}
+        page={isNaN(page) ? 1 : page}
+        count={isNaN(maxPage) ? 1 : maxPage}
         onChange={(event, page) => handleChange(page)}
       />
       <TextField
@@ -37,7 +37,7 @@ export const TablePagination = ({
         InputProps={{
           inputProps: {
             style: { padding: 5 },
-            max: maxPage,
+            max: isNaN(maxPage) ? 1 : maxPage,
           },
         }}
         size={'small'}

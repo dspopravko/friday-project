@@ -26,6 +26,11 @@ export const packsAPI = {
       data
     )
   },
+  updatePack(data: Partial<packResponseType> & { _id: string }) {
+    return instance.put<
+      APIRootResponse & { updatedCardsPack: packResponseType }
+    >('cards/pack', { cardsPack: data })
+  },
 }
 export type getPacksRequestType = {
   packName: string
