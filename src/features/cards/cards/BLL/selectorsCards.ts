@@ -8,6 +8,10 @@ const pageCount = (state: AppRootStateType) =>
   state.cards.cardsGeneral.pageCount
 const cardsPacksTotalCount = (state: AppRootStateType) =>
   state.cards.cardsGeneral.cardsTotalCount
+export const cardsAuthorUserName = (state: AppRootStateType) =>
+  state.cards.currentCardsUserName
+export const cardsCurrentPackInfo = (state: AppRootStateType) =>
+  state.cards.cardsGeneral
 
 export const maxPageSelector = createSelector(
   [cardsPacksTotalCount, pageCount],

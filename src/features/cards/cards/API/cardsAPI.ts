@@ -18,6 +18,24 @@ export const cardsAPI = {
       },
     })
   },
+  postCard(data: postCardRequestType) {
+    return instance.post('cards/card', { card: data })
+  },
+  putCard(data: postCardRequestType) {
+    return instance.post('cards/card', { card: data })
+  },
+}
+
+export type postCardRequestType = {
+  cardsPack_id: string
+  question?: string
+  answer: string
+  questionImg?: string
+  grade?: number
+  shots?: number
+  answerImg?: string
+  questionVideo?: string
+  answerVideo?: string
 }
 
 export type getCardsRequestType = {

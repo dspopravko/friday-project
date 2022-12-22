@@ -2,12 +2,13 @@ import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 import { shapeTableHead } from './CardsTableHead'
 import { createSearchParams, useSearchParams } from 'react-router-dom'
-import { useAppSelector } from '../../../../state/store'
+import { useAppDispatch, useAppSelector } from '../../../../state/store'
 import { selectCards } from '../BLL/selectorsCards'
 import s from './../../common/Table.module.css'
 import { CircularProgress, Typography } from '@mui/material'
 import { userIdSelector } from '../../../../state/selectors'
 import { tableActionsConstructor } from '../../common/TableActionsConstructor'
+import { deleteCard, updateCard } from '../BLL/cardsThunk'
 
 export function CardsTable() {
   const cards = useAppSelector(selectCards)
@@ -15,6 +16,7 @@ export function CardsTable() {
   const userID = useAppSelector(userIdSelector)
   const [searchParams, setSearchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
+  const dispatch = useAppDispatch()
 
   const updateParams = (newParams: { [param: string]: string }) => {
     setSearchParams(createSearchParams({ ...params, ...newParams }))
@@ -25,12 +27,22 @@ export function CardsTable() {
     return shapeTableHead(cards, updateParams, params)
   }, [cards])
 
-  const tableRowAction = (type: string, packID: string) => {
+  const tableRowAction = (type: string, cardID: string) => {
     switch (type) {
       case 'delete':
-        // dispatch(deleteCard({ packID, params }))
+        dispatch(deleteCard({ cardID, params }))
         break
       case 'edit':
+        dispatch(
+          updateCard({
+            params,
+            postCard: {
+              cardsPack_id: cardID,
+              question: 'updated question',
+              answer: 'updated answer',
+            },
+          })
+        )
         break
       case 'learn':
         break

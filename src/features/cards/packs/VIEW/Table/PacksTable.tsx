@@ -13,6 +13,7 @@ import { PATH } from '../../../../../data/paths'
 import s from './../../../common/Table.module.css'
 import { deletePack, updatePack } from '../../BLL/packsThunk'
 import { userIdSelector } from '../../../../../state/selectors'
+import { rememberPack } from '../../../cards/BLL/cardsSlice'
 
 export function PacksTable() {
   const packs = useAppSelector((state) => state.packs.packsCurrent)
@@ -49,6 +50,7 @@ export function PacksTable() {
         )
         break
       case 'learn':
+        alert('Work in progress!')
         break
     }
   }
@@ -71,6 +73,7 @@ export function PacksTable() {
       return
     }
     if (typedCell.column.id !== 'Edit') {
+      dispatch(rememberPack(typedRow.original.user_name, typedRow.original._id))
       navigate(`/${PATH.CARDS}/${typedRow.original._id}`)
     }
   }

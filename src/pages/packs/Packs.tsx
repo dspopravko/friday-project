@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { PacksTableControls } from '../../features/cards/packs/VIEW/Controls/PacksTableControls'
 import { PacksTable } from '../../features/cards/packs/VIEW/Table/PacksTable'
-import { getPacks } from '../../features/cards/packs/BLL/packsThunk'
+import { getPacks, postPack } from '../../features/cards/packs/BLL/packsThunk'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { useSearchParams } from 'react-router-dom'
 import { TablePagination } from '../../features/cards/common/TablePagination'
@@ -9,7 +9,7 @@ import {
   currentPageSelector,
   maxPageSelector,
 } from '../../features/cards/packs/BLL/selectorsPacks'
-import { AddPackButton } from '../../features/cards/packs/VIEW/AddPack/AddPackButton'
+import { AddEntityButton } from '../../features/cards/common/AddEntityButton'
 
 export const Packs = () => {
   const currentPage = useAppSelector(currentPageSelector)
@@ -22,12 +22,24 @@ export const Packs = () => {
   }, [searchParams])
   return (
     <div style={{ marginTop: 60 }}>
-      <div>
-        <AddPackButton />
-        <PacksTableControls />
-        <PacksTable />
-        <TablePagination page={currentPage} maxPage={maxPage} />
-      </div>
+      <AddEntityButton
+        title={'Packs'}
+        ButtonTitle={'Add new pack'}
+        ButtonCallback={() => {
+          dispatch(
+            postPack({
+              postData: {
+                name: prompt('Whats new name?') || 'default',
+                cardsPack: [],
+              },
+              params: params,
+            })
+          )
+        }}
+      />
+      <PacksTableControls />
+      <PacksTable />
+      <TablePagination page={currentPage} maxPage={maxPage} />
     </div>
   )
 }
