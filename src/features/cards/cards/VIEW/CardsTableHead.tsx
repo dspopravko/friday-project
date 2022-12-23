@@ -1,3 +1,4 @@
+import { Rating } from '@mui/material'
 import React from 'react'
 import { CardsType } from '../BLL/cardsSlice'
 
@@ -19,6 +20,21 @@ export const shapeTableHead = (
             return {
               Header: 'Last Updated',
               accessor: key,
+            }
+          case key === 'grade':
+            return {
+              Header: 'Grade',
+              accessor: key,
+              Cell: ({ value }: { value: number }) => (
+                <>
+                  <Rating
+                    name="read-only"
+                    value={value}
+                    precision={0.5}
+                    readOnly
+                  />
+                </>
+              ),
             }
         }
         return { Header: key, accessor: key }
