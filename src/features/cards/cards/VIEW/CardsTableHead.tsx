@@ -1,6 +1,7 @@
 import { Rating } from '@mui/material'
 import React from 'react'
 import { CardsType } from '../BLL/cardsSlice'
+import { TableDateColumn } from '../../common/components/TableDateColumn'
 
 export const shapeTableHead = (
   cards: Array<CardsType>,
@@ -17,10 +18,7 @@ export const shapeTableHead = (
     ? Object.keys(reshapedObj[0]).map((key) => {
         switch (true) {
           case key === 'updated':
-            return {
-              Header: 'Last Updated',
-              accessor: key,
-            }
+            return TableDateColumn(params, sort, key)
           case key === 'grade':
             return {
               Header: 'Grade',

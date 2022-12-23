@@ -25,6 +25,7 @@
 }
 
 .tableHead {
+    text-transform: capitalize;
     border-radius: 12px;
     background: #EFEFEF;
     height: 48px;
@@ -43,6 +44,7 @@
 }
 
 .tableCell {
+    word-break: break-word;
     max-width: 250px;
     height: 48px;
     vertical-align: middle;

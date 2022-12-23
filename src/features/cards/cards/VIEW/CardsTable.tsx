@@ -4,13 +4,13 @@ import { shapeTableHead } from './CardsTableHead'
 import { createSearchParams, useSearchParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../../../state/store'
 import { selectCards } from '../BLL/selectorsCards'
-import s from './../../common/Table.module.css'
+import s from '../../common/styles/Table.module.css'
 import { CircularProgress, Typography } from '@mui/material'
 import { userIdSelector } from '../../../../state/selectors'
-import { tableActionsConstructor } from '../../common/TableActionsConstructor'
+import { tableActionsConstructor } from '../../common/components/TableActionsConstructor'
 import { deleteCard, updateCard } from '../BLL/cardsThunk'
 
-export function CardsTable() {
+export function CardsTable({ id }: { id: string }) {
   const cards = useAppSelector(selectCards)
   const pending = useAppSelector((state) => state.cards.pending)
   const userID = useAppSelector(userIdSelector)
@@ -30,7 +30,7 @@ export function CardsTable() {
   const tableRowAction = (type: string, cardID: string) => {
     switch (type) {
       case 'delete':
-        dispatch(deleteCard({ cardID, params }))
+        dispatch(deleteCard({ cardID, params, packId: id }))
         break
       case 'edit':
         dispatch(
@@ -41,6 +41,7 @@ export function CardsTable() {
               question: 'updated question',
               answer: 'updated answer',
             },
+            packId: id,
           })
         )
         break

@@ -1,6 +1,7 @@
 import React from 'react'
 import { PacksType } from '../../BLL/packsSlice'
 import cardsBlank from './../../../../../assets/cardsBlank.svg'
+import { TableDateColumn } from '../../../common/components/TableDateColumn'
 
 //оформляем наши данные в колонки для react-tables, библиотека требует данные в виде массива объектов {Header: '', accessor: ''}
 //todo: написать решейпер для объекта, и вынести в отдельный файл
@@ -82,42 +83,7 @@ export const shapeTableHead = (
               accessor: key,
             }
           case key === 'updated':
-            return {
-              Header: () => {
-                let sortIcon = String.fromCharCode(10782)
-                if (typedParams.sortPacks === '1updated') {
-                  sortIcon = String.fromCharCode(9650)
-                }
-                if (typedParams.sortPacks === '0updated') {
-                  sortIcon = String.fromCharCode(9660)
-                }
-                return (
-                  <div
-                    style={{ cursor: 'pointer' }}
-                    title={'Sort last updated date'}
-                    onClick={() => {
-                      if (typedParams.sortPacks === '1updated') {
-                        sort({ sortPacks: '0updated' })
-                      } else {
-                        sort({ sortPacks: '1updated' })
-                      }
-                    }}
-                  >
-                    Last Updated {sortIcon}
-                  </div>
-                )
-              },
-              accessor: key,
-              Cell: ({ value }: { value: string }) => (
-                <>
-                  {new Intl.DateTimeFormat('ru-ru', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: '2-digit',
-                  }).format(new Date(value))}
-                </>
-              ),
-            }
+            return TableDateColumn(params, sort, key)
           case key === '_id':
             // убираем рендер id шки, чтобы её данные по прежнему были в таблице, но не рисовались
             if (key === '_id') {

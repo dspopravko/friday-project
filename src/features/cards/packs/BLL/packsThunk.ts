@@ -1,16 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { handleAxiosError } from '../../../../services/error-notification'
 import { AxiosError } from 'axios'
-import {
-  getPacksRequestType,
-  packResponseType,
-  packsAPI,
-  postPackRequestType,
-} from '../API/packsAPI'
+import { packsAPI } from '../API/packsAPI'
+import { PackType, PacksPageParamsType, PostPackType } from '../API/types'
 
 export const getPacks = createAsyncThunk(
   'packs/get',
-  async (data: Partial<getPacksRequestType>, thunkApi) => {
+  async (data: Partial<PacksPageParamsType>, thunkApi) => {
     try {
       return await packsAPI.getPacks(data)
     } catch (e) {
@@ -25,7 +21,7 @@ export const getPacks = createAsyncThunk(
 )
 type deletePackDataType = {
   packID: string
-  params: Partial<getPacksRequestType>
+  params: Partial<PacksPageParamsType>
 }
 export const deletePack = createAsyncThunk(
   'packs/delete',
@@ -46,8 +42,8 @@ export const deletePack = createAsyncThunk(
 )
 
 type postPackDataType = {
-  postData: postPackRequestType
-  params: Partial<getPacksRequestType>
+  postData: PostPackType
+  params: Partial<PacksPageParamsType>
 }
 export const postPack = createAsyncThunk(
   'packs/post',
@@ -67,8 +63,8 @@ export const postPack = createAsyncThunk(
   }
 )
 type updatePackDataType = {
-  postData: Partial<packResponseType> & { _id: string }
-  params: Partial<getPacksRequestType>
+  postData: Partial<PackType> & { _id: string }
+  params: Partial<PacksPageParamsType>
 }
 export const updatePack = createAsyncThunk(
   'packs/put',

@@ -4,12 +4,12 @@ import { PacksTable } from '../../features/cards/packs/VIEW/Table/PacksTable'
 import { getPacks, postPack } from '../../features/cards/packs/BLL/packsThunk'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { useSearchParams } from 'react-router-dom'
-import { TablePagination } from '../../features/cards/common/TablePagination'
+import { TablePagination } from '../../features/cards/common/components/TablePagination'
 import {
   currentPageSelector,
   maxPageSelector,
 } from '../../features/cards/packs/BLL/selectorsPacks'
-import { AddEntityButton } from '../../features/cards/common/AddEntityButton'
+import { AddEntityButton } from '../../features/cards/common/components/AddEntityButton'
 
 export const Packs = () => {
   const currentPage = useAppSelector(currentPageSelector)
@@ -29,8 +29,9 @@ export const Packs = () => {
           dispatch(
             postPack({
               postData: {
-                name: prompt('Whats new name?') || 'default',
-                cardsPack: [],
+                cardsPack: {
+                  name: prompt('Whats new name?') || 'default',
+                },
               },
               params: params,
             })

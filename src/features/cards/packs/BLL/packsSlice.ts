@@ -1,21 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {
-  getPacksRequestType,
-  getPacksResponseType,
-  packResponseType,
-} from '../API/packsAPI'
 import { deletePack, getPacks } from './packsThunk'
+import { PackType, PacksPageParamsType, getPacksType } from '../API/types'
 
-export type PacksType = Omit<packResponseType, '__v' | 'more_id'>
+export type PacksType = Omit<PackType, '__v' | 'more_id'>
 export type PacksGeneralType = Omit<
-  getPacksResponseType,
+  getPacksType,
   'cardPacks' | 'token' | 'tokenDeathTime'
 >
 
 const initialState = {
   packsCurrent: [] as Array<PacksType>,
   packsGeneral: {} as PacksGeneralType,
-  queryParams: {} as Partial<getPacksRequestType>,
+  queryParams: {} as Partial<PacksPageParamsType>,
   pending: false,
   errors: '',
 }
@@ -27,7 +23,7 @@ export const packsSlice = createSlice({
     setPending(state, action: PayloadAction<boolean>) {
       state.pending = action.payload
     },
-    setQueryParams(state, action: PayloadAction<Partial<getPacksRequestType>>) {
+    setQueryParams(state, action: PayloadAction<Partial<PacksPageParamsType>>) {
       state.queryParams = action.payload
     },
   },

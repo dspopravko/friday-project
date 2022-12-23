@@ -2,18 +2,18 @@ import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 import { useAppDispatch, useAppSelector } from '../../../../../state/store'
 import { shapeTableHead } from './PacksTableHead'
-import { tableActionsConstructor } from '../../../common/TableActionsConstructor'
-import { packResponseType } from '../../API/packsAPI'
+import { tableActionsConstructor } from '../../../common/components/TableActionsConstructor'
 import {
   createSearchParams,
   useNavigate,
   useSearchParams,
 } from 'react-router-dom'
 import { PATH } from '../../../../../data/paths'
-import s from './../../../common/Table.module.css'
+import s from '../../../common/styles/Table.module.css'
 import { deletePack, updatePack } from '../../BLL/packsThunk'
 import { userIdSelector } from '../../../../../state/selectors'
 import { rememberPack } from '../../../cards/BLL/cardsSlice'
+import { PackType } from '../../API/types'
 
 export function PacksTable() {
   const packs = useAppSelector((state) => state.packs.packsCurrent)
@@ -66,7 +66,7 @@ export function PacksTable() {
     tableInstance
 
   const cellClickHandler = (cell: unknown, row: unknown) => {
-    const typedRow = row as { original: packResponseType }
+    const typedRow = row as { original: PackType }
     const typedCell = cell as { column: { id: string } }
     if (typedCell.column.id === 'user_name') {
       updateParams({ user_id: typedRow.original.user_id })

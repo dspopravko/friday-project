@@ -1,7 +1,7 @@
 import { Hooks, Row } from 'react-table'
 import React from 'react'
-import { PacksType } from '../packs/BLL/packsSlice'
-import { TableActionButtons } from '../packs/VIEW/Table/TableActions/TableActionButtons'
+import { PacksType } from '../../packs/BLL/packsSlice'
+import { TableActionButtons } from '../../packs/VIEW/Table/TableActions/TableActionButtons'
 
 //Здесь мы добавляем кнопку к каждой строчке
 //todo: сделать actions

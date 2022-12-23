@@ -10,8 +10,8 @@ import {
   currentPageSelector,
   maxPageSelector,
 } from '../../features/cards/cards/BLL/selectorsCards'
-import { TablePagination } from '../../features/cards/common/TablePagination'
-import { AddEntityButton } from '../../features/cards/common/AddEntityButton'
+import { TablePagination } from '../../features/cards/common/components/TablePagination'
+import { AddEntityButton } from '../../features/cards/common/components/AddEntityButton'
 import { userIDSelector } from '../../features/auth/selectorsAuth'
 
 export const Cards = () => {
@@ -52,13 +52,13 @@ export const Cards = () => {
                 question: prompt('Question: ') || 'question',
                 answer: prompt('Answer: ') || 'answer',
               },
-              queries: params,
+              queries: { ...params, cardsPack_id: id },
             })
           )
         }}
       />
       <CardsTableControls />
-      <CardsTable />
+      <CardsTable id={id || ''} />
       <TablePagination page={currentPage} maxPage={maxPage} />
     </div>
   )

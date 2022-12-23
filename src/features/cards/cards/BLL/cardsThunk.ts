@@ -1,15 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { handleAxiosError } from '../../../../services/error-notification'
 import { AxiosError } from 'axios'
-import {
-  cardsAPI,
-  getCardsRequestType,
-  postCardRequestType,
-} from '../API/cardsAPI'
+import { cardsAPI } from '../API/cardsAPI'
+import { CardsPageParamsType, postCardType } from '../API/types'
 
 export const getCards = createAsyncThunk(
   'cards/get',
-  async (data: Partial<getCardsRequestType>, thunkApi) => {
+  async (data: Partial<CardsPageParamsType>, thunkApi) => {
     try {
       return await cardsAPI.getCards(data)
     } catch (e) {
@@ -27,8 +24,8 @@ export const postCard = createAsyncThunk(
   'cards/post',
   async (
     data: {
-      postCard: postCardRequestType
-      queries: Partial<getCardsRequestType>
+      postCard: postCardType
+      queries: Partial<CardsPageParamsType>
     },
     thunkApi
   ) => {
@@ -51,14 +48,15 @@ export const updateCard = createAsyncThunk(
   'cards/put',
   async (
     data: {
-      postCard: postCardRequestType
-      params: Partial<getCardsRequestType>
+      postCard: postCardType
+      params: Partial<CardsPageParamsType>
+      packId: string
     },
     thunkApi
   ) => {
     try {
       await cardsAPI.putCard(data.postCard)
-      thunkApi.dispatch(getCards(data.params))
+      thunkApi.dispatch(getCards({ ...data.params, cardsPack_id: data.packId }))
       return true
     } catch (e) {
       handleAxiosError(e, thunkApi.dispatch)
@@ -74,12 +72,16 @@ export const updateCard = createAsyncThunk(
 export const deleteCard = createAsyncThunk(
   'cards/delete',
   async (
-    data: { cardID: string; params: Partial<getCardsRequestType> },
+    data: {
+      cardID: string
+      params: Partial<CardsPageParamsType>
+      packId: string
+    },
     thunkApi
   ) => {
     try {
       await cardsAPI.deleteCard(data.cardID)
-      thunkApi.dispatch(getCards(data.params))
+      thunkApi.dispatch(getCards({ ...data.params, cardsPack_id: data.packId }))
       return true
     } catch (e) {
       handleAxiosError(e, thunkApi.dispatch)

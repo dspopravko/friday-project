@@ -1,6 +1,6 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { cardsResponseType, getCardsResponseType } from '../API/cardsAPI'
 import { getCards } from './cardsThunk'
+import { CardType, getCardsType } from '../API/types'
 
 export const rememberPack = createAction(
   'cards/rememberPack',
@@ -9,9 +9,9 @@ export const rememberPack = createAction(
   })
 )
 
-export type CardsType = Omit<cardsResponseType, '__v' | 'more_id'>
+export type CardsType = Omit<CardType, '__v' | 'more_id'>
 export type CardsGeneralType = Omit<
-  getCardsResponseType,
+  getCardsType,
   'token' | 'tokenDeathTime' | 'cards'
 >
 

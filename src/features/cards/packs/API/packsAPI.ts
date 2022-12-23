@@ -1,9 +1,16 @@
 import { instance } from '../../../../services/api/api'
+import {
+  getPacksType,
+  PacksPageParamsType,
+  PackType,
+  PostPackType,
+  RootAPIResponse,
+} from './types'
 
 export const packsAPI = {
-  getPacks(data: Partial<getPacksRequestType>) {
+  getPacks(data: Partial<PacksPageParamsType>) {
     return instance
-      .get<getPacksResponseType>('cards/pack', {
+      .get<getPacksType>('cards/pack', {
         params: data,
       })
       .then((res) => {
@@ -12,71 +19,25 @@ export const packsAPI = {
       })
   },
   deletePack(packID: string) {
-    return instance.delete<
-      APIRootResponse & { deletedCardsPack: packResponseType }
-    >('cards/pack', {
-      params: {
-        id: packID,
-      },
-    })
+    return instance.delete<RootAPIResponse & { deletedCardsPack: PackType }>(
+      'cards/pack',
+      {
+        params: {
+          id: packID,
+        },
+      }
+    )
   },
-  postPack(data: postPackRequestType) {
-    return instance.post<APIRootResponse & { newCardsPack: packResponseType }>(
+  postPack(data: PostPackType) {
+    return instance.post<RootAPIResponse & { newCardsPack: PackType }>(
       'cards/pack',
       data
     )
   },
-  updatePack(data: Partial<packResponseType> & { _id: string }) {
-    return instance.put<
-      APIRootResponse & { updatedCardsPack: packResponseType }
-    >('cards/pack', { cardsPack: data })
+  updatePack(data: Partial<PackType> & { _id: string }) {
+    return instance.put<RootAPIResponse & { updatedCardsPack: PackType }>(
+      'cards/pack',
+      { cardsPack: data }
+    )
   },
-}
-export type getPacksRequestType = {
-  packName: string
-  min: number
-  max: number
-  sortPacks: string
-  page: number
-  pageCount: number
-  user_id: string
-  block: boolean
-}
-export type postPackRequestType = {
-  name: string
-  deckCover?: string
-  private?: boolean
-  cardsPack: []
-}
-export type packResponseType = {
-  _id: string
-  user_id: string
-  user_name: string
-  private: boolean
-  name: string
-  path: string
-  grade: number
-  shots: number
-  cardsCount: number
-  type: string
-  rating: number
-  created: Date
-  updated: Date
-  more_id: string
-  __v: number
-  deckCover: string
-}
-
-export type getPacksResponseType = {
-  cardPacks: packResponseType[]
-  page: number
-  pageCount: number
-  cardPacksTotalCount: number
-  minCardsCount: number
-  maxCardsCount: number
-} & APIRootResponse
-
-type APIRootResponse = {
-  token: string
-  tokenDeathTime: number
 }
