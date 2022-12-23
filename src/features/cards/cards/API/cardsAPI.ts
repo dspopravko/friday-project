@@ -1,4 +1,4 @@
-import { instance } from '../../../../services/api/api'
+import { instance } from '../../../../services/API/api'
 import { CardsPageParamsType, getCardsType, postCardType } from './types'
 
 export const cardsAPI = {

@@ -19,7 +19,6 @@ export const Pages = () => {
       <Route element={<PrivateRoutes />}>
         <Route path={PATH.PROFILE} element={<Profile />} />
         <Route path={PATH.CARDS + '/:id'} element={<Cards />} />
-        <Route path={PATH.CARDS} element={<Cards />} />
         <Route path={PATH.PACKS} element={<Packs />} />
       </Route>
       <Route path={PATH.LOGIN.MAIN} element={<Login />} />

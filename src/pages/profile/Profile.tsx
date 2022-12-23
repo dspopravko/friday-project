@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { Box, Card, Grid, Typography } from '@mui/material'
 import s from './profile.module.css'
@@ -9,15 +9,23 @@ import { UpdateProfileContainer } from '../../features/auth/profile/updateProfil
 import { setTitle } from '../../services/setHeaderTitle'
 import { profileSlice } from '../../features/auth/profile/services/profileSlice'
 import { CardsCheer } from '../../features/auth/profile/CardsCheer'
+import { HeaderContext } from '../../context/context'
+import { profileSelector } from '../../features/auth/selectorsAuth'
 
 export const Profile = () => {
+  const { setGoBackButtonTitle } = useContext(HeaderContext)
+  const { user, updateSuccess } = useAppSelector(profileSelector)
   const dispatch = useAppDispatch()
   setTitle('Profile')
-  const { user, updateSuccess } = useAppSelector((state) => state.profile)
   setResetTimeout(4000, updateSuccess)
   const logoutHandler = () => {
     dispatch(logout())
   }
+
+  useEffect(() => {
+    setGoBackButtonTitle('Go back')
+    return () => setGoBackButtonTitle('')
+  }, [])
 
   const onOpenChange = (name: string) => {
     alert(

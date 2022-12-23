@@ -6,10 +6,11 @@ import { setTitle } from '../../services/setHeaderTitle'
 import { SuggestBlock } from '../../features/auth/common/components/suggestBlock'
 import { useAppSelector } from '../../state/store'
 import { Navigate } from 'react-router-dom'
+import { isAuthSelector } from '../../features/auth/selectorsAuth'
 
 export const Login = () => {
   setTitle('Login', 'Login')
-  const { isAuth } = useAppSelector((state) => state.auth)
+  const isAuth = useAppSelector(isAuthSelector)
   if (isAuth) {
     return <Navigate to={'/' + PATH.PROFILE} />
   }

@@ -1,4 +1,4 @@
-import { instance } from '../../../../services/api/api'
+import { instance } from '../../../../services/API/api'
 import { AxiosResponse } from 'axios'
 
 type setNewPasswordSuccessType = {

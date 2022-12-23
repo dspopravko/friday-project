@@ -13,10 +13,11 @@ import {
 } from '../../features/auth/login/services/loginThunks'
 import { loginPayload } from '../../features/auth/login/services/loginAPI'
 import { setTitle } from '../../services/setHeaderTitle'
+import { isAuthSelector } from '../../features/auth/selectorsAuth'
 
 export const Test = () => {
   const dispatch = useAppDispatch()
-  const isAuth = useAppSelector((state) => state.auth.isAuth)
+  const isAuth = useAppSelector(isAuthSelector)
   setTitle(`Tests, isAuth: ${isAuth}`, 'Tests')
   const checkMe = () => dispatch(authMe())
   const authCorrect = () => {

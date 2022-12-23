@@ -5,6 +5,7 @@ import { Close, DoneAll } from '@mui/icons-material'
 import { useAppSelector } from '../../../state/store'
 import { SuccessBig } from '../common/components/successBig'
 import { FormError } from '../common/components/formError'
+import { profileSelector } from '../selectorsAuth'
 
 type ModalPropsType = {
   open: boolean
@@ -29,7 +30,7 @@ export const UpdateProfileModal = ({
   onClose,
   setOpen,
 }: ModalPropsType) => {
-  const { updateSuccess, errors } = useAppSelector((state) => state.profile)
+  const { updateSuccess, errors } = useAppSelector(profileSelector)
   return (
     <Modal
       open={open}

@@ -8,6 +8,7 @@ import { signUp } from '../services/signUpSlice'
 import s from './SignUpForm.module.css'
 import { defaultSchema } from '../../common/validation/validationSchema'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { isAuthFetching } from '../../selectorsAuth'
 
 type RegistrationType = {
   email: string
@@ -39,7 +40,7 @@ export const SignUpForm = () => {
   }
 
   const dispatch = useAppDispatch()
-  const isFetching = useAppSelector((state) => state.auth.isFetching)
+  const isFetching = useAppSelector(isAuthFetching)
   const {
     register,
     handleSubmit,

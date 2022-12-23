@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { getCards, postCard } from '../../features/cards/cards/BLL/cardsThunk'
@@ -13,8 +13,12 @@ import {
 import { TablePagination } from '../../features/cards/common/components/TablePagination'
 import { AddEntityButton } from '../../features/cards/common/components/AddEntityButton'
 import { userIDSelector } from '../../features/auth/selectorsAuth'
+import { setTitle } from '../../services/setHeaderTitle'
+import { HeaderContext } from '../../context/context'
 
 export const Cards = () => {
+  setTitle('Cards')
+  const { setGoBackButtonTitle } = useContext(HeaderContext)
   const currentPage = useAppSelector(currentPageSelector)
   const maxPage = useAppSelector(maxPageSelector)
   const authorUserName = useAppSelector(cardsAuthorUserName)
@@ -24,6 +28,10 @@ export const Cards = () => {
   const [searchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const dispatch = useAppDispatch()
+  useEffect(() => {
+    setGoBackButtonTitle('Go back to Packs list')
+    return () => setGoBackButtonTitle('')
+  }, [])
   useEffect(() => {
     id && dispatch(getCards({ cardsPack_id: id, ...params }))
   }, [id, searchParams])

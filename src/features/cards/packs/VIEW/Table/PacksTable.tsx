@@ -14,10 +14,11 @@ import { deletePack, updatePack } from '../../BLL/packsThunk'
 import { userIdSelector } from '../../../../../state/selectors'
 import { rememberPack } from '../../../cards/BLL/cardsSlice'
 import { PackType } from '../../API/types'
+import { isPacksPending, packsSelector } from '../../BLL/selectorsPacks'
 
 export function PacksTable() {
-  const packs = useAppSelector((state) => state.packs.packsCurrent)
-  const pending = useAppSelector((state) => state.packs.pending)
+  const packs = useAppSelector(packsSelector)
+  const pending = useAppSelector(isPacksPending)
   const userID = useAppSelector(userIdSelector)
   const [searchParams, setSearchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)

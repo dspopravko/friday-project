@@ -3,6 +3,7 @@ import { Avatar, Badge, IconButton } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import { UpdateProfileModal } from './updateProfileModal'
 import { useAppSelector } from '../../../state/store'
+import { profileSelector } from '../selectorsAuth'
 
 export type LoginData = {
   name?: string
@@ -11,7 +12,7 @@ export type LoginData = {
 }
 //это просто оболочка для аватарки, в ней содержится модалка с формой изменения профиля, возможно стоит перенести модалку повыше, в profile
 export const UpdateProfileContainer = ({ photo }: { photo: string }) => {
-  const { updateSuccess, pending } = useAppSelector((state) => state.profile)
+  const { updateSuccess, pending } = useAppSelector(profileSelector)
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => {

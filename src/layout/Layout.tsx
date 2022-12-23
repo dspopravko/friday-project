@@ -6,13 +6,14 @@ import { appStatus } from '../state/appSlice'
 import { AppLoader } from '../common/components/appLoader/appLoader'
 import { useAppDispatch, useAppSelector } from '../state/store'
 import { authMe } from '../features/auth/login/services/loginThunks'
+import { appStatusSelector } from '../state/selectors'
 
 type LayoutPropsType = {
   children: ReactNode
 }
 
 export const Layout = (props: LayoutPropsType) => {
-  const { status } = useAppSelector((state) => state.app)
+  const status = useAppSelector(appStatusSelector)
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(authMe())

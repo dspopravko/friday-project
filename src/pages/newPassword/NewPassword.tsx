@@ -8,6 +8,7 @@ import { SuccessBig } from '../../features/auth/common/components/successBig'
 import { PATH } from '../../data/paths'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
 import { theme } from '../../assets/mui-theme'
+import { newPasswordStateSelector } from '../../features/auth/selectorsAuth'
 
 export const NewPassword = () => {
   const { token } = useParams()
@@ -16,7 +17,7 @@ export const NewPassword = () => {
     isSet,
     errors: serverErrors,
     isFetching,
-  } = useAppSelector((state) => state.new)
+  } = useAppSelector(newPasswordStateSelector)
 
   return (
     <Card className={'loginCanvas'}>

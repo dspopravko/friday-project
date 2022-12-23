@@ -18,6 +18,7 @@ import { NavLink } from 'react-router-dom'
 import { PATH } from '../../../../data/paths'
 import { defaultSchema } from '../../common/validation/validationSchema'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { isAuthFetching } from '../../selectorsAuth'
 
 const schema = yup.object().shape({
   email: defaultSchema.email,
@@ -41,7 +42,7 @@ export const LoginForm = () => {
     event.preventDefault()
   }
   const dispatch = useAppDispatch()
-  const isFetching = useAppSelector((state) => state.auth.isFetching)
+  const isFetching = useAppSelector(isAuthFetching)
   const {
     register,
     handleSubmit,

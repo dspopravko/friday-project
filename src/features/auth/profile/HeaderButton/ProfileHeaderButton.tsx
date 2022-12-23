@@ -6,11 +6,11 @@ import PersonIcon from '@mui/icons-material/Person'
 import XButton from '../../../../common/components/button/XButton'
 import { logout } from '../../login/services/loginThunks'
 import { useNavigate } from 'react-router-dom'
+import { profileSelector } from '../../selectorsAuth'
 
 export const ProfileHeaderButton = () => {
-  // const [open, setOpen] = useState(true)
   const dispatch = useAppDispatch()
-  const user = useAppSelector((state) => state.profile.user)
+  const { user } = useAppSelector(profileSelector)
   const navigate = useNavigate()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const openMui = Boolean(anchorEl)
@@ -61,25 +61,6 @@ export const ProfileHeaderButton = () => {
           Logout
         </MenuItem>
       </Menu>
-
-      {/*{open && (*/}
-      {/*  <div*/}
-      {/*    style={{*/}
-      {/*      position: 'absolute',*/}
-      {/*      transform: 'translate(-20px, 46px)',*/}
-      {/*      backgroundColor: 'red',*/}
-      {/*    }}*/}
-      {/*  >*/}
-      {/*    <Button*/}
-      {/*      variant={'contained'}*/}
-      {/*      onClick={() => {*/}
-      {/*        dispatch(logout())*/}
-      {/*      }}*/}
-      {/*    >*/}
-      {/*      Logout*/}
-      {/*    </Button>*/}
-      {/*  </div>*/}
-      {/*)}*/}
     </div>
   )
 }

@@ -9,6 +9,7 @@ import { LoginData } from './updateProfileContainer'
 import { useAppDispatch, useAppSelector } from '../../../state/store'
 import * as yup from 'yup'
 import { defaultSchema } from '../common/validation/validationSchema'
+import { profileSelector } from '../selectorsAuth'
 
 const schema = yup.object().shape({
   name: yup.string().min(3),
@@ -16,7 +17,7 @@ const schema = yup.object().shape({
 })
 // форма которая может изменять имя или аватарку профиля, обязателен только пароль
 export const UpdateProfileForm = () => {
-  const { user, pending } = useAppSelector((state) => state.profile)
+  const { user, pending } = useAppSelector(profileSelector)
   const dispatch = useAppDispatch()
   const handleSubmission = async (data: LoginData) => {
     await dispatchProfileData(data, dispatch)

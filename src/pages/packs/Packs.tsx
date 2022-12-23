@@ -10,13 +10,16 @@ import {
   maxPageSelector,
 } from '../../features/cards/packs/BLL/selectorsPacks'
 import { AddEntityButton } from '../../features/cards/common/components/AddEntityButton'
+import { setTitle } from '../../services/setHeaderTitle'
 
 export const Packs = () => {
+  setTitle('Packs')
   const currentPage = useAppSelector(currentPageSelector)
   const maxPage = useAppSelector(maxPageSelector)
   const [searchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const dispatch = useAppDispatch()
+
   useEffect(() => {
     dispatch(getPacks(params))
   }, [searchParams])

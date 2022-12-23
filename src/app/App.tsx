@@ -1,7 +1,7 @@
 import '../assets/css/global.css'
 import React, { useState } from 'react'
-import { HashRouter } from 'react-router-dom'
-import { HeaderTitleContext } from '../context/context'
+import { BrowserRouter } from 'react-router-dom'
+import { HeaderContext } from '../context/context'
 import { Layout } from '../layout/Layout'
 import { Pages } from '../pages/Pages'
 import { Provider } from 'react-redux'
@@ -11,10 +11,13 @@ import { theme } from '../assets/mui-theme'
 
 function App() {
   const [title, setTitle] = useState('')
+  const [goBackButtonTitle, setGoBackButtonTitle] = useState('')
   return (
     <div style={{ textAlign: 'center' }}>
-      <HashRouter>
-        <HeaderTitleContext.Provider value={{ title, setTitle }}>
+      <BrowserRouter>
+        <HeaderContext.Provider
+          value={{ title, setTitle, goBackButtonTitle, setGoBackButtonTitle }}
+        >
           <ThemeProvider theme={theme}>
             <Provider store={store}>
               <Layout>
@@ -22,8 +25,8 @@ function App() {
               </Layout>
             </Provider>
           </ThemeProvider>
-        </HeaderTitleContext.Provider>
-      </HashRouter>
+        </HeaderContext.Provider>
+      </BrowserRouter>
     </div>
   )
 }
