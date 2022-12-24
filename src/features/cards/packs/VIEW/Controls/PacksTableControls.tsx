@@ -34,6 +34,7 @@ export const PacksTableControls = () => {
   }
   return (
     <div className={s.controlWrapper}>
+      {/*Search input*/}
       <div className={s.controlBlock} style={{ flexGrow: 1 }}>
         <Typography>Search</Typography>
         <DebouncedInput
@@ -42,9 +43,9 @@ export const PacksTableControls = () => {
           placeholder={'Provide your text'}
         />
       </div>
+      {/*Button "Me/All"*/}
       <div className={s.controlBlock}>
         <Typography>Show packs cards</Typography>
-
         <XButtonGroup
           activeButton={activeButton()}
           handleButtonClick={(button) => {
@@ -52,13 +53,16 @@ export const PacksTableControls = () => {
           }}
         />
       </div>
+      {/*Slider*/}
       <div className={s.controlBlock}>
         <Typography>Number of cards</Typography>
         <DoubleSliderWithInputs
+          current={[+params.min, +params.max]}
           border={[0, packsMaxCardsCount]}
           onChangeCommitted={updateParams}
         />
       </div>
+      {/*Clear filter*/}
       <div className={s.controlBlock}>
         <Typography>Clear</Typography>
         <IconButton onClick={clearParams}>

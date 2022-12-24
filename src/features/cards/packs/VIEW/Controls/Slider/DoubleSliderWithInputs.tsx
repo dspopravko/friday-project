@@ -4,24 +4,28 @@ import { DoubleRangeSlider } from '../../../../../../common/components/selectors
 import s from './DoubleSliderWithInputs.module.css'
 
 type DoubleSliderWithInputsPropsType = {
+  current: number[]
   border: number[]
   onChangeCommitted: (newParams: Array<{ [param: string]: string }>) => void
 }
 
 export const DoubleSliderWithInputs = ({
+  current,
   border,
   onChangeCommitted,
 }: DoubleSliderWithInputsPropsType) => {
   const isInitialized = useRef(false)
-  const [params, setParams] = useState({ min: 0, max: 100 })
+  const [localValue, setLocalValue] = useState({ min: 0, max: 100 })
   const [timerId, setTimerId] = useState<number | undefined>(undefined)
 
   const handleInput = (newParams: Array<{ [param: string]: string }>) => {
     isInitialized.current = true
-    setParams({ ...params, ...Object.assign({}, ...newParams) })
+    setLocalValue({ ...localValue, ...Object.assign({}, ...newParams) })
   }
 
+  //sends new position if slider touched, debounced
   useEffect(() => {
+    //prevent sending position on the first render
     if (!isInitialized.current) {
       return
     }
@@ -29,13 +33,42 @@ export const DoubleSliderWithInputs = ({
     setTimerId(
       +setTimeout(() => {
         onChangeCommitted([
-          { max: params.max.toString() },
-          { min: params.min.toString() },
+          { max: localValue.max.toString() },
+          { min: localValue.min.toString() },
         ])
       }, 1000)
     )
     return clearTimeout(timerId)
-  }, [params.min, params.max])
+  }, [localValue.min, localValue.max])
+
+  //set slider position if new current values comes in
+  useEffect(() => {
+    if (!isNaN(current[0]) && !isNaN(current[1])) {
+      setLocalValue({ min: current[0], max: current[1] })
+    }
+  }, [current])
+
+  //reset slider position if out of new scope
+  useEffect(() => {
+    if (current[0] > border[1]) {
+      setLocalValue({ ...localValue, min: 0 })
+    }
+    if (current[1] > border[1]) {
+      setLocalValue({ ...localValue, max: border[1] })
+    }
+    if (
+      (!isNaN(border[1]) && localValue.max > border[1]) ||
+      !isInitialized.current
+    ) {
+      setLocalValue({ ...localValue, max: border[1] })
+    }
+    if (isNaN(current[0]) && isNaN(current[1])) {
+      return
+    }
+    if (localValue.min !== current[0] || localValue.max !== current[1]) {
+      setLocalValue({ min: current[0], max: current[1] })
+    }
+  }, [border])
 
   return (
     <div style={{ display: 'flex' }}>
@@ -45,7 +78,7 @@ export const DoubleSliderWithInputs = ({
           className={s.input}
           name="From"
           type="number"
-          value={params.min}
+          value={localValue.min}
           InputProps={{
             inputProps: {
               min: border[0],
@@ -64,7 +97,7 @@ export const DoubleSliderWithInputs = ({
             { max: values[1].toString() },
           ])
         }}
-        current={[+params.min, +params.max]}
+        current={[+localValue.min, +localValue.max]}
         initialValue={[0, 100]}
         border={[0, border[1]]}
       />
@@ -76,7 +109,7 @@ export const DoubleSliderWithInputs = ({
           name="To"
           type="number"
           fullWidth
-          value={params.max}
+          value={localValue.max}
           InputProps={{
             inputProps: {
               min: border[0],

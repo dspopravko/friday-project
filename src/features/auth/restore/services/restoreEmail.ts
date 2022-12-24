@@ -1,4 +1,4 @@
-const link = `${window.location.host}/#/set-new-password/$token$`
+const link = `${window.location.host}/set-new-password/$token$`
 export const restoreEmail = `<div>
     <table>
         <tr>
