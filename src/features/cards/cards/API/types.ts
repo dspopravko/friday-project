@@ -55,3 +55,6 @@ export type getCardsType = {
   token: string
   tokenDeathTime: number
 }
+export type updateCardType = Omit<postCardType, 'cardsPack_id'> & {
+  _id: string
+}

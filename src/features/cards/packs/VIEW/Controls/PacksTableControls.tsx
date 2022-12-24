@@ -26,11 +26,11 @@ export const PacksTableControls = () => {
   const activeButton = () => {
     if (params.user_id === userID) {
       return 1
-    }
-    if (params.user_id === undefined || params.user_id === '') {
+    } else if (params.user_id === undefined || params.user_id === '') {
       return 2
+    } else {
+      return 0
     }
-    return 0
   }
   return (
     <div className={s.controlWrapper}>

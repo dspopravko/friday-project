@@ -37,7 +37,7 @@ export function CardsTable({ id }: { id: string }) {
           updateCard({
             params,
             postCard: {
-              cardsPack_id: cardID,
+              _id: cardID,
               question: 'updated question',
               answer: 'updated answer',
             },

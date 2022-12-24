@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { handleAxiosError } from '../../../../services/error-notification'
 import { AxiosError } from 'axios'
 import { cardsAPI } from '../API/cardsAPI'
-import { CardsPageParamsType, postCardType } from '../API/types'
+import { CardsPageParamsType, postCardType, updateCardType } from '../API/types'
 
 export const getCards = createAsyncThunk(
   'cards/get',
@@ -48,14 +48,14 @@ export const updateCard = createAsyncThunk(
   'cards/put',
   async (
     data: {
-      postCard: postCardType
+      postCard: updateCardType
       params: Partial<CardsPageParamsType>
       packId: string
     },
     thunkApi
   ) => {
     try {
-      await cardsAPI.putCard(data.postCard)
+      await cardsAPI.updateCard(data.postCard)
       thunkApi.dispatch(getCards({ ...data.params, cardsPack_id: data.packId }))
       return true
     } catch (e) {

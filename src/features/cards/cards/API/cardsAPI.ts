@@ -22,7 +22,7 @@ export const cardsAPI = {
   postCard(data: postCardType) {
     return instance.post('cards/card', { card: data })
   },
-  putCard(data: postCardType) {
-    return instance.post('cards/card', { card: data })
+  updateCard(data: Omit<postCardType, 'cardsPack_id'> & { _id: string }) {
+    return instance.put('cards/card', { card: data })
   },
 }
