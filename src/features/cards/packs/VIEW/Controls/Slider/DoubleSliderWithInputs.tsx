@@ -23,7 +23,7 @@ export const DoubleSliderWithInputs = ({
     setLocalValue({ ...localValue, ...Object.assign({}, ...newParams) })
   }
 
-  //sends new position if slider touched, debounced
+  //sends debounced position on callback
   useEffect(() => {
     //prevent sending position on the first render
     if (!isInitialized.current) {
@@ -48,25 +48,15 @@ export const DoubleSliderWithInputs = ({
     }
   }, [current])
 
-  //reset slider position if out of new scope
   useEffect(() => {
-    if (current[0] > border[1]) {
-      setLocalValue({ ...localValue, min: 0 })
-    }
+    //reset current value if out of new boundaries
     if (current[1] > border[1]) {
-      setLocalValue({ ...localValue, max: border[1] })
-    }
-    if (
-      (!isNaN(border[1]) && localValue.max > border[1]) ||
-      !isInitialized.current
-    ) {
-      setLocalValue({ ...localValue, max: border[1] })
-    }
-    if (isNaN(current[0]) && isNaN(current[1])) {
+      setLocalValue({ min: border[0], max: border[1] })
       return
     }
-    if (localValue.min !== current[0] || localValue.max !== current[1]) {
-      setLocalValue({ min: current[0], max: current[1] })
+    //set boundaries on initialization
+    if (!isNaN(border[1]) && !isInitialized.current) {
+      setLocalValue({ ...localValue, max: border[1] })
     }
   }, [border])
 
