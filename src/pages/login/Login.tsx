@@ -7,6 +7,7 @@ import { SuggestBlock } from '../../features/auth/common/components/suggestBlock
 import { useAppSelector } from '../../state/store'
 import { Navigate } from 'react-router-dom'
 import { isAuthSelector } from '../../features/auth/selectorsAuth'
+import BasicModal from '../../features/modal/Modal'
 
 export const Login = () => {
   setTitle('Login', 'Login')
@@ -29,6 +30,7 @@ export const Login = () => {
           path={'/' + PATH.LOGIN.SIGNUP}
         />
       </div>
+      <BasicModal />
     </Card>
   )
 }
