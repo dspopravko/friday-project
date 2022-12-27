@@ -4,8 +4,8 @@ import {
   PacksPageParamsType,
   PackType,
   PostPackType,
-  RootAPIResponse,
 } from './types'
+import { RootAPIResponse } from '../../../../services/API/types'
 
 export const packsAPI = {
   getPacks(data: Partial<PacksPageParamsType>) {

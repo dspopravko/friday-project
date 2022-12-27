@@ -11,4 +11,5 @@ export const PATH = {
   TESTS: 'test',
   CARDS: 'cards',
   PACKS: 'packs',
+  LEARN: 'learn',
 }

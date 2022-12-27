@@ -51,7 +51,7 @@ export function PacksTable() {
         )
         break
       case 'learn':
-        alert('Work in progress!')
+        navigate(`/${PATH.LEARN}/${packID}`)
         break
     }
   }

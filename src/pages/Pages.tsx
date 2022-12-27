@@ -12,6 +12,7 @@ import { SignUpSuccess } from './signUpSuccess/SignUpSucces'
 import { PrivateRoutes } from './PrivateRoutes'
 import { Cards } from './cards/Cards'
 import { Packs } from './packs/Packs'
+import { Learn } from './learn/Learn'
 
 export const Pages = () => {
   return (
@@ -20,6 +21,7 @@ export const Pages = () => {
         <Route path={PATH.PROFILE} element={<Profile />} />
         <Route path={PATH.CARDS + '/:id'} element={<Cards />} />
         <Route path={PATH.PACKS} element={<Packs />} />
+        <Route path={PATH.LEARN + '/:id'} element={<Learn />} />
       </Route>
       <Route path={PATH.LOGIN.MAIN} element={<Login />} />
       <Route path={PATH.LOGIN.RESTORE} element={<PasswordRestore />} />
