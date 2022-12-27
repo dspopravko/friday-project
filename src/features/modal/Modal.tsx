@@ -40,7 +40,13 @@ const buttonStyle = {
   height: '108px',
 }
 
-export default function BasicModal() {
+type BasicModalType = {
+  children: React.ReactNode
+  title: string
+  buttonType: 'send' | 'save' | 'delete'
+}
+
+export function BasicModal(props: BasicModalType) {
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
@@ -62,24 +68,36 @@ export default function BasicModal() {
             component="h2"
             sx={titleStyle}
           >
-            Text in a modal
+            {props.title}
             <IconButton onClick={handleClose} sx={{ padding: '0' }}>
               <CloseIcon />
             </IconButton>
           </Typography>
           <Divider variant={'fullWidth'} />
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          {props.children}
           <Container sx={buttonStyle} disableGutters={true}>
-            <XButton style={{ minWidth: '113px' }}>Send</XButton>
             <XButton
               onClick={handleClose}
-              type="delete"
+              type="secondary"
               style={{ minWidth: '113px' }}
             >
-              Close
+              Cancel
             </XButton>
+            {props.buttonType === 'send' && (
+              <XButton type="primary" style={{ minWidth: '113px' }}>
+                Send
+              </XButton>
+            )}
+            {props.buttonType === 'save' && (
+              <XButton type="primary" style={{ minWidth: '113px' }}>
+                Save
+              </XButton>
+            )}
+            {props.buttonType === 'delete' && (
+              <XButton type="delete" style={{ minWidth: '113px' }}>
+                Delete
+              </XButton>
+            )}
           </Container>
         </Box>
       </Modal>

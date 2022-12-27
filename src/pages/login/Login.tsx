@@ -7,7 +7,11 @@ import { SuggestBlock } from '../../features/auth/common/components/suggestBlock
 import { useAppSelector } from '../../state/store'
 import { Navigate } from 'react-router-dom'
 import { isAuthSelector } from '../../features/auth/selectorsAuth'
-import BasicModal from '../../features/modal/Modal'
+import { ModalDeleteCard } from '../../features/modal/modal-delete-card/ModalDeleteCard'
+import { ModalDeletePack } from '../../features/modal/modal-delete-pack/ModalDeletePack'
+import { ModalEditCard } from '../../features/modal/modal-edit-card/ModalEditCard'
+import { ModalNewCard } from '../../features/modal/modal-new-card/ModalNewCard'
+import { ModalNewPack } from '../../features/modal/modal-new-pack/ModalNewPack'
 
 export const Login = () => {
   setTitle('Login', 'Login')
@@ -30,7 +34,7 @@ export const Login = () => {
           path={'/' + PATH.LOGIN.SIGNUP}
         />
       </div>
-      <BasicModal />
+      <ModalNewPack />
     </Card>
   )
 }
