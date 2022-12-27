@@ -4,7 +4,6 @@
     border-collapse: collapse;
     border-radius: 30px;
     border-style: hidden; /* hide standard table (collapsed) border */
-    box-shadow: 0 0 0 1px #666; /* this draws the table border  */
 }
 
 .tableBody .tableRow:last-child .tableCell:last-child {
@@ -70,4 +69,11 @@
 
 .tableCell:last-child {
     padding-right: 35px;
+}
+.blur {
+    filter: blur(6px);
+    transition: 0.3s ease;
+}
+.blur:hover {
+    filter: none;
 }

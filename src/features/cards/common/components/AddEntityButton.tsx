@@ -2,15 +2,19 @@ import React from 'react'
 import { Button, Typography } from '@mui/material'
 
 type AddEntityButtonPropsType = {
+  pending?: boolean
   title: string
-  ButtonTitle: string
-  ButtonCallback: () => void
+  buttonTitle: string
+  buttonCallback: () => void
+  children?: React.ReactNode
 }
 
 export const AddEntityButton = ({
-  ButtonCallback,
-  ButtonTitle,
+  buttonCallback,
+  buttonTitle,
   title,
+  pending = false,
+  children,
 }: AddEntityButtonPropsType) => {
   return (
     <div
@@ -21,8 +25,15 @@ export const AddEntityButton = ({
         margin: '0 auto',
       }}
     >
-      <Typography variant={'h5'}>{title}</Typography>
-      <Button onClick={ButtonCallback}>{ButtonTitle}</Button>
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <Typography variant={'h5'} sx={{ opacity: pending ? '0.5' : 'none' }}>
+          {title}
+        </Typography>
+        {children}
+      </div>
+      <Button disabled={pending} onClick={buttonCallback}>
+        {buttonTitle}
+      </Button>
     </div>
   )
 }

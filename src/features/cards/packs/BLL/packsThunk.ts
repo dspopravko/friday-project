@@ -72,8 +72,7 @@ export const updatePack = createAsyncThunk(
     try {
       const res = await packsAPI.updatePack(data.postData)
       thunkApi.dispatch(getPacks(data.params))
-      console.log(res)
-      return true
+      return res.data
     } catch (e) {
       handleAxiosError(e, thunkApi.dispatch)
       if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {

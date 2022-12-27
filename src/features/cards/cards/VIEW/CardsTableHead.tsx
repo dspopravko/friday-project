@@ -2,6 +2,7 @@ import { Rating } from '@mui/material'
 import React from 'react'
 import { CardsType } from '../BLL/cardsSlice'
 import { TableDateColumn } from '../../common/components/TableDateColumn'
+import s from './../../common/styles/Table.module.css'
 
 export const shapeTableHead = (
   cards: Array<CardsType>,
@@ -32,6 +33,14 @@ export const shapeTableHead = (
                     readOnly
                   />
                 </>
+              ),
+            }
+          case key === 'answer':
+            return {
+              Header: 'Answer',
+              accessor: key,
+              Cell: ({ value }: { value: string }) => (
+                <span className={s.blur}>{value}</span>
               ),
             }
         }

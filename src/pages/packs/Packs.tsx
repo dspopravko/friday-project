@@ -19,7 +19,18 @@ export const Packs = () => {
   const [searchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const dispatch = useAppDispatch()
-
+  const addPackHandler = () => {
+    dispatch(
+      postPack({
+        postData: {
+          cardsPack: {
+            name: prompt('Whats new name?') || 'default',
+          },
+        },
+        params: params,
+      })
+    )
+  }
   useEffect(() => {
     dispatch(getPacks(params))
   }, [searchParams])
@@ -27,19 +38,8 @@ export const Packs = () => {
     <div style={{ marginTop: 60 }}>
       <AddEntityButton
         title={'Packs'}
-        ButtonTitle={'Add new pack'}
-        ButtonCallback={() => {
-          dispatch(
-            postPack({
-              postData: {
-                cardsPack: {
-                  name: prompt('Whats new name?') || 'default',
-                },
-              },
-              params: params,
-            })
-          )
-        }}
+        buttonTitle={'Add new pack'}
+        buttonCallback={addPackHandler}
       />
       <PacksTableControls />
       <PacksTable />
