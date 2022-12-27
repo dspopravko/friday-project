@@ -14,6 +14,7 @@ import {
 import { loginPayload } from '../../features/auth/login/services/loginAPI'
 import { setTitle } from '../../services/setHeaderTitle'
 import { isAuthSelector } from '../../features/auth/selectorsAuth'
+import { Typography } from '@mui/material'
 
 export const Test = () => {
   const dispatch = useAppDispatch()
@@ -61,6 +62,9 @@ export const Test = () => {
         <div className={s.item}>
           Radio: (without logic)
           <XRadio value={1} options={mockSelect} />
+        </div>
+        <div>
+          <Typography>Some</Typography>
         </div>
       </div>
     </div>

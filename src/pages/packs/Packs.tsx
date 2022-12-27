@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { PacksTableControls } from '../../features/cards/packs/VIEW/Controls/PacksTableControls'
 import { PacksTable } from '../../features/cards/packs/VIEW/Table/PacksTable'
 import { getPacks, postPack } from '../../features/cards/packs/BLL/packsThunk'
@@ -11,9 +11,11 @@ import {
 } from '../../features/cards/packs/BLL/selectorsPacks'
 import { AddEntityButton } from '../../features/cards/common/components/AddEntityButton'
 import { setTitle } from '../../services/setHeaderTitle'
+import { HeaderContext } from '../../context/context'
 
 export const Packs = () => {
   setTitle('Packs')
+  const { setGoBackButtonTitle } = useContext(HeaderContext)
   const currentPage = useAppSelector(currentPageSelector)
   const maxPage = useAppSelector(maxPageSelector)
   const [searchParams] = useSearchParams()
@@ -31,6 +33,9 @@ export const Packs = () => {
       })
     )
   }
+  useEffect(() => {
+    setGoBackButtonTitle('')
+  }, [])
   useEffect(() => {
     dispatch(getPacks(params))
   }, [searchParams])

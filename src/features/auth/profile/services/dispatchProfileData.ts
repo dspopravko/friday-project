@@ -9,14 +9,12 @@ export const dispatchProfileData = async (
 ) => {
   let photo
   if (data.avatar.item(0)) {
-    console.log('some avatar here')
     photo = await fileToBase64(data.avatar[0])
   }
   dispatch(
     updateProfile({
       name: data.name,
       avatar: photo as string,
-      password: data.password,
     })
   )
 }

@@ -33,6 +33,7 @@ export const cardsSlice = createSlice({
     },
     resetPack(state) {
       state.cardsGeneral.packUserId = ''
+      state.cardsCurrent = []
     },
   },
   extraReducers: (builder) => {

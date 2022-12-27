@@ -7,7 +7,6 @@ import { profileSelector } from '../selectorsAuth'
 
 export type LoginData = {
   name?: string
-  password: string
   avatar: FileList
 }
 //это просто оболочка для аватарки, в ней содержится модалка с формой изменения профиля, возможно стоит перенести модалку повыше, в profile

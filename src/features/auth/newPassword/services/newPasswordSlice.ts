@@ -1,7 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { handleAxiosError } from '../../../../services/error-notification'
-import { AxiosError } from 'axios'
-import { newPasswordAPI, setNewPasswordPayloadType } from './newPasswordAPI'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { newPassword } from './newPasswordThunk'
 
 const initialState = {
   isFetching: false,
@@ -38,21 +36,3 @@ export const newPasswordSlice = createSlice({
 })
 
 export const newPasswordReducer = newPasswordSlice.reducer
-export const { setRestorePassword } = newPasswordSlice.actions
-
-export const newPassword = createAsyncThunk(
-  'auth/newPasswordSlice',
-  async (data: setNewPasswordPayloadType, thunkApi) => {
-    try {
-      const res = await newPasswordAPI.setNewPassword(data)
-      return res.data
-    } catch (e) {
-      handleAxiosError(e, thunkApi.dispatch)
-      if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {
-        return thunkApi.rejectWithValue(e.response?.data.error)
-      } else {
-        throw e
-      }
-    }
-  }
-)

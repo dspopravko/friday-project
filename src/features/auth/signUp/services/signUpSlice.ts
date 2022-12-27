@@ -1,7 +1,5 @@
-import { handleAxiosError } from '../../../../services/error-notification'
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { regApi, RegType } from './signUpAPI'
-import { AxiosError } from 'axios'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { signUp } from './signUpThunk'
 
 const initialState = {
   registered: false,
@@ -35,20 +33,3 @@ export const signUpSlice = createSlice({
 
 export const regReducer = signUpSlice.reducer
 export const { setReg } = signUpSlice.actions
-
-export const signUp = createAsyncThunk(
-  'auth/register',
-  async (data: RegType, thunkApi) => {
-    try {
-      const res = await regApi.reg(data)
-      return res.data.addedUser
-    } catch (e) {
-      handleAxiosError(e, thunkApi.dispatch)
-      if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {
-        return thunkApi.rejectWithValue(e.response?.data.error)
-      } else {
-        throw e
-      }
-    }
-  }
-)

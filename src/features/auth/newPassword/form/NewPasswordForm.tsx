@@ -12,8 +12,8 @@ import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
 import * as yup from 'yup'
 import { defaultSchema } from '../../common/validation/validationSchema'
 import { useAppDispatch } from '../../../../state/store'
-import { newPassword } from '../services/newPasswordSlice'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { newPassword } from '../services/newPasswordThunk'
 
 const schema = yup.object().shape({
   password: defaultSchema.password,
