@@ -44,20 +44,18 @@ type BasicModalType = {
   children: React.ReactNode
   title: string
   buttonType: 'send' | 'save' | 'delete'
+  handleClose: () => void
+  open: boolean
 }
 
 export function BasicModal(props: BasicModalType) {
-  const [open, setOpen] = React.useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
-
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      {/* <Button onClick={handleOpen}>Open modal</Button> */}
 
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={props.open}
+        onClose={props.handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -69,7 +67,7 @@ export function BasicModal(props: BasicModalType) {
             sx={titleStyle}
           >
             {props.title}
-            <IconButton onClick={handleClose} sx={{ padding: '0' }}>
+            <IconButton onClick={props.handleClose} sx={{ padding: '0' }}>
               <CloseIcon />
             </IconButton>
           </Typography>
@@ -77,7 +75,7 @@ export function BasicModal(props: BasicModalType) {
           {props.children}
           <Container sx={buttonStyle} disableGutters={true}>
             <XButton
-              onClick={handleClose}
+              onClick={props.handleClose}
               type="secondary"
               style={{ minWidth: '113px' }}
             >

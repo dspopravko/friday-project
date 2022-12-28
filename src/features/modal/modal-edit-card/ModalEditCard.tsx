@@ -10,13 +10,21 @@ import React from 'react'
 import { BasicModal } from '../Modal'
 
 export const ModalEditCard = () => {
+  const [open, setOpen] = React.useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
   const [value, setValue] = React.useState('text')
 
   const handleChange = (event: SelectChangeEvent) => {
     setValue(event.target.value as string)
   }
   return (
-    <BasicModal title={'Edit cards'} buttonType="save">
+    <BasicModal
+      title={'Edit cards'}
+      buttonType="save"
+      handleClose={handleClose}
+      open={open}
+    >
       <FormControl fullWidth size="small">
         <FormHelperText sx={{ fontSize: '14px', marginLeft: '0' }}>
           Choose a question format

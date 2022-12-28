@@ -5,11 +5,20 @@ import {
   FormGroup,
   TextField,
 } from '@mui/material'
+import React from 'react'
 import { BasicModal } from '../Modal'
 
 export const ModalEditPack = () => {
+  const [open, setOpen] = React.useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
   return (
-    <BasicModal title={'Edit pack'} buttonType="save">
+    <BasicModal
+      title={'Edit pack'}
+      buttonType="save"
+      handleClose={handleClose}
+      open={open}
+    >
       <FormControl fullWidth>
         <TextField
           id="standard-required"

@@ -12,6 +12,7 @@ import {
 import { AddEntityButton } from '../../features/cards/common/components/AddEntityButton'
 import { setTitle } from '../../services/setHeaderTitle'
 import { HeaderContext } from '../../context/context'
+import { ModalNewPack } from '../../features/modal/modal-new-pack/ModalNewPack'
 
 export const Packs = () => {
   setTitle('Packs')
@@ -41,11 +42,12 @@ export const Packs = () => {
   }, [searchParams])
   return (
     <div style={{ marginTop: 60 }}>
-      <AddEntityButton
+      <ModalNewPack params={params} />
+      {/* <AddEntityButton
         title={'Packs'}
         buttonTitle={'Add new pack'}
         buttonCallback={addPackHandler}
-      />
+      /> */}
       <PacksTableControls />
       <PacksTable />
       <TablePagination page={currentPage} maxPage={maxPage} />
