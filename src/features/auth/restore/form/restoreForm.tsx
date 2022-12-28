@@ -7,7 +7,7 @@ import { useAppDispatch } from '../../../../state/store'
 import { restoreEmail } from '../services/restoreEmail'
 import * as yup from 'yup'
 import { defaultSchema } from '../../common/validation/validationSchema'
-import { restorePassword } from '../services/restorePasswordSlice'
+import { restorePassword } from '../services/restorePasswordThunk'
 
 const schema = yup.object().shape({
   email: defaultSchema.email,

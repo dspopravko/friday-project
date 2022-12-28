@@ -1,11 +1,12 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getCards } from './cardsThunk'
 import { CardType, getCardsType } from '../API/types'
+import { updatePack } from '../../packs/BLL/packsThunk'
 
 export const rememberPack = createAction(
   'cards/rememberPack',
-  (userName, packID) => ({
-    payload: { userName, packID },
+  (userName, packName) => ({
+    payload: { userName, packName },
   })
 )
 
@@ -30,6 +31,10 @@ export const cardsSlice = createSlice({
     setPending(state, action: PayloadAction<boolean>) {
       state.pending = action.payload
     },
+    resetPack(state) {
+      state.cardsGeneral.packUserId = ''
+      state.cardsCurrent = []
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getCards.fulfilled, (state, action) => {
@@ -45,6 +50,10 @@ export const cardsSlice = createSlice({
     })
     builder.addCase(rememberPack, (state, action) => {
       state.currentCardsUserName = action.payload.userName
+      state.cardsGeneral.packName = action.payload.packName
+    })
+    builder.addCase(updatePack.fulfilled, (state, action) => {
+      state.cardsGeneral.packName = action.payload.updatedCardsPack.name
     })
   },
 })

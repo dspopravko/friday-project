@@ -4,11 +4,11 @@ import { Button, IconButton, InputAdornment, TextField } from '@mui/material'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { useAppDispatch, useAppSelector } from '../../../../state/store'
-import { signUp } from '../services/signUpSlice'
 import s from './SignUpForm.module.css'
 import { defaultSchema } from '../../common/validation/validationSchema'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { isAuthFetching } from '../../selectorsAuth'
+import { signUp } from '../services/signUpThunk'
 
 type RegistrationType = {
   email: string

@@ -51,7 +51,7 @@ export function PacksTable() {
         )
         break
       case 'learn':
-        alert('Work in progress!')
+        navigate(`/${PATH.LEARN}/${packID}`)
         break
     }
   }
@@ -74,7 +74,9 @@ export function PacksTable() {
       return
     }
     if (typedCell.column.id !== 'Edit') {
-      dispatch(rememberPack(typedRow.original.user_name, typedRow.original._id))
+      dispatch(
+        rememberPack(typedRow.original.user_name, typedRow.original.name)
+      )
       navigate(`/${PATH.CARDS}/${typedRow.original._id}`)
     }
   }

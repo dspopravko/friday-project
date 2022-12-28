@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { getCards, postCard } from '../../features/cards/cards/BLL/cardsThunk'
 import { CardsTableControls } from '../../features/cards/cards/VIEW/CardsTableControls'
 import { CardsTable } from '../../features/cards/cards/VIEW/CardsTable'
 import {
-  cardsAuthorUserName,
   cardsCurrentPackInfo,
+  cardsPendingSelector,
   currentPageSelector,
   maxPageSelector,
 } from '../../features/cards/cards/BLL/selectorsCards'
@@ -15,20 +15,47 @@ import { AddEntityButton } from '../../features/cards/common/components/AddEntit
 import { userIDSelector } from '../../features/auth/selectorsAuth'
 import { setTitle } from '../../services/setHeaderTitle'
 import { HeaderContext } from '../../context/context'
+import { PATH } from '../../data/paths'
+import { HoverMenu } from '../../features/learn/UI/hoverMenu/HoverMenu'
+import { cardsSlice } from '../../features/cards/cards/BLL/cardsSlice'
 
 export const Cards = () => {
   setTitle('Cards')
   const { setGoBackButtonTitle } = useContext(HeaderContext)
+  const pending = useAppSelector(cardsPendingSelector)
   const currentPage = useAppSelector(currentPageSelector)
   const maxPage = useAppSelector(maxPageSelector)
-  const authorUserName = useAppSelector(cardsAuthorUserName)
   const currentPackInfo = useAppSelector(cardsCurrentPackInfo)
   const currentUserID = useAppSelector(userIDSelector)
+  const isOwner = currentPackInfo.packUserId === currentUserID
   const { id } = useParams()
   const [searchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
+  const buttonCallback = () => {
+    if (!id) {
+      return
+    }
+    if (isOwner) {
+      dispatch(
+        postCard({
+          postCard: {
+            cardsPack_id: id,
+            question: prompt('Question: ') || 'question',
+            answer: prompt('Answer: ') || 'answer',
+          },
+          queries: { ...params, cardsPack_id: id },
+        })
+      )
+    } else {
+      navigate(`/${PATH.LEARN}/${id}`)
+    }
+  }
+
   useEffect(() => {
+    dispatch(cardsSlice.actions.resetPack())
     setGoBackButtonTitle('Go back to Packs list')
     return () => setGoBackButtonTitle('')
   }, [])
@@ -39,32 +66,13 @@ export const Cards = () => {
   return (
     <div style={{ marginTop: 60 }}>
       <AddEntityButton
-        title={(() => {
-          if (currentPackInfo.packUserId === currentUserID) {
-            return 'My Pack'
-          } else if (authorUserName === 'Friend') {
-            return "Friend's Pack"
-          } else {
-            return `${authorUserName}'s pack`
-          }
-        })()}
-        ButtonTitle={'Add new card'}
-        ButtonCallback={() => {
-          if (!id) {
-            return
-          }
-          dispatch(
-            postCard({
-              postCard: {
-                cardsPack_id: id,
-                question: prompt('Question: ') || 'question',
-                answer: prompt('Answer: ') || 'answer',
-              },
-              queries: { ...params, cardsPack_id: id },
-            })
-          )
-        }}
-      />
+        title={currentPackInfo.packName}
+        buttonTitle={isOwner ? 'Add new card' : 'Learn pack'}
+        buttonCallback={buttonCallback}
+        pending={pending}
+      >
+        {isOwner && id && <HoverMenu packID={id} />}
+      </AddEntityButton>
       <CardsTableControls />
       <CardsTable id={id || ''} />
       <TablePagination page={currentPage} maxPage={maxPage} />

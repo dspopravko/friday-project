@@ -1,5 +1,4 @@
 import { instance } from '../../../../services/API/api'
-import { loginPayload } from '../../login/services/loginAPI'
 import { AxiosResponse } from 'axios'
 
 export type blockDataType = {
@@ -26,6 +25,10 @@ export type apiUserType = {
 export type registerSuccess = {
   addedUser: apiUserType
 }
+export type updateProfilePropsType = {
+  name?: string
+  avatar?: string
+}
 export const profileAPI = {
   block(blockData: blockDataType) {
     return instance.post<
@@ -33,9 +36,9 @@ export const profileAPI = {
       { user: string; blockedCardPacksCount: number }
     >('auth/me', blockData)
   },
-  updateUser(data: userUpdateData & loginPayload) {
-    return instance.post<userUpdateData, AxiosResponse<registerSuccess>>(
-      'auth/login',
+  updateUser(data: updateProfilePropsType) {
+    return instance.put<userUpdateData, AxiosResponse<registerSuccess>>(
+      'auth/me',
       data
     )
   },

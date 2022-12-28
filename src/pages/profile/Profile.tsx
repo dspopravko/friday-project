@@ -11,6 +11,7 @@ import { profileSlice } from '../../features/auth/profile/services/profileSlice'
 import { CardsCheer } from '../../features/auth/profile/CardsCheer'
 import { HeaderContext } from '../../context/context'
 import { profileSelector } from '../../features/auth/selectorsAuth'
+import { updateProfile } from '../../features/auth/profile/services/profileThunk'
 
 export const Profile = () => {
   const { setGoBackButtonTitle } = useContext(HeaderContext)
@@ -28,10 +29,7 @@ export const Profile = () => {
   }, [])
 
   const onOpenChange = (name: string) => {
-    alert(
-      name +
-        ', к сожалению бэк просит ещё и пароль, так что обновление только через формочку выше!'
-    )
+    dispatch(updateProfile({ name }))
   }
 
   return (
@@ -56,6 +54,7 @@ export const Profile = () => {
     </Grid>
   )
 }
+
 //после обновления профиля меняется состояние updateSuccess, этот таймер сбрасывает это состояние
 function setResetTimeout(delay: number, success: boolean) {
   const dispatch = useAppDispatch()

@@ -1,9 +1,5 @@
 import { PageParamsType } from '../../common/API/types'
-
-export type RootAPIResponse = {
-  token: string
-  tokenDeathTime: number
-}
+import { RootAPIResponse } from '../../../../services/API/types'
 
 export type PacksPageParamsType = {
   sortPacks: string

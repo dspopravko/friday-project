@@ -2,6 +2,8 @@ import { AppRootStateType } from '../../../../state/store'
 import { createSelector } from '@reduxjs/toolkit'
 
 export const selectCards = (state: AppRootStateType) => state.cards.cardsCurrent
+export const cardsPendingSelector = (state: AppRootStateType) =>
+  state.cards.pending
 export const currentPageSelector = (state: AppRootStateType) =>
   state.cards.cardsGeneral.page
 const pageCount = (state: AppRootStateType) =>
