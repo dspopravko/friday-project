@@ -46,6 +46,7 @@ type BasicModalType = {
   buttonType: 'send' | 'save' | 'delete'
   handleClose: () => void
   open: boolean
+  buttonCallback?: () => void
 }
 
 export function BasicModal(props: BasicModalType) {
@@ -82,17 +83,29 @@ export function BasicModal(props: BasicModalType) {
               Cancel
             </XButton>
             {props.buttonType === 'send' && (
-              <XButton type="primary" style={{ minWidth: '113px' }}>
+              <XButton
+                type="primary"
+                style={{ minWidth: '113px' }}
+                onClick={props.buttonCallback}
+              >
                 Send
               </XButton>
             )}
             {props.buttonType === 'save' && (
-              <XButton type="primary" style={{ minWidth: '113px' }}>
+              <XButton
+                type="primary"
+                style={{ minWidth: '113px' }}
+                onClick={props.buttonCallback}
+              >
                 Save
               </XButton>
             )}
             {props.buttonType === 'delete' && (
-              <XButton type="delete" style={{ minWidth: '113px' }}>
+              <XButton
+                type="delete"
+                style={{ minWidth: '113px' }}
+                onClick={props.buttonCallback}
+              >
                 Delete
               </XButton>
             )}
