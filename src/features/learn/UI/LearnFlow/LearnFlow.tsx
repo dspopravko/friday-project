@@ -51,8 +51,14 @@ export const LearnFlow = () => {
       dispatch(learnSlice.actions.learnCompleted())
       return currentCard
     }
-    const x = Math.ceil(Math.random() * (remainCards.length - 1))
-    return remainCards[x]
+    let filtredCards: CardsType[]
+    for (let i = 1; i < 6; i++) {
+      filtredCards = remainCards.filter((card) => card.grade < i)
+      if (filtredCards[0]) {
+        return filtredCards[Math.floor(Math.random() * filtredCards.length)]
+      }
+    }
+    return currentCard
   }
   const normalise = () => {
     if (total && cardsLeft) {
