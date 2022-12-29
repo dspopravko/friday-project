@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { InputAdornment, TextField } from '@mui/material'
 import { SearchSharp } from '@mui/icons-material'
 
@@ -6,7 +6,7 @@ export type DebouncedInputPropsType = {
   onChangeText?: (value: string) => void
   onEnter?: () => void
   spanClassName?: string
-  initialValue: string
+  value: string
   placeholder?: string
   onDebouncedChange?: (value: string) => void
 }
@@ -14,16 +14,22 @@ export type DebouncedInputPropsType = {
 export const DebouncedInput = ({
   onDebouncedChange,
   onChangeText,
-  initialValue,
+  value,
   placeholder = 'Search...',
 }: DebouncedInputPropsType) => {
   const [timerId, setTimerId] = useState<number | undefined>(undefined)
-  const [value, setValue] = useState(initialValue || '')
+  const [localValue, setLocalValue] = useState(value || '')
+
+  useEffect(() => {
+    if (value === undefined) {
+      setLocalValue('')
+    }
+  }, [value])
 
   const onChangeTextCallback = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
-    setValue(e.target.value)
+    setLocalValue(e.target.value)
     onChangeText?.(e.currentTarget.value)
     if (onDebouncedChange) {
       timerId && clearTimeout(timerId)
@@ -47,7 +53,7 @@ export const DebouncedInput = ({
       }}
       fullWidth
       onChange={(e) => onChangeTextCallback(e)}
-      value={value}
+      value={localValue}
       placeholder={placeholder}
     />
   )

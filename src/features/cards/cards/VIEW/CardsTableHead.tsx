@@ -5,7 +5,7 @@ import { TableDateColumn } from '../../common/components/TableDateColumn'
 import s from './../../common/styles/Table.module.css'
 
 export const shapeTableHead = (
-  cards: Array<CardsType>,
+  cards: CardsType[],
   sort: (newParams: { [param: string]: string }) => void,
   params: unknown
 ) => {

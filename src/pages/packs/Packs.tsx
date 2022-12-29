@@ -10,11 +10,11 @@ import {
   maxPageSelector,
 } from '../../features/cards/packs/BLL/selectorsPacks'
 import { AddEntityButton } from '../../features/cards/common/components/AddEntityButton'
-import { setTitle } from '../../services/setHeaderTitle'
+import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { HeaderContext } from '../../context/context'
 
 export const Packs = () => {
-  setTitle('Packs')
+  useSetHeaderTitle('Packs')
   const { setGoBackButtonTitle } = useContext(HeaderContext)
   const currentPage = useAppSelector(currentPageSelector)
   const maxPage = useAppSelector(maxPageSelector)
@@ -48,7 +48,12 @@ export const Packs = () => {
       />
       <PacksTableControls />
       <PacksTable />
-      <TablePagination page={currentPage} maxPage={maxPage} />
+      <TablePagination
+        page={currentPage}
+        maxPage={maxPage}
+        pageCount={+params.pageCount}
+        title={'packs'}
+      />
     </div>
   )
 }

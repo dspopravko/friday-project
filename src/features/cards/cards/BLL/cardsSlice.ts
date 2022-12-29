@@ -17,7 +17,7 @@ export type CardsGeneralType = Omit<
 >
 
 const initialState = {
-  cardsCurrent: [] as Array<CardsType>,
+  cardsCurrent: [] as CardsType[],
   cardsGeneral: {} as CardsGeneralType,
   currentCardsUserName: 'Friend',
   pending: false,

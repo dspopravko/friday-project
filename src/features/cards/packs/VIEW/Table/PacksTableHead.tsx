@@ -6,7 +6,7 @@ import { TableDateColumn } from '../../../common/components/TableDateColumn'
 //оформляем наши данные в колонки для react-tables, библиотека требует данные в виде массива объектов {Header: '', accessor: ''}
 //todo: написать решейпер для объекта, и вынести в отдельный файл
 export const shapeTableHead = (
-  packs: Array<PacksType>,
+  packs: PacksType[],
   sort: (newParams: { [param: string]: string }) => void,
   params: unknown
 ) => {

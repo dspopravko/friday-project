@@ -8,24 +8,16 @@ import {
 import { RootAPIResponse } from '../../../../services/API/types'
 
 export const packsAPI = {
-  getPacks(data: Partial<PacksPageParamsType>) {
-    return instance
-      .get<getPacksType>('cards/pack', {
-        params: data,
-      })
-      .then((res) => {
-        const { cardPacks, ...packsGeneral } = res.data
-        return { cardPacks, packsGeneral }
-      })
+  getPacks(params: Partial<PacksPageParamsType>) {
+    return instance.get<getPacksType>('cards/pack', { params }).then((res) => {
+      const { cardPacks, ...packsGeneral } = res.data
+      return { cardPacks, packsGeneral }
+    })
   },
-  deletePack(packID: string) {
+  deletePack(id: string) {
     return instance.delete<RootAPIResponse & { deletedCardsPack: PackType }>(
       'cards/pack',
-      {
-        params: {
-          id: packID,
-        },
-      }
+      { params: { id } }
     )
   },
   postPack(data: PostPackType) {
@@ -34,10 +26,10 @@ export const packsAPI = {
       data
     )
   },
-  updatePack(data: Partial<PackType> & { _id: string }) {
+  updatePack(cardsPack: Partial<PackType> & { _id: string }) {
     return instance.put<RootAPIResponse & { updatedCardsPack: PackType }>(
       'cards/pack',
-      { cardsPack: data }
+      { cardsPack }
     )
   },
 }

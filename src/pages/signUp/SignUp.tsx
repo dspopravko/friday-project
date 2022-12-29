@@ -4,13 +4,13 @@ import { Navigate } from 'react-router-dom'
 import { PATH } from '../../data/paths'
 import { SignUpForm } from '../../features/auth/signUp/form/SignUpForm'
 import { useAppSelector } from '../../state/store'
-import { setTitle } from '../../services/setHeaderTitle'
+import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { SuggestBlock } from '../../features/auth/common/components/suggestBlock'
 import { FormError } from '../../features/auth/common/components/formError'
 
 export const SignUp = () => {
   const { errors, registered } = useAppSelector((state) => state.reg)
-  setTitle('Sign Up')
+  useSetHeaderTitle('Sign Up')
 
   if (registered) {
     return <Navigate to={'/' + PATH.SUCCESS} />

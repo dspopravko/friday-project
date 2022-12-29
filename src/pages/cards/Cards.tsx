@@ -13,14 +13,14 @@ import {
 import { TablePagination } from '../../features/cards/common/components/TablePagination'
 import { AddEntityButton } from '../../features/cards/common/components/AddEntityButton'
 import { userIDSelector } from '../../features/auth/selectorsAuth'
-import { setTitle } from '../../services/setHeaderTitle'
+import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { HeaderContext } from '../../context/context'
 import { PATH } from '../../data/paths'
 import { HoverMenu } from '../../features/learn/UI/hoverMenu/HoverMenu'
 import { cardsSlice } from '../../features/cards/cards/BLL/cardsSlice'
 
 export const Cards = () => {
-  setTitle('Cards')
+  useSetHeaderTitle('Cards')
   const { setGoBackButtonTitle } = useContext(HeaderContext)
   const pending = useAppSelector(cardsPendingSelector)
   const currentPage = useAppSelector(currentPageSelector)
@@ -75,7 +75,12 @@ export const Cards = () => {
       </AddEntityButton>
       <CardsTableControls />
       <CardsTable id={id || ''} />
-      <TablePagination page={currentPage} maxPage={maxPage} />
+      <TablePagination
+        page={currentPage}
+        maxPage={maxPage}
+        pageCount={+params.pageCount}
+        title={'cards'}
+      />
     </div>
   )
 }

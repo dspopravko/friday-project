@@ -6,7 +6,7 @@ import s from './DoubleSliderWithInputs.module.css'
 type DoubleSliderWithInputsPropsType = {
   current: number[]
   border: number[]
-  onChangeCommitted: (newParams: Array<{ [param: string]: string }>) => void
+  onChangeCommitted: (newParams: { [param: string]: string }[]) => void
 }
 
 export const DoubleSliderWithInputs = ({
@@ -18,7 +18,7 @@ export const DoubleSliderWithInputs = ({
   const [localValue, setLocalValue] = useState({ min: 0, max: 100 })
   const [timerId, setTimerId] = useState<number | undefined>(undefined)
 
-  const handleInput = (newParams: Array<{ [param: string]: string }>) => {
+  const handleInput = (newParams: { [param: string]: string }[]) => {
     isInitialized.current = true
     setLocalValue({ ...localValue, ...Object.assign({}, ...newParams) })
   }

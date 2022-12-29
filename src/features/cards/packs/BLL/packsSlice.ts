@@ -9,7 +9,7 @@ export type PacksGeneralType = Omit<
 >
 
 const initialState = {
-  packsCurrent: [] as Array<PacksType>,
+  packsCurrent: [] as PacksType[],
   packsGeneral: {} as PacksGeneralType,
   queryParams: {} as Partial<PacksPageParamsType>,
   pending: false,

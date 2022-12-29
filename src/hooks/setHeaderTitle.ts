@@ -1,8 +1,8 @@
 import { useContext, useEffect } from 'react'
 import { HeaderContext } from '../context/context'
-import { setPageTitle } from './pageTitle'
+import { setPageTitle } from '../services/pageTitle'
 
-export function setTitle(header: string, page?: string) {
+export function useSetHeaderTitle(header: string, page?: string) {
   const { setTitle } = useContext(HeaderContext)
   useEffect(() => {
     header && setTitle(header)

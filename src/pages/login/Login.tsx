@@ -2,14 +2,14 @@ import React from 'react'
 import { LoginForm } from '../../features/auth/login/form/LoginForm'
 import { Card, Typography } from '@mui/material'
 import { PATH } from '../../data/paths'
-import { setTitle } from '../../services/setHeaderTitle'
+import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { SuggestBlock } from '../../features/auth/common/components/suggestBlock'
 import { useAppSelector } from '../../state/store'
 import { Navigate } from 'react-router-dom'
 import { isAuthSelector } from '../../features/auth/selectorsAuth'
 
 export const Login = () => {
-  setTitle('Login', 'Login')
+  useSetHeaderTitle('Login', 'Login')
   const isAuth = useAppSelector(isAuthSelector)
   if (isAuth) {
     return <Navigate to={'/' + PATH.PROFILE} />

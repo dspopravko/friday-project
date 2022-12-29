@@ -12,14 +12,14 @@ import {
   logout,
 } from '../../features/auth/login/services/loginThunks'
 import { loginPayload } from '../../features/auth/login/services/loginAPI'
-import { setTitle } from '../../services/setHeaderTitle'
+import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { isAuthSelector } from '../../features/auth/selectorsAuth'
 import { Typography } from '@mui/material'
 
 export const Test = () => {
   const dispatch = useAppDispatch()
   const isAuth = useAppSelector(isAuthSelector)
-  setTitle(`Tests, isAuth: ${isAuth}`, 'Tests')
+  useSetHeaderTitle(`Tests, isAuth: ${isAuth}`, 'Tests')
   const checkMe = () => dispatch(authMe())
   const authCorrect = () => {
     const auth: loginPayload = {

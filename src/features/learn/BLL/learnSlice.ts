@@ -3,7 +3,7 @@ import { CardsType } from '../../cards/cards/BLL/cardsSlice'
 import { getAllCards, setGrade } from './learnThunk'
 
 const initialState = {
-  cards: [] as Array<CardsType>,
+  cards: [] as CardsType[],
   packName: '',
   pending: false,
   loaded: false,

@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { Card, Typography } from '@mui/material'
 import { useAppSelector } from '../../state/store'
-import { setTitle } from '../../services/setHeaderTitle'
+import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { NewPasswordForm } from '../../features/auth/newPassword/form/NewPasswordForm'
 import { SuccessBig } from '../../features/auth/common/components/successBig'
 import { PATH } from '../../data/paths'
@@ -12,7 +12,7 @@ import { newPasswordStateSelector } from '../../features/auth/selectorsAuth'
 
 export const NewPassword = () => {
   const { token } = useParams()
-  setTitle('Setup new password')
+  useSetHeaderTitle('Setup new password')
   const {
     isSet,
     errors: serverErrors,

@@ -16,7 +16,7 @@ export const PacksTableControls = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
 
-  const updateParams = (newParams: Array<{ [param: string]: string }>) =>
+  const updateParams = (newParams: { [param: string]: string }[]) =>
     setSearchParams(
       createSearchParams({ ...params, ...Object.assign({}, ...newParams) })
     )
@@ -39,7 +39,7 @@ export const PacksTableControls = () => {
         <Typography>Search</Typography>
         <DebouncedInput
           onDebouncedChange={(input) => updateParams([{ packName: input }])}
-          initialValue={params.packName}
+          value={params.packName}
           placeholder={'Provide your text'}
         />
       </div>
@@ -47,6 +47,7 @@ export const PacksTableControls = () => {
       <div className={s.controlBlock}>
         <Typography>Show packs cards</Typography>
         <XButtonGroup
+          title={['My', 'All']}
           activeButton={activeButton()}
           handleButtonClick={(button) => {
             updateParams([{ user_id: button === 1 ? userID : '' }])

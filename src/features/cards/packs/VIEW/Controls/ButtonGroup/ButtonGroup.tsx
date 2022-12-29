@@ -3,6 +3,7 @@ import s from '../PacksTableControls.module.css'
 import { Button, ButtonGroup } from '@mui/material'
 
 type ButtonGroupPropsType = {
+  title: string[]
   activeButton: 0 | 1 | 2
   handleButtonClick: (button: number) => void
 }
@@ -10,6 +11,7 @@ type ButtonGroupPropsType = {
 export const XButtonGroup = ({
   activeButton,
   handleButtonClick,
+  title,
 }: ButtonGroupPropsType) => {
   const buttonStyle = {
     width: '87px',
@@ -21,7 +23,6 @@ export const XButtonGroup = ({
       boxShadow: 1,
     },
   }
-
   return (
     <ButtonGroup className={s.buttonGroup}>
       <Button
@@ -31,7 +32,7 @@ export const XButtonGroup = ({
           handleButtonClick(1)
         }}
       >
-        My
+        {title[0]}
       </Button>
       <Button
         sx={buttonStyle}
@@ -40,7 +41,7 @@ export const XButtonGroup = ({
           handleButtonClick(2)
         }}
       >
-        All
+        {title[1]}
       </Button>
     </ButtonGroup>
   )

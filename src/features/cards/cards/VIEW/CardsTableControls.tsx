@@ -8,7 +8,7 @@ export const CardsTableControls = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
 
-  const updateParams = (newParams: Array<{ [param: string]: string }>) =>
+  const updateParams = (newParams: { [param: string]: string }[]) =>
     setSearchParams(
       createSearchParams({ ...params, ...Object.assign({}, ...newParams) })
     )
@@ -19,7 +19,7 @@ export const CardsTableControls = () => {
         <Typography>Search:</Typography>
         <DebouncedInput
           onDebouncedChange={(input) => updateParams([{ cardQuestion: input }])}
-          initialValue={params.packName}
+          value={params.packName}
           placeholder={'Search in questions'}
         />
       </div>

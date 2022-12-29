@@ -6,7 +6,7 @@ import XButton from '../../common/components/button/XButton'
 import { EditNameUser } from '../../common/components/editNameUser/EditNameUser'
 import { logout } from '../../features/auth/login/services/loginThunks'
 import { UpdateProfileContainer } from '../../features/auth/profile/updateProfileContainer'
-import { setTitle } from '../../services/setHeaderTitle'
+import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { profileSlice } from '../../features/auth/profile/services/profileSlice'
 import { CardsCheer } from '../../features/auth/profile/CardsCheer'
 import { HeaderContext } from '../../context/context'
@@ -17,7 +17,7 @@ export const Profile = () => {
   const { setGoBackButtonTitle } = useContext(HeaderContext)
   const { user, updateSuccess } = useAppSelector(profileSelector)
   const dispatch = useAppDispatch()
-  setTitle('Profile')
+  useSetHeaderTitle('Profile')
   setResetTimeout(4000, updateSuccess)
   const logoutHandler = () => {
     dispatch(logout())
@@ -48,7 +48,6 @@ export const Profile = () => {
         <XButton style={{ marginTop: '30px' }} onClick={logoutHandler}>
           Log out
         </XButton>
-
         <CardsCheer cardsCount={user.publicCardPacksCount} />
       </Card>
     </Grid>

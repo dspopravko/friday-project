@@ -29,7 +29,7 @@ export function PacksTable() {
     setSearchParams(createSearchParams({ ...params, ...newParams, page: '1' }))
   }
 
-  const productsData = useMemo(() => [...(packs as Array<any>)], [packs])
+  const productsData = useMemo(() => [...(packs as never[])], [packs])
   const productsColumns = useMemo(() => {
     return shapeTableHead(packs, updateParams, params)
   }, [packs])

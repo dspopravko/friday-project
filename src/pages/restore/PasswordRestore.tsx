@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Card, Typography } from '@mui/material'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { PATH } from '../../data/paths'
-import { setTitle } from '../../services/setHeaderTitle'
+import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { SuccessBig } from '../../features/auth/common/components/successBig'
 import { Email } from '@mui/icons-material'
 import { RestoreForm } from '../../features/auth/restore/form/restoreForm'
@@ -11,7 +11,7 @@ import { theme } from '../../assets/mui-theme'
 import { restorePasswordSlice } from '../../features/auth/restore/services/restorePasswordSlice'
 
 export const PasswordRestore = () => {
-  setTitle('Restore password')
+  useSetHeaderTitle('Restore password')
   resetState()
   const {
     restored,

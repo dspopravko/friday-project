@@ -1,9 +1,9 @@
 import React from 'react'
 import s from './Error404.module.css'
-import { setTitle } from '../../services/setHeaderTitle'
+import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 
 export const Error404 = () => {
-  setTitle('💃')
+  useSetHeaderTitle('💃')
   return (
     <div className={s.container}>
       <h1>Error 404</h1>
