@@ -18,6 +18,7 @@ import { HeaderContext } from '../../context/context'
 import { PATH } from '../../data/paths'
 import { HoverMenu } from '../../features/learn/UI/hoverMenu/HoverMenu'
 import { cardsSlice } from '../../features/cards/cards/BLL/cardsSlice'
+import { ModalNewCard } from '../../features/modal/modal-new-card/ModalNewCard'
 
 export const Cards = () => {
   useSetHeaderTitle('Cards')
@@ -34,25 +35,25 @@ export const Cards = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const buttonCallback = () => {
-    if (!id) {
-      return
-    }
-    if (isOwner) {
-      dispatch(
-        postCard({
-          postCard: {
-            cardsPack_id: id,
-            question: prompt('Question: ') || 'question',
-            answer: prompt('Answer: ') || 'answer',
-          },
-          queries: { ...params, cardsPack_id: id },
-        })
-      )
-    } else {
-      navigate(`/${PATH.LEARN}/${id}`)
-    }
-  }
+  // const buttonCallback = () => {
+  //   if (!id) {
+  //     return
+  //   }
+  //   if (isOwner) {
+  //     dispatch(
+  //       postCard({
+  //         postCard: {
+  //           cardsPack_id: id,
+  //           question: prompt('Question: ') || 'question',
+  //           answer: prompt('Answer: ') || 'answer',
+  //         },
+  //         queries: { ...params, cardsPack_id: id },
+  //       })
+  //     )
+  //   } else {
+  //     navigate(`/${PATH.LEARN}/${id}`)
+  //   }
+  // }
 
   useEffect(() => {
     dispatch(cardsSlice.actions.resetPack())
@@ -65,14 +66,22 @@ export const Cards = () => {
 
   return (
     <div style={{ marginTop: 60 }}>
-      <AddEntityButton
+      <ModalNewCard
+        currentPackInfo={currentPackInfo}
+        buttonTitle={isOwner ? 'Add new card' : 'Learn pack'}
+        pending={pending}
+        id={id}
+        isOwner={isOwner}
+        params={params}
+      />
+      {/* <AddEntityButton
         title={currentPackInfo.packName}
         buttonTitle={isOwner ? 'Add new card' : 'Learn pack'}
         buttonCallback={buttonCallback}
         pending={pending}
-      >
-        {isOwner && id && <HoverMenu packID={id} />}
-      </AddEntityButton>
+      > */}
+      {/* {isOwner && id && <HoverMenu packID={id} />}
+      </AddEntityButton> */}
       <CardsTableControls />
       <CardsTable id={id || ''} />
       <TablePagination

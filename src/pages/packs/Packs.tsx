@@ -12,6 +12,7 @@ import {
 import { AddEntityButton } from '../../features/cards/common/components/AddEntityButton'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { HeaderContext } from '../../context/context'
+import { ModalNewPack } from '../../features/modal/modal-new-pack/ModalNewPack'
 
 export const Packs = () => {
   useSetHeaderTitle('Packs')
@@ -21,18 +22,6 @@ export const Packs = () => {
   const [searchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const dispatch = useAppDispatch()
-  const addPackHandler = () => {
-    dispatch(
-      postPack({
-        postData: {
-          cardsPack: {
-            name: prompt('Whats new name?') || 'default',
-          },
-        },
-        params: params,
-      })
-    )
-  }
   useEffect(() => {
     setGoBackButtonTitle('')
   }, [])
@@ -41,11 +30,7 @@ export const Packs = () => {
   }, [searchParams])
   return (
     <div style={{ marginTop: 60 }}>
-      <AddEntityButton
-        title={'Packs'}
-        buttonTitle={'Add new pack'}
-        buttonCallback={addPackHandler}
-      />
+      <ModalNewPack params={params} />
       <PacksTableControls />
       <PacksTable />
       <TablePagination
