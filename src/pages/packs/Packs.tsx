@@ -22,18 +22,6 @@ export const Packs = () => {
   const [searchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const dispatch = useAppDispatch()
-  const addPackHandler = () => {
-    dispatch(
-      postPack({
-        postData: {
-          cardsPack: {
-            name: prompt('Whats new name?') || 'default',
-          },
-        },
-        params: params,
-      })
-    )
-  }
   useEffect(() => {
     setGoBackButtonTitle('')
   }, [])
@@ -43,11 +31,6 @@ export const Packs = () => {
   return (
     <div style={{ marginTop: 60 }}>
       <ModalNewPack params={params} />
-      {/* <AddEntityButton
-        title={'Packs'}
-        buttonTitle={'Add new pack'}
-        buttonCallback={addPackHandler}
-      /> */}
       <PacksTableControls />
       <PacksTable />
       <TablePagination page={currentPage} maxPage={maxPage} />

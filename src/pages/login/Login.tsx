@@ -34,7 +34,6 @@ export const Login = () => {
           path={'/' + PATH.LOGIN.SIGNUP}
         />
       </div>
-      <ModalNewPack />
     </Card>
   )
 }
