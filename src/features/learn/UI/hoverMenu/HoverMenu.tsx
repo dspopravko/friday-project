@@ -10,12 +10,22 @@ import { theme } from '../../../../assets/mui-theme'
 import { PATH } from '../../../../data/paths'
 import { deletePack, updatePack } from '../../../tables/packs/BLL/packsThunk'
 import { userIDSelector } from '../../../auth/common/selectors/selectorsAuth'
+import { ModalEditPack } from '../../../modal/modal-edit-pack/ModalEditPack'
+import { ModalDeleteItem } from '../../../modal/modal-delete-item/ModalDeleteItem'
 
 type hoverMenuPropsType = {
   packID: string
+  packName: string
+  packType: boolean
+  isOwnUser: boolean
 }
 
-export const HoverMenu = ({ packID }: hoverMenuPropsType) => {
+export const HoverMenu = ({
+  packID,
+  packName,
+  packType,
+  isOwnUser,
+}: hoverMenuPropsType) => {
   const [searchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const userID = useAppSelector(userIDSelector)
@@ -85,13 +95,34 @@ export const HoverMenu = ({ packID }: hoverMenuPropsType) => {
           transform: 'translate(-80px, 8px)',
         }}
       >
-        <MenuItem onClick={handleEdit}>
-          <img alt={'Edit'} src={editicon} />
-          Edit
+        <MenuItem
+          onClick={(event) => {
+            event.stopPropagation()
+          }}
+        >
+          <ModalEditPack
+            isOwnUser={isOwnUser}
+            packId={packID}
+            packName={packName}
+            packType={packType}
+            hoverMenu={true}
+          />
         </MenuItem>
-        <MenuItem onClick={handleDelete}>
-          <img alt={'Delete'} src={deleteicon} />
-          Delete
+
+        <MenuItem
+          onClick={(event) => {
+            event.stopPropagation()
+          }}
+        >
+          <ModalDeleteItem
+            isOwnUser={isOwnUser}
+            packId={packID}
+            packName={packName}
+            isCard={false}
+            cardId={undefined}
+            cardName={undefined}
+            hoverMenu={true}
+          />
         </MenuItem>
         <MenuItem onClick={handleLearn}>
           <img alt={'learn'} src={teachicon} />

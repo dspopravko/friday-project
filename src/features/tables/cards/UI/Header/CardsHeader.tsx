@@ -43,7 +43,14 @@ export const CardsHeader = ({ id, buttonTitle }: ModalNewCardType) => {
         buttonCallback={handleButtonClick}
         pending={pending}
       >
-        {isOwner && id && <HoverMenu packID={id} />}
+        {isOwner && id && (
+          <HoverMenu
+            packID={id}
+            packName={currentPackInfo.packName}
+            packType={currentPackInfo.packPrivate}
+            isOwnUser={isOwner}
+          />
+        )}
       </AddEntityButton>
       <ModalNewCard
         handleClose={handleClose}
