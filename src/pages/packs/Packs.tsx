@@ -29,7 +29,7 @@ export const Packs = () => {
   }, [searchParams])
   return (
     <div style={{ marginTop: 60 }}>
-      <ModalNewPack params={params} />
+      <ModalNewPack />
       <PacksTableControls />
       <PacksTable />
       <TablePagination

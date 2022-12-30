@@ -10,12 +10,11 @@ import React from 'react'
 import { AddEntityButton } from '../../tables/common/components/AddEntityButton'
 import { useAppDispatch } from '../../../state/store'
 import { postPack } from '../../tables/packs/BLL/packsThunk'
+import { useSearchParams } from 'react-router-dom'
 
-type ModalNewPackType = {
-  params?: any
-}
-
-export const ModalNewPack = (props: ModalNewPackType) => {
+export const ModalNewPack = () => {
+  const [searchParams] = useSearchParams()
+  const params = Object.fromEntries(searchParams)
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => {
     setOpen(true)
@@ -39,7 +38,7 @@ export const ModalNewPack = (props: ModalNewPackType) => {
             private: packIsPrivate,
           },
         },
-        params: props.params,
+        params,
       })
     )
     if (postPack.fulfilled.match(action)) {

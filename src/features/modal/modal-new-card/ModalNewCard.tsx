@@ -7,28 +7,29 @@ import {
   TextField,
 } from '@mui/material'
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { BasicModal } from '../Modal'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { postCard } from '../../tables/cards/BLL/cardsThunk'
 import { PATH } from '../../../data/paths'
 import { useAppDispatch } from '../../../state/store'
-import { CardsGeneralType } from '../../tables/cards/BLL/cardsSlice'
-import { postCard } from '../../tables/cards/BLL/cardsThunk'
-import { AddEntityButton } from '../../tables/common/components/AddEntityButton'
-import { HoverMenu } from '../../learn/UI/hoverMenu/HoverMenu'
-import { BasicModal } from '../Modal'
 
-type ModalNewCardType = {
-  currentPackInfo: CardsGeneralType
-  buttonTitle: 'Add new card' | 'Learn pack'
-  pending: boolean
+type ModalNewCardPropsType = {
+  handleClose: () => void
   id: string | undefined
   isOwner: boolean
-  params: any
+  open: boolean
 }
 
-export const ModalNewCard = (props: ModalNewCardType) => {
-  const [open, setOpen] = React.useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+export const ModalNewCard = ({
+  handleClose,
+  id,
+  isOwner,
+  open,
+}: ModalNewCardPropsType) => {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const params = Object.fromEntries(searchParams)
 
   const [value, setValue] = React.useState('text')
 
@@ -44,23 +45,19 @@ export const ModalNewCard = (props: ModalNewCardType) => {
   const answerHandler = (value: string) => {
     setAnswer(value)
   }
-
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
-
   const addCardHandler = async () => {
-    if (!props.id) {
+    if (!id) {
       return
     }
-    if (props.isOwner) {
+    if (isOwner) {
       const action = await dispatch(
         postCard({
           postCard: {
-            cardsPack_id: props.id,
+            cardsPack_id: id,
             question: question,
             answer: answer,
           },
-          queries: { ...props.params, cardsPack_id: props.id },
+          queries: { ...params, cardsPack_id: id },
         })
       )
       if (postCard.fulfilled.match(action)) {
@@ -69,65 +66,54 @@ export const ModalNewCard = (props: ModalNewCardType) => {
         handleClose()
       }
     } else {
-      navigate(`/${PATH.LEARN}/${props.id}`)
+      navigate(`/${PATH.LEARN}/${id}`)
     }
   }
-
   return (
-    <>
-      <AddEntityButton
-        title={props.currentPackInfo.packName}
-        buttonTitle={props.buttonTitle}
-        buttonCallback={handleOpen}
-        pending={props.pending}
-      >
-        {props.isOwner && props.id && <HoverMenu packID={props.id} />}{' '}
-      </AddEntityButton>
-      <BasicModal
-        title={'Add new card'}
-        buttonType={'send'}
-        handleClose={handleClose}
-        open={open}
-        buttonCallback={addCardHandler}
-      >
-        <FormControl fullWidth size="small">
-          <FormHelperText sx={{ fontSize: '14px', marginLeft: '0' }}>
-            Choose a question format
-          </FormHelperText>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={value}
-            onChange={handleChange}
-            sx={{
-              height: '36px',
-              paddingLeft: '12px',
-              paddingTop: '8px',
-              paddingBottom: '8px',
-              marginBottom: '20px',
-            }}
-          >
-            <MenuItem value="text">Text</MenuItem>
-            <MenuItem value="image">Image</MenuItem>
-          </Select>
-          <TextField
-            sx={{ marginBottom: '20px' }}
-            label="Question"
-            defaultValue="How This works in JavaScript?"
-            variant="standard"
-            value={question}
-            onChange={(e) => questionHandler(e.target.value)}
-          />
-          <TextField
-            sx={{ marginBottom: '20px' }}
-            label="Answer"
-            defaultValue="Name Pack"
-            variant="standard"
-            value={answer}
-            onChange={(e) => answerHandler(e.target.value)}
-          />
-        </FormControl>
-      </BasicModal>
-    </>
+    <BasicModal
+      title={'Add new card'}
+      buttonType={'send'}
+      handleClose={handleClose}
+      open={open}
+      buttonCallback={addCardHandler}
+    >
+      <FormControl fullWidth size="small">
+        <FormHelperText sx={{ fontSize: '14px', marginLeft: '0' }}>
+          Choose a question format
+        </FormHelperText>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={value}
+          onChange={handleChange}
+          sx={{
+            height: '36px',
+            paddingLeft: '12px',
+            paddingTop: '8px',
+            paddingBottom: '8px',
+            marginBottom: '20px',
+          }}
+        >
+          <MenuItem value="text">Text</MenuItem>
+          <MenuItem value="image">Image</MenuItem>
+        </Select>
+        <TextField
+          sx={{ marginBottom: '20px' }}
+          label="Question"
+          defaultValue="How This works in JavaScript?"
+          variant="standard"
+          value={question}
+          onChange={(e) => questionHandler(e.target.value)}
+        />
+        <TextField
+          sx={{ marginBottom: '20px' }}
+          label="Answer"
+          defaultValue="Name Pack"
+          variant="standard"
+          value={answer}
+          onChange={(e) => answerHandler(e.target.value)}
+        />
+      </FormControl>
+    </BasicModal>
   )
 }

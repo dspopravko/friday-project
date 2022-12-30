@@ -6,7 +6,6 @@ import { CardsTableControls } from '../../features/tables/cards/UI/CardsTableCon
 import { CardsTable } from '../../features/tables/cards/UI/CardsTable'
 import {
   cardsCurrentPackInfo,
-  cardsPendingSelector,
   currentPageSelector,
   maxPageSelector,
 } from '../../features/tables/cards/BLL/selectorsCards'
@@ -15,12 +14,11 @@ import { userIDSelector } from '../../features/auth/common/selectors/selectorsAu
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { HeaderContext } from '../../context/context'
 import { cardsSlice } from '../../features/tables/cards/BLL/cardsSlice'
-import { ModalNewCard } from '../../features/modal/modal-new-card/ModalNewCard'
+import { CardsHeader } from '../../features/modal/modal-new-card/CardsHeader'
 
 export const Cards = () => {
   useSetHeaderTitle('Cards')
   const { setGoBackButtonTitle } = useContext(HeaderContext)
-  const pending = useAppSelector(cardsPendingSelector)
   const currentPage = useAppSelector(currentPageSelector)
   const maxPage = useAppSelector(maxPageSelector)
   const currentPackInfo = useAppSelector(cardsCurrentPackInfo)
@@ -42,22 +40,10 @@ export const Cards = () => {
 
   return (
     <div style={{ marginTop: 60 }}>
-      <ModalNewCard
-        currentPackInfo={currentPackInfo}
+      <CardsHeader
         buttonTitle={isOwner ? 'Add new card' : 'Learn pack'}
-        pending={pending}
         id={id}
-        isOwner={isOwner}
-        params={params}
       />
-      {/* <AddEntityButton
-        title={currentPackInfo.packName}
-        buttonTitle={isOwner ? 'Add new card' : 'Learn pack'}
-        buttonCallback={buttonCallback}
-        pending={pending}
-      > */}
-      {/* {isOwner && id && <HoverMenu packID={id} />}
-      </AddEntityButton> */}
       <CardsTableControls />
       <CardsTable id={id || ''} />
       <TablePagination
