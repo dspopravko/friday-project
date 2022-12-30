@@ -122,6 +122,7 @@ export const HoverMenu = ({
             cardId={undefined}
             cardName={undefined}
             hoverMenu={true}
+            userID={userID}
           />
         </MenuItem>
         <MenuItem onClick={handleLearn}>

@@ -3,10 +3,11 @@ import { BasicModal } from '../Modal'
 import deleteicon from '../../../assets/icons/delete.svg'
 import s from './ModalDeleteItem.module.css'
 import React from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useAppDispatch } from '../../../state/store'
 import { deletePack } from '../../tables/packs/BLL/packsThunk'
 import { deleteCard } from '../../tables/cards/BLL/cardsThunk'
+import { PATH } from '../../../data/paths'
 
 type ModalDeletePackType = {
   isOwnUser: boolean
@@ -16,12 +17,14 @@ type ModalDeletePackType = {
   cardName: string | undefined
   isCard: boolean
   hoverMenu?: boolean
+  userID?: any
 }
 
 export const ModalDeleteItem = (props: ModalDeletePackType) => {
   const [searchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
@@ -37,6 +40,10 @@ export const ModalDeleteItem = (props: ModalDeletePackType) => {
   }
   const deletePackHandler = async () => {
     const action = await dispatch(deletePack({ packID: props.packId, params }))
+    if (deletePack.fulfilled.match(action) && props.hoverMenu) {
+      handleClose()
+      navigate(`/${PATH.PACKS}/?user_id=${props.userID}`)
+    }
     if (deletePack.fulfilled.match(action)) {
       handleClose()
     }
