@@ -2,12 +2,12 @@ import React, { useContext } from 'react'
 import s from './Header.module.css'
 import { HeaderContext } from '../../context/context'
 import { useAppSelector } from '../../state/store'
-import { ProfileHeaderButton } from '../../features/auth/profile/HeaderButton/ProfileHeaderButton'
+import { ProfileHeaderButton } from '../../features/auth/profile/UI/HeaderButton/ProfileHeaderButton'
 import { useNavigate } from 'react-router-dom'
 import { PATH } from '../../data/paths'
 import { Button, Fab } from '@mui/material'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
-import { isAuthSelector } from '../../features/auth/selectorsAuth'
+import { isAuthSelector } from '../../features/auth/common/selectors/selectorsAuth'
 
 export const Header = () => {
   const { title, goBackButtonTitle } = useContext(HeaderContext)

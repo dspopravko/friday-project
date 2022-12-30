@@ -1,7 +1,7 @@
 import { appSlice, appStatus } from '../state/appSlice'
 import { Dispatch } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios'
-import { loginSlice } from '../features/auth/login/services/loginSlice'
+import { loginSlice } from '../features/auth/login/BLL/loginSlice'
 
 export const handleAxiosError = (error: unknown, dispatch: Dispatch) => {
   if (error instanceof AxiosError) {

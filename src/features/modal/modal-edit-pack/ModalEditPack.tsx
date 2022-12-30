@@ -11,7 +11,7 @@ import s from './ModalEditPack.module.css'
 import editicon from '../../../assets/icons/edit.svg'
 import { useSearchParams } from 'react-router-dom'
 import { useAppDispatch } from '../../../state/store'
-import { updatePack } from '../../cards/packs/BLL/packsThunk'
+import { updatePack } from '../../tables/packs/BLL/packsThunk'
 
 type ModalEditPackType = {
   isOwnUser: boolean

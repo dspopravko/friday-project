@@ -5,8 +5,8 @@ import s from './ModalDeleteItem.module.css'
 import React from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useAppDispatch } from '../../../state/store'
-import { deletePack } from '../../cards/packs/BLL/packsThunk'
-import { deleteCard } from '../../cards/cards/BLL/cardsThunk'
+import { deletePack } from '../../tables/packs/BLL/packsThunk'
+import { deleteCard } from '../../tables/cards/BLL/cardsThunk'
 
 type ModalDeletePackType = {
   isOwnUser: boolean
@@ -43,7 +43,7 @@ export const ModalDeleteItem = (props: ModalDeletePackType) => {
   const title = props.isCard ? 'Delete card' : 'Delete pack'
   const pageText = props.isCard
     ? 'Card will be deleted'
-    : 'All cards will be deleted'
+    : 'All tables will be deleted'
   const textTitle = props.cardName ? props.cardName : props.packName
 
   return (

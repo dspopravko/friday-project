@@ -1,14 +1,14 @@
 import React, { useContext, useEffect } from 'react'
-import { PacksTableControls } from '../../features/cards/packs/VIEW/Controls/PacksTableControls'
-import { PacksTable } from '../../features/cards/packs/VIEW/Table/PacksTable'
-import { getPacks } from '../../features/cards/packs/BLL/packsThunk'
+import { PacksTableControls } from '../../features/tables/packs/UI/Controls/PacksTableControls'
+import { PacksTable } from '../../features/tables/packs/UI/Table/PacksTable'
+import { getPacks } from '../../features/tables/packs/BLL/packsThunk'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { useSearchParams } from 'react-router-dom'
-import { TablePagination } from '../../features/cards/common/components/TablePagination'
+import { TablePagination } from '../../features/tables/common/components/TablePagination'
 import {
   currentPageSelector,
   maxPageSelector,
-} from '../../features/cards/packs/BLL/selectorsPacks'
+} from '../../features/tables/packs/BLL/selectorsPacks'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { HeaderContext } from '../../context/context'
 import { ModalNewPack } from '../../features/modal/modal-new-pack/ModalNewPack'

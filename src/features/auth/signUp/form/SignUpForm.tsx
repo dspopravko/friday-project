@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../../state/store'
 import s from './SignUpForm.module.css'
 import { defaultSchema } from '../../common/validation/validationSchema'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { isAuthFetching } from '../../selectorsAuth'
+import { isAuthFetching } from '../../common/selectors/selectorsAuth'
 import { signUp } from '../services/signUpThunk'
 
 type RegistrationType = {

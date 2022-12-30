@@ -12,7 +12,7 @@ import s from './../modal-edit-pack/ModalEditPack.module.css'
 import editicon from '../../../assets/icons/edit.svg'
 import { useSearchParams } from 'react-router-dom'
 import { useAppDispatch } from '../../../state/store'
-import { updateCard } from '../../cards/cards/BLL/cardsThunk'
+import { updateCard } from '../../tables/cards/BLL/cardsThunk'
 
 type ModalEditPackType = {
   isOwnUser: boolean

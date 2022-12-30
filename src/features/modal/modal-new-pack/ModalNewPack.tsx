@@ -7,9 +7,9 @@ import {
 } from '@mui/material'
 import { BasicModal } from '../Modal'
 import React from 'react'
-import { AddEntityButton } from '../../cards/common/components/AddEntityButton'
+import { AddEntityButton } from '../../tables/common/components/AddEntityButton'
 import { useAppDispatch } from '../../../state/store'
-import { postPack } from '../../cards/packs/BLL/packsThunk'
+import { postPack } from '../../tables/packs/BLL/packsThunk'
 
 type ModalNewPackType = {
   params?: any

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../state/store'
-import { CardsType } from '../../../cards/cards/BLL/cardsSlice'
+import { CardsType } from '../../../tables/cards/BLL/cardsSlice'
 import { learnSlice } from '../../BLL/learnSlice'
 import { LinearProgress, Paper } from '@mui/material'
 import { setGrade } from '../../BLL/learnThunk'
@@ -87,7 +87,7 @@ export const LearnFlow = () => {
         )}
         {isCompleted && (
           <SuccessBig
-            title={'You have successfully learned all the cards!'}
+            title={'You have successfully learned all the tables!'}
             email={''}
             description={'👇'}
             GoTo={{

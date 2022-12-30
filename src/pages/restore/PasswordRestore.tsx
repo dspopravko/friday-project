@@ -5,10 +5,10 @@ import { PATH } from '../../data/paths'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { SuccessBig } from '../../features/auth/common/components/successBig'
 import { Email } from '@mui/icons-material'
-import { RestoreForm } from '../../features/auth/restore/form/restoreForm'
+import { RestoreForm } from '../../features/auth/restore/UI/restoreForm'
 import { SuggestBlock } from '../../features/auth/common/components/suggestBlock'
 import { theme } from '../../assets/mui-theme'
-import { restorePasswordSlice } from '../../features/auth/restore/services/restorePasswordSlice'
+import { restorePasswordSlice } from '../../features/auth/restore/BLL/restorePasswordSlice'
 
 export const PasswordRestore = () => {
   useSetHeaderTitle('Restore password')

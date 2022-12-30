@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { authMe } from '../features/auth/login/services/loginThunks'
+import { authMe } from '../features/auth/login/BLL/loginThunks'
 
 export enum appStatus {
   loading,

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { CardsType } from '../../cards/cards/BLL/cardsSlice'
+import { CardsType } from '../../tables/cards/BLL/cardsSlice'
 import { getAllCards, setGrade } from './learnThunk'
 
 const initialState = {

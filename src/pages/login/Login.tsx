@@ -1,12 +1,12 @@
 import React from 'react'
-import { LoginForm } from '../../features/auth/login/form/LoginForm'
+import { LoginForm } from '../../features/auth/login/UI/LoginForm'
 import { Card, Typography } from '@mui/material'
 import { PATH } from '../../data/paths'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { SuggestBlock } from '../../features/auth/common/components/suggestBlock'
 import { useAppSelector } from '../../state/store'
 import { Navigate } from 'react-router-dom'
-import { isAuthSelector } from '../../features/auth/selectorsAuth'
+import { isAuthSelector } from '../../features/auth/common/selectors/selectorsAuth'
 
 export const Login = () => {
   useSetHeaderTitle('Login', 'Login')

@@ -8,8 +8,8 @@ import deleteicon from '../../../../assets/icons/delete.svg'
 import editicon from '../../../../assets/icons/edit.svg'
 import { theme } from '../../../../assets/mui-theme'
 import { PATH } from '../../../../data/paths'
-import { deletePack, updatePack } from '../../../cards/packs/BLL/packsThunk'
-import { userIDSelector } from '../../../auth/selectorsAuth'
+import { deletePack, updatePack } from '../../../tables/packs/BLL/packsThunk'
+import { userIDSelector } from '../../../auth/common/selectors/selectorsAuth'
 
 type hoverMenuPropsType = {
   packID: string

@@ -10,10 +10,10 @@ import {
   authMe,
   login,
   logout,
-} from '../../features/auth/login/services/loginThunks'
-import { loginPayload } from '../../features/auth/login/services/loginAPI'
+} from '../../features/auth/login/BLL/loginThunks'
+import { loginPayload } from '../../features/auth/login/API/loginAPI'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
-import { isAuthSelector } from '../../features/auth/selectorsAuth'
+import { isAuthSelector } from '../../features/auth/common/selectors/selectorsAuth'
 import { Typography } from '@mui/material'
 
 export const Test = () => {
