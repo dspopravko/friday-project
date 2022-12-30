@@ -2,7 +2,7 @@ import React from 'react'
 import { createSearchParams, useSearchParams } from 'react-router-dom'
 import { Typography } from '@mui/material'
 import s from './CardsTableControls.module.css'
-import { DebouncedInput } from '../../packs/UI/Controls/SearchInput'
+import { DebouncedInput } from '../../../packs/UI/Controls/SearchInput'
 
 export const CardsTableControls = () => {
   const [searchParams, setSearchParams] = useSearchParams()

@@ -14,17 +14,17 @@ import { PATH } from '../../../data/paths'
 import { useAppDispatch } from '../../../state/store'
 
 type ModalNewCardPropsType = {
+  open: boolean
   handleClose: () => void
   id: string | undefined
   isOwner: boolean
-  open: boolean
 }
 
 export const ModalNewCard = ({
+  open,
   handleClose,
   id,
   isOwner,
-  open,
 }: ModalNewCardPropsType) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()

@@ -11,7 +11,7 @@ import {
 } from '../../features/tables/packs/BLL/selectorsPacks'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { HeaderContext } from '../../context/context'
-import { ModalNewPack } from '../../features/modal/modal-new-pack/ModalNewPack'
+import { PacksHeader } from '../../features/tables/packs/UI/Header/PacksHeader'
 
 export const Packs = () => {
   useSetHeaderTitle('Packs')
@@ -29,7 +29,7 @@ export const Packs = () => {
   }, [searchParams])
   return (
     <div style={{ marginTop: 60 }}>
-      <ModalNewPack />
+      <PacksHeader />
       <PacksTableControls />
       <PacksTable />
       <TablePagination

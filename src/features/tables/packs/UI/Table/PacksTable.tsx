@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 import { useAppDispatch, useAppSelector } from '../../../../../state/store'
-import { shapeTableHead } from './PacksTableHead'
+import { PacksTableHead } from './PacksTableHead'
 import { tableActionsConstructor } from '../../../common/components/TableActionsConstructor'
 import {
   createSearchParams,
@@ -31,7 +31,7 @@ export function PacksTable() {
 
   const productsData = useMemo(() => [...(packs as never[])], [packs])
   const productsColumns = useMemo(() => {
-    return shapeTableHead(packs, updateParams, params)
+    return PacksTableHead(packs, updateParams, params)
   }, [packs])
 
   const tableRowAction = (type: string, packID: string) => {

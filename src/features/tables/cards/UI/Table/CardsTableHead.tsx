@@ -1,10 +1,10 @@
 import { Rating } from '@mui/material'
 import React from 'react'
-import { CardsType } from '../BLL/cardsSlice'
-import { TableDateColumn } from '../../common/components/TableDateColumn'
-import s from './../../common/styles/Table.module.css'
+import { CardsType } from '../../BLL/cardsSlice'
+import { TableDateColumn } from '../../../common/components/TableDateColumn'
+import s from '../../../common/styles/Table.module.css'
 
-export const shapeTableHead = (
+export const CardsTableHead = (
   cards: CardsType[],
   sort: (newParams: { [param: string]: string }) => void,
   params: unknown

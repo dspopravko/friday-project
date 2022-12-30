@@ -1,14 +1,14 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
-import { shapeTableHead } from './CardsTableHead'
+import { CardsTableHead } from './CardsTableHead'
 import { createSearchParams, useSearchParams } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../../../../state/store'
-import { selectCards } from '../BLL/selectorsCards'
-import s from '../../common/styles/Table.module.css'
+import { useAppDispatch, useAppSelector } from '../../../../../state/store'
+import { selectCards } from '../../BLL/selectorsCards'
+import s from '../../../common/styles/Table.module.css'
 import { CircularProgress, Typography } from '@mui/material'
-import { userIdSelector } from '../../../../state/selectors'
-import { tableActionsConstructor } from '../../common/components/TableActionsConstructor'
-import { deleteCard, updateCard } from '../BLL/cardsThunk'
+import { userIdSelector } from '../../../../../state/selectors'
+import { tableActionsConstructor } from '../../../common/components/TableActionsConstructor'
+import { deleteCard, updateCard } from '../../BLL/cardsThunk'
 
 export function CardsTable({ id }: { id: string }) {
   const cards = useAppSelector(selectCards)
@@ -24,7 +24,7 @@ export function CardsTable({ id }: { id: string }) {
 
   const productsData = useMemo(() => [...(cards as Array<never>)], [cards])
   const productsColumns = useMemo(() => {
-    return shapeTableHead(cards, updateParams, params)
+    return CardsTableHead(cards, updateParams, params)
   }, [cards])
 
   const tableRowAction = (type: string, cardID: string) => {

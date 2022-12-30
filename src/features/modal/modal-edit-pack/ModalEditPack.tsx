@@ -29,9 +29,11 @@ export const ModalEditPack = ({
   const [searchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const dispatch = useAppDispatch()
+
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+
   const [packName, setPackName] = React.useState<string>(initPackName || '')
   const formHandler = (value: string) => {
     setPackName(value)
@@ -40,8 +42,6 @@ export const ModalEditPack = ({
   const checkboxHandler = (value: boolean) => {
     setPackIsPrivate(value)
   }
-  // console.log(packType)
-  console.log(packIsPrivate)
   const editPackHandler = async () => {
     const action = await dispatch(
       updatePack({

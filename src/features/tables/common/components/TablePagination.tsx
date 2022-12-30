@@ -38,7 +38,7 @@ export const TablePagination = ({
       Show
       <XSelect
         style={{ width: 50, margin: '0 10px 0 10px' }}
-        value={pageCount}
+        value={pageCount || 1}
         onChangeOption={(option) =>
           handleChange(+pageCountOptions[option - 1].value, 'pageCount')
         }

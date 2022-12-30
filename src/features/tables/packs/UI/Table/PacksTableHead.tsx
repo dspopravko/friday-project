@@ -3,9 +3,7 @@ import { PacksType } from '../../BLL/packsSlice'
 import cardsBlank from './../../../../../assets/cardsBlank.svg'
 import { TableDateColumn } from '../../../common/components/TableDateColumn'
 
-//оформляем наши данные в колонки для react-tables, библиотека требует данные в виде массива объектов {Header: '', accessor: ''}
-//todo: написать решейпер для объекта, и вынести в отдельный файл
-export const shapeTableHead = (
+export const PacksTableHead = (
   packs: PacksType[],
   sort: (newParams: { [param: string]: string }) => void,
   params: unknown

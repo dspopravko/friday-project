@@ -1,14 +1,14 @@
 import React from 'react'
-import { useAppSelector } from '../../../state/store'
-import { AddEntityButton } from '../../tables/common/components/AddEntityButton'
-import { HoverMenu } from '../../learn/UI/hoverMenu/HoverMenu'
-import { ModalNewCard } from './ModalNewCard'
+import { useAppSelector } from '../../../../../state/store'
+import { AddEntityButton } from '../../../common/components/AddEntityButton'
+import { HoverMenu } from '../../../../learn/UI/hoverMenu/HoverMenu'
+import { ModalNewCard } from '../../../../modal/modal-new-card/ModalNewCard'
 import {
   cardsCurrentPackInfo,
   cardsPendingSelector,
-} from '../../tables/cards/BLL/selectorsCards'
-import { userIDSelector } from '../../auth/common/selectors/selectorsAuth'
-import { PATH } from '../../../data/paths'
+} from '../../BLL/selectorsCards'
+import { userIDSelector } from '../../../../auth/common/selectors/selectorsAuth'
+import { PATH } from '../../../../../data/paths'
 import { useNavigate } from 'react-router-dom'
 
 type ModalNewCardType = {
@@ -43,7 +43,7 @@ export const CardsHeader = ({ id, buttonTitle }: ModalNewCardType) => {
         buttonCallback={handleButtonClick}
         pending={pending}
       >
-        {isOwner && id && <HoverMenu packID={id} />}{' '}
+        {isOwner && id && <HoverMenu packID={id} />}
       </AddEntityButton>
       <ModalNewCard
         handleClose={handleClose}
