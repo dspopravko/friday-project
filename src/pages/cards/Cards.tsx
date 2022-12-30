@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../state/store'
-import { getCards, postCard } from '../../features/cards/cards/BLL/cardsThunk'
+import { getCards } from '../../features/cards/cards/BLL/cardsThunk'
 import { CardsTableControls } from '../../features/cards/cards/VIEW/CardsTableControls'
 import { CardsTable } from '../../features/cards/cards/VIEW/CardsTable'
 import {
@@ -11,12 +11,9 @@ import {
   maxPageSelector,
 } from '../../features/cards/cards/BLL/selectorsCards'
 import { TablePagination } from '../../features/cards/common/components/TablePagination'
-import { AddEntityButton } from '../../features/cards/common/components/AddEntityButton'
 import { userIDSelector } from '../../features/auth/selectorsAuth'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { HeaderContext } from '../../context/context'
-import { PATH } from '../../data/paths'
-import { HoverMenu } from '../../features/learn/UI/hoverMenu/HoverMenu'
 import { cardsSlice } from '../../features/cards/cards/BLL/cardsSlice'
 import { ModalNewCard } from '../../features/modal/modal-new-card/ModalNewCard'
 
@@ -33,27 +30,6 @@ export const Cards = () => {
   const [searchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
-
-  // const buttonCallback = () => {
-  //   if (!id) {
-  //     return
-  //   }
-  //   if (isOwner) {
-  //     dispatch(
-  //       postCard({
-  //         postCard: {
-  //           cardsPack_id: id,
-  //           question: prompt('Question: ') || 'question',
-  //           answer: prompt('Answer: ') || 'answer',
-  //         },
-  //         queries: { ...params, cardsPack_id: id },
-  //       })
-  //     )
-  //   } else {
-  //     navigate(`/${PATH.LEARN}/${id}`)
-  //   }
-  // }
 
   useEffect(() => {
     dispatch(cardsSlice.actions.resetPack())

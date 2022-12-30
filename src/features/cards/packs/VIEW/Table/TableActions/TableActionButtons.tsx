@@ -1,8 +1,9 @@
 import React from 'react'
 import teachicon from '../../../../../../assets/icons/teach.svg'
 import s from './TableActionButtons.module.css'
-import { ModalDeletePack } from '../../../../../modal/modal-delete-pack/ModalDeletePack'
+import { ModalDeleteItem } from '../../../../../modal/modal-delete-item/ModalDeleteItem'
 import { ModalEditPack } from '../../../../../modal/modal-edit-pack/ModalEditPack'
+import { ModalEditCard } from '../../../../../modal/modal-edit-card/ModalEditCard'
 
 type TableActionButtonsPropsType = {
   isCard?: boolean
@@ -44,7 +45,7 @@ export const TableActionButtons = ({
         </button>
       )}
       {isOwnUser && (
-        <ModalDeletePack
+        <ModalDeleteItem
           isOwnUser={isOwnUser}
           cardId={cardId}
           packId={packId}
@@ -53,16 +54,22 @@ export const TableActionButtons = ({
           isCard={isCard}
         />
       )}
-      {isOwnUser && (
-        <ModalEditPack
+      {isOwnUser && isCard ? (
+        <ModalEditCard
           isOwnUser={isOwnUser}
           cardId={cardId}
           packId={packId}
           packName={packName}
           cardName={cardName}
-          isCard={isCard}
           packType={packType}
           answer={answer}
+        />
+      ) : (
+        <ModalEditPack
+          isOwnUser={isOwnUser}
+          packId={packId}
+          packName={packName}
+          packType={packType}
         />
       )}
     </div>

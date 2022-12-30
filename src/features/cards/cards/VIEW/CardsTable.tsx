@@ -22,7 +22,7 @@ export function CardsTable({ id }: { id: string }) {
     setSearchParams(createSearchParams({ ...params, ...newParams }))
   }
 
-  const productsData = useMemo(() => [...(cards as Array<any>)], [cards])
+  const productsData = useMemo(() => [...(cards as Array<never>)], [cards])
   const productsColumns = useMemo(() => {
     return shapeTableHead(cards, updateParams, params)
   }, [cards])

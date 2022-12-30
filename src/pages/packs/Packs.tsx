@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { PacksTableControls } from '../../features/cards/packs/VIEW/Controls/PacksTableControls'
 import { PacksTable } from '../../features/cards/packs/VIEW/Table/PacksTable'
-import { getPacks, postPack } from '../../features/cards/packs/BLL/packsThunk'
+import { getPacks } from '../../features/cards/packs/BLL/packsThunk'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { useSearchParams } from 'react-router-dom'
 import { TablePagination } from '../../features/cards/common/components/TablePagination'
@@ -9,7 +9,6 @@ import {
   currentPageSelector,
   maxPageSelector,
 } from '../../features/cards/packs/BLL/selectorsPacks'
-import { AddEntityButton } from '../../features/cards/common/components/AddEntityButton'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { HeaderContext } from '../../context/context'
 import { ModalNewPack } from '../../features/modal/modal-new-pack/ModalNewPack'

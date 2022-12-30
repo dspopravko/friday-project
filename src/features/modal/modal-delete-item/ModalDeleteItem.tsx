@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 import { BasicModal } from '../Modal'
 import deleteicon from '../../../assets/icons/delete.svg'
-import s from './ModalDeletePack.module.css'
+import s from './ModalDeleteItem.module.css'
 import React from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useAppDispatch } from '../../../state/store'
@@ -17,8 +17,8 @@ type ModalDeletePackType = {
   isCard: boolean
 }
 
-export const ModalDeletePack = (props: ModalDeletePackType) => {
-  const [searchParams, setSearchParams] = useSearchParams()
+export const ModalDeleteItem = (props: ModalDeletePackType) => {
+  const [searchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const dispatch = useAppDispatch()
   const [open, setOpen] = React.useState(false)
@@ -40,9 +40,10 @@ export const ModalDeletePack = (props: ModalDeletePackType) => {
       handleClose()
     }
   }
-  const title = props.isCard === true ? 'Delete card' : 'Delete pack'
-  const pageText =
-    props.isCard === true ? 'Card will be deleted' : 'All cards will be deleted'
+  const title = props.isCard ? 'Delete card' : 'Delete pack'
+  const pageText = props.isCard
+    ? 'Card will be deleted'
+    : 'All cards will be deleted'
   const textTitle = props.cardName ? props.cardName : props.packName
 
   return (
