@@ -15,6 +15,7 @@ type ModalDeletePackType = {
   packName: string | undefined
   cardName: string | undefined
   isCard: boolean
+  hoverMenu?: boolean
 }
 
 export const ModalDeleteItem = (props: ModalDeletePackType) => {
@@ -48,13 +49,24 @@ export const ModalDeleteItem = (props: ModalDeletePackType) => {
 
   return (
     <>
-      <button
-        className={s.button}
-        style={{ visibility: props.isOwnUser ? 'visible' : 'hidden' }}
-        onClick={handleOpen}
-      >
-        <img alt={'Delete'} src={deleteicon} />
-      </button>
+      {props.hoverMenu && (
+        <button
+          className={s.button}
+          style={{ visibility: props.isOwnUser ? 'visible' : 'hidden' }}
+          onClick={handleOpen}
+        >
+          <img alt={'Delete'} src={deleteicon} /> Delete
+        </button>
+      )}
+      {!props.hoverMenu && (
+        <button
+          className={s.button}
+          style={{ visibility: props.isOwnUser ? 'visible' : 'hidden' }}
+          onClick={handleOpen}
+        >
+          <img alt={'Delete'} src={deleteicon} />
+        </button>
+      )}
       <BasicModal
         title={title}
         buttonType={'delete'}

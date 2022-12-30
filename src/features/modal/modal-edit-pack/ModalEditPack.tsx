@@ -3,6 +3,7 @@ import {
   FormControl,
   FormControlLabel,
   FormGroup,
+  MenuItem,
   TextField,
 } from '@mui/material'
 import React from 'react'
@@ -18,6 +19,7 @@ type ModalEditPackType = {
   packId: string
   packName: string | undefined
   packType: boolean | undefined
+  hoverMenu?: boolean
 }
 
 export const ModalEditPack = ({
@@ -25,6 +27,7 @@ export const ModalEditPack = ({
   packId,
   packName: initPackName,
   isOwnUser,
+  hoverMenu,
 }: ModalEditPackType) => {
   const [searchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
@@ -60,13 +63,24 @@ export const ModalEditPack = ({
   const title = 'Edit pack'
   return (
     <>
-      <button
-        className={s.button}
-        style={{ visibility: isOwnUser ? 'visible' : 'hidden' }}
-        onClick={handleOpen}
-      >
-        <img alt={'Edit'} src={editicon} />
-      </button>
+      {hoverMenu && (
+        <button
+          className={s.button}
+          style={{ visibility: isOwnUser ? 'visible' : 'hidden' }}
+          onClick={handleOpen}
+        >
+          <img alt={'Edit'} src={editicon} /> Edit
+        </button>
+      )}
+      {!hoverMenu && (
+        <button
+          className={s.button}
+          style={{ visibility: isOwnUser ? 'visible' : 'hidden' }}
+          onClick={handleOpen}
+        >
+          <img alt={'Edit'} src={editicon} />
+        </button>
+      )}
       <BasicModal
         title={title}
         buttonType="save"
