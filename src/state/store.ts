@@ -9,8 +9,8 @@ import { loginReducer } from '../features/auth/login/BLL/loginSlice'
 import { restorePasswordReducer } from '../features/auth/restore/BLL/restorePasswordSlice'
 import { newPasswordReducer } from '../features/auth/newPassword/BLL/newPasswordSlice'
 import { profileReducer } from '../features/auth/profile/BLL/profileSlice'
-import { packsReducer } from '../features/tables/packs/BLL/packsSlice'
-import { cardsReducer } from '../features/tables/cards/BLL/cardsSlice'
+import { packsReducer } from '../features/packs/BLL/packsSlice'
+import { cardsReducer } from '../features/cards/BLL/cardsSlice'
 import { learnReducer } from '../features/learn/BLL/learnSlice'
 
 export type ReduxStateType = ReturnType<typeof rootReducer>

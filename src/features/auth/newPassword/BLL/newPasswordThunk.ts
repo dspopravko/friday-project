@@ -3,7 +3,7 @@ import {
   newPasswordAPI,
   setNewPasswordPayloadType,
 } from '../API/newPasswordAPI'
-import { thunkTryCatch } from '../../../../services/API/thunkTryCatch'
+import { thunkTryCatch } from '../../../../api/thunkTryCatch'
 
 export const newPassword = createAsyncThunk(
   'auth/newPasswordSlice',

@@ -1,6 +1,6 @@
-import { instance } from '../../../services/API/api'
-import { RootAPIResponse } from '../../../services/API/types'
-import { CardType } from '../../tables/cards/API/types'
+import { instance } from '../../../api/api'
+import { RootAPIResponse } from '../../../api/types'
+import { CardType } from '../../cards/API/types'
 
 export const learnAPI = {
   getAllCards(params: getAllCardsType) {

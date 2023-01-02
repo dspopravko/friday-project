@@ -1,4 +1,4 @@
-import { instance } from '../../../../services/API/api'
+import { instance } from '../../../../api/api'
 import { AxiosResponse } from 'axios'
 import { apiUserType } from '../../profile/API/profileAPI'
 

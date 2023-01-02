@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { regApi, RegType } from './signUpAPI'
-import { thunkTryCatch } from '../../../../services/API/thunkTryCatch'
+import { thunkTryCatch } from '../../../../api/thunkTryCatch'
 
 export const signUp = createAsyncThunk(
   'auth/register',

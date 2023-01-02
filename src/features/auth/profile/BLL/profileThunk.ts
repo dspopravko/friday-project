@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { profileAPI, updateProfilePropsType } from '../API/profileAPI'
 import { authMe } from '../../login/BLL/loginThunks'
-import { thunkTryCatch } from '../../../../services/API/thunkTryCatch'
+import { thunkTryCatch } from '../../../../api/thunkTryCatch'
 
 export const updateProfile = createAsyncThunk(
   'profile/updateProfile',

@@ -1,7 +1,6 @@
 import React from 'react'
 import s from '../../../login/UI/LoginForm.module.css'
 import { Button, TextField } from '@mui/material'
-import XButton from '../../../../../common/components/button/XButton'
 import { dispatchProfileData } from '../../BLL/dispatchProfileData'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -9,6 +8,7 @@ import { LoginData } from '../updateProfileContainer'
 import { useAppDispatch, useAppSelector } from '../../../../../state/store'
 import * as yup from 'yup'
 import { profileSelector } from '../../../common/selectors/selectorsAuth'
+import XButton from '../../../../../common/Button/XButton'
 
 const schema = yup.object().shape({
   name: yup.string().min(3),

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { loginAPI, loginPayload } from '../API/loginAPI'
-import { thunkTryCatch } from '../../../../services/API/thunkTryCatch'
+import { thunkTryCatch } from '../../../../api/thunkTryCatch'
 
 export const authMe = createAsyncThunk('login/fetchMe', async (_, thunkApi) => {
   return thunkTryCatch(thunkApi, async () => {

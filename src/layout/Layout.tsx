@@ -1,12 +1,12 @@
 import React, { ReactNode, useEffect } from 'react'
 import { Header } from './Header/Header'
 import { Footer } from './Footer/Footer'
-import { ErrorSnackbar } from '../common/errorSnackbar/ErrorSnackbar'
+import { ErrorSnackbar } from '../common/ErrorSnackbar/ErrorSnackbar'
 import { appStatus } from '../state/appSlice'
-import { AppLoader } from '../common/components/appLoader/appLoader'
 import { useAppDispatch, useAppSelector } from '../state/store'
 import { authMe } from '../features/auth/login/BLL/loginThunks'
 import { appStatusSelector } from '../state/selectors'
+import { AppLoader } from '../common/AppLoader/AppLoader'
 
 type LayoutPropsType = {
   children: ReactNode

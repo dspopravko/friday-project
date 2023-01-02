@@ -5,8 +5,8 @@ import {
   AccordionSummary,
   Typography,
 } from '@mui/material'
-import XButton from '../../../../common/components/button/XButton'
-import XRadio from '../../../../common/components/radio/XRadio'
+import XRadio from '../../../../common/Radio/XRadio'
+import XButton from '../../../../common/Button/XButton'
 
 type LearnFormPropsType = {
   question: string

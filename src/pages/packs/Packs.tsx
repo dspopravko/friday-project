@@ -1,17 +1,17 @@
 import React, { useContext, useEffect } from 'react'
-import { PacksTableControls } from '../../features/tables/packs/UI/Controls/PacksTableControls'
-import { PacksTable } from '../../features/tables/packs/UI/Table/PacksTable'
-import { getPacks } from '../../features/tables/packs/BLL/packsThunk'
+import { PacksTableControls } from '../../features/packs/UI/Controls/PacksTableControls'
+import { PacksTable } from '../../features/packs/UI/Table/PacksTable/PacksTable'
+import { getPacks } from '../../features/packs/BLL/packsThunk'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { useSearchParams } from 'react-router-dom'
-import { TablePagination } from '../../features/tables/common/components/TablePagination'
+import { TablePagination } from '../../common/TablePagination/TablePagination'
 import {
   currentPageSelector,
   maxPageSelector,
-} from '../../features/tables/packs/BLL/selectorsPacks'
+} from '../../features/packs/BLL/selectorsPacks'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { HeaderContext } from '../../context/context'
-import { PacksHeader } from '../../features/tables/packs/UI/Header/PacksHeader'
+import { PacksHeader } from '../../features/packs/UI/Header/PacksHeader'
 
 export const Packs = () => {
   useSetHeaderTitle('Packs')

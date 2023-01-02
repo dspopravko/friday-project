@@ -1,9 +1,6 @@
 import React from 'react'
-import XButton from '../../common/components/button/XButton'
-import XInput from '../../common/components/input/XInput'
 import s from './Test.module.css'
-import XSelect from '../../common/components/selectors/select/XSelect'
-import XRadio from '../../common/components/radio/XRadio'
+import XSelect from '../../common/selectors/Select/XSelect'
 import { mockSelect } from '../../data/selectOptions'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import {
@@ -15,6 +12,8 @@ import { loginPayload } from '../../features/auth/login/API/loginAPI'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { isAuthSelector } from '../../features/auth/common/selectors/selectorsAuth'
 import { Typography } from '@mui/material'
+import XButton from '../../common/Button/XButton'
+import XRadio from '../../common/Radio/XRadio'
 
 export const Test = () => {
   const dispatch = useAppDispatch()
@@ -50,10 +49,6 @@ export const Test = () => {
           <XButton onClick={logoutHandler} disabled>
             Disabled
           </XButton>
-        </div>
-        <div className={s.item}>
-          Input: (without logic)
-          <XInput />
         </div>
         <div className={s.item}>
           Select: (without logic)
