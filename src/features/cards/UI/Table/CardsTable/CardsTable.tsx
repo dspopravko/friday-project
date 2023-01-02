@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
-import { CardsTableHead } from '../CardsTableHead/CardsTableHead'
+import { CardsTableColumnsRender } from '../CardsTableColumnsRender/CardsTableColumnsRender'
 import { createSearchParams, useSearchParams } from 'react-router-dom'
 import { useAppSelector } from '../../../../../state/store'
 import { selectCards } from '../../../BLL/selectorsCards'
@@ -22,7 +22,7 @@ export function CardsTable() {
 
   const productsData = useMemo(() => [...(cards as Array<never>)], [cards])
   const productsColumns = useMemo(() => {
-    return CardsTableHead(cards, updateParams, params)
+    return CardsTableColumnsRender(cards, updateParams, params)
   }, [cards])
 
   let isOwnUser

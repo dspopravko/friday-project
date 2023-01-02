@@ -4,7 +4,7 @@ import { CardsType } from '../../../BLL/cardsSlice'
 import { TableDateColumn } from '../../../../../common/TableDateColumnWithSort/TableDateColumn'
 import s from '../../../../../assets/styles/Table.module.css'
 
-export const CardsTableHead = (
+export const CardsTableColumnsRender = (
   cards: CardsType[],
   sort: (newParams: { [param: string]: string }) => void,
   params: unknown

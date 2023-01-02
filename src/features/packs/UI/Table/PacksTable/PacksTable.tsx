@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 import { useAppDispatch, useAppSelector } from '../../../../../state/store'
-import { PacksTableHead } from '../PacksTableHead/PacksTableHead'
+import { PacksTableColumnsRender } from '../PacksTableColumnsRender/PacksTableColumnsRender'
 import {
   createSearchParams,
   useNavigate,
@@ -30,7 +30,7 @@ export function PacksTable() {
 
   const productsData = useMemo(() => [...(packs as never[])], [packs])
   const productsColumns = useMemo(() => {
-    return PacksTableHead(packs, updateParams, params)
+    return PacksTableColumnsRender(packs, updateParams, params)
   }, [packs])
 
   const tableInstance = useTable(
@@ -90,12 +90,7 @@ export function PacksTable() {
             prepareRow(row)
             const { key, ...restProps } = row.getRowProps()
             return (
-              <tr
-                className={s.tableRow}
-                // onClick={() => openCardsHandler(row)}
-                key={key}
-                {...restProps}
-              >
+              <tr className={s.tableRow} key={key} {...restProps}>
                 {row.cells.map((cell) => {
                   const { key, ...restProps } = cell.getCellProps()
                   return (

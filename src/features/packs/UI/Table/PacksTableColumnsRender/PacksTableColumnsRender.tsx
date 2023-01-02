@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { PacksType } from '../../../BLL/packsSlice'
 import cardsBlank from '../../../../../assets/cardsBlank.svg'
 import { TableDateColumn } from '../../../../../common/TableDateColumnWithSort/TableDateColumn'
 
-export const PacksTableHead = (
+export const PacksTableColumnsRender = (
   packs: PacksType[],
   sort: (newParams: { [param: string]: string }) => void,
   params: unknown
 ) => {
   const typedParams = params as { sortPacks: string }
   const reshapedObj = packs.map((obj) => ({
-    //задаём порядок колоннок
+    //defines order of table columns
     deckCover: obj.deckCover,
     name: obj.name,
     cardsCount: obj.cardsCount,
@@ -20,26 +20,29 @@ export const PacksTableHead = (
   }))
   return reshapedObj[0]
     ? Object.keys(reshapedObj[0]).map((key) => {
-        // переназначаем дефолтный метод рендера из react-table, чтобы отрисовывалась картинка, а не ссылка
         switch (true) {
           case key === 'deckCover':
             return {
               Header: 'Cover',
               accessor: key,
-              Cell: ({ value }: { value: string }) => (
-                <div style={{ width: '48px', height: '48px' }}>
-                  <img
-                    alt={'pack_cover'}
-                    style={{
-                      borderRadius: '20%',
-                      height: '100%',
-                      width: '100%',
-                      objectFit: 'cover',
-                    }}
-                    src={value || cardsBlank}
-                  />
-                </div>
-              ),
+              Cell: ({ value }: { value: string }) => {
+                const [image, setImage] = useState(value)
+                return (
+                  <div style={{ width: '48px', height: '48px' }}>
+                    <img
+                      alt={'pack_cover'}
+                      onError={() => setImage(cardsBlank)}
+                      style={{
+                        borderRadius: '20%',
+                        height: '100%',
+                        width: '100%',
+                        objectFit: 'cover',
+                      }}
+                      src={image || cardsBlank}
+                    />
+                  </div>
+                )
+              },
               maxWidth: 70,
             }
           case key === 'name':
@@ -83,7 +86,7 @@ export const PacksTableHead = (
           case key === 'updated':
             return TableDateColumn(params, ['0updated', '1updated'], sort, key)
           case key === '_id':
-            // убираем рендер id шки, чтобы её данные по прежнему были в таблице, но не рисовались
+            // render method for id column removed here. this id column data is needed to be aviliable for the table action buttons
             if (key === '_id') {
               return {
                 Header: '',
