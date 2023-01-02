@@ -2,6 +2,12 @@
   border: none;
   background: transparent;
   transition: 0.1s ease;
+  cursor: pointer;
+}
+.buttonInactive {
+  border: none;
+  background: transparent;
+  opacity: 0.5;
 }
 .button:hover {
   stroke: #3c4147;

@@ -3,7 +3,7 @@ import s from './PacksTableActionButtons.module.css'
 import { ModalEditPack } from '../../../modals/modal-edit-pack/ModalEditPack'
 import editIcon from '../../../../../../assets/icons/edit.svg'
 import deleteIcon from '../../../../../../assets/icons/delete.svg'
-import leatnIcon from '../../../../../../assets/icons/teach.svg'
+import learnIcon from '../../../../../../assets/icons/teach.svg'
 import { useModal } from '../../../../../../hooks/useModal'
 import { ModalDeletePack } from '../../../modals/modal-delete-pack/ModalDeletePack'
 import { useNavigate } from 'react-router-dom'
@@ -27,12 +27,17 @@ export const PacksTableActionButtons = ({
 }: TableActionButtonsPropsType) => {
   const navigate = useNavigate()
   const learnHandler = () => navigate(`/${PATH.LEARN}/${packId}`)
+
   const [modal1, toggleModal1] = useModal()
   const [modal2, toggleModal2] = useModal()
   return (
     <div className={s.buttonGroup}>
-      <button className={s.button} disabled={isEmpty} onClick={learnHandler}>
-        <img alt={'learn'} src={leatnIcon} />
+      <button
+        className={isEmpty ? s.buttonInactive : s.button}
+        disabled={isEmpty}
+        onClick={learnHandler}
+      >
+        <img alt={'learn'} src={learnIcon} />
       </button>
       {isOwnUser && (
         <>

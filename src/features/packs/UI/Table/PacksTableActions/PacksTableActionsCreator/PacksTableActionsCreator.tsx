@@ -15,7 +15,7 @@ export const packsTableActionsCreator = (userID: string) => (hooks: Hooks) => {
         return (
           <PacksTableActionButtons
             packId={typedRow._id}
-            isEmpty={typedRow.cardsCount > 0}
+            isEmpty={typedRow.cardsCount < 1}
             isOwnUser={typedRow.user_id === userID}
             packName={typedRow.name}
             packType={typedRow.private}
