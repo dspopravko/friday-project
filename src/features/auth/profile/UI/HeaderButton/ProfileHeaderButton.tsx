@@ -3,10 +3,10 @@ import { useAppDispatch, useAppSelector } from '../../../../../state/store'
 import { Avatar, Menu, MenuItem } from '@mui/material'
 import LogoutIcon from '@mui/icons-material/Logout'
 import PersonIcon from '@mui/icons-material/Person'
-import XButton from '../../../../../common/components/button/XButton'
 import { logout } from '../../../login/BLL/loginThunks'
 import { useNavigate } from 'react-router-dom'
 import { profileSelector } from '../../../common/selectors/selectorsAuth'
+import XButton from '../../../../../common/Button/XButton'
 
 export const ProfileHeaderButton = () => {
   const dispatch = useAppDispatch()
@@ -49,7 +49,7 @@ export const ProfileHeaderButton = () => {
           transform: 'translate(0, 8px)',
         }}
         MenuListProps={{
-          'aria-labelledby': 'basic-button',
+          'aria-labelledby': 'basic-Button',
         }}
       >
         <MenuItem onClick={() => navigate('profile')}>

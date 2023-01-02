@@ -1,0 +1,20 @@
+import React from 'react'
+import { HeaderButtonWithTitle } from '../../../../common/HeaderButtonWithTitle/HeaderButtonWithTitle'
+import { ModalNewPack } from '../modals/modal-new-pack/ModalNewPack'
+
+export const PacksHeader = () => {
+  const [open, setOpen] = React.useState(false)
+  const handleClose = () => setOpen(false)
+  const handleOpen = () => setOpen(true)
+
+  return (
+    <>
+      <HeaderButtonWithTitle
+        title={'Packs'}
+        buttonTitle={'Add new pack'}
+        buttonCallback={handleOpen}
+      />
+      <ModalNewPack open={open} handleClose={handleClose} />
+    </>
+  )
+}

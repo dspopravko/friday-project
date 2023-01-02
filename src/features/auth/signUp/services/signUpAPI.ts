@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios'
-import { instance } from '../../../../services/API/api'
+import { instance } from '../../../../api/api'
 
 export interface AddedUser {
   _id: string

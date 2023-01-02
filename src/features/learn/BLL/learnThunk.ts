@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { getAllCardsType, learnAPI, SetGradeType } from '../API/learnAPI'
-import { thunkTryCatch } from '../../../services/API/thunkTryCatch'
+import { thunkTryCatch } from '../../../api/thunkTryCatch'
 
 export const getAllCards = createAsyncThunk(
   'learn/getAll',

@@ -2,8 +2,6 @@ import React, { useContext, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { Box, Card, Grid, Typography } from '@mui/material'
 import s from './profile.module.css'
-import XButton from '../../common/components/button/XButton'
-import { EditNameUser } from '../../common/components/editNameUser/EditNameUser'
 import { logout } from '../../features/auth/login/BLL/loginThunks'
 import { UpdateProfileContainer } from '../../features/auth/profile/UI/updateProfileContainer'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
@@ -12,6 +10,8 @@ import { CardsCheer } from '../../features/auth/profile/UI/CardsCheer'
 import { HeaderContext } from '../../context/context'
 import { profileSelector } from '../../features/auth/common/selectors/selectorsAuth'
 import { updateProfile } from '../../features/auth/profile/BLL/profileThunk'
+import { EditNameUser } from '../../common/EditNameUser/EditNameUser'
+import XButton from '../../common/Button/XButton'
 
 export const Profile = () => {
   const { setGoBackButtonTitle } = useContext(HeaderContext)

@@ -1,4 +1,4 @@
-import '../assets/css/global.css'
+import '../assets/styles/global.css'
 import React, { useState } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { HeaderContext } from '../context/context'

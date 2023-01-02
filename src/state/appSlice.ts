@@ -34,5 +34,4 @@ export const appSlice = createSlice({
   },
 })
 
-export type AppReducerStateType = typeof initialState
 export const appReducer = appSlice.reducer
