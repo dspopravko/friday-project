@@ -13,7 +13,6 @@ import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { isAuthSelector } from '../../features/auth/common/selectors/selectorsAuth'
 import { Typography } from '@mui/material'
 import XButton from '../../common/Button/XButton'
-import XInput from '../../common/Input/XInput'
 import XRadio from '../../common/Radio/XRadio'
 
 export const Test = () => {
@@ -50,10 +49,6 @@ export const Test = () => {
           <XButton onClick={logoutHandler} disabled>
             Disabled
           </XButton>
-        </div>
-        <div className={s.item}>
-          Input: (without logic)
-          <XInput />
         </div>
         <div className={s.item}>
           Select: (without logic)
