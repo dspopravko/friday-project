@@ -5,8 +5,8 @@ import { updatePack } from '../../packs/BLL/packsThunk'
 
 export const rememberPack = createAction(
   'tables/rememberPack',
-  (userName, packName) => ({
-    payload: { userName, packName },
+  (userName, packName, deckCover) => ({
+    payload: { userName, packName, deckCover },
   })
 )
 
@@ -51,6 +51,7 @@ export const cardsSlice = createSlice({
     builder.addCase(rememberPack, (state, action) => {
       state.currentCardsUserName = action.payload.userName
       state.cardsGeneral.packName = action.payload.packName
+      state.cardsGeneral.packDeckCover = action.payload.deckCover
     })
     builder.addCase(updatePack.fulfilled, (state, action) => {
       state.cardsGeneral.packName = action.payload.updatedCardsPack.name

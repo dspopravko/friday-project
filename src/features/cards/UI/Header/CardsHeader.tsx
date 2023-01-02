@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppSelector } from '../../../../state/store'
 import { HeaderButtonWithTitle } from '../../../../common/HeaderButtonWithTitle/HeaderButtonWithTitle'
 import { PackMenu } from '../PackMenu/PackMenu'
@@ -10,6 +10,7 @@ import {
 import { userIDSelector } from '../../../auth/common/selectors/selectorsAuth'
 import { PATH } from '../../../../data/paths'
 import { useNavigate } from 'react-router-dom'
+import { Paper } from '@mui/material'
 
 type ModalNewCardType = {
   buttonTitle: 'Add new card' | 'Learn pack'
@@ -27,6 +28,12 @@ export const CardsHeader = ({ id, buttonTitle }: ModalNewCardType) => {
   const [open, setOpen] = React.useState(false)
   const handleClose = () => setOpen(false)
   const handleOpen = () => setOpen(true)
+
+  const [image, setImage] = useState(currentPackInfo.packDeckCover)
+
+  useEffect(() => {
+    setImage(currentPackInfo.packDeckCover)
+  }, [currentPackInfo.packDeckCover])
 
   const handleButtonClick = () => {
     if (isOwner) {
@@ -57,6 +64,18 @@ export const CardsHeader = ({ id, buttonTitle }: ModalNewCardType) => {
         isOwner={isOwner}
         open={open}
       />
+      {image && (
+        <Paper
+          sx={{ height: 150, width: 150, borderRadius: '12%', padding: 1 }}
+        >
+          <img
+            alt={'pack cover'}
+            style={{ width: '100%', height: '100%', borderRadius: '12%' }}
+            onError={() => setImage('')}
+            src={image}
+          />
+        </Paper>
+      )}
     </>
   )
 }

@@ -52,7 +52,11 @@ export function PacksTable() {
     }
     if (typedCell.column.id !== 'Edit') {
       dispatch(
-        rememberPack(typedRow.original.user_name, typedRow.original.name)
+        rememberPack(
+          typedRow.original.user_name,
+          typedRow.original.name,
+          typedRow.original.deckCover
+        )
       )
       navigate(`/${PATH.CARDS}/${typedRow.original._id}`)
     }
