@@ -7,10 +7,15 @@ import {
 } from '@mui/material'
 import XRadio from '../../../../common/Radio/XRadio'
 import XButton from '../../../../common/Button/XButton'
+import { MediaField } from './MediaField'
 
 type LearnFormPropsType = {
   question: string
+  questionImg: string
+  questionVideo: string
   answer: string
+  answerImg: string
+  answerVideo: string
   handleNext: (grade: number) => void
 }
 
@@ -23,17 +28,22 @@ export const gradeOptions = [
 ]
 
 export const LearnForm = ({
-  handleNext,
-  answer,
   question,
+  questionImg,
+  questionVideo,
+  answer,
+  answerImg,
+  answerVideo,
+  handleNext,
 }: LearnFormPropsType) => {
-  const [showAnswer, setShowAnswer] = useState(false)
   const [grade, setGrade] = useState(0)
-  const handleButton = () => {
-    if (!showAnswer) {
-      setShowAnswer(true)
+
+  const [hideAnswer, setHideAnswer] = useState(true)
+  const handleNextButton = () => {
+    if (hideAnswer) {
+      setHideAnswer(false)
     } else {
-      setShowAnswer(false)
+      setHideAnswer(true)
       handleNext(grade)
       setGrade(0)
     }
@@ -50,15 +60,17 @@ export const LearnForm = ({
       }}
     >
       <div>
-        <Typography sx={{ marginBottom: 3 }}>
-          <span style={{ fontWeight: '600' }}>Question: </span>
-          {question}
-        </Typography>
+        <MediaField
+          title={'Question'}
+          fieldImg={questionImg}
+          fieldText={question}
+          fieldVideo={questionVideo}
+        />
       </div>
       <div>
         <Accordion
-          expanded={showAnswer}
-          onChange={() => setShowAnswer(!showAnswer)}
+          expanded={!hideAnswer}
+          onChange={() => setHideAnswer(!hideAnswer)}
         >
           <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
             <Typography>Show answer</Typography>
@@ -66,10 +78,13 @@ export const LearnForm = ({
           <AccordionDetails
             sx={{ display: 'flex', flexDirection: 'column', gap: '20px' }}
           >
-            <Typography style={{ opacity: showAnswer ? '1' : '0' }}>
-              <span style={{ fontWeight: '600' }}>Answer: </span>
-              {answer}
-            </Typography>
+            <MediaField
+              hidden={hideAnswer}
+              title={'Question'}
+              fieldImg={answerImg}
+              fieldText={answer}
+              fieldVideo={answerVideo}
+            />
             <XRadio
               value={grade}
               onChangeOption={(option) => setGrade(option)}
@@ -77,7 +92,7 @@ export const LearnForm = ({
             />
             <XButton
               disabled={grade === 0}
-              onClick={handleButton}
+              onClick={handleNextButton}
               sx={{
                 marginTop: '20px',
                 width: '100%',

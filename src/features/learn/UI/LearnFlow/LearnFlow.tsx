@@ -53,7 +53,7 @@ export const LearnFlow = () => {
     }
     let filtredCards: CardsType[]
     for (let i = 1; i < 6; i++) {
-      filtredCards = remainCards.filter((card) => card.grade < i)
+      filtredCards = remainCards.filter((card) => card.grade <= i)
       if (filtredCards[0]) {
         return filtredCards[Math.floor(Math.random() * filtredCards.length)]
       }
@@ -81,7 +81,11 @@ export const LearnFlow = () => {
         {currentCard && !isCompleted && (
           <LearnForm
             question={currentCard.question}
+            questionImg={currentCard.questionImg}
+            questionVideo={currentCard.questionVideo}
             answer={currentCard.answer}
+            answerImg={currentCard.answerImg}
+            answerVideo={currentCard.answerVideo}
             handleNext={handleNext}
           />
         )}
