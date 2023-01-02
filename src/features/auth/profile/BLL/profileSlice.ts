@@ -3,7 +3,6 @@ import { updateProfile } from './profileThunk'
 import { authMe, login } from '../../login/BLL/loginThunks'
 
 const initialState = {
-  updateSuccess: false,
   pending: false,
   errors: '',
   user: {
@@ -41,13 +40,9 @@ export const profileSlice = createSlice({
     setProfilePhoto(state, action: PayloadAction<string>) {
       state.user.avatar = action.payload
     },
-    resetSuccess(state) {
-      state.updateSuccess = false
-    },
   },
   extraReducers: (builder) => {
     builder.addCase(updateProfile.fulfilled, (state) => {
-      state.updateSuccess = true
       state.pending = false
     })
     builder.addCase(updateProfile.pending, (state) => {

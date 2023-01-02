@@ -5,7 +5,6 @@ import s from './profile.module.css'
 import { logout } from '../../features/auth/login/BLL/loginThunks'
 import { UpdateProfileContainer } from '../../features/auth/profile/UI/updateProfileContainer'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
-import { profileSlice } from '../../features/auth/profile/BLL/profileSlice'
 import { CardsCheer } from '../../features/auth/profile/UI/CardsCheer'
 import { HeaderContext } from '../../context/context'
 import { profileSelector } from '../../features/auth/common/selectors/selectorsAuth'
@@ -15,22 +14,18 @@ import XButton from '../../common/Button/XButton'
 
 export const Profile = () => {
   const { setGoBackButtonTitle } = useContext(HeaderContext)
-  const { user, updateSuccess } = useAppSelector(profileSelector)
+  const { user } = useAppSelector(profileSelector)
   const dispatch = useAppDispatch()
   useSetHeaderTitle('Profile')
-  setResetTimeout(4000, updateSuccess)
-  const logoutHandler = () => {
-    dispatch(logout())
-  }
+
+  const logoutHandler = () => dispatch(logout())
 
   useEffect(() => {
     setGoBackButtonTitle('Go back')
     return () => setGoBackButtonTitle('')
   }, [])
 
-  const onOpenChange = (name: string) => {
-    dispatch(updateProfile({ name }))
-  }
+  const onOpenChange = (name: string) => dispatch(updateProfile({ name }))
 
   return (
     <Grid container justifyContent={'center'} alignItems={'center'}>
@@ -45,24 +40,11 @@ export const Profile = () => {
         <Typography className={s.email} component={'p'}>
           {user.email}
         </Typography>
-        <XButton style={{ marginTop: '30px' }} onClick={logoutHandler}>
+        <XButton style={{ marginTop: '22px' }} onClick={logoutHandler}>
           Log out
         </XButton>
         <CardsCheer cardsCount={user.publicCardPacksCount} />
       </Card>
     </Grid>
   )
-}
-
-//после обновления профиля меняется состояние updateSuccess, этот таймер сбрасывает это состояние
-function setResetTimeout(delay: number, success: boolean) {
-  const dispatch = useAppDispatch()
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (success) {
-        dispatch(profileSlice.actions.resetSuccess())
-      }
-    }, delay)
-    return () => clearTimeout(timer)
-  }, [success])
 }
