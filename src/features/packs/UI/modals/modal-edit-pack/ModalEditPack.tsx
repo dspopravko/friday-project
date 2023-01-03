@@ -5,11 +5,13 @@ import {
   FormGroup,
   TextField,
 } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { BasicModal } from '../../../../../common/Modal/Modal'
 import { useAppDispatch } from '../../../../../state/store'
 import { updatePack } from '../../../BLL/packsThunk'
 import { UseSearchParamsObject } from '../../../../../hooks/useSearchParamsObject'
+import { ImageInputWithPreview } from '../../../../../common/ImageInputWithPreview/ImageInputWithPreview'
+import { checkFileSize } from '../../../../../services/checkFileSize'
 
 type ModalEditPackType = {
   open: boolean
@@ -26,9 +28,11 @@ export const ModalEditPack = ({
   packName: initPackName,
   packType,
 }: ModalEditPackType) => {
+  const fileInput = useRef<HTMLInputElement>(null)
   const params = UseSearchParamsObject()
   const dispatch = useAppDispatch()
 
+  const [avatar, setAvatar] = useState<string>()
   const [packName, setPackName] = useState(initPackName || '')
   const formHandler = (value: string) => setPackName(value)
 
@@ -42,12 +46,22 @@ export const ModalEditPack = ({
           name: packName,
           _id: packId,
           private: packIsPrivate,
+          deckCover: avatar,
         },
         params,
       })
     )
     if (updatePack.fulfilled.match(action)) {
       handleClose()
+    }
+  }
+  const handleFileInput = (file: File) =>
+    checkFileSize(file, setAvatar, dispatch)
+
+  const resetAvatar = () => {
+    setAvatar('')
+    if (fileInput.current && fileInput.current.value) {
+      fileInput.current.value = ''
     }
   }
 
@@ -67,6 +81,12 @@ export const ModalEditPack = ({
             onChange={(e) => formHandler(e.target.value)}
             variant="standard"
             sx={{ marginBottom: '20px', marginTop: '20px' }}
+          />
+          <ImageInputWithPreview
+            title={'Upload deck cover'}
+            deleteImage={resetAvatar}
+            avatar={avatar}
+            handleFileInput={handleFileInput}
           />
           <FormGroup>
             <FormControlLabel

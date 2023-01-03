@@ -1,19 +1,18 @@
-import React, { ChangeEvent, useState } from 'react'
-import { Button, Paper, TextField } from '@mui/material'
+import React, { useState } from 'react'
+import { TextField } from '@mui/material'
 import { useAppDispatch, useAppSelector } from '../../../../../state/store'
 import { FormError } from '../../../common/components/formError'
 import { profileSelector } from '../../../common/selectors/selectorsAuth'
 import { BasicModal } from '../../../../../common/Modal/Modal'
 import s from '../../../login/UI/LoginForm.module.css'
-import XButton from '../../../../../common/Button/XButton'
 import { LoginData } from '../updateProfileContainer'
 import { fileFromInputToBase64 } from '../../BLL/fileFromInputToBase64'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
 import * as yup from 'yup'
 import { updateProfile } from '../../BLL/profileThunk'
-import { theme } from '../../../../../assets/mui-theme'
 import { handleServerAppError } from '../../../../../services/error-notification'
+import { ImageInputWithPreview } from '../../../../../common/ImageInputWithPreview/ImageInputWithPreview'
 
 type ModalPropsType = {
   open: boolean
@@ -29,19 +28,15 @@ export const UpdateProfileModal = ({ open, onClose }: ModalPropsType) => {
   const [avatar, setAvatar] = useState<string>()
   const dispatch = useAppDispatch()
 
-  const hanleFileInput = async (e: ChangeEvent<HTMLInputElement>) => {
-    await onChangeFileInput(e)
-    if (e.target.files && e.target.files.length) {
-      const file = e.target.files[0]
-      if (file.size < 300000) {
-        const avatar = await fileFromInputToBase64(file)
-        setAvatar(avatar)
-      } else {
-        handleServerAppError(
-          { error: 'Maximum file size (300 kb) exceeded' },
-          dispatch
-        )
-      }
+  const handlFileInput = async (file: File) => {
+    if (file.size < 300000) {
+      const avatar = await fileFromInputToBase64(file)
+      setAvatar(avatar)
+    } else {
+      handleServerAppError(
+        { error: 'Maximum file size (300 kb) exceeded' },
+        dispatch
+      )
     }
   }
 
@@ -71,13 +66,11 @@ export const UpdateProfileModal = ({ open, onClose }: ModalPropsType) => {
     resolver: yupResolver(schema),
   })
 
-  const resetFileInput = () => resetField('avatar')
-  const { onChange: onChangeFileInput, ...restAvatarProps } = register(
-    'avatar',
-    {
-      required: false,
-    }
-  )
+  const resetFileInput = () => {
+    setAvatar('')
+    resetField('avatar')
+  }
+
   return (
     <BasicModal
       open={open}
@@ -92,48 +85,11 @@ export const UpdateProfileModal = ({ open, onClose }: ModalPropsType) => {
           opacity: pending ? '0.5' : '1',
         }}
       >
-        <Button variant="outlined" component="label">
-          Upload Photo
-          <input
-            type="file"
-            accept="image/png, image/jpeg"
-            hidden
-            {...restAvatarProps}
-            onChange={hanleFileInput}
-          />
-        </Button>
-        {avatar && (
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              backgroundColor: theme.palette.grey.A200,
-              margin: '10px auto 0 auto',
-              width: '120px',
-            }}
-          >
-            <Paper
-              sx={{ width: 80, height: 80, borderRadius: '50%' }}
-              variant="outlined"
-            >
-              <img
-                style={{ width: '100%', height: '100%', borderRadius: '50%' }}
-                src={avatar}
-                alt={'selected image'}
-              />
-            </Paper>
-            <XButton
-              type={'delete'}
-              onClick={() => {
-                resetFileInput()
-                setAvatar('')
-              }}
-            >
-              delete
-            </XButton>
-          </div>
-        )}
+        <ImageInputWithPreview
+          avatar={avatar}
+          deleteImage={resetFileInput}
+          handleFileInput={handlFileInput}
+        />
         <TextField
           label="name"
           margin="normal"

@@ -33,14 +33,13 @@ export const ModalNewCard = ({
 
   const [value, setValue] = useState('text')
 
-  const handleChange = (event: SelectChangeEvent) =>
-    setValue(event.target.value as string)
+  const handleChange = (e: SelectChangeEvent) =>
+    setValue(e.target.value as string)
 
   const [question, setQuestion] = useState<string>('')
-  const questionHandler = (value: string) => {
-    setQuestion(value)
-  }
-  const [answer, setAnswer] = React.useState<string>('')
+  const questionHandler = (value: string) => setQuestion(value)
+
+  const [answer, setAnswer] = useState<string>('')
   const answerHandler = (value: string) => setAnswer(value)
 
   const addCardHandler = async () => {
@@ -72,39 +71,25 @@ export const ModalNewCard = ({
       open={open}
       buttonCallback={addCardHandler}
     >
-      <FormControl fullWidth size="small">
+      <FormControl fullWidth size="small" sx={{ gap: 2 }}>
         <FormHelperText sx={{ fontSize: '14px', marginLeft: '0' }}>
-          Choose a question format
+          Choose input format
         </FormHelperText>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={value}
-          onChange={handleChange}
-          sx={{
-            height: '36px',
-            paddingLeft: '12px',
-            paddingTop: '8px',
-            paddingBottom: '8px',
-            marginBottom: '20px',
-          }}
-        >
+        <Select value={value} onChange={handleChange}>
           <MenuItem value="text">Text</MenuItem>
           <MenuItem value="image">Image</MenuItem>
         </Select>
         <TextField
-          sx={{ marginBottom: '20px' }}
           label="Question"
-          defaultValue="How This works in JavaScript?"
           variant="standard"
+          multiline
           value={question}
           onChange={(e) => questionHandler(e.target.value)}
         />
         <TextField
-          sx={{ marginBottom: '20px' }}
           label="Answer"
-          defaultValue="Name Pack"
           variant="standard"
+          multiline
           value={answer}
           onChange={(e) => answerHandler(e.target.value)}
         />
