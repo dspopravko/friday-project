@@ -80,7 +80,7 @@ export const LearnForm = ({
           >
             <MediaField
               hidden={hideAnswer}
-              title={'Question'}
+              title={'Answer'}
               fieldImg={answerImg}
               fieldText={answer}
               fieldVideo={answerVideo}
