@@ -10,14 +10,18 @@ type TableActionButtonsPropsType = {
   cardId: string
   packId: string
   question: string
+  questionImg: string
   answer: string
+  answerImg: string
 }
 
 export const CardsTableActionButtons = ({
-  question,
   cardId,
   packId,
+  question,
+  questionImg,
   answer,
+  answerImg,
 }: TableActionButtonsPropsType) => {
   const [modal1, toggleModal1] = useModal()
   const [modal2, toggleModal2] = useModal()
@@ -42,7 +46,9 @@ export const CardsTableActionButtons = ({
         cardId={cardId}
         packId={packId}
         question={question}
+        questionImg={questionImg}
         answer={answer}
+        answerImg={answerImg}
       />
     </div>
   )

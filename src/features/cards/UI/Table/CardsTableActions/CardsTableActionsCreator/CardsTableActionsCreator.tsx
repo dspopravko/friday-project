@@ -24,7 +24,9 @@ export const cardsTableActionsCreator =
               cardId={typedRow._id}
               packId={typedRow.cardsPack_id}
               question={typedRow.question}
+              questionImg={typedRow.questionImg}
               answer={typedRow.answer}
+              answerImg={typedRow.answerImg}
             />
           )
         },

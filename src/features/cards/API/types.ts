@@ -3,7 +3,7 @@ import { PageParamsType } from '../../../api/types'
 export type postCardType = {
   cardsPack_id: string
   question?: string
-  answer: string
+  answer?: string
   questionImg?: string
   grade?: number
   shots?: number
