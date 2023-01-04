@@ -1,5 +1,5 @@
 import { Rating } from '@mui/material'
-import React, { useState } from 'react'
+import React from 'react'
 import { CardsType } from '../../../BLL/cardsSlice'
 import { TableDateColumn } from '../../../../../common/TableDateColumnWithSort/TableDateColumn'
 
@@ -27,8 +27,10 @@ export const CardsTableColumnsRender = (
           Header: 'Question',
           accessor: key,
           Cell: (e: { value: string; row: { original: any } }) => {
-            const [showImage, setShowImage] = useState(true)
-            if (showImage) {
+            if (
+              e.row.original.questionImg &&
+              e.row.original.questionImg.startsWith('data:image')
+            ) {
               return (
                 <div style={{ height: '45px', width: '100px' }}>
                   <img
@@ -38,7 +40,6 @@ export const CardsTableColumnsRender = (
                       width: '100%',
                       objectFit: 'cover',
                     }}
-                    onError={() => setShowImage(false)}
                     src={e.row.original.questionImg}
                   />
                 </div>
@@ -53,8 +54,10 @@ export const CardsTableColumnsRender = (
           Header: 'Answer',
           accessor: key,
           Cell: (e: { value: string; row: { original: any } }) => {
-            const [showImage, setShowImage] = useState(true)
-            if (showImage) {
+            if (
+              e.row.original.answerImg &&
+              e.row.original.answerImg.startsWith('data:image')
+            ) {
               return (
                 <div style={{ height: '45px', width: '100px' }}>
                   <img
@@ -64,7 +67,6 @@ export const CardsTableColumnsRender = (
                       width: '100%',
                       objectFit: 'cover',
                     }}
-                    onError={() => setShowImage(false)}
                     src={e.row.original.answerImg}
                   />
                 </div>
