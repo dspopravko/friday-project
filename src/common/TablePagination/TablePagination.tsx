@@ -25,7 +25,8 @@ export const TablePagination = ({
   const params = Object.fromEntries(searchParams)
   const handleChange = (value: number, param: string) =>
     setSearchParams(
-      createSearchParams({ ...params, [param]: value.toString() })
+      createSearchParams({ ...params, [param]: value.toString() }),
+      { replace: true }
     )
 
   return (
@@ -38,7 +39,7 @@ export const TablePagination = ({
       Show
       <XSelect
         style={{ width: 50, margin: '0 10px 0 10px' }}
-        value={pageCount || 1}
+        value={pageCount || 10}
         onChangeOption={(option) =>
           handleChange(+pageCountOptions[option - 1].value, 'pageCount')
         }

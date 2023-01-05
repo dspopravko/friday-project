@@ -30,7 +30,10 @@ export function PacksTable({ columnPropsNames }: PacksTablePropsType) {
   const dispatch = useAppDispatch()
 
   const updateParams = (newParams: { [param: string]: string }) => {
-    setSearchParams(createSearchParams({ ...params, ...newParams, page: '1' }))
+    setSearchParams(
+      createSearchParams({ ...params, ...newParams, page: '1' }),
+      { replace: true }
+    )
   }
 
   const productsData = useMemo(() => [...(packs as never[])], [packs])

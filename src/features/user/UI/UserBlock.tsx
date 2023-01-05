@@ -4,6 +4,7 @@ import s from './UserBlock.module.css'
 import { useAppDispatch, useAppSelector } from '../../../state/store'
 import { getUser } from '../BLL/userThunk'
 import { userSelector } from '../BLL/selectorUser'
+import { userSlice } from '../BLL/userSlice'
 
 const createDate = (date: Date): string => {
   return new Intl.DateTimeFormat('ru-ru', {
@@ -17,9 +18,10 @@ export const UserBlock = ({ id }: { id: string }) => {
   const user = useAppSelector(userSelector)
   const dispatch = useAppDispatch()
   useEffect(() => {
+    dispatch(userSlice.actions.resetUser())
     setTimeout(() => {
       dispatch(getUser({ id }))
-    }, 1000)
+    }, 1500)
   }, [])
   return (
     <Paper className={s.userContainer}>

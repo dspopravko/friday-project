@@ -18,10 +18,11 @@ export const PacksTableControls = () => {
 
   const updateParams = (newParams: { [param: string]: string }[]) =>
     setSearchParams(
-      createSearchParams({ ...params, ...Object.assign({}, ...newParams) })
+      createSearchParams({ ...params, ...Object.assign({}, ...newParams) }),
+      { replace: true }
     )
   const clearParams = () => {
-    setSearchParams(createSearchParams({}))
+    setSearchParams(createSearchParams({}), { replace: true })
   }
   const activeButton = () => {
     if (params.user_id === userID) {
