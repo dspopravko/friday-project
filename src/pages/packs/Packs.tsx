@@ -12,6 +12,7 @@ import {
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { HeaderContext } from '../../context/context'
 import { PacksHeader } from '../../features/packs/UI/Header/PacksHeader'
+import { goBackButtonTitles } from '../../layout/Header/Header'
 
 export const Packs = () => {
   useSetHeaderTitle('Packs')
@@ -22,7 +23,7 @@ export const Packs = () => {
   const params = Object.fromEntries(searchParams)
   const dispatch = useAppDispatch()
   useEffect(() => {
-    setGoBackButtonTitle('')
+    setGoBackButtonTitle(goBackButtonTitles.none)
   }, [])
   useEffect(() => {
     dispatch(getPacks(params))

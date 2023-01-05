@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { Typography } from '@mui/material'
 import { HeaderContext } from '../../context/context'
+import { goBackButtonTitles } from '../../layout/Header/Header'
 
 export const Learn = ({ pageCount = 100 }: { pageCount?: number }) => {
   const { setGoBackButtonTitle } = useContext(HeaderContext)
@@ -13,7 +14,7 @@ export const Learn = ({ pageCount = 100 }: { pageCount?: number }) => {
   const dispatch = useAppDispatch()
   const { id } = useParams()
   useEffect(() => {
-    setGoBackButtonTitle('Go back')
+    setGoBackButtonTitle(goBackButtonTitles.back)
     id && dispatch(getAllCards({ cardsPack_id: id, pageCount }))
   }, [id])
 

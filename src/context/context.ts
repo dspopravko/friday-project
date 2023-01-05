@@ -1,13 +1,14 @@
 import { createContext } from 'react'
+import { goBackButtonTitles } from '../layout/Header/Header'
 
 type ThemeContextType = {
-  goBackButtonTitle: string
-  setGoBackButtonTitle: (title: string) => void
+  goBackButtonTitle: goBackButtonTitles
+  setGoBackButtonTitle: (title: goBackButtonTitles) => void
   title: string
   setTitle: (title: string) => void
 }
 const DefaultState = {
-  goBackButtonTitle: '',
+  goBackButtonTitle: goBackButtonTitles.none,
   setGoBackButtonTitle: () => undefined,
   title: 'Loading...',
   setTitle: () => undefined,

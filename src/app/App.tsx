@@ -8,10 +8,12 @@ import { Provider } from 'react-redux'
 import { ThemeProvider } from '@mui/material'
 import { store } from '../state/store'
 import { theme } from '../assets/mui-theme'
+import { goBackButtonTitles } from '../layout/Header/Header'
 
 function App() {
   const [title, setTitle] = useState('')
-  const [goBackButtonTitle, setGoBackButtonTitle] = useState('')
+  const [goBackButtonTitle, setGoBackButtonTitle] =
+    useState<goBackButtonTitles>(goBackButtonTitles.none)
   return (
     <div style={{ textAlign: 'center' }}>
       <BrowserRouter>

@@ -16,9 +16,10 @@ export function CardsTable() {
   const [searchParams, setSearchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
 
-  const updateParams = (newParams: { [param: string]: string }) => {
-    setSearchParams(createSearchParams({ ...params, ...newParams }))
-  }
+  const updateParams = (newParams: { [param: string]: string }) =>
+    setSearchParams(createSearchParams({ ...params, ...newParams }), {
+      replace: true,
+    })
 
   const productsData = useMemo(() => [...(cards as Array<never>)], [cards])
   const productsColumns = useMemo(() => {

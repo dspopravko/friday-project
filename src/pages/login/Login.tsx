@@ -12,7 +12,7 @@ export const Login = () => {
   useSetHeaderTitle('Login', 'Login')
   const isAuth = useAppSelector(isAuthSelector)
   if (isAuth) {
-    return <Navigate to={'/' + PATH.PROFILE} />
+    return <Navigate to={'/' + PATH.PACKS} />
   }
   return (
     <Card className={'loginCanvas'}>

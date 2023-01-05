@@ -18,9 +18,9 @@ export const Pages = () => {
   return (
     <Routes>
       <Route element={<PrivateRoutes />}>
+        <Route path={PATH.PACKS} element={<Packs />} />
         <Route path={PATH.PROFILE} element={<Profile />} />
         <Route path={PATH.CARDS + '/:id'} element={<Cards />} />
-        <Route path={PATH.PACKS} element={<Packs />} />
         <Route path={PATH.LEARN + '/:id'} element={<Learn />} />
       </Route>
       <Route path={PATH.LOGIN.MAIN} element={<Login />} />
@@ -30,7 +30,7 @@ export const Pages = () => {
       <Route path={PATH.NEWPASSWORD + '/:token'} element={<NewPassword />} />
       <Route path={PATH.TESTS} element={<Test />} />
       <Route path={'*'} element={<Error404 />} />
-      <Route path={''} element={<Navigate to={PATH.PROFILE} />} />
+      <Route path={''} element={<Navigate to={PATH.PACKS} />} />
     </Routes>
   )
 }

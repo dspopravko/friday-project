@@ -15,6 +15,7 @@ import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { HeaderContext } from '../../context/context'
 import { cardsSlice } from '../../features/cards/BLL/cardsSlice'
 import { CardsHeader } from '../../features/cards/UI/Header/CardsHeader'
+import { goBackButtonTitles } from '../../layout/Header/Header'
 
 export const Cards = () => {
   useSetHeaderTitle('Cards')
@@ -31,8 +32,8 @@ export const Cards = () => {
 
   useEffect(() => {
     dispatch(cardsSlice.actions.resetPack())
-    setGoBackButtonTitle('Go back to Packs list')
-    return () => setGoBackButtonTitle('')
+    setGoBackButtonTitle(goBackButtonTitles.back)
+    return () => setGoBackButtonTitle(goBackButtonTitles.none)
   }, [])
   useEffect(() => {
     id && dispatch(getCards({ cardsPack_id: id, ...params }))

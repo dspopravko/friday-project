@@ -10,7 +10,8 @@ export const CardsTableControls = () => {
 
   const updateParams = (newParams: { [param: string]: string }[]) =>
     setSearchParams(
-      createSearchParams({ ...params, ...Object.assign({}, ...newParams) })
+      createSearchParams({ ...params, ...Object.assign({}, ...newParams) }),
+      { replace: true }
     )
 
   return (

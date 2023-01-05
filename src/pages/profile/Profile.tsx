@@ -11,6 +11,7 @@ import { profileSelector } from '../../features/auth/common/selectors/selectorsA
 import { updateProfile } from '../../features/auth/profile/BLL/profileThunk'
 import { EditNameUser } from '../../common/EditNameUser/EditNameUser'
 import XButton from '../../common/Button/XButton'
+import { goBackButtonTitles } from '../../layout/Header/Header'
 
 export const Profile = () => {
   const { setGoBackButtonTitle } = useContext(HeaderContext)
@@ -21,8 +22,8 @@ export const Profile = () => {
   const logoutHandler = () => dispatch(logout())
 
   useEffect(() => {
-    setGoBackButtonTitle('Go back')
-    return () => setGoBackButtonTitle('')
+    setGoBackButtonTitle(goBackButtonTitles.toPacks)
+    return () => setGoBackButtonTitle(goBackButtonTitles.none)
   }, [])
 
   const onOpenChange = (name: string) => dispatch(updateProfile({ name }))
