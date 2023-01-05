@@ -17,7 +17,9 @@ export const UserBlock = ({ id }: { id: string }) => {
   const user = useAppSelector(userSelector)
   const dispatch = useAppDispatch()
   useEffect(() => {
-    dispatch(getUser({ id }))
+    setTimeout(() => {
+      dispatch(getUser({ id }))
+    }, 1000)
   }, [])
   return (
     <Paper className={s.userContainer}>
