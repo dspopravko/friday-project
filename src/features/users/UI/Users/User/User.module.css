@@ -1,0 +1,19 @@
+.userContainer {
+  background-color: white;
+  border-radius: 7px;
+  width: 280px;
+  height: 110px;
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+}
+.textContainer {
+  text-align: left;
+  width: 176px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

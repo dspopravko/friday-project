@@ -12,6 +12,7 @@ import { profileReducer } from '../features/auth/profile/BLL/profileSlice'
 import { packsReducer } from '../features/packs/BLL/packsSlice'
 import { cardsReducer } from '../features/cards/BLL/cardsSlice'
 import { learnReducer } from '../features/learn/BLL/learnSlice'
+import { usersReducer } from '../features/users/BLL/usersSlice'
 
 export type ReduxStateType = ReturnType<typeof rootReducer>
 
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   packs: packsReducer,
   cards: cardsReducer,
   learn: learnReducer,
+  users: usersReducer,
 })
 
 export const store = configureStore({
