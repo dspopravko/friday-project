@@ -12,8 +12,8 @@ export const Footer = () => {
   const dispatch = useAppDispatch()
   const authCorrect = () => {
     const auth: loginPayload = {
-      email: 'nya-admin@nya.nya',
-      password: '1qazxcvBG',
+      email: 'demid1498@gmail.com',
+      password: 'parol1498',
     }
     dispatch(login(auth))
   }
@@ -80,6 +80,12 @@ export const Footer = () => {
         style={({ isActive }) => ({ color: isActive ? activeColor : color })}
       >
         Users
+      </NavLink>
+      <NavLink
+        to={PATH.USER + '/639b559ecedb881e98d7cb1d'}
+        style={({ isActive }) => ({ color: isActive ? activeColor : color })}
+      >
+        User
       </NavLink>
 
       <button onClick={() => authCorrect()}>auth correct</button>

@@ -9,6 +9,10 @@
   justify-content: flex-start;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
+}
+.userContainer:hover {
+  background-color: #f8f8f8;
 }
 .textContainer {
   text-align: left;

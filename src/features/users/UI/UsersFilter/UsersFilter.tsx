@@ -21,7 +21,14 @@ export const UsersFilter = () => {
     dispatch(getUsers(params))
   }, [searchParams])
   return (
-    <div style={{ backgroundColor: '#f3f3f3', padding: '10px' }}>
+    <div
+      style={{
+        gap: '20px',
+        backgroundColor: '#f3f3f3',
+        padding: '10px',
+        borderRadius: '12px',
+      }}
+    >
       <Typography>Search by name</Typography>
       <DebouncedInput
         onDebouncedChange={(input) => updateParams([{ userName: input }])}

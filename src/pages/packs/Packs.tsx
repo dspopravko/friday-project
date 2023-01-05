@@ -32,7 +32,16 @@ export const Packs = () => {
     <div style={{ marginTop: 60 }}>
       <PacksHeader />
       <PacksTableControls />
-      <PacksTable />
+      <PacksTable
+        columnPropsNames={[
+          'deckCover',
+          'name',
+          'cardsCount',
+          'updated',
+          'user_name',
+          '_id',
+        ]}
+      />
       <TablePagination
         page={currentPage}
         maxPage={maxPage}

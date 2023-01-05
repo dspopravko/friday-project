@@ -14,6 +14,7 @@ import { Cards } from './cards/Cards'
 import { Packs } from './packs/Packs'
 import { Learn } from './learn/Learn'
 import { UsersPage } from './users/UsersPage'
+import { UserPage } from './user/UserPage'
 
 export const Pages = () => {
   return (
@@ -22,6 +23,7 @@ export const Pages = () => {
         <Route path={PATH.PACKS} element={<Packs />} />
         <Route path={PATH.PROFILE} element={<Profile />} />
         <Route path={PATH.USERS} element={<UsersPage />} />
+        <Route path={PATH.USER + '/:id'} element={<UserPage />} />
         <Route path={PATH.CARDS + '/:id'} element={<Cards />} />
         <Route path={PATH.LEARN + '/:id'} element={<Learn />} />
       </Route>

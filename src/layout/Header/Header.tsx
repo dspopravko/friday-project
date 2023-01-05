@@ -5,9 +5,10 @@ import { useAppSelector } from '../../state/store'
 import { ProfileHeaderButton } from '../../features/auth/profile/UI/HeaderButton/ProfileHeaderButton'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { PATH } from '../../data/paths'
-import { Button, Fab } from '@mui/material'
+import { Button, Fab, IconButton } from '@mui/material'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 import { isAuthSelector } from '../../features/auth/common/selectors/selectorsAuth'
+import Groups2Icon from '@mui/icons-material/Groups2'
 
 export enum goBackButtonTitles {
   none = '',
@@ -48,16 +49,25 @@ export const Header = () => {
             </Fab>
           )}
         </div>
-        <NavLink to={`/`} className={s.titleContainer}>
-          {'The Cards app🐬'}
-        </NavLink>
-        {isAuth ? (
-          <ProfileHeaderButton />
-        ) : (
-          <Button variant={'contained'} onClick={handleSignIn}>
-            Sign in
-          </Button>
-        )}
+        <div className={s.buttonGroup}>
+          <NavLink to={`/`} className={s.titleContainer}>
+            {'The Cards app🐬'}
+          </NavLink>
+        </div>
+        <div className={s.buttonGroup}>
+          <NavLink className={s.usersNavlink} to={`/${PATH.USERS}`}>
+            <IconButton>
+              <Groups2Icon fontSize="large" color="action" />
+            </IconButton>
+          </NavLink>
+          {isAuth ? (
+            <ProfileHeaderButton />
+          ) : (
+            <Button variant={'contained'} onClick={handleSignIn}>
+              Sign in
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   )

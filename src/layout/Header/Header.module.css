@@ -25,3 +25,15 @@
   align-items: center;
   transform: translate(-15px, 0);
 }
+.buttonGroup {
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+}
+.usersNavlink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 60px;
+}

@@ -2,12 +2,11 @@
     width: 100%;
     background: #ffffff;
     border-collapse: collapse;
-    border-radius: 30px;
+    border-radius: 10px;
     border-style: hidden; /* hide standard table (collapsed) border */
 }
 
 .tableBody .tableRow:last-child .tableCell:last-child {
-    /*border: 2px solid green;*/
     border-bottom-right-radius: 10px;
 }
 
@@ -44,7 +43,7 @@
 
 .tableCell {
     word-break: break-word;
-    max-width: 250px;
+    max-width: 200px;
     height: 48px;
     vertical-align: middle;
 }
@@ -52,17 +51,12 @@
 .tableCell:first-child {
     padding-left: 35px;
 }
-.tableCell:nth-child(5) {
-    width: 150px;
-    transition: 0.1s ease;
-}
+
 .tableCell:nth-child(6) {
     padding: 0;
     width: 0;
 }
-.tableCell:nth-child(7) {
-    width: 110px;
-}
+
 .tableBody .tableCell:nth-child(5):hover {
     font-weight: bold;
 }
