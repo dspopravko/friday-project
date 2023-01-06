@@ -2,10 +2,21 @@ import React from 'react'
 import s from './Footer.module.css'
 import { NavLink } from 'react-router-dom'
 import { PATH } from '../../data/paths'
+import { useAppDispatch } from '../../state/store'
+import { loginPayload } from '../../features/auth/login/API/loginAPI'
+import { login } from '../../features/auth/login/BLL/loginThunks'
 
 export const Footer = () => {
   const activeColor = 'var(--link-color)'
   const color = 'var(--text-color)'
+  const dispatch = useAppDispatch()
+  const authCorrect = () => {
+    const auth: loginPayload = {
+      email: 'demid1498@gmail.com',
+      password: 'parol1498',
+    }
+    dispatch(login(auth))
+  }
   return (
     <div className={s.footer}>
       <NavLink
@@ -64,6 +75,20 @@ export const Footer = () => {
       >
         Cards
       </NavLink>
+      <NavLink
+        to={PATH.USERS}
+        style={({ isActive }) => ({ color: isActive ? activeColor : color })}
+      >
+        Users
+      </NavLink>
+      <NavLink
+        to={PATH.USER + '/639b559ecedb881e98d7cb1d'}
+        style={({ isActive }) => ({ color: isActive ? activeColor : color })}
+      >
+        User
+      </NavLink>
+
+      <button onClick={() => authCorrect()}>auth correct</button>
     </div>
   )
 }

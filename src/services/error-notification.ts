@@ -1,7 +1,6 @@
 import { appSlice, appStatus } from '../state/appSlice'
 import { Dispatch } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios'
-import { loginSlice } from '../features/auth/login/BLL/loginSlice'
 
 export const handleAxiosError = (error: unknown, dispatch: Dispatch) => {
   if (error instanceof AxiosError) {
@@ -26,9 +25,9 @@ export const handleServerAppError = (
     )
     return
   }
-  if (data.error.includes('not authorized')) {
-    dispatch(loginSlice.actions.setAuth(false))
-  }
+  // if (data.error.includes('not authorized')) {
+  //   dispatch(loginSlice.actions.setAuth(false))
+  // }
   dispatch(appSlice.actions.setAppError({ error: data.error }))
 }
 

@@ -1,0 +1,12 @@
+.usersFilterContainer {
+  background-color:  #f3f3f3;
+  padding: 10px;
+  border-radius: 12px;
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.controlBlock {
+
+}

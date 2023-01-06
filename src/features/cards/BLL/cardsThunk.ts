@@ -6,7 +6,10 @@ import { thunkTryCatch } from '../../../api/thunkTryCatch'
 export const getCards = createAsyncThunk(
   'tables/get',
   async (data: Partial<CardsPageParamsType>, thunkApi) => {
-    return thunkTryCatch(thunkApi, async () => await cardsAPI.getCards(data))
+    return thunkTryCatch(
+      thunkApi,
+      async () => await cardsAPI.getCards({ pageCount: 10, ...data })
+    )
   }
 )
 

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { getCards } from '../../features/cards/BLL/cardsThunk'
@@ -12,14 +12,13 @@ import {
 import { TablePagination } from '../../common/TablePagination/TablePagination'
 import { userIDSelector } from '../../features/auth/common/selectors/selectorsAuth'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
-import { HeaderContext } from '../../context/context'
 import { cardsSlice } from '../../features/cards/BLL/cardsSlice'
 import { CardsHeader } from '../../features/cards/UI/Header/CardsHeader'
 import { goBackButtonTitles } from '../../layout/Header/Header'
+import { useGoBackButton } from '../../hooks/useGoBackButton'
 
 export const Cards = () => {
   useSetHeaderTitle('Cards')
-  const { setGoBackButtonTitle } = useContext(HeaderContext)
   const currentPage = useAppSelector(currentPageSelector)
   const maxPage = useAppSelector(maxPageSelector)
   const currentPackInfo = useAppSelector(cardsCurrentPackInfo)
@@ -29,11 +28,9 @@ export const Cards = () => {
   const [searchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const dispatch = useAppDispatch()
-
+  useGoBackButton(goBackButtonTitles.back)
   useEffect(() => {
     dispatch(cardsSlice.actions.resetPack())
-    setGoBackButtonTitle(goBackButtonTitles.back)
-    return () => setGoBackButtonTitle(goBackButtonTitles.none)
   }, [])
   useEffect(() => {
     id && dispatch(getCards({ cardsPack_id: id, ...params }))
@@ -51,6 +48,7 @@ export const Cards = () => {
         page={currentPage}
         maxPage={maxPage}
         pageCount={+params.pageCount}
+        initPageCount={10}
         title={'cards'}
       />
     </div>

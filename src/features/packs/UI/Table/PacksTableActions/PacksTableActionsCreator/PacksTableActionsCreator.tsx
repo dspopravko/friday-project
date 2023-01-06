@@ -3,13 +3,14 @@ import React from 'react'
 import { PacksType } from '../../../../BLL/packsSlice'
 import { PacksTableActionButtons } from '../PacksTableActionButtons/PacksTableActionButtons'
 
-//Здесь мы добавляем кнопку к каждой строчке
 export const packsTableActionsCreator = (userID: string) => (hooks: Hooks) => {
   hooks.visibleColumns.push((columns) => [
     ...columns,
     {
       id: 'Edit',
-      Header: 'Actions',
+      Header: () => {
+        return <p style={{ width: '70px' }}>Actions</p>
+      },
       Cell: ({ row }: { row: Row }) => {
         const typedRow = row.original as PacksType
         return (

@@ -6,7 +6,9 @@ import { thunkTryCatch } from '../../../api/thunkTryCatch'
 export const getPacks = createAsyncThunk(
   'packs/get',
   async (data: Partial<PacksPageParamsType>, thunkApi) => {
-    return thunkTryCatch(thunkApi, async () => packsAPI.getPacks(data))
+    return thunkTryCatch(thunkApi, async () =>
+      packsAPI.getPacks({ pageCount: 10, ...data })
+    )
   }
 )
 

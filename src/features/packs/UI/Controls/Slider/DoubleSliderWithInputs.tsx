@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TextField } from '@mui/material'
 import { DoubleRangeSlider } from '../../../../../common/selectors/DoubleRange/DoubleRangeSlider'
 import s from './DoubleSliderWithInputs.module.css'
@@ -14,19 +14,18 @@ export const DoubleSliderWithInputs = ({
   border,
   onChangeCommitted,
 }: DoubleSliderWithInputsPropsType) => {
-  const isInitialized = useRef(false)
-  const [localValue, setLocalValue] = useState({ min: 0, max: 100 })
+  const [initialized, setInitialized] = useState(false)
+  const [localValue, setLocalValue] = useState({ min: 0, max: 1000 })
   const [timerId, setTimerId] = useState<number | undefined>(undefined)
 
   const handleInput = (newParams: { [param: string]: string }[]) => {
-    isInitialized.current = true
+    setInitialized(true)
     setLocalValue({ ...localValue, ...Object.assign({}, ...newParams) })
   }
-
   //sends debounced position on callback
   useEffect(() => {
     //prevent sending position on the first render
-    if (!isInitialized.current) {
+    if (!initialized) {
       return
     }
     timerId && clearTimeout(timerId)
@@ -50,20 +49,22 @@ export const DoubleSliderWithInputs = ({
 
   useEffect(() => {
     //reset current value if out of new boundaries
-    if (current[1] > border[1]) {
+    if (localValue.max > border[1]) {
       setLocalValue({ min: border[0], max: border[1] })
       return
     }
     //set boundaries on initialization
-    if (!isNaN(border[1]) && !isInitialized.current) {
-      setLocalValue({ ...localValue, max: border[1] })
+    if (!isNaN(border[1]) && !initialized) {
+      setLocalValue({ min: current[0] || 0, max: border[1] })
     }
   }, [border])
-
   return (
     <div style={{ display: 'flex' }}>
       <div>
         <TextField
+          sx={{
+            backgroundColor: 'white',
+          }}
           size="small"
           className={s.input}
           name="From"
@@ -93,7 +94,7 @@ export const DoubleSliderWithInputs = ({
       />
       <div>
         <TextField
-          sx={{ p: '1px' }}
+          sx={{ p: '1px', backgroundColor: 'white' }}
           className={s.input}
           size="small"
           name="To"

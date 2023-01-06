@@ -7,6 +7,8 @@ export const PATH = {
   SUCCESS: 'success',
   NEWPASSWORD: 'set-new-password',
   PROFILE: 'profile',
+  USERS: 'users',
+  USER: 'user',
   ERROR404: '404',
   TESTS: 'test',
   CARDS: 'cards',

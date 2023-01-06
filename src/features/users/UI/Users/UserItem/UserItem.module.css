@@ -1,0 +1,23 @@
+.userContainer {
+  background-color: white;
+  border-radius: 7px;
+  min-width: min-content;
+  height: 110px;
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+.userContainer:hover {
+  background-color: #f8f8f8;
+}
+.textContainer {
+  text-align: left;
+  width: 176px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

@@ -1,0 +1,9 @@
+.tablePaginationContainer {
+  margin: 20px 0 16px 0;
+  display: flex;
+  align-items: center;
+}
+.pageCountSelect {
+  width: 50px;
+  margin: 0 10px 0 10px;
+}

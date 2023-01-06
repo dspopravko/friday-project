@@ -43,6 +43,9 @@ export const DebouncedInput = ({
 
   return (
     <TextField
+      sx={{
+        backgroundColor: 'white',
+      }}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
