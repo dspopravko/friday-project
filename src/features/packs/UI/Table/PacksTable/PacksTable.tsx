@@ -15,6 +15,7 @@ import { PackType } from '../../../API/types'
 import { isPacksPending, packsSelector } from '../../../BLL/selectorsPacks'
 import { packsTableActionsCreator } from '../PacksTableActions/PacksTableActionsCreator/PacksTableActionsCreator'
 import { Typography } from '@mui/material'
+import s2 from './PacksTable.module.css'
 
 type PacksTablePropsType = {
   columnPropsNames: string[]
@@ -78,10 +79,8 @@ export function PacksTable({ columnPropsNames }: PacksTablePropsType) {
   return (
     <>
       <div
+        className={s2.packsTableContainer}
         style={{
-          display: 'flex',
-          width: '100%',
-          overflowX: 'auto',
           opacity: pending ? '0.4' : '1',
         }}
       >

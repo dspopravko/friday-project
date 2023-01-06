@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { UserType } from '../API/types'
+import { UsersResponseType, UserType } from '../API/types'
 import { getUsers } from './usersThunk'
 
 const initialState = {
   users: [] as UserType[],
-  pending: false,
-  errors: '',
+  usersGeneral: {} as Omit<UsersResponseType, 'users'>,
+  pending: true,
 }
 
 export const usersSlice = createSlice({
@@ -16,6 +16,13 @@ export const usersSlice = createSlice({
     builder.addCase(getUsers.fulfilled, (state, action) => {
       state.pending = false
       state.users = action.payload.users
+      state.usersGeneral = action.payload.usersGeneral
+    })
+    builder.addCase(getUsers.pending, (state) => {
+      state.pending = true
+    })
+    builder.addCase(getUsers.rejected, (state) => {
+      state.pending = false
     })
   },
 })

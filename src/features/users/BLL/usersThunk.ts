@@ -7,8 +7,7 @@ export const getUsers = createAsyncThunk(
   'users/get-users',
   async (params: Partial<UsersPageParamsType>, thunkApi) => {
     return thunkTryCatch(thunkApi, async () => {
-      const res = await usersAPI.getUsers({ pageCount: 6, ...params })
-      return res.data
+      return await usersAPI.getUsers({ pageCount: 6, ...params })
     })
   }
 )

@@ -37,7 +37,7 @@ export const PacksTableControls = () => {
     <div className={s.controlWrapper}>
       {/*Search Input*/}
       <div className={s.controlBlock} style={{ flexGrow: 1 }}>
-        <Typography>Search</Typography>
+        <Typography>Search by pack name</Typography>
         <DebouncedInput
           onDebouncedChange={(input) => updateParams([{ packName: input }])}
           value={params.packName}

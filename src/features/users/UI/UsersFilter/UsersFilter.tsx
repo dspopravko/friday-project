@@ -4,7 +4,9 @@ import { DebouncedInput } from '../../../packs/UI/Controls/SearchInput'
 import { createSearchParams, useSearchParams } from 'react-router-dom'
 import { useAppDispatch } from '../../../../state/store'
 import { getUsers } from '../../BLL/usersThunk'
-import { Typography } from '@mui/material'
+import { IconButton, Typography } from '@mui/material'
+import s from './UsersFilter.module.css'
+import FilterAltOffIcon from '@mui/icons-material/FilterAltOff'
 
 export const UsersFilter = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -15,33 +17,36 @@ export const UsersFilter = () => {
       createSearchParams({ ...params, ...Object.assign({}, ...newParams) }),
       { replace: true }
     )
-  // const clearParams = () => {
-  //   setSearchParams(createSearchParams({}))
-  // }
+  const clearParams = () => {
+    setSearchParams(createSearchParams({}), { replace: true })
+  }
   useEffect(() => {
     dispatch(getUsers(params))
   }, [searchParams])
   return (
-    <div
-      style={{
-        gap: '20px',
-        backgroundColor: '#f3f3f3',
-        padding: '10px',
-        borderRadius: '12px',
-      }}
-    >
-      <Typography>Search by name</Typography>
-      <DebouncedInput
-        onDebouncedChange={(input) => updateParams([{ userName: input }])}
-        value={params.packName}
-        placeholder={'Input name here'}
-      />
-      <Typography>Search by cards count</Typography>
-      <DoubleSliderWithInputs
-        current={[+params.min, +params.max]}
-        border={[0, 100]}
-        onChangeCommitted={updateParams}
-      />
+    <div className={s.usersFilterContainer}>
+      <div className={s.controlBlock}>
+        <Typography>Search by name</Typography>
+        <DebouncedInput
+          onDebouncedChange={(input) => updateParams([{ userName: input }])}
+          value={params.userName}
+          placeholder={'Input name here'}
+        />
+      </div>
+      <div className={s.controlBlock}>
+        <Typography>Search by cards count</Typography>
+        <DoubleSliderWithInputs
+          current={[+params.min, +params.max]}
+          border={[0, 100]}
+          onChangeCommitted={updateParams}
+        />
+      </div>
+      <div className={s.controlBlock}>
+        <Typography>Clear</Typography>
+        <IconButton onClick={clearParams}>
+          <FilterAltOffIcon />
+        </IconButton>
+      </div>
     </div>
   )
 }

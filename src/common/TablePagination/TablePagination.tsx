@@ -2,6 +2,7 @@ import React from 'react'
 import { Pagination } from '@mui/material'
 import { createSearchParams, useSearchParams } from 'react-router-dom'
 import XSelect from '../selectors/Select/XSelect'
+import s from './TablePagination.module.css'
 
 const pageCountOptions = [
   { id: 4, value: '4' },
@@ -12,6 +13,7 @@ type TablePaginationPropsType = {
   page: number
   maxPage: number
   pageCount: number
+  initPageCount: number
   title?: string
 }
 
@@ -19,6 +21,7 @@ export const TablePagination = ({
   page,
   maxPage,
   pageCount,
+  initPageCount = 4,
   title = 'items',
 }: TablePaginationPropsType) => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -30,7 +33,7 @@ export const TablePagination = ({
     )
 
   return (
-    <div style={{ marginTop: '20px', display: 'flex', alignItems: 'center' }}>
+    <div className={s.tablePaginationContainer}>
       <Pagination
         page={isNaN(page) ? 1 : page}
         count={isNaN(maxPage) ? 1 : maxPage}
@@ -38,8 +41,8 @@ export const TablePagination = ({
       />
       Show
       <XSelect
-        style={{ width: 50, margin: '0 10px 0 10px' }}
-        value={pageCount || 10}
+        className={s.pageCountSelect}
+        value={pageCount || initPageCount}
         onChangeOption={(option) =>
           handleChange(+pageCountOptions[option - 1].value, 'pageCount')
         }

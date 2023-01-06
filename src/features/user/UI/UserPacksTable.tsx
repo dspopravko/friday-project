@@ -9,6 +9,7 @@ import {
 } from '../../packs/BLL/selectorsPacks'
 import { useSearchParams } from 'react-router-dom'
 import { getPacks } from '../../packs/BLL/packsThunk'
+import s from './UserPacksTabel.module.css'
 
 export const UserPacksTable = ({ id }: { id: string }) => {
   const dispatch = useAppDispatch()
@@ -21,7 +22,7 @@ export const UserPacksTable = ({ id }: { id: string }) => {
   }, [searchParams])
 
   return (
-    <Paper style={{ width: 800 }}>
+    <Paper className={s.userPacksTableContainer}>
       <PacksTable
         columnPropsNames={['deckCover', 'name', 'cardsCount', 'updated', '_id']}
       />
@@ -29,6 +30,7 @@ export const UserPacksTable = ({ id }: { id: string }) => {
         page={currentPage}
         maxPage={maxPage}
         pageCount={+params.pageCount}
+        initPageCount={10}
         title={'packs'}
       />
     </Paper>

@@ -1,7 +1,7 @@
 .userContainer {
   background-color: white;
   border-radius: 7px;
-  width: 280px;
+  min-width: min-content;
   height: 110px;
   margin: 10px;
   display: flex;

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { PacksTableControls } from '../../features/packs/UI/Controls/PacksTableControls'
 import { PacksTable } from '../../features/packs/UI/Table/PacksTable/PacksTable'
 import { getPacks } from '../../features/packs/BLL/packsThunk'
@@ -10,21 +10,19 @@ import {
   maxPageSelector,
 } from '../../features/packs/BLL/selectorsPacks'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
-import { HeaderContext } from '../../context/context'
 import { PacksHeader } from '../../features/packs/UI/Header/PacksHeader'
 import { goBackButtonTitles } from '../../layout/Header/Header'
+import { useGoBackButton } from '../../hooks/useGoBackButton'
 
 export const Packs = () => {
   useSetHeaderTitle('Packs')
-  const { setGoBackButtonTitle } = useContext(HeaderContext)
   const currentPage = useAppSelector(currentPageSelector)
   const maxPage = useAppSelector(maxPageSelector)
   const [searchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const dispatch = useAppDispatch()
-  useEffect(() => {
-    setGoBackButtonTitle(goBackButtonTitles.none)
-  }, [])
+  useGoBackButton(goBackButtonTitles.none)
+
   useEffect(() => {
     dispatch(getPacks(params))
   }, [searchParams])
@@ -46,6 +44,7 @@ export const Packs = () => {
         page={currentPage}
         maxPage={maxPage}
         pageCount={+params.pageCount}
+        initPageCount={10}
         title={'packs'}
       />
     </div>

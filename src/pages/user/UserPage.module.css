@@ -1,4 +1,5 @@
 .userPageContainer {
+  min-height: 436px;
   margin-top: 80px;
   display: grid;
   grid-auto-flow: column;
