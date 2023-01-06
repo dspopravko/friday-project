@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { TextField } from '@mui/material'
-import { DoubleRangeSlider } from '../../../../../common/selectors/DoubleRange/DoubleRangeSlider'
+import { DoubleRangeSlider } from '../../../../../common'
 import s from './DoubleSliderWithInputs.module.css'
 
 type DoubleSliderWithInputsPropsType = {

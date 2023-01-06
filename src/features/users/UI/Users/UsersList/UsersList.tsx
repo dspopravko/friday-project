@@ -8,7 +8,7 @@ import {
   usersSelector,
 } from '../../../BLL/selectorsUsers'
 import { CircularProgress, Typography } from '@mui/material'
-import { TablePagination } from '../../../../../common/TablePagination/TablePagination'
+import { TablePagination } from '../../../../../common'
 import { UseSearchParamsObject } from '../../../../../hooks/useSearchParamsObject'
 import s from './UsersList.module.css'
 
@@ -20,7 +20,7 @@ export const UsersList = () => {
   const params = UseSearchParamsObject()
   return (
     <div className={s.userListContainer}>
-      <div style={{ opacity: pending ? 0.4 : 1 }}>
+      <div className={s.listContainer} style={{ opacity: pending ? 0.4 : 1 }}>
         {users.map((u) => (
           <UserItem key={u._id} {...u} />
         ))}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { PacksType } from '../../../BLL/packsSlice'
 import cardsBlank from '../../../../../assets/cardsBlank.svg'
-import { TableDateColumn } from '../../../../../common/TableDateColumnWithSort/TableDateColumn'
+import { TableDateColumn } from '../../../../../common'
 
 export const PacksTableColumnsRender = (
   packs: PacksType[],

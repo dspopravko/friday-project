@@ -1,6 +1,6 @@
 import { AppRootStateType } from '../../../../state/store'
 
-export const userIDSelector = (state: AppRootStateType) =>
+export const ownerIDSelector = (state: AppRootStateType) =>
   state.profile.user._id
 export const profileSelector = (state: AppRootStateType) => state.profile
 export const isAuthSelector = (state: AppRootStateType) => state.auth.isAuth

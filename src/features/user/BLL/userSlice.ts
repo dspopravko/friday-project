@@ -4,16 +4,15 @@ import { getUser } from './userThunk'
 
 const initialState = {
   user: {} as UserType,
-  pending: false,
-  errors: '',
+  pending: true,
 }
 
-export const userSlice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState: initialState,
   reducers: {
-    resetUser(state) {
-      state.user = {} as UserType
+    resetState() {
+      return initialState
     },
   },
   extraReducers: (builder) => {
@@ -25,3 +24,4 @@ export const userSlice = createSlice({
 })
 
 export const userReducer = userSlice.reducer
+export const userActions = userSlice.actions

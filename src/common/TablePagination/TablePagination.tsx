@@ -1,7 +1,7 @@
 import React from 'react'
 import { Pagination } from '@mui/material'
 import { createSearchParams, useSearchParams } from 'react-router-dom'
-import XSelect from '../selectors/Select/XSelect'
+import { XSelect } from './..'
 import s from './TablePagination.module.css'
 
 const pageCountOptions = [
@@ -43,7 +43,7 @@ export const TablePagination = ({
       <XSelect
         className={s.pageCountSelect}
         value={pageCount || initPageCount}
-        onChangeOption={(option) =>
+        onChangeOption={(option: number) =>
           handleChange(+pageCountOptions[option - 1].value, 'pageCount')
         }
         options={pageCountOptions}

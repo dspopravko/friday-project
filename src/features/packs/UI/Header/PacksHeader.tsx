@@ -1,5 +1,5 @@
 import React from 'react'
-import { HeaderButtonWithTitle } from '../../../../common/HeaderButtonWithTitle/HeaderButtonWithTitle'
+import { HeaderButtonWithTitle } from '../../../../common'
 import { ModalNewPack } from '../modals/modal-new-pack/ModalNewPack'
 
 export const PacksHeader = () => {

@@ -1,20 +1,17 @@
-export function cardsCheer(numberOfCards: number) {
+export function cardsCheer(numberOfPacks: number) {
   let response
   switch (true) {
-    case numberOfCards < 5:
-      response = `I see you just started! You have ${numberOfCards} cards, let's add more!`
+    case numberOfPacks < 3:
+      response = `I see you just started! You have ${numberOfPacks} packs, let's add more!`
       break
-    case numberOfCards < 20:
-      response = `You have the average amount of cards. ${numberOfCards} by the way`
+    case numberOfPacks < 6:
+      response = `I see you've got a taste for it! ${numberOfPacks} packs are something.`
       break
-    case numberOfCards < 40:
-      response = `I see you've got a taste for it! ${numberOfCards} cards are something.`
-      break
-    case numberOfCards < 100:
-      response = `It would be nice to have time to learn all ${numberOfCards}, wouldn't it?`
+    case numberOfPacks < 9:
+      response = `It would be nice to have time to learn all ${numberOfPacks} of your packs, wouldn't it?`
       break
     default:
-      response = `It can't be that you really need ${numberOfCards} cards!`
+      response = `It can't be that you really need ${numberOfPacks} packs!`
       break
   }
   return response

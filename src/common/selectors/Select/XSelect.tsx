@@ -5,7 +5,7 @@ import React, {
 } from 'react'
 import s from './XSelect.module.css'
 
-export type arrType = {
+type arrType = {
   id: number
   value: string
 }
@@ -20,7 +20,7 @@ type SuperSelectPropsType = DefaultSelectPropsType & {
   onChangeOption?: (option: number) => void
 }
 
-const XSelect: React.FC<SuperSelectPropsType> = ({
+export const XSelect: React.FC<SuperSelectPropsType> = ({
   options,
   className,
   onChangeOption,
@@ -54,5 +54,3 @@ const XSelect: React.FC<SuperSelectPropsType> = ({
     </select>
   )
 }
-
-export default XSelect

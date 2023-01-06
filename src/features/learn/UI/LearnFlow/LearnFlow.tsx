@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../state/store'
-import { CardsType } from '../../../cards/BLL/cardsSlice'
-import { learnSlice } from '../../BLL/learnSlice'
 import { LinearProgress, Paper } from '@mui/material'
 import { setGrade } from '../../BLL/learnThunk'
 import { LearnForm } from '../LearnForm/LearnForm'
 import { SuccessBig } from '../../../auth/common/components/successBig'
 import { PATH } from '../../../../data/paths'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
+import { CardType } from '../../../cards/API/types'
+import { learnActions } from '../../BLL/learnSlice'
 
 export const LearnFlow = () => {
   const cards = useAppSelector((state) => state.learn.cards)
   const isCompleted = useAppSelector((state) => state.learn.isCompleted)
   const [cardsLeft, setCardsLeft] = useState(0)
   const [total, setTotal] = useState<number | null>(null)
-  const [currentCard, setCurrentCard] = useState<CardsType | null>(null)
+  const [currentCard, setCurrentCard] = useState<CardType | null>(null)
   const dispatch = useAppDispatch()
   useEffect(() => {
     setCurrentCard(getRandomCard())
     return () => {
-      dispatch(learnSlice.actions.resetSlice())
+      dispatch(learnActions.resetSlice())
     }
   }, [])
   useEffect(() => {
@@ -35,7 +35,7 @@ export const LearnFlow = () => {
       return
     }
     if (grade >= 5) {
-      dispatch(learnSlice.actions.removeCard({ cardId: currentCard._id }))
+      dispatch(learnActions.removeCard({ cardId: currentCard._id }))
     }
     dispatch(setGrade({ grade, card_id: currentCard._id }))
   }
@@ -48,10 +48,10 @@ export const LearnFlow = () => {
   const getRandomCard = () => {
     const remainCards = cards.filter((card) => card._id !== currentCard?._id)
     if (remainCards.length === 0) {
-      dispatch(learnSlice.actions.learnCompleted())
+      dispatch(learnActions.learnCompleted())
       return currentCard
     }
-    let filtredCards: CardsType[]
+    let filtredCards: CardType[]
     for (let i = 1; i < 6; i++) {
       filtredCards = remainCards.filter((card) => card.grade <= i)
       if (filtredCards[0]) {

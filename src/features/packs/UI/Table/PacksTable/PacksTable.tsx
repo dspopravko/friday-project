@@ -61,17 +61,12 @@ export function PacksTable({ columnPropsNames }: PacksTablePropsType) {
     const typedRow = row as { original: PackType }
     const typedCell = cell as { column: { id: string } }
     if (typedCell.column.id === 'user_name') {
+      console.log(typedRow.original.user_name, typedRow.original.user_id)
       navigate(`/${PATH.USER}/${typedRow.original.user_id}`)
       return
     }
     if (typedCell.column.id !== 'Edit') {
-      dispatch(
-        rememberPack(
-          typedRow.original.user_name,
-          typedRow.original.name,
-          typedRow.original.deckCover
-        )
-      )
+      dispatch(rememberPack({ ...typedRow.original }))
       navigate(`/${PATH.CARDS}/${typedRow.original._id}`)
     }
   }
@@ -131,12 +126,12 @@ export function PacksTable({ columnPropsNames }: PacksTablePropsType) {
             })}
           </tbody>
         </table>
+        {!packs[0] && !pending && (
+          <Typography sx={{ m: 14 }} variant={'h5'}>
+            No packs found!
+          </Typography>
+        )}
       </div>
-      {!packs[0] && !pending && (
-        <Typography sx={{ m: 4 }} variant={'h5'}>
-          No packs found!
-        </Typography>
-      )}
     </>
   )
 }

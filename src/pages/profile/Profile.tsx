@@ -8,8 +8,7 @@ import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { CardsCheer } from '../../features/auth/profile/UI/CardsCheer'
 import { profileSelector } from '../../features/auth/common/selectors/selectorsAuth'
 import { updateProfile } from '../../features/auth/profile/BLL/profileThunk'
-import { EditNameUser } from '../../common/EditNameUser/EditNameUser'
-import XButton from '../../common/Button/XButton'
+import { EditNameUser, XButton } from '../../common'
 import { goBackButtonTitles } from '../../layout/Header/Header'
 import { useGoBackButton } from '../../hooks/useGoBackButton'
 
@@ -39,7 +38,7 @@ export const Profile = () => {
         <XButton style={{ marginTop: '22px' }} onClick={logoutHandler}>
           Log out
         </XButton>
-        <CardsCheer cardsCount={user.publicCardPacksCount} />
+        <CardsCheer packsCount={user.publicCardPacksCount} />
       </Card>
     </Grid>
   )

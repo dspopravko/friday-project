@@ -10,8 +10,8 @@ import { RootAPIResponse } from '../../../api/types'
 export const packsAPI = {
   getPacks(params: Partial<PacksPageParamsType>) {
     return instance.get<getPacksType>('cards/pack', { params }).then((res) => {
-      const { cardPacks, ...packsGeneral } = res.data
-      return { cardPacks, packsGeneral }
+      const { cardPacks, ...packsPage } = res.data
+      return { cardPacks, packsPage }
     })
   },
   deletePack(id: string) {

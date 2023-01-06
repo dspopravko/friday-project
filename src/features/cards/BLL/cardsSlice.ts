@@ -1,30 +1,25 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getCards } from './cardsThunk'
-import { CardType, getCardsType } from '../API/types'
+import { CardsPageType, CardType } from '../API/types'
 import { updatePack } from '../../packs/BLL/packsThunk'
+import { PackType } from '../../packs/API/types'
 
 export const rememberPack = createAction(
   'tables/rememberPack',
-  (userName, packName, deckCover) => ({
-    payload: { userName, packName, deckCover },
+  (currentPack: PackType) => ({
+    payload: { currentPack },
   })
 )
 
-export type CardsType = Omit<CardType, '__v' | 'more_id'>
-export type CardsGeneralType = Omit<
-  getCardsType,
-  'token' | 'tokenDeathTime' | 'cards'
->
-
 const initialState = {
-  cardsCurrent: [] as CardsType[],
-  cardsGeneral: {} as CardsGeneralType,
-  currentCardsUserName: 'Friend',
+  cardsCurrent: [] as CardType[],
+  cardsPage: {} as CardsPageType,
+  currentPack: {} as PackType,
+  currentCardsUserName: '',
   pending: false,
-  errors: '',
 }
 
-export const cardsSlice = createSlice({
+const cardsSlice = createSlice({
   name: 'cards',
   initialState: initialState,
   reducers: {
@@ -32,14 +27,14 @@ export const cardsSlice = createSlice({
       state.pending = action.payload
     },
     resetPack(state) {
-      state.cardsGeneral.packUserId = ''
+      state.cardsPage.packUserId = ''
       state.cardsCurrent = []
     },
   },
   extraReducers: (builder) => {
     builder.addCase(getCards.fulfilled, (state, action) => {
       state.cardsCurrent = action.payload.cards
-      state.cardsGeneral = action.payload.cardsGeneral
+      state.cardsPage = action.payload.cardsPage
       state.pending = false
     })
     builder.addCase(getCards.pending, (state) => {
@@ -49,14 +44,13 @@ export const cardsSlice = createSlice({
       state.pending = false
     })
     builder.addCase(rememberPack, (state, action) => {
-      state.currentCardsUserName = action.payload.userName
-      state.cardsGeneral.packName = action.payload.packName
-      state.cardsGeneral.packDeckCover = action.payload.deckCover
+      state.currentPack = action.payload.currentPack
     })
     builder.addCase(updatePack.fulfilled, (state, action) => {
-      state.cardsGeneral.packName = action.payload.updatedCardsPack.name
+      state.cardsPage.packName = action.payload.updatedCardsPack.name
     })
   },
 })
 
 export const cardsReducer = cardsSlice.reducer
+export const cardsActions = cardsSlice.actions

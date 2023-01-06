@@ -7,14 +7,18 @@ export type PacksPageParamsType = {
   packName: string
 } & PageParamsType
 
-export type getPacksType = {
+export type packsPageType = {
   minCardsCount: number
   maxCardsCount: number
   page: number
   pageCount: number
   cardPacksTotalCount: number
+}
+
+export type getPacksType = {
   cardPacks: PackType[]
-} & RootAPIResponse
+} & RootAPIResponse &
+  packsPageType
 
 export type PackType = {
   _id: string

@@ -5,43 +5,35 @@ import { getCards } from '../../features/cards/BLL/cardsThunk'
 import { CardsTableControls } from '../../features/cards/UI/Controls/CardsTableControls'
 import { CardsTable } from '../../features/cards/UI/Table/CardsTable/CardsTable'
 import {
-  cardsCurrentPackInfo,
   currentPageSelector,
   maxPageSelector,
 } from '../../features/cards/BLL/selectorsCards'
-import { TablePagination } from '../../common/TablePagination/TablePagination'
-import { userIDSelector } from '../../features/auth/common/selectors/selectorsAuth'
+import { TablePagination } from '../../common'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
-import { cardsSlice } from '../../features/cards/BLL/cardsSlice'
-import { CardsHeader } from '../../features/cards/UI/Header/CardsHeader'
 import { goBackButtonTitles } from '../../layout/Header/Header'
 import { useGoBackButton } from '../../hooks/useGoBackButton'
+import { CardsHeader } from '../../features/cards/UI/Header/CardsHeader'
+import { cardsActions } from '../../features/cards/BLL/cardsSlice'
 
 export const Cards = () => {
   useSetHeaderTitle('Cards')
   const currentPage = useAppSelector(currentPageSelector)
   const maxPage = useAppSelector(maxPageSelector)
-  const currentPackInfo = useAppSelector(cardsCurrentPackInfo)
-  const currentUserID = useAppSelector(userIDSelector)
-  const isOwner = currentPackInfo.packUserId === currentUserID
   const { id } = useParams()
   const [searchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const dispatch = useAppDispatch()
   useGoBackButton(goBackButtonTitles.back)
   useEffect(() => {
-    dispatch(cardsSlice.actions.resetPack())
+    dispatch(cardsActions.resetPack())
   }, [])
   useEffect(() => {
     id && dispatch(getCards({ cardsPack_id: id, ...params }))
   }, [id, searchParams])
 
   return (
-    <div style={{ marginTop: 60 }}>
-      <CardsHeader
-        buttonTitle={isOwner ? 'Add new card' : 'Learn pack'}
-        id={id || ''}
-      />
+    <div style={{ marginTop: 60, width: '1000px' }}>
+      <CardsHeader id={id || ''} />
       <CardsTableControls />
       <CardsTable />
       <TablePagination

@@ -1,5 +1,12 @@
 import { instance } from '../../../api/api'
-import { CardsPageParamsType, getCardsType, postCardType } from './types'
+import {
+  CardsPageParamsType,
+  CardType,
+  getCardsType,
+  postCardType,
+  updateCardType,
+} from './types'
+import { RootAPIResponse } from '../../../api/types'
 
 export const cardsAPI = {
   getCards(data: Partial<CardsPageParamsType>) {
@@ -8,8 +15,8 @@ export const cardsAPI = {
         params: data,
       })
       .then((res) => {
-        const { cards, ...cardsGeneral } = res.data
-        return { cards, cardsGeneral }
+        const { cards, ...cardsPage } = res.data
+        return { cards, cardsPage }
       })
   },
   deleteCard(cardID: string) {
@@ -19,10 +26,16 @@ export const cardsAPI = {
       },
     })
   },
-  postCard(data: postCardType) {
-    return instance.post('cards/card', { card: data })
+  postCard(data: Partial<postCardType> & { cardsPack_id: string }) {
+    return instance.post<RootAPIResponse & { newCardsPack: CardType }>(
+      'cards/card',
+      { card: data }
+    )
   },
-  updateCard(data: Omit<postCardType, 'cardsPack_id'> & { _id: string }) {
-    return instance.put('cards/card', { card: data })
+  updateCard(data: updateCardType) {
+    return instance.put<RootAPIResponse & { updatedCard: CardType }>(
+      'cards/card',
+      { card: data }
+    )
   },
 }

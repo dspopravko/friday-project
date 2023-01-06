@@ -7,7 +7,10 @@ export const learnAPI = {
     return instance.get<getAllCardsResponse>('cards/card', { params })
   },
   setGrade(params: SetGradeType) {
-    return instance.put('cards/grade', params)
+    return instance.put<RootAPIResponse & { updatedGrade: CardType }>(
+      'cards/grade',
+      params
+    )
   },
 }
 
@@ -19,7 +22,7 @@ export type SetGradeType = {
   grade: number
   card_id: string
 }
-type getAllCardsResponse = {
+export type getAllCardsResponse = {
   cards: CardType[]
   cardsTotalCount: number
   maxGrade: number

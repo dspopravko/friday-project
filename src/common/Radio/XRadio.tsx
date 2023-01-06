@@ -26,7 +26,7 @@ type SuperRadioPropsType = Omit<DefaultRadioPropsType, 'type'> & {
   spanProps?: DefaultSpanPropsType
 }
 
-const SuperRadio: React.FC<SuperRadioPropsType> = ({
+export const XRadio: React.FC<SuperRadioPropsType> = ({
   id,
   name,
   className,
@@ -68,5 +68,3 @@ const SuperRadio: React.FC<SuperRadioPropsType> = ({
 
   return <div className={s.options}>{mappedOptions}</div>
 }
-
-export default SuperRadio

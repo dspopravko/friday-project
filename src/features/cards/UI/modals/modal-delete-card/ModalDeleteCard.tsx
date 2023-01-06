@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material'
-import { BasicModal } from '../../../../../common/Modal/Modal'
+import { BasicModal } from '../../../../../common'
 import React from 'react'
 import { useAppDispatch } from '../../../../../state/store'
 import { deleteCard } from '../../../BLL/cardsThunk'

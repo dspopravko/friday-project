@@ -5,13 +5,13 @@ import { DebouncedInput } from './SearchInput'
 import { IconButton, Typography } from '@mui/material'
 import { DoubleSliderWithInputs } from './Slider/DoubleSliderWithInputs'
 import { maxCardsInPacksCountSelector } from '../../BLL/selectorsPacks'
-import { userIDSelector } from '../../../auth/common/selectors/selectorsAuth'
+import { ownerIDSelector } from '../../../auth/common/selectors/selectorsAuth'
 import s from '../../../../assets/styles/TableControls.module.css'
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff'
 import { XButtonGroup } from './ButtonGroup/ButtonGroup'
 
 export const PacksTableControls = () => {
-  const userID = useAppSelector(userIDSelector)
+  const userID = useAppSelector(ownerIDSelector)
   const packsMaxCardsCount = useAppSelector(maxCardsInPacksCountSelector)
   const [searchParams, setSearchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)

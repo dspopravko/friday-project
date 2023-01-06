@@ -4,7 +4,7 @@ import { PacksTable } from '../../features/packs/UI/Table/PacksTable/PacksTable'
 import { getPacks } from '../../features/packs/BLL/packsThunk'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { useSearchParams } from 'react-router-dom'
-import { TablePagination } from '../../common/TablePagination/TablePagination'
+import { TablePagination } from '../../common'
 import {
   currentPageSelector,
   maxPageSelector,
@@ -27,7 +27,7 @@ export const Packs = () => {
     dispatch(getPacks(params))
   }, [searchParams])
   return (
-    <div style={{ marginTop: 60 }}>
+    <div style={{ marginTop: 60, width: '1000px' }}>
       <PacksHeader />
       <PacksTableControls />
       <PacksTable

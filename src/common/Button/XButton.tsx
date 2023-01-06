@@ -7,7 +7,11 @@ type XButtonPropsType = Omit<ButtonProps, 'type'> & {
   children?: React.ReactNode
 }
 
-const XButton: React.FC<XButtonPropsType> = ({ type, disabled, ...rest }) => {
+export const XButton: React.FC<XButtonPropsType> = ({
+  type,
+  disabled,
+  ...rest
+}) => {
   return (
     <Button
       {...rest}
@@ -41,5 +45,3 @@ const XButton: React.FC<XButtonPropsType> = ({ type, disabled, ...rest }) => {
     </Button>
   )
 }
-
-export default XButton

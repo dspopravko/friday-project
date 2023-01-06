@@ -1,81 +1,85 @@
 import React, { useEffect, useState } from 'react'
-import { useAppSelector } from '../../../../state/store'
-import { HeaderButtonWithTitle } from '../../../../common/HeaderButtonWithTitle/HeaderButtonWithTitle'
+import { Button, Typography } from '@mui/material'
+import { useAppDispatch, useAppSelector } from '../../../../state/store'
+import { cardsCurrentPack } from '../../BLL/selectorsCards'
+import s from './CardsHeader.module.css'
+import { UserItem } from '../../../users/UI/Users/UserItem/UserItem'
 import { PackMenu } from '../PackMenu/PackMenu'
-import { ModalNewCard } from '../modals/modal-new-card/ModalNewCard'
-import {
-  cardsCurrentPackInfo,
-  cardsPendingSelector,
-} from '../../BLL/selectorsCards'
-import { userIDSelector } from '../../../auth/common/selectors/selectorsAuth'
+import { ownerIDSelector } from '../../../auth/common/selectors/selectorsAuth'
 import { PATH } from '../../../../data/paths'
 import { useNavigate } from 'react-router-dom'
-import { Paper } from '@mui/material'
+import { userSelector } from '../../../user/BLL/selectorUser'
+import { getUser } from '../../../user/BLL/userThunk'
+import cardsBlank from './../../../../assets/cardsBlank.svg'
+import { createDate } from '../../../../services/formatDateToString'
+import { userActions } from '../../../user/BLL/userSlice'
 
-type ModalNewCardType = {
-  buttonTitle: 'Add new card' | 'Learn pack'
-  id: string
-}
-
-export const CardsHeader = ({ id, buttonTitle }: ModalNewCardType) => {
-  const currentPackInfo = useAppSelector(cardsCurrentPackInfo)
-  const pending = useAppSelector(cardsPendingSelector)
-  const currentUserID = useAppSelector(userIDSelector)
-  const isOwner = currentPackInfo.packUserId === currentUserID
-
+export const CardsHeader = ({ id }: { id: string }) => {
+  const currentPack = useAppSelector(cardsCurrentPack)
+  const ownerID = useAppSelector(ownerIDSelector)
+  const user = useAppSelector(userSelector)
+  const isOwner = currentPack.user_id === ownerID
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
-
-  const [open, setOpen] = React.useState(false)
-  const handleClose = () => setOpen(false)
-  const handleOpen = () => setOpen(true)
-
-  const [image, setImage] = useState(currentPackInfo.packDeckCover)
+  const [image, setImage] = useState(currentPack.deckCover)
+  const handleLearn = () => navigate(`/${PATH.LEARN}/${id}`)
 
   useEffect(() => {
-    setImage(currentPackInfo.packDeckCover)
-  }, [currentPackInfo.packDeckCover])
+    setImage(currentPack.deckCover)
+  }, [currentPack.deckCover])
 
-  const handleButtonClick = () => {
-    if (isOwner) {
-      handleOpen()
-    } else {
-      navigate(`/${PATH.LEARN}/${id}`)
-    }
-  }
+  useEffect(() => {
+    dispatch(userActions.resetState())
+    setTimeout(() => {
+      currentPack.user_id && dispatch(getUser({ id: currentPack.user_id }))
+    }, 1800)
+  }, [currentPack.user_id])
   return (
-    <>
-      <HeaderButtonWithTitle
-        title={currentPackInfo.packName}
-        buttonTitle={buttonTitle}
-        buttonCallback={handleButtonClick}
-        pending={pending}
-      >
-        {isOwner && id && (
-          <PackMenu
-            packID={id}
-            packName={currentPackInfo.packName}
-            packType={currentPackInfo.packPrivate}
-          />
-        )}
-      </HeaderButtonWithTitle>
-      <ModalNewCard
-        handleClose={handleClose}
-        id={id}
-        isOwner={isOwner}
-        open={open}
-      />
-      {image && (
-        <Paper
-          sx={{ height: 150, width: 150, borderRadius: '12%', padding: 1 }}
+    <div className={s.cardsBlockContainer}>
+      <div className={s.block}>
+        <div
+          style={{
+            height: '100%',
+            maxWidth: '300px',
+            borderRadius: '14px',
+            padding: 1,
+          }}
         >
           <img
             alt={'pack cover'}
-            style={{ width: '100%', height: '100%', borderRadius: '12%' }}
-            onError={() => setImage('')}
-            src={image}
+            style={{
+              width: '100%',
+              height: '100%',
+              borderRadius: '12px',
+            }}
+            onError={() => setImage(cardsBlank)}
+            src={image || ''}
           />
-        </Paper>
+        </div>
+      </div>
+      {currentPack.name && (
+        <div className={s.block} style={{ flexGrow: 1 }}>
+          <Typography variant={'h5'}>{currentPack.name}</Typography>
+          <Typography>Cards: {currentPack.cardsCount}</Typography>
+          <Typography>Created: {createDate(currentPack.created)}</Typography>
+          <Typography>Updated: {createDate(currentPack.updated)}</Typography>
+        </div>
       )}
-    </>
+
+      <div className={s.block} style={{ flexGrow: 1 }}>
+        <UserItem {...user} />
+      </div>
+      <div style={{ justifyContent: 'space-evenly' }} className={s.block}>
+        <Button onClick={handleLearn}>Learn pack</Button>
+        {isOwner && id && (
+          <PackMenu
+            isOwner={isOwner}
+            packID={id}
+            packName={currentPack.name}
+            packType={currentPack.private}
+          />
+        )}
+      </div>
+    </div>
   )
 }

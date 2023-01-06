@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './Test.module.css'
-import XSelect from '../../common/selectors/Select/XSelect'
+import { AppLoader, XButton, XSelect } from '../../common'
 import { mockSelect } from '../../data/selectOptions'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import {
@@ -12,8 +12,6 @@ import { loginPayload } from '../../features/auth/login/API/loginAPI'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { isAuthSelector } from '../../features/auth/common/selectors/selectorsAuth'
 import { Typography } from '@mui/material'
-import XButton from '../../common/Button/XButton'
-import XRadio from '../../common/Radio/XRadio'
 
 export const Test = () => {
   const dispatch = useAppDispatch()
@@ -54,11 +52,8 @@ export const Test = () => {
           Select: (without logic)
           <XSelect options={mockSelect} />
         </div>
-        <div className={s.item}>
-          Radio: (without logic)
-          <XRadio value={1} options={mockSelect} />
-        </div>
         <div>
+          <AppLoader />
           <Typography>Some</Typography>
         </div>
       </div>

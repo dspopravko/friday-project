@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../../state/store'
 import { Avatar, Menu, MenuItem } from '@mui/material'
 import LogoutIcon from '@mui/icons-material/Logout'
@@ -6,23 +6,21 @@ import PersonIcon from '@mui/icons-material/Person'
 import { logout } from '../../../login/BLL/loginThunks'
 import { useNavigate } from 'react-router-dom'
 import { profileSelector } from '../../../common/selectors/selectorsAuth'
-import XButton from '../../../../../common/Button/XButton'
+import { XButton } from '../../../../../common'
 
 export const ProfileHeaderButton = () => {
   const dispatch = useAppDispatch()
   const { user } = useAppSelector(profileSelector)
   const navigate = useNavigate()
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const openMui = Boolean(anchorEl)
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) =>
     setAnchorEl(event.currentTarget)
-  }
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
-  const handleLogout = () => {
-    dispatch(logout())
-  }
+
+  const handleClose = () => setAnchorEl(null)
+
+  const handleLogout = () => dispatch(logout())
+
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <XButton

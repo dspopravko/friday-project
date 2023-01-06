@@ -1,22 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { deletePack, getPacks } from './packsThunk'
-import { getPacksType, PacksPageParamsType, PackType } from '../API/types'
+import { PacksPageParamsType, packsPageType, PackType } from '../API/types'
 
 export type PacksType = Omit<PackType, '__v' | 'more_id'>
-export type PacksGeneralType = Omit<
-  getPacksType,
-  'cardPacks' | 'token' | 'tokenDeathTime'
->
 
 const initialState = {
   packsCurrent: [] as PacksType[],
-  packsGeneral: {} as PacksGeneralType,
+  packsPage: {} as packsPageType,
   queryParams: {} as Partial<PacksPageParamsType>,
   pending: false,
-  errors: '',
 }
 
-export const packsSlice = createSlice({
+const packsSlice = createSlice({
   name: 'packs',
   initialState: initialState,
   reducers: {
@@ -30,7 +25,7 @@ export const packsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getPacks.fulfilled, (state, action) => {
       state.packsCurrent = action.payload.cardPacks
-      state.packsGeneral = action.payload.packsGeneral
+      state.packsPage = action.payload.packsPage
       state.pending = false
     })
     builder.addCase(getPacks.pending, (state) => {
@@ -42,7 +37,7 @@ export const packsSlice = createSlice({
     builder.addCase(deletePack.fulfilled, (state, action) => {
       state.pending = false
       state.packsCurrent = state.packsCurrent.filter(
-        (pack) => pack._id !== action.payload
+        (pack) => pack._id !== action.payload.deletedCardsPack._id
       )
     })
     builder.addCase(deletePack.pending, (state) => {
@@ -55,3 +50,4 @@ export const packsSlice = createSlice({
 })
 
 export const packsReducer = packsSlice.reducer
+export const packsActions = packsSlice.actions

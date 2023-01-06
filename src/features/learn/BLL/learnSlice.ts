@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { CardsType } from '../../cards/BLL/cardsSlice'
 import { getAllCards, setGrade } from './learnThunk'
+import { CardType } from '../../cards/API/types'
 
 const initialState = {
-  cards: [] as CardsType[],
+  cards: [] as CardType[],
   packName: '',
   pending: false,
   loaded: false,
   isCompleted: false,
 }
 
-export const learnSlice = createSlice({
+const learnSlice = createSlice({
   name: 'learn',
   initialState: initialState,
   reducers: {
@@ -57,3 +57,4 @@ export const learnSlice = createSlice({
 })
 
 export const learnReducer = learnSlice.reducer
+export const learnActions = learnSlice.actions

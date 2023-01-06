@@ -5,8 +5,7 @@ import {
   AccordionSummary,
   Typography,
 } from '@mui/material'
-import XRadio from '../../../../common/Radio/XRadio'
-import XButton from '../../../../common/Button/XButton'
+import { XButton, XRadio } from '../../../../common'
 import { MediaField } from './MediaField'
 
 type LearnFormPropsType = {

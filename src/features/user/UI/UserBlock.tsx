@@ -1,24 +1,18 @@
 import React, { useEffect } from 'react'
-import { Avatar, Paper, Typography } from '@mui/material'
+import { Avatar, CircularProgress, Paper, Typography } from '@mui/material'
 import s from './UserBlock.module.css'
 import { useAppDispatch, useAppSelector } from '../../../state/store'
 import { getUser } from '../BLL/userThunk'
-import { userSelector } from '../BLL/selectorUser'
-import { userSlice } from '../BLL/userSlice'
-
-const createDate = (date: Date): string => {
-  return new Intl.DateTimeFormat('ru-ru', {
-    day: '2-digit',
-    month: '2-digit',
-    year: '2-digit',
-  }).format(new Date(date))
-}
+import { userPendingSelector, userSelector } from '../BLL/selectorUser'
+import { createDate } from '../../../services/formatDateToString'
+import { userActions } from '../BLL/userSlice'
 
 export const UserBlock = ({ id }: { id: string }) => {
   const user = useAppSelector(userSelector)
+  const pending = useAppSelector(userPendingSelector)
   const dispatch = useAppDispatch()
   useEffect(() => {
-    dispatch(userSlice.actions.resetUser())
+    dispatch(userActions.resetState())
     setTimeout(() => {
       dispatch(getUser({ id }))
     }, 1500)
@@ -28,6 +22,7 @@ export const UserBlock = ({ id }: { id: string }) => {
       <div className={s.avatarContainer}>
         <Avatar sx={{ width: 160, height: 160 }} src={user.avatar} />
       </div>
+      {pending && <CircularProgress sx={{ marginTop: '110px' }} />}
       {user.name && (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div className={s.textContainer}>

@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import IconButton from '@mui/material/IconButton'
 import { Divider } from '@mui/material'
 import Container from '@mui/material/Container'
-import XButton from '../Button/XButton'
+import { XButton } from '../'
 
 const style = {
   position: 'absolute',

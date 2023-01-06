@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useRef } from 'react'
 import { theme } from '../../assets/mui-theme'
 import { IconButton, Paper, Typography } from '@mui/material'
-import XButton from '../Button/XButton'
+import { XButton } from '../'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 
 type ImagePreviewPropsType = {

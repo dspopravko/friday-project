@@ -1,11 +1,11 @@
 import { Typography } from '@mui/material'
-import { BasicModal } from '../../../../../common/Modal/Modal'
+import { BasicModal } from '../../../../../common'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../../../../state/store'
 import { deletePack } from '../../../BLL/packsThunk'
 import { PATH } from '../../../../../data/paths'
-import { userIDSelector } from '../../../../auth/common/selectors/selectorsAuth'
+import { ownerIDSelector } from '../../../../auth/common/selectors/selectorsAuth'
 import { UseSearchParamsObject } from '../../../../../hooks/useSearchParamsObject'
 
 type ModalDeletePackType = {
@@ -22,7 +22,7 @@ export const ModalDeletePack = ({
   packName,
 }: ModalDeletePackType) => {
   const params = UseSearchParamsObject()
-  const userID = useAppSelector(userIDSelector)
+  const userID = useAppSelector(ownerIDSelector)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
