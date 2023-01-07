@@ -25,7 +25,9 @@ export const UserItem = ({
         <Avatar sx={{ width: 76, height: 76 }} src={avatar} />
       </div>
       {name && (
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <div
+          style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
+        >
           <div className={s.textContainer}>
             <Typography>{name}</Typography>
           </div>

@@ -5,7 +5,6 @@ import Modal from '@mui/material/Modal'
 import CloseIcon from '@mui/icons-material/Close'
 import IconButton from '@mui/material/IconButton'
 import { Divider, Fade } from '@mui/material'
-import Container from '@mui/material/Container'
 import { XButton } from '../'
 import s from './Modal.module.css'
 
@@ -16,6 +15,7 @@ type BasicModalType = {
   handleClose: () => void
   open: boolean
   buttonCallback?: () => void
+  pending?: boolean
 }
 
 export function BasicModal({
@@ -25,6 +25,7 @@ export function BasicModal({
   buttonType,
   title,
   children,
+  pending,
 }: BasicModalType) {
   return (
     <div>
@@ -35,7 +36,7 @@ export function BasicModal({
               id="modal-modal-title"
               variant="h6"
               component="h2"
-              className={s.titleStyle}
+              className={s.title}
             >
               {title}
               <IconButton onClick={handleClose} sx={{ padding: '0' }}>
@@ -44,7 +45,7 @@ export function BasicModal({
             </Typography>
             <Divider variant={'fullWidth'} />
             {children}
-            <Container className={s.buttonStyle} disableGutters>
+            <div className={s.buttonContainer}>
               <XButton
                 onClick={handleClose}
                 type="secondary"
@@ -54,6 +55,7 @@ export function BasicModal({
               </XButton>
               {buttonType === 'send' && (
                 <XButton
+                  disabled={pending}
                   type="primary"
                   style={{ minWidth: '113px' }}
                   onClick={buttonCallback}
@@ -63,6 +65,7 @@ export function BasicModal({
               )}
               {buttonType === 'save' && (
                 <XButton
+                  disabled={pending}
                   type="primary"
                   style={{ minWidth: '113px' }}
                   onClick={buttonCallback}
@@ -72,6 +75,7 @@ export function BasicModal({
               )}
               {buttonType === 'delete' && (
                 <XButton
+                  disabled={pending}
                   type="delete"
                   style={{ minWidth: '113px' }}
                   onClick={buttonCallback}
@@ -79,7 +83,7 @@ export function BasicModal({
                   Delete
                 </XButton>
               )}
-            </Container>
+            </div>
           </Box>
         </Fade>
       </Modal>

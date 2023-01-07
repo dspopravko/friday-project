@@ -1,10 +1,9 @@
 import { FormControl } from '@mui/material'
 import React, { useState } from 'react'
-import { BasicModal } from '../../../../../common/Modal/Modal'
+import { BasicModal, MediaInputGroup } from '../../../../../common'
 import { useAppDispatch } from '../../../../../state/store'
 import { updateCard } from '../../../BLL/cardsThunk'
 import { UseSearchParamsObject } from '../../../../../hooks/useSearchParamsObject'
-import { MediaInputGroup } from '../../../../../common/MediaInputGroup/MediaInputGroup'
 
 type ModalEditPackType = {
   open: boolean
@@ -36,7 +35,10 @@ export const ModalEditCard = ({
   const [answer, setAnswer] = useState(initAnswer || '')
   const [answerImg, setAnswerImg] = useState(initAnswerImg || '')
 
+  const [pending, setPending] = useState(false)
+
   const editCardHandler = async () => {
+    setPending(true)
     const action = await dispatch(
       updateCard({
         params,
@@ -53,6 +55,7 @@ export const ModalEditCard = ({
     if (updateCard.fulfilled.match(action)) {
       handleClose()
     }
+    setPending(false)
   }
 
   return (
@@ -63,6 +66,7 @@ export const ModalEditCard = ({
         handleClose={handleClose}
         open={open}
         buttonCallback={editCardHandler}
+        pending={pending}
       >
         <FormControl fullWidth size="small">
           <MediaInputGroup

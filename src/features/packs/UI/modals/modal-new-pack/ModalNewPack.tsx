@@ -5,12 +5,11 @@ import {
   FormGroup,
   TextField,
 } from '@mui/material'
-import { BasicModal } from '../../../../../common/Modal/Modal'
+import { BasicModal, ImageInputWithPreview } from '../../../../../common'
 import React, { useRef, useState } from 'react'
 import { useAppDispatch } from '../../../../../state/store'
 import { postPack } from '../../../BLL/packsThunk'
 import { UseSearchParamsObject } from '../../../../../hooks/useSearchParamsObject'
-import { ImageInputWithPreview } from '../../../../../common/ImageInputWithPreview/ImageInputWithPreview'
 import { checkFileSize } from '../../../../../services/checkFileSize'
 
 type ModalNewPackPropsType = {
@@ -23,14 +22,16 @@ export const ModalNewPack = ({ open, handleClose }: ModalNewPackPropsType) => {
   const [avatar, setAvatar] = useState<string>()
 
   const params = UseSearchParamsObject()
-  const [packName, setPackName] = React.useState<string>('')
+  const [packName, setPackName] = useState<string>('')
+  const [pending, setPending] = useState(false)
   const formHandler = (value: string) => setPackName(value)
 
-  const [packIsPrivate, setPackIsPrivate] = React.useState<boolean>(false)
+  const [packIsPrivate, setPackIsPrivate] = useState<boolean>(false)
   const checkboxHandler = (value: boolean) => setPackIsPrivate(value)
 
   const dispatch = useAppDispatch()
   const addPackHandler = async () => {
+    setPending(true)
     const action = await dispatch(
       postPack({
         postData: {
@@ -45,9 +46,10 @@ export const ModalNewPack = ({ open, handleClose }: ModalNewPackPropsType) => {
     )
     if (postPack.fulfilled.match(action)) {
       setPackName('')
-      setPackIsPrivate(true)
       handleClose()
     }
+    setPending(false)
+    setPackIsPrivate(false)
   }
   const handleFileInput = (file: File) =>
     checkFileSize(file, setAvatar, dispatch)
@@ -66,6 +68,7 @@ export const ModalNewPack = ({ open, handleClose }: ModalNewPackPropsType) => {
       buttonCallback={addPackHandler}
       handleClose={handleClose}
       open={open}
+      pending={pending}
     >
       <FormControl fullWidth>
         <TextField

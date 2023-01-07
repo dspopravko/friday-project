@@ -14,14 +14,12 @@ type hoverMenuPropsType = {
   packID: string
   packName: string
   packType: boolean
-  isOwner: boolean
 }
 
 export const PackMenu = ({
   packID,
   packName,
   packType,
-  isOwner,
 }: hoverMenuPropsType) => {
   const { id } = useParams()
 
@@ -33,12 +31,7 @@ export const PackMenu = ({
     <div className={s.packMenuContainer}>
       <IconButton onClick={() => !modal1 && toggleModal1()}>
         <AddCircleIcon />
-        <ModalNewCard
-          handleClose={toggleModal1}
-          id={id || ''}
-          isOwner={isOwner}
-          open={modal1}
-        />
+        <ModalNewCard handleClose={toggleModal1} id={id || ''} open={modal1} />
       </IconButton>
       <IconButton onClick={() => !modal2 && toggleModal2()}>
         <DeleteIcon />

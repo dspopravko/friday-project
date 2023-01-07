@@ -30,7 +30,7 @@ export const deletePack = createAsyncThunk<
   return thunkTryCatch(thunkApi, async () => {
     const res = await packsAPI.deletePack(data.packID)
     thunkApi.dispatch(getPacks(data.params))
-    return res
+    return res.data
   })
 })
 
@@ -46,7 +46,7 @@ export const postPack = createAsyncThunk<
   return thunkTryCatch(thunkApi, async () => {
     const res = await packsAPI.postPack(data.postData)
     thunkApi.dispatch(getPacks(data.params))
-    return res
+    return res.data
   })
 })
 
@@ -62,6 +62,6 @@ export const updatePack = createAsyncThunk<
   return thunkTryCatch(thunkApi, async () => {
     const res = await packsAPI.updatePack(data.postData)
     thunkApi.dispatch(getPacks(data.params))
-    return res
+    return res.data
   })
 })

@@ -1,5 +1,5 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { getCards } from './cardsThunk'
+import { deleteCard, getCards, postCard } from './cardsThunk'
 import { CardsPageType, CardType } from '../API/types'
 import { updatePack } from '../../packs/BLL/packsThunk'
 import { PackType } from '../../packs/API/types'
@@ -48,6 +48,12 @@ const cardsSlice = createSlice({
     })
     builder.addCase(updatePack.fulfilled, (state, action) => {
       state.cardsPage.packName = action.payload.updatedCardsPack.name
+    })
+    builder.addCase(postCard.fulfilled, (state) => {
+      state.currentPack.cardsCount = state.currentPack.cardsCount + 1
+    })
+    builder.addCase(deleteCard.fulfilled, (state) => {
+      state.currentPack.cardsCount = state.currentPack.cardsCount - 1
     })
   },
 })

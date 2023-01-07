@@ -6,11 +6,10 @@ import {
   TextField,
 } from '@mui/material'
 import React, { useRef, useState } from 'react'
-import { BasicModal } from '../../../../../common/Modal/Modal'
+import { BasicModal, ImageInputWithPreview } from '../../../../../common'
 import { useAppDispatch } from '../../../../../state/store'
 import { updatePack } from '../../../BLL/packsThunk'
 import { UseSearchParamsObject } from '../../../../../hooks/useSearchParamsObject'
-import { ImageInputWithPreview } from '../../../../../common/ImageInputWithPreview/ImageInputWithPreview'
 import { checkFileSize } from '../../../../../services/checkFileSize'
 
 type ModalEditPackType = {
@@ -34,12 +33,14 @@ export const ModalEditPack = ({
 
   const [avatar, setAvatar] = useState<string>()
   const [packName, setPackName] = useState(initPackName || '')
+  const [pending, setPending] = useState(false)
   const formHandler = (value: string) => setPackName(value)
 
   const [packIsPrivate, setPackIsPrivate] = useState(packType)
   const checkboxHandler = (value: boolean) => setPackIsPrivate(value)
 
   const editPackHandler = async () => {
+    setPending(true)
     const action = await dispatch(
       updatePack({
         postData: {
@@ -54,6 +55,7 @@ export const ModalEditPack = ({
     if (updatePack.fulfilled.match(action)) {
       handleClose()
     }
+    setPending(false)
   }
   const handleFileInput = (file: File) =>
     checkFileSize(file, setAvatar, dispatch)
@@ -73,6 +75,7 @@ export const ModalEditPack = ({
         handleClose={handleClose}
         open={open}
         buttonCallback={editPackHandler}
+        pending={pending}
       >
         <FormControl fullWidth>
           <TextField

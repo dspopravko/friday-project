@@ -70,10 +70,11 @@ export const CardsHeader = ({ id }: { id: string }) => {
         <UserItem {...user} />
       </div>
       <div style={{ justifyContent: 'space-evenly' }} className={s.block}>
-        <Button onClick={handleLearn}>Learn pack</Button>
+        <Button disabled={!currentPack.cardsCount} onClick={handleLearn}>
+          Learn pack
+        </Button>
         {isOwner && id && (
           <PackMenu
-            isOwner={isOwner}
             packID={id}
             packName={currentPack.name}
             packType={currentPack.private}

@@ -21,10 +21,10 @@ export const TableDateColumn = (
           style={{ cursor: 'pointer' }}
           title={'Sort last updated date'}
           onClick={() => {
-            if (typedParams.sortPacks === ascDesc[1]) {
-              sort({ sortPacks: ascDesc[0] })
-            } else {
+            if (typedParams.sortPacks === ascDesc[0]) {
               sort({ sortPacks: ascDesc[1] })
+            } else {
+              sort({ sortPacks: ascDesc[0] })
             }
           }}
         >

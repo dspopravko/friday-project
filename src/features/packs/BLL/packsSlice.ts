@@ -5,7 +5,7 @@ import { PacksPageParamsType, packsPageType, PackType } from '../API/types'
 export type PacksType = Omit<PackType, '__v' | 'more_id'>
 
 const initialState = {
-  packsCurrent: [] as PacksType[],
+  packs: [] as PacksType[],
   packsPage: {} as packsPageType,
   queryParams: {} as Partial<PacksPageParamsType>,
   pending: false,
@@ -27,7 +27,7 @@ const packsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getPacks.fulfilled, (state, action) => {
-      state.packsCurrent = action.payload.cardPacks
+      state.packs = action.payload.cardPacks
       state.packsPage = action.payload.packsPage
       state.pending = false
     })
@@ -38,16 +38,9 @@ const packsSlice = createSlice({
       state.pending = false
     })
     builder.addCase(deletePack.fulfilled, (state, action) => {
-      state.pending = false
-      state.packsCurrent = state.packsCurrent.filter(
+      state.packs = state.packs.filter(
         (pack) => pack._id !== action.payload.deletedCardsPack._id
       )
-    })
-    builder.addCase(deletePack.pending, (state) => {
-      state.pending = true
-    })
-    builder.addCase(deletePack.rejected, (state) => {
-      state.pending = false
     })
   },
 })

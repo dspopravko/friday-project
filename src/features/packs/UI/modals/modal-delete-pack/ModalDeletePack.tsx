@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material'
 import { BasicModal } from '../../../../../common'
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../../../../state/store'
 import { deletePack } from '../../../BLL/packsThunk'
@@ -25,8 +25,9 @@ export const ModalDeletePack = ({
   const userID = useAppSelector(ownerIDSelector)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-
+  const [pending, setPending] = useState(false)
   const deletePackHandler = async () => {
+    setPending(true)
     const action = await dispatch(deletePack({ packID: packId, params }))
     if (deletePack.fulfilled.match(action)) {
       handleClose()
@@ -34,6 +35,7 @@ export const ModalDeletePack = ({
         navigate(`/${PATH.PACKS}/?user_id=${userID}`)
       }, 1100)
     }
+    setPending(false)
   }
   return (
     <>
@@ -43,6 +45,7 @@ export const ModalDeletePack = ({
         handleClose={handleClose}
         open={open}
         buttonCallback={deletePackHandler}
+        pending={pending}
       >
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           Do you really want to remove&nbsp;

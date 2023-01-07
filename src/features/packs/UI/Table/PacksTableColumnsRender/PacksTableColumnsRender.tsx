@@ -56,10 +56,10 @@ export const PacksTableColumnsRender = (
                 style={{ cursor: 'pointer' }}
                 title={'Sort by tables count'}
                 onClick={() => {
-                  if (typedParams.sortPacks === '1cardsCount') {
-                    sort({ sortPacks: '0cardsCount' })
-                  } else {
+                  if (typedParams.sortPacks === '0cardsCount') {
                     sort({ sortPacks: '1cardsCount' })
+                  } else {
+                    sort({ sortPacks: '0cardsCount' })
                   }
                 }}
               >

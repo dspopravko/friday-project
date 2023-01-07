@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import s from '../../login/UI/LoginForm.module.css'
 import {
   Button,
@@ -29,7 +29,7 @@ export const NewPasswordForm = ({
   token: string
   isFetching: boolean
 }) => {
-  const [showPassword, setShowPassword] = React.useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleClickShowPassword = () => setShowPassword((show) => !show)
 

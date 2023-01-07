@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useAppDispatch, useAppSelector } from '../../../../state/store'
 import s from './LoginForm.module.css'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 import {
   Button,
   Checkbox,
@@ -17,7 +18,6 @@ import { login } from '../BLL/loginThunks'
 import { NavLink } from 'react-router-dom'
 import { PATH } from '../../../../data/paths'
 import { defaultSchema } from '../../common/validation/validationSchema'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { isAuthFetching } from '../../common/selectors/selectorsAuth'
 
 const schema = yup.object().shape({
@@ -32,7 +32,7 @@ type LoginData = {
 }
 
 export const LoginForm = () => {
-  const [showPassword, setShowPassword] = React.useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleClickShowPassword = () => setShowPassword((show) => !show)
 

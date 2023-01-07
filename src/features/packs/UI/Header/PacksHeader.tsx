@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { HeaderButtonWithTitle } from '../../../../common'
 import { ModalNewPack } from '../modals/modal-new-pack/ModalNewPack'
 
 export const PacksHeader = () => {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
   const handleClose = () => setOpen(false)
   const handleOpen = () => setOpen(true)
 

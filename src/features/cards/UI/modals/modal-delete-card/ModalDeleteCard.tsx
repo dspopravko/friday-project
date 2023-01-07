@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material'
 import { BasicModal } from '../../../../../common'
-import React from 'react'
+import React, { useState } from 'react'
 import { useAppDispatch } from '../../../../../state/store'
 import { deleteCard } from '../../../BLL/cardsThunk'
 import { UseSearchParamsObject } from '../../../../../hooks/useSearchParamsObject'
@@ -22,14 +22,17 @@ export const ModalDeleteCard = ({
 }: ModalDeletePackType) => {
   const params = UseSearchParamsObject()
   const dispatch = useAppDispatch()
+  const [pending, setPending] = useState(false)
 
   const deleteCardHandler = async () => {
+    setPending(true)
     const action = await dispatch(
       deleteCard({ cardID: cardId, params, packId: packId })
     )
     if (deleteCard.fulfilled.match(action)) {
       handleClose()
     }
+    setPending(false)
   }
 
   return (
@@ -40,6 +43,7 @@ export const ModalDeleteCard = ({
         handleClose={handleClose}
         open={open}
         buttonCallback={deleteCardHandler}
+        pending={pending}
       >
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           Do you really want to remove&nbsp;

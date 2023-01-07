@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, IconButton, InputAdornment, TextField } from '@mui/material'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -27,8 +27,8 @@ const schema = yup.object().shape({
 })
 
 export const SignUpForm = () => {
-  const [showPassword, setShowPassword] = React.useState(false)
-  const [showPassword1, setShowPassword1] = React.useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword1, setShowPassword1] = useState(false)
 
   const handleClickShowPassword = () => setShowPassword((show) => !show)
   const handleClickShowPassword1 = () => setShowPassword1((show) => !show)
