@@ -21,6 +21,9 @@ const packsSlice = createSlice({
     setQueryParams(state, action: PayloadAction<Partial<PacksPageParamsType>>) {
       state.queryParams = action.payload
     },
+    resetState() {
+      return initialState
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getPacks.fulfilled, (state, action) => {

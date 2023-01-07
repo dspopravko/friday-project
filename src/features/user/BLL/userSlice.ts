@@ -4,7 +4,6 @@ import { getUser } from './userThunk'
 
 const initialState = {
   user: {} as UserType,
-  pending: true,
 }
 
 const userSlice = createSlice({
@@ -17,7 +16,6 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getUser.fulfilled, (state, action) => {
-      state.pending = false
       state.user = action.payload.user
     })
   },

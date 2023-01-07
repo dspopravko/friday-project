@@ -6,8 +6,8 @@ export const usersAPI = {
     return instance
       .get<UsersResponseType>('social/users', { params })
       .then((res) => {
-        const { users, ...usersGeneral } = res.data
-        return { users, usersGeneral }
+        const { users, ...usersPage } = res.data
+        return { users, usersPage }
       })
   },
 }

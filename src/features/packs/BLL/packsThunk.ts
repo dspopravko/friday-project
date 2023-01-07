@@ -62,6 +62,6 @@ export const updatePack = createAsyncThunk<
   return thunkTryCatch(thunkApi, async () => {
     const res = await packsAPI.updatePack(data.postData)
     thunkApi.dispatch(getPacks(data.params))
-    return res.data
+    return res
   })
 })

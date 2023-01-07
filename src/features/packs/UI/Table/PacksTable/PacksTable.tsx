@@ -16,6 +16,7 @@ import { isPacksPending, packsSelector } from '../../../BLL/selectorsPacks'
 import { packsTableActionsCreator } from '../PacksTableActions/PacksTableActionsCreator/PacksTableActionsCreator'
 import { Typography } from '@mui/material'
 import s2 from './PacksTable.module.css'
+import { packsActions } from '../../../BLL/packsSlice'
 
 type PacksTablePropsType = {
   columnPropsNames: string[]
@@ -61,7 +62,7 @@ export function PacksTable({ columnPropsNames }: PacksTablePropsType) {
     const typedRow = row as { original: PackType }
     const typedCell = cell as { column: { id: string } }
     if (typedCell.column.id === 'user_name') {
-      console.log(typedRow.original.user_name, typedRow.original.user_id)
+      dispatch(packsActions.resetState())
       navigate(`/${PATH.USER}/${typedRow.original.user_id}`)
       return
     }

@@ -3,13 +3,12 @@ import { Avatar, CircularProgress, Paper, Typography } from '@mui/material'
 import s from './UserBlock.module.css'
 import { useAppDispatch, useAppSelector } from '../../../state/store'
 import { getUser } from '../BLL/userThunk'
-import { userPendingSelector, userSelector } from '../BLL/selectorUser'
+import { userSelector } from '../BLL/selectorUser'
 import { createDate } from '../../../services/formatDateToString'
 import { userActions } from '../BLL/userSlice'
 
 export const UserBlock = ({ id }: { id: string }) => {
   const user = useAppSelector(userSelector)
-  const pending = useAppSelector(userPendingSelector)
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(userActions.resetState())
@@ -22,7 +21,7 @@ export const UserBlock = ({ id }: { id: string }) => {
       <div className={s.avatarContainer}>
         <Avatar sx={{ width: 160, height: 160 }} src={user.avatar} />
       </div>
-      {pending && <CircularProgress sx={{ marginTop: '110px' }} />}
+      {!user.name && <CircularProgress sx={{ marginTop: '110px' }} />}
       {user.name && (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div className={s.textContainer}>

@@ -1,4 +1,4 @@
-import { PageParamsType, RootAPIResponse } from '../../../api/types'
+import { RootAPIResponse } from '../../../api/types'
 
 export type UserType = {
   _id: string
@@ -11,16 +11,19 @@ export type UserType = {
   updated: Date
   avatar: string
 }
-export type UsersResponseType = {
-  users: UserType
+export type UsersPageType = {
   page: number
   pageCount: number
   usersTotalCount: number
   minPublicCardPacksCount: number
   maxPublicCardPacksCount: number
-} & RootAPIResponse
+}
+export type UsersResponseType = {
+  users: UserType
+} & RootAPIResponse &
+  UsersPageType
 
 export type UsersPageParamsType = {
   sortUsers: string
   userName: string
-} & PageParamsType
+} & UsersPageType

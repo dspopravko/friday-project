@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { UsersResponseType, UserType } from '../API/types'
+import { UsersPageType, UserType } from '../API/types'
 import { getUsers } from './usersThunk'
 
 const initialState = {
   users: [] as UserType[],
-  usersGeneral: {} as Omit<UsersResponseType, 'users'>,
+  usersPage: {} as UsersPageType,
   pending: true,
 }
 
-export const usersSlice = createSlice({
+const usersSlice = createSlice({
   name: 'users',
   initialState: initialState,
   reducers: {},
@@ -16,7 +16,7 @@ export const usersSlice = createSlice({
     builder.addCase(getUsers.fulfilled, (state, action) => {
       state.pending = false
       state.users = action.payload.users
-      state.usersGeneral = action.payload.usersGeneral
+      state.usersPage = action.payload.usersPage
     })
     builder.addCase(getUsers.pending, (state) => {
       state.pending = true
@@ -28,3 +28,4 @@ export const usersSlice = createSlice({
 })
 
 export const usersReducer = usersSlice.reducer
+export const usersActions = usersSlice.actions

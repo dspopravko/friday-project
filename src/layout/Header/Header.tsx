@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import s from './Header.module.css'
 import { HeaderContext } from '../../context/context'
-import { useAppSelector } from '../../state/store'
+import { useAppDispatch, useAppSelector } from '../../state/store'
 import { ProfileHeaderButton } from '../../features/auth/profile/UI/HeaderButton/ProfileHeaderButton'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { PATH } from '../../data/paths'
@@ -9,6 +9,7 @@ import { Button, Fab, IconButton } from '@mui/material'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 import { isAuthSelector } from '../../features/auth/common/selectors/selectorsAuth'
 import Groups2Icon from '@mui/icons-material/Groups2'
+import { packsActions } from '../../features/packs/BLL/packsSlice'
 
 export enum goBackButtonTitles {
   none = '',
@@ -17,6 +18,7 @@ export enum goBackButtonTitles {
 }
 
 export const Header = () => {
+  const dispatch = useAppDispatch()
   const { goBackButtonTitle } = useContext(HeaderContext)
   const isAuth = useAppSelector(isAuthSelector)
   const navigate = useNavigate()
@@ -28,6 +30,7 @@ export const Header = () => {
           {goBackButtonTitle && (
             <Fab
               onClick={() => {
+                dispatch(packsActions.resetState())
                 if (goBackButtonTitle === 'Go back to packs lists') {
                   navigate(`/${PATH.PACKS}`)
                 } else {

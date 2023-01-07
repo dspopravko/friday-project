@@ -1,11 +1,11 @@
 import React from 'react'
 import { UserType } from '../../../API/types'
-import { Avatar, CircularProgress, Typography } from '@mui/material'
+import { Avatar, Typography } from '@mui/material'
 import s from './UserItem.module.css'
 import { useNavigate } from 'react-router-dom'
 import { PATH } from '../../../../../data/paths'
-import { useAppSelector } from '../../../../../state/store'
-import { userPendingSelector } from '../../../../user/BLL/selectorUser'
+import { packsActions } from '../../../../packs/BLL/packsSlice'
+import { useAppDispatch } from '../../../../../state/store'
 
 export const UserItem = ({
   _id,
@@ -13,9 +13,10 @@ export const UserItem = ({
   publicCardPacksCount,
   avatar,
 }: UserType) => {
-  const pending = useAppSelector(userPendingSelector)
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const userClickHandler = () => {
+    dispatch(packsActions.resetState())
     navigate(`/${PATH.USER}/${_id}`)
   }
   return (
@@ -23,7 +24,6 @@ export const UserItem = ({
       <div style={{ marginLeft: '4px' }}>
         <Avatar sx={{ width: 76, height: 76 }} src={avatar} />
       </div>
-      {pending && <CircularProgress sx={{ marginLeft: '54px' }} />}
       {name && (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div className={s.textContainer}>
