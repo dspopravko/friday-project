@@ -10,6 +10,7 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 import { isAuthSelector } from '../../features/auth/common/selectors/selectorsAuth'
 import Groups2Icon from '@mui/icons-material/Groups2'
 import { packsActions } from '../../features/packs/BLL/packsSlice'
+import { cardsActions } from '../../features/cards/BLL/cardsSlice'
 
 export enum goBackButtonTitles {
   none = '',
@@ -30,6 +31,7 @@ export const Header = () => {
           {goBackButtonTitle && (
             <Fab
               onClick={() => {
+                dispatch(cardsActions.resetPack())
                 dispatch(packsActions.resetState())
                 if (goBackButtonTitle === 'Go back to packs lists') {
                   navigate(`/${PATH.PACKS}`)
