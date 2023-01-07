@@ -25,13 +25,11 @@ export const UserItem = ({
         <Avatar sx={{ width: 76, height: 76 }} src={avatar} />
       </div>
       {name && (
-        <div
-          style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
-        >
-          <div className={s.textContainer}>
+        <div className={s.textContainer}>
+          <div>
             <Typography>{name}</Typography>
           </div>
-          <div className={s.textContainer}>
+          <div>
             <Typography>Packs: {publicCardPacksCount}</Typography>
           </div>
         </div>

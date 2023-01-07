@@ -33,9 +33,16 @@ const cardsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getCards.fulfilled, (state, action) => {
+      state.pending = false
       state.cardsCurrent = action.payload.cards
       state.cardsPage = action.payload.cardsPage
-      state.pending = false
+      state.currentPack.deckCover = action.payload.cardsPage.packDeckCover
+      state.currentPack.name = action.payload.cardsPage.packName
+      state.currentPack.created = action.payload.cardsPage.packCreated
+      state.currentPack.updated = action.payload.cardsPage.packUpdated
+      state.currentPack.cardsCount = action.payload.cardsPage.cardsTotalCount
+      state.currentPack.user_id = action.payload.cardsPage.packUserId
+      state.currentPack.type = action.payload.cardsPage.packPrivate
     })
     builder.addCase(getCards.pending, (state) => {
       state.pending = true

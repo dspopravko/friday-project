@@ -30,7 +30,7 @@ export type PackType = {
   grade: number
   shots: number
   cardsCount: number
-  type: string
+  type: boolean
   rating: number
   created: Date
   updated: Date

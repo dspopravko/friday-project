@@ -58,7 +58,7 @@
 }
 
 .tableBody .tableCell:nth-child(5):hover {
-    font-weight: bold;
+    text-shadow: 1px 0 0;
 }
 
 .tableCell:last-child {

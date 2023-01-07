@@ -9,7 +9,6 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  min-width: 0;
   gap: 12px;
   cursor: pointer;
 }
@@ -18,7 +17,7 @@
 }
 .textContainer {
   text-align: left;
-  width: calc(100% - 90px);
+  min-width: 0;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
