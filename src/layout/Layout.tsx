@@ -15,7 +15,7 @@ export const Layout = (props: LayoutPropsType) => {
   const status = useAppSelector(appStatusSelector)
   const dispatch = useAppDispatch()
   useEffect(() => {
-    dispatch(authMe())
+    dispatch(authMe({ ignoreError: true }))
   }, [])
   if (status === appStatus.loading) {
     return <AppLoader />

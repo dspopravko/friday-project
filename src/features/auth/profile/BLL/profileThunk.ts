@@ -8,7 +8,7 @@ export const updateProfile = createAsyncThunk(
   async (data: updateProfilePropsType, thunkApi) => {
     return thunkTryCatch(thunkApi, async () => {
       const res = await profileAPI.updateUser(data)
-      thunkApi.dispatch(authMe())
+      thunkApi.dispatch(authMe({}))
       return res.data
     })
   }

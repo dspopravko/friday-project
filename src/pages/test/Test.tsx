@@ -17,7 +17,7 @@ export const Test = () => {
   const dispatch = useAppDispatch()
   const isAuth = useAppSelector(isAuthSelector)
   useSetHeaderTitle(`Tests, isAuth: ${isAuth}`, 'Tests')
-  const checkMe = () => dispatch(authMe())
+  const checkMe = () => dispatch(authMe({}))
   const authCorrect = () => {
     const auth: loginPayload = {
       email: 'nya-admin@nya.nya',

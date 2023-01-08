@@ -6,12 +6,13 @@ export const thunkTryCatch = async (
   // eslint-disable-next-line @typescript-eslint/ban-types
   logic: Function,
   // eslint-disable-next-line @typescript-eslint/ban-types
-  onError?: Function
+  onError?: Function,
+  ignoreError = false
 ) => {
   try {
     return await logic()
   } catch (e: unknown) {
-    handleAxiosError(e, thunkApi.dispatch)
+    !ignoreError && handleAxiosError(e, thunkApi.dispatch)
     if (e instanceof AxiosError && e.code !== 'ERR_NETWORK') {
       if (onError) {
         await onError()
