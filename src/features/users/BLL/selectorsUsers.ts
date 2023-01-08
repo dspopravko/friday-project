@@ -4,8 +4,10 @@ import { createSelector } from '@reduxjs/toolkit'
 export const usersSelector = (state: AppRootStateType) => state.users.users
 export const usersPendingSelector = (state: AppRootStateType) =>
   state.users.pending
-export const usersCurrentPage = (state: AppRootStateType) =>
+export const usersCurrentPageCount = (state: AppRootStateType) =>
   state.users.usersPage.page
+export const usersCurrentPage = (state: AppRootStateType) =>
+  state.users.usersPage
 export const usersPageCount = (state: AppRootStateType) =>
   state.users.usersPage.pageCount
 export const usersTotalCount = (state: AppRootStateType) =>

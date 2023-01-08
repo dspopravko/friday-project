@@ -2,13 +2,22 @@ import React, { useEffect } from 'react'
 import { DoubleSliderWithInputs } from '../../../packs/UI/Controls/Slider/DoubleSliderWithInputs'
 import { DebouncedInput } from '../../../packs/UI/Controls/SearchInput'
 import { createSearchParams, useSearchParams } from 'react-router-dom'
-import { useAppDispatch } from '../../../../state/store'
+import { useAppDispatch, useAppSelector } from '../../../../state/store'
 import { getUsers } from '../../BLL/usersThunk'
 import { IconButton, Typography } from '@mui/material'
 import s from './UsersFilter.module.css'
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff'
+import { XSelect } from '../../../../common'
+import { usersCurrentPage } from '../../BLL/selectorsUsers'
+
+const usersSortOptions = [
+  { id: 0, value: 'none', param: '' },
+  { id: 1, value: 'From high to low', param: '0publicCardPacksCount' },
+  { id: 2, value: 'From low to high', param: '1publicCardPacksCount' },
+]
 
 export const UsersFilter = () => {
+  const usersPage = useAppSelector(usersCurrentPage)
   const [searchParams, setSearchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const dispatch = useAppDispatch()
@@ -34,11 +43,23 @@ export const UsersFilter = () => {
         />
       </div>
       <div className={s.controlBlock}>
-        <Typography>Search by cards count</Typography>
+        <Typography>Search by packs count</Typography>
         <DoubleSliderWithInputs
           current={[+params.min, +params.max]}
-          border={[0, 100]}
+          border={[0, usersPage.maxPublicCardPacksCount]}
           onChangeCommitted={updateParams}
+        />
+      </div>
+      <div className={s.controlBlock}>
+        <Typography>Sort by packs count</Typography>
+        <XSelect
+          value={
+            usersSortOptions.find((o) => o.param === params.sortUsers)?.id || 0
+          }
+          onChangeOption={(option: number) =>
+            updateParams([{ sortUsers: usersSortOptions[option - 1].param }])
+          }
+          options={usersSortOptions}
         />
       </div>
       <div className={s.controlBlock}>

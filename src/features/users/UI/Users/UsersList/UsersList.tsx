@@ -2,7 +2,7 @@ import React from 'react'
 import { UserItem } from '../UserItem/UserItem'
 import { useAppSelector } from '../../../../../state/store'
 import {
-  usersCurrentPage,
+  usersCurrentPageCount,
   usersMaxPageSelector,
   usersPendingSelector,
   usersSelector,
@@ -14,7 +14,7 @@ import s from './UsersList.module.css'
 
 export const UsersList = () => {
   const users = useAppSelector(usersSelector)
-  const currentPage = useAppSelector(usersCurrentPage)
+  const currentPage = useAppSelector(usersCurrentPageCount)
   const maxPage = useAppSelector(usersMaxPageSelector)
   const pending = useAppSelector(usersPendingSelector)
   const params = UseSearchParamsObject()

@@ -28,12 +28,7 @@ export const XSelect: React.FC<SuperSelectPropsType> = ({
 }) => {
   const mappedOptions: any[] = options
     ? options.map((o) => (
-        <option
-          id={'hw7-option-' + o.id}
-          className={s.option}
-          key={o.id}
-          value={o.id}
-        >
+        <option className={s.option} key={o.id} value={o.id}>
           {o.value}
         </option>
       ))

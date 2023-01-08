@@ -15,7 +15,7 @@ export const DoubleSliderWithInputs = ({
   onChangeCommitted,
 }: DoubleSliderWithInputsPropsType) => {
   const [initialized, setInitialized] = useState(false)
-  const [localValue, setLocalValue] = useState({ min: 0, max: 1000 })
+  const [localValue, setLocalValue] = useState({ min: 0, max: 999 })
   const [timerId, setTimerId] = useState<number | undefined>(undefined)
 
   const handleInput = (newParams: { [param: string]: string }[]) => {
