@@ -60,13 +60,15 @@ export const Header = () => {
           </NavLink>
         </div>
         <div className={s.buttonGroup}>
-          <NavLink className={s.usersNavlink} to={`/${PATH.USERS}`}>
-            <IconButton>
-              <Groups2Icon fontSize="large" color="action" />
-            </IconButton>
-          </NavLink>
           {isAuth ? (
-            <ProfileHeaderButton />
+            <>
+              <NavLink className={s.usersNavlink} to={`/${PATH.USERS}`}>
+                <IconButton>
+                  <Groups2Icon fontSize="large" color="action" />
+                </IconButton>
+              </NavLink>
+              <ProfileHeaderButton />
+            </>
           ) : (
             <Button variant={'contained'} onClick={handleSignIn}>
               Sign in

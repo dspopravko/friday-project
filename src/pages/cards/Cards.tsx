@@ -14,6 +14,7 @@ import { goBackButtonTitles } from '../../layout/Header/Header'
 import { useGoBackButton } from '../../hooks/useGoBackButton'
 import { CardsHeader } from '../../features/cards/UI/Header/CardsHeader'
 import { cardsActions } from '../../features/cards/BLL/cardsSlice'
+import { motion } from 'framer-motion'
 
 export const Cards = () => {
   useSetHeaderTitle('Cards')
@@ -32,7 +33,11 @@ export const Cards = () => {
   }, [id, searchParams])
 
   return (
-    <div style={{ marginTop: 60, width: '1000px' }}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0, duration: 0.2 }}
+      style={{ marginTop: 60, width: '1000px' }}>
       <CardsHeader id={id || ''} />
       <CardsTableControls />
       <CardsTable />
@@ -43,6 +48,6 @@ export const Cards = () => {
         initPageCount={10}
         title={'cards'}
       />
-    </div>
+    </motion.div>
   )
 }

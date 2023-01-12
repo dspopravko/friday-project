@@ -6,7 +6,7 @@ import thunkMiddleware from 'redux-thunk'
 import logger from 'redux-logger'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { loginReducer } from '../features/auth/login/BLL/loginSlice'
-import { restorePasswordReducer } from '../features/auth/restore/BLL/restorePasswordSlice'
+import { resPassReducer } from '../features/auth/restore/BLL/restorePasswordSlice'
 import { newPasswordReducer } from '../features/auth/newPassword/BLL/newPasswordSlice'
 import { profileReducer } from '../features/auth/profile/BLL/profileSlice'
 import { packsReducer } from '../features/packs/BLL/packsSlice'
@@ -15,13 +15,11 @@ import { learnReducer } from '../features/learn/BLL/learnSlice'
 import { usersReducer } from '../features/users/BLL/usersSlice'
 import { userReducer } from '../features/user/BLL/userSlice'
 
-export type ReduxStateType = ReturnType<typeof rootReducer>
-
 const rootReducer = combineReducers({
   app: appReducer,
   auth: loginReducer,
   reg: regReducer,
-  res: restorePasswordReducer,
+  res: resPassReducer,
   new: newPasswordReducer,
   profile: profileReducer,
   packs: packsReducer,

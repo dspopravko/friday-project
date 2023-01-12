@@ -36,11 +36,9 @@ export const LoginForm = () => {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show)
 
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault()
-  }
+  const handleMouseDownPassword = (e: React.MouseEvent<HTMLButtonElement>) =>
+    e.preventDefault()
+
   const dispatch = useAppDispatch()
   const isFetching = useAppSelector(isAuthFetching)
   const {

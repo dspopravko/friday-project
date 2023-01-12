@@ -1,20 +1,26 @@
+import { motion } from 'framer-motion'
 import React from 'react'
 import s from './AppLoader.module.css'
 
 export const AppLoader = () => (
-  <div
+  <motion.div
+    initial={{ opacity: 0, y: 200 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: 200 }}
+    transition={{ delay: 0, duration: 0.3 }}
     style={{
-      background: '#f6f6f6',
+      position: 'fixed',
       width: '100vw',
       height: '100vh',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'flex-end',
+      overflow: "hidden"
     }}
   >
     <span
-      style={{ marginBottom: '50px', transform: 'scale(1.5)' }}
+      style={{ transform: 'scale(1.5)' }}
       className={s.loader}
     ></span>
-  </div>
+  </motion.div>
 )

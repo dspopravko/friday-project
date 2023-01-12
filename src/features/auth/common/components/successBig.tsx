@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import { Icon, Typography } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { theme } from '../../../../assets/mui-theme'
+import { motion } from 'framer-motion'
 
 type SuccessPropsType = {
   title?: string
@@ -22,7 +23,10 @@ export const SuccessBig = ({
   GoTo,
 }: SuccessPropsType) => {
   return (
-    <>
+    <motion.div
+      initial={{opacity: 0, scale: 0.5}}
+      animate={{opacity: 1, scale: 1}}
+      transition={{delay: 0, duration: 0.2}}>
       <div
         style={{
           height: '160px',
@@ -70,6 +74,6 @@ export const SuccessBig = ({
           </Typography>
         </NavLink>
       )}
-    </>
+    </motion.div>
   )
 }

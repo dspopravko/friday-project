@@ -17,7 +17,7 @@ export const UserItem = ({
   const navigate = useNavigate()
   const userClickHandler = () => {
     dispatch(packsActions.resetState())
-    navigate(`/${PATH.USER}/${_id}`)
+    _id && navigate(`/${PATH.USER}/${_id}`)
   }
   return (
     <div className={s.userContainer} onClick={userClickHandler}>

@@ -71,6 +71,7 @@ a.active {
   border-radius: 2px;
   margin: 60px auto 0  auto;
   padding: 35px 38px 33px 38px;
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
 }
 @media only screen and (max-width: 600px)  {
   .loginCanvas {

@@ -7,6 +7,7 @@ import { useAppSelector } from '../../state/store'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { SuggestBlock } from '../../features/auth/common/components/suggestBlock'
 import { FormError } from '../../features/auth/common/components/formError'
+import { motion } from 'framer-motion'
 
 export const SignUp = () => {
   const { errors, registered } = useAppSelector((state) => state.reg)
@@ -17,7 +18,11 @@ export const SignUp = () => {
   }
 
   return (
-    <div className="pageContainer">
+    <motion.div
+      initial={{opacity: 0}}
+      animate={{opacity: 1}}
+      transition={{delay: 0, duration: 0.4}}
+      className="pageContainer">
       <Card className={'loginCanvas'}>
         {/*<SuccessSignup />*/}
         <Typography variant={'h5'}>Sign up</Typography>
@@ -35,6 +40,6 @@ export const SignUp = () => {
           />
         </div>
       </Card>
-    </div>
+    </motion.div>
   )
 }

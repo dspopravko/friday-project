@@ -102,7 +102,6 @@ export const LearnForm = ({
           </AccordionDetails>
         </Accordion>
       </div>
-      <div></div>
     </div>
   )
 }

@@ -8,7 +8,7 @@ const initialState = {
   email: '',
 }
 
-export const restorePasswordSlice = createSlice({
+const restorePasswordSlice = createSlice({
   name: 'restore',
   initialState: initialState,
   reducers: {
@@ -39,4 +39,5 @@ export const restorePasswordSlice = createSlice({
   },
 })
 
-export const restorePasswordReducer = restorePasswordSlice.reducer
+export const resPassReducer = restorePasswordSlice.reducer
+export const resPassActions = restorePasswordSlice.actions

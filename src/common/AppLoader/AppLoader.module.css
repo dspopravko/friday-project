@@ -1,12 +1,17 @@
+:root {
+    --bear-color: #f5f5f5;
+    --bear-face: #bdd5e0
+}
 .loader {
+    box-shadow: 10px 10px 400px 160px rgb(211, 211, 211);
     width: 160px;
     height: 185px;
     position: relative;
-    background: #fff;
+    background: var(--bear-color);
     border-radius: 100px 100px 0 0;
+    padding-bottom: 50px;
 }
 .loader:after {
-
     content: "";
     position: absolute;
     width: 100px;
@@ -19,9 +24,9 @@
     radial-gradient(circle, #fff 30%, transparent 45%),
     radial-gradient(circle, #000 48%, transparent 51%),
     linear-gradient(#000 20px, transparent 0),
-    linear-gradient(#cfecf9 60px, transparent 0),
-    radial-gradient(circle, #cfecf9 50%, transparent 51%),
-    radial-gradient(circle, #cfecf9 50%, transparent 51%);
+    linear-gradient(var(--bear-face) 60px, transparent 0),
+    radial-gradient(circle, var(--bear-face) 50%, transparent 51%),
+    radial-gradient(circle, var(--bear-face) 50%, transparent 51%);
     background-repeat: no-repeat;
     background-size: 16px 16px, 16px 16px, 10px 10px, 42px 42px, 12px 3px,
     50px 25px, 70px 70px, 70px 70px;
@@ -30,15 +35,14 @@
     animation: faceLift 3s linear infinite alternate;
 }
 .loader:before {
-
     content: "";
     position: absolute;
     width: 140%;
     height: 125px;
     left: -20%;
     top: 0;
-    background-image: radial-gradient(circle, #fff 48%, transparent 50%),
-    radial-gradient(circle, #fff 48%, transparent 50%);
+    background-image: radial-gradient(circle, var(--bear-color) 48%, transparent 50%),
+    radial-gradient(circle, var(--bear-color) 48%, transparent 50%);
     background-repeat: no-repeat;
     background-size: 65px 65px;
     background-position: 0 12px, 145px 12px;

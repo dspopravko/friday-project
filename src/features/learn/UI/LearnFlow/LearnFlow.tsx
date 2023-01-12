@@ -8,6 +8,7 @@ import { PATH } from '../../../../data/paths'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
 import { CardType } from '../../../cards/API/types'
 import { learnActions } from '../../BLL/learnSlice'
+import { motion } from 'framer-motion'
 
 export const LearnFlow = () => {
   const cards = useAppSelector((state) => state.learn.cards)
@@ -68,7 +69,11 @@ export const LearnFlow = () => {
     }
   }
   return (
-    <>
+    <motion.div
+      initial={{x: 100, opacity: 0}}
+      animate={{x: 0,opacity: 1}}
+      transition={{delay: 0, duration: 0.2}}
+    >
       {!isCompleted && (
         <LinearProgress variant="determinate" value={normalise()} />
       )}
@@ -103,6 +108,6 @@ export const LearnFlow = () => {
           </SuccessBig>
         )}
       </Paper>
-    </>
+    </motion.div>
   )
 }

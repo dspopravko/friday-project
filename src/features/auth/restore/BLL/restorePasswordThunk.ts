@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { restoreAPI, restorePasswordPayloadType } from '../API/restoreAPI'
-import { restorePasswordSlice } from './restorePasswordSlice'
+import { resPassActions } from './restorePasswordSlice'
 import { thunkTryCatch } from '../../../../api/thunkTryCatch'
 
 export const restorePassword = createAsyncThunk(
@@ -8,9 +8,7 @@ export const restorePassword = createAsyncThunk(
   async (data: restorePasswordPayloadType, thunkApi) => {
     return thunkTryCatch(thunkApi, async () => {
       const res = await restoreAPI.restorePassword(data)
-      thunkApi.dispatch(
-        restorePasswordSlice.actions.setRestoreEmailValue(data.email)
-      )
+      thunkApi.dispatch(resPassActions.setRestoreEmailValue(data.email))
       return res.data
     })
   }

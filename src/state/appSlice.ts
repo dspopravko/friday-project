@@ -1,19 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { authMe } from '../features/auth/login/BLL/loginThunks'
 
-export enum appStatus {
-  loading,
-  idle,
-}
+export type appStatus = 'loading' | 'idle'
 
 export type errorType = string | null
 
 const initialState = {
-  status: appStatus.loading as appStatus,
+  status: 'loading' as appStatus,
   error: null as errorType,
 }
 
-export const appSlice = createSlice({
+const appSlice = createSlice({
   name: 'app',
   initialState: initialState,
   reducers: {
@@ -26,12 +23,13 @@ export const appSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(authMe.fulfilled, (state) => {
-      state.status = appStatus.idle
+      state.status = 'idle'
     })
     builder.addCase(authMe.rejected, (state) => {
-      state.status = appStatus.idle
+      state.status = 'idle'
     })
   },
 })
 
 export const appReducer = appSlice.reducer
+export const appActions = appSlice.actions

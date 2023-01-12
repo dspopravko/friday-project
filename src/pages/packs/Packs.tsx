@@ -13,6 +13,7 @@ import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { PacksHeader } from '../../features/packs/UI/Header/PacksHeader'
 import { goBackButtonTitles } from '../../layout/Header/Header'
 import { useGoBackButton } from '../../hooks/useGoBackButton'
+import { motion } from 'framer-motion'
 
 export const Packs = () => {
   useSetHeaderTitle('Packs')
@@ -27,7 +28,12 @@ export const Packs = () => {
     dispatch(getPacks(params))
   }, [searchParams])
   return (
-    <div style={{ marginTop: 60, width: '1000px' }}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0, duration: 0.2 }}
+      style={{ marginTop: 60, width: '1000px' }}
+    >
       <PacksHeader />
       <PacksTableControls />
       <PacksTable
@@ -47,6 +53,6 @@ export const Packs = () => {
         initPageCount={10}
         title={'packs'}
       />
-    </div>
+    </motion.div>
   )
 }

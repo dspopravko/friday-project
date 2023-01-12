@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Card, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { PATH } from '../../data/paths'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
@@ -8,7 +8,8 @@ import { Email } from '@mui/icons-material'
 import { RestoreForm } from '../../features/auth/restore/UI/restoreForm'
 import { SuggestBlock } from '../../features/auth/common/components/suggestBlock'
 import { theme } from '../../assets/mui-theme'
-import { restorePasswordSlice } from '../../features/auth/restore/BLL/restorePasswordSlice'
+import { resPassActions } from '../../features/auth/restore/BLL/restorePasswordSlice'
+import { motion } from 'framer-motion'
 
 export const PasswordRestore = () => {
   useSetHeaderTitle('Restore password')
@@ -21,7 +22,12 @@ export const PasswordRestore = () => {
   } = useAppSelector((state) => state.res)
 
   return (
-    <Card className={'loginCanvas'}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0, duration: 0.4 }}
+      className={'loginCanvas'}
+    >
       {restored ? (
         <>
           <SuccessBig
@@ -50,7 +56,7 @@ export const PasswordRestore = () => {
       >
         {serverErrors}
       </Typography>
-    </Card>
+    </motion.div>
   )
 }
 
@@ -58,7 +64,7 @@ function resetState() {
   const dispatch = useAppDispatch()
   useEffect(
     () => () => {
-      dispatch(restorePasswordSlice.actions.reset())
+      dispatch(resPassActions.reset())
     },
     []
   )
