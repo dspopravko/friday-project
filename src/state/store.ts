@@ -1,4 +1,4 @@
-import { regReducer } from '../features/auth/signUp/services/signUpSlice'
+import { regReducer } from '../features/auth/signUp/BLL/signUpSlice'
 import { appReducer } from './appSlice'
 import { combineReducers } from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
@@ -18,9 +18,9 @@ import { userReducer } from '../features/user/BLL/userSlice'
 const rootReducer = combineReducers({
   app: appReducer,
   auth: loginReducer,
-  reg: regReducer,
-  res: resPassReducer,
-  new: newPasswordReducer,
+  signUp: regReducer,
+  resPass: resPassReducer,
+  newPass: newPasswordReducer,
   profile: profileReducer,
   packs: packsReducer,
   cards: cardsReducer,

@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import { Icon, Typography } from '@mui/material'
 import { NavLink } from 'react-router-dom'
-import { theme } from '../../../../assets/mui-theme'
+import { theme } from '../../assets/mui-theme'
 import { motion } from 'framer-motion'
 
 type SuccessPropsType = {
@@ -15,7 +15,7 @@ type SuccessPropsType = {
   }
 }
 
-export const SuccessBig = ({
+export const SuccessBlock = ({
   title = 'Instruction was sent to:',
   email = 'Your email address',
   description = 'Please check it',
@@ -24,9 +24,10 @@ export const SuccessBig = ({
 }: SuccessPropsType) => {
   return (
     <motion.div
-      initial={{opacity: 0, scale: 0.5}}
-      animate={{opacity: 1, scale: 1}}
-      transition={{delay: 0, duration: 0.2}}>
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 0, duration: 0.2 }}
+    >
       <div
         style={{
           height: '160px',

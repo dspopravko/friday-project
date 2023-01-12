@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography } from '@mui/material'
-import { theme } from '../../../../assets/mui-theme'
+import { theme } from '../../assets/mui-theme'
 
 export const FormError = ({ error }: { error: string }) => {
   return (

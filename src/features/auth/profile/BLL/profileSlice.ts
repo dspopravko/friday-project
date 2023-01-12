@@ -21,7 +21,7 @@ type userType = {
   publicCardPacksCount: number
 }
 
-export const profileSlice = createSlice({
+const profileSlice = createSlice({
   name: 'profile',
   initialState: initialState,
   reducers: {
@@ -83,3 +83,4 @@ export const profileSlice = createSlice({
 })
 
 export const profileReducer = profileSlice.reducer
+export const profileActions = profileSlice.actions

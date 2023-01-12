@@ -58,7 +58,7 @@ export const ModalEditPack = ({
     setPending(false)
   }
   const handleFileInput = (file: File) =>
-    checkFileSize(file, setAvatar, dispatch)
+    checkFileSize(file, setAvatar, dispatch, 300)
 
   const resetAvatar = () => {
     setAvatar('')

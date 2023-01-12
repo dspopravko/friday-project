@@ -3,11 +3,16 @@ import React from 'react'
 import { PacksType } from '../../../../BLL/packsSlice'
 import { PacksTableActionButtons } from '../PacksTableActionButtons/PacksTableActionButtons'
 
+/**
+ * Pushes column with action buttons
+ * @param userID - authorized user ID
+ */
+
 export const packsTableActionsCreator = (userID: string) => (hooks: Hooks) => {
   hooks.visibleColumns.push((columns) => [
     ...columns,
     {
-      id: 'Edit',
+      id: 'Actions',
       Header: () => {
         return <p style={{ width: '70px' }}>Actions</p>
       },
@@ -20,7 +25,6 @@ export const packsTableActionsCreator = (userID: string) => (hooks: Hooks) => {
             isOwnUser={typedRow.user_id === userID}
             packName={typedRow.name}
             packType={typedRow.private}
-            cardName={typedRow.name}
           />
         )
       },

@@ -14,6 +14,7 @@ import { PacksHeader } from '../../features/packs/UI/Header/PacksHeader'
 import { goBackButtonTitles } from '../../layout/Header/Header'
 import { useGoBackButton } from '../../hooks/useGoBackButton'
 import { motion } from 'framer-motion'
+import s from './Packs.module.css'
 
 export const Packs = () => {
   useSetHeaderTitle('Packs')
@@ -27,23 +28,23 @@ export const Packs = () => {
   useEffect(() => {
     dispatch(getPacks(params))
   }, [searchParams])
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0, duration: 0.2 }}
-      style={{ marginTop: 60, width: '1000px' }}
+      className={s.mainContainer}
     >
       <PacksHeader />
       <PacksTableControls />
       <PacksTable
-        columnPropsNames={[
+        columnsPropsNames={[
           'deckCover',
           'name',
           'cardsCount',
           'updated',
           'user_name',
-          '_id',
         ]}
       />
       <TablePagination

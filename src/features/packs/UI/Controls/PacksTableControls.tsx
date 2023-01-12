@@ -21,6 +21,7 @@ export const PacksTableControls = () => {
       createSearchParams({ ...params, ...Object.assign({}, ...newParams) }),
       { replace: true }
     )
+
   const clearParams = () => {
     setSearchParams(createSearchParams({}), { replace: true })
   }
@@ -44,6 +45,7 @@ export const PacksTableControls = () => {
           placeholder={'Provide your text'}
         />
       </div>
+
       {/*Button "Me/All"*/}
       <div className={s.controlBlock}>
         <Typography>Show packs cards</Typography>
@@ -55,6 +57,7 @@ export const PacksTableControls = () => {
           }}
         />
       </div>
+
       {/*Slider*/}
       <div className={s.controlBlock}>
         <Typography>Number of cards</Typography>
@@ -64,6 +67,7 @@ export const PacksTableControls = () => {
           onChangeCommitted={updateParams}
         />
       </div>
+
       {/*Clear filter*/}
       <div className={s.controlBlock}>
         <Typography>Clear</Typography>

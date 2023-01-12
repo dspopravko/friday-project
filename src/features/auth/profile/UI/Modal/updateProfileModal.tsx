@@ -1,18 +1,19 @@
 import React, { useState } from 'react'
 import { TextField } from '@mui/material'
 import { useAppDispatch, useAppSelector } from '../../../../../state/store'
-import { FormError } from '../../../common/components/formError'
 import { profileSelector } from '../../../common/selectors/selectorsAuth'
-import { BasicModal } from '../../../../../common/Modal/Modal'
+import {
+  BasicModal,
+  ImageInputWithPreview,
+  FormError,
+} from '../../../../../common'
 import s from '../../../login/UI/LoginForm.module.css'
 import { LoginData } from '../updateProfileContainer'
-import { fileFromInputToBase64 } from '../../BLL/fileFromInputToBase64'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
 import * as yup from 'yup'
 import { updateProfile } from '../../BLL/profileThunk'
-import { handleServerAppError } from '../../../../../services/error-notification'
-import { ImageInputWithPreview } from '../../../../../common/ImageInputWithPreview/ImageInputWithPreview'
+import { checkFileSize } from '../../../../../services/checkFileSize'
 
 type ModalPropsType = {
   open: boolean
@@ -28,17 +29,8 @@ export const UpdateProfileModal = ({ open, onClose }: ModalPropsType) => {
   const [avatar, setAvatar] = useState<string>()
   const dispatch = useAppDispatch()
 
-  const handlFileInput = async (file: File) => {
-    if (file.size < 300000) {
-      const avatar = await fileFromInputToBase64(file)
-      setAvatar(avatar)
-    } else {
-      handleServerAppError(
-        { error: 'Maximum file size (300 kb) exceeded' },
-        dispatch
-      )
-    }
-  }
+  const handlFileInput = async (file: File) =>
+    checkFileSize(file, setAvatar, dispatch, 600)
 
   const handleSubmission = async () => {
     const data = getValues()
@@ -58,6 +50,7 @@ export const UpdateProfileModal = ({ open, onClose }: ModalPropsType) => {
   const {
     register,
     resetField,
+    handleSubmit,
     getValues,
     reset,
     formState: { errors },
@@ -80,6 +73,7 @@ export const UpdateProfileModal = ({ open, onClose }: ModalPropsType) => {
       buttonCallback={() => handleSubmission()}
     >
       <form
+        onSubmit={handleSubmit(handleSubmission)}
         className={s.form}
         style={{
           opacity: pending ? '0.5' : '1',

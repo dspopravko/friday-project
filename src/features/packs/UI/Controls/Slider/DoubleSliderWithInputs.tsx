@@ -9,6 +9,13 @@ type DoubleSliderWithInputsPropsType = {
   onChangeCommitted: (newParams: { [param: string]: string }[]) => void
 }
 
+/**
+ * Slider with debounce and two border inputs
+ * @param current - current [min, max] range
+ * @param border - limit for [min, max] range
+ * @param onChangeCommitted - callback for new [{min: 10}, {max: 100}] range
+ */
+
 export const DoubleSliderWithInputs = ({
   current,
   border,
@@ -22,9 +29,10 @@ export const DoubleSliderWithInputs = ({
     setInitialized(true)
     setLocalValue({ ...localValue, ...Object.assign({}, ...newParams) })
   }
-  //sends debounced position on callback
+
+  //sends debounced range on callback
   useEffect(() => {
-    //prevent sending position on the first render
+    //prevent sending range on the first render
     if (!initialized) {
       return
     }
@@ -40,24 +48,29 @@ export const DoubleSliderWithInputs = ({
     return clearTimeout(timerId)
   }, [localValue.min, localValue.max])
 
-  //set slider position if new current values comes in
+  //adjust slider range if new current values comes in
   useEffect(() => {
     if (!isNaN(current[0]) && !isNaN(current[1])) {
       setLocalValue({ min: current[0], max: current[1] })
     }
   }, [current])
 
+  //adjust slider range on limit change
   useEffect(() => {
-    //reset current value if out of new boundaries
+    //reset range if out of new limit
     if (localValue.max > border[1]) {
       setLocalValue({ min: border[0], max: border[1] })
       return
     }
-    //set boundaries on initialization
+    //set limit on initialization
     if (!isNaN(border[1]) && !initialized) {
       setLocalValue({ min: current[0] || 0, max: border[1] })
+      setTimeout(() => {
+        setInitialized(true)
+      }, 100)
     }
   }, [border])
+
   return (
     <div style={{ display: 'flex' }}>
       <div>

@@ -1,4 +1,4 @@
-.cardsBlockContainer {
+.mainContainer {
   box-sizing: border-box;
   width: 100%;
   display: flex;
@@ -8,7 +8,7 @@
   height: 160px;
   border-radius: 12px;
   background-color: #f6f6f6;
-  gap: 20px
+  gap: 20px;
 }
 .block {
   max-width: 300px;
@@ -17,4 +17,16 @@
   text-align: left;
   box-sizing: border-box;
   height: 100%;
+}
+.coverContainer{
+  box-sizing: border-box;
+  height: 100%;
+  max-width: 300px;
+  border-radius: 14px;
+  padding: 1px;
+}
+.coverContainer img{
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
 }

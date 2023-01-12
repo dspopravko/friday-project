@@ -15,10 +15,12 @@ export const UserItem = ({
 }: UserType) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+
   const userClickHandler = () => {
     dispatch(packsActions.resetState())
     _id && navigate(`/${PATH.USER}/${_id}`)
   }
+
   return (
     <div className={s.userContainer} onClick={userClickHandler}>
       <div style={{ marginLeft: '4px' }}>

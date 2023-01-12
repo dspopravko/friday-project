@@ -7,10 +7,14 @@ type ButtonGroupPropsType = {
   handleButtonClick: (button: number) => void
 }
 
+/**
+ * One of the two buttons can be selected, or none
+ */
+
 export const XButtonGroup = ({
+  title,
   activeButton,
   handleButtonClick,
-  title,
 }: ButtonGroupPropsType) => {
   const buttonStyle = {
     width: '87px',

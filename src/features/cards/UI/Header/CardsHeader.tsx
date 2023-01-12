@@ -34,29 +34,20 @@ export const CardsHeader = ({ id }: { id: string }) => {
       currentPack.user_id && dispatch(getUser({ id: currentPack.user_id }))
     }, 1800)
   }, [currentPack.user_id])
+
   return (
-    <div className={s.cardsBlockContainer}>
+    <div className={s.mainContainer}>
+      {/*Pack cover*/}
       <div className={s.block}>
-        <div
-          style={{
-            height: '100%',
-            maxWidth: '300px',
-            borderRadius: '14px',
-            padding: 1,
-          }}
-        >
+        <div className={s.coverContainer}>
           <img
             alt={'pack cover'}
-            style={{
-              width: '100%',
-              height: '100%',
-              borderRadius: '12px',
-            }}
             onError={() => setImage(cardsBlank)}
             src={image || ''}
           />
         </div>
       </div>
+      {/*Pack info*/}
       {currentPack.name && (
         <div className={s.block} style={{ flexGrow: 1 }}>
           <Typography variant={'h5'}>{currentPack.name}</Typography>
@@ -65,11 +56,12 @@ export const CardsHeader = ({ id }: { id: string }) => {
           <Typography>Updated: {createDate(currentPack.updated)}</Typography>
         </div>
       )}
-
+      {/*Pack owner*/}
       <div className={s.block} style={{ flexGrow: 1 }}>
         <UserItem {...user} />
       </div>
-      <div style={{ justifyContent: 'space-evenly' }} className={s.block}>
+      {/*Pack controls*/}
+      <div className={s.block} style={{ justifyContent: 'space-evenly' }}>
         <Button disabled={!currentPack.cardsCount} onClick={handleLearn}>
           Learn pack
         </Button>

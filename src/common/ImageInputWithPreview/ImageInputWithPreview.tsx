@@ -1,8 +1,9 @@
 import React, { ChangeEvent, useRef } from 'react'
-import { theme } from '../../assets/mui-theme'
-import { IconButton, Paper, Typography } from '@mui/material'
+import { IconButton, Typography } from '@mui/material'
 import { XButton } from '../'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
+import { AnimatePresence, motion } from 'framer-motion'
+import s from './ImageInputWithPreview.module.css'
 
 type ImagePreviewPropsType = {
   title?: string
@@ -25,51 +26,60 @@ export const ImageInputWithPreview = ({
       handleFileInput(file)
     }
   }
+
+  const variants = {
+    visible: { opacity: 1, scale: 1 },
+    hidden: { opacity: 0, scale: 0.6 },
+  }
+
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: theme.palette.grey.A200,
-        margin: '10px auto 0 auto',
-        width: '120px',
-        height: '140px',
-        borderRadius: '12px',
-      }}
+    <motion.div
+      initial={{ height: 0, opacity: 0 }}
+      animate={{ height: 140, opacity: 1 }}
+      exit={{ height: 0, opacity: 0 }}
+      transition={{ delay: 0, duration: 0.2 }}
+      className={s.mainContainer}
     >
-      {avatar ? (
-        <>
-          <Paper
-            sx={{ width: 80, height: 80, borderRadius: '50%' }}
-            variant="outlined"
+      <AnimatePresence>
+        {avatar ? (
+          <motion.div
+            key={'contained'}
+            variants={variants}
+            initial={'hidden'}
+            animate={'visible'}
+            exit={'hidden'}
+            className={s.imageInputContainer}
           >
-            <img
-              style={{ width: '100%', height: '100%', borderRadius: '50%' }}
-              src={avatar}
-              alt={'selected image'}
+            <div className={s.previewImageContainer}>
+              <img src={avatar} alt={'selected image'} />
+            </div>
+            <XButton type={'delete'} onClick={deleteImage}>
+              delete
+            </XButton>
+          </motion.div>
+        ) : (
+          <motion.div
+            key={'empty'}
+            variants={variants}
+            initial={'hidden'}
+            animate={'visible'}
+            exit={'hidden'}
+            className={s.imageInputContainer}
+          >
+            <Typography align={'center'}>{title}</Typography>
+            <IconButton onClick={selectFileHandler} component={'span'}>
+              <FileUploadIcon fontSize={'large'} />
+            </IconButton>
+            <input
+              type="file"
+              accept="image/png, image/jpeg"
+              hidden
+              ref={inputRef}
+              onChange={uploadHandler}
             />
-          </Paper>
-          <XButton type={'delete'} onClick={deleteImage}>
-            delete
-          </XButton>
-        </>
-      ) : (
-        <>
-          <Typography align={'center'}>{title}</Typography>
-          <IconButton onClick={selectFileHandler} component={'span'}>
-            <FileUploadIcon fontSize={'large'} />
-          </IconButton>
-          <input
-            type="file"
-            accept="image/png, image/jpeg"
-            hidden
-            ref={inputRef}
-            onChange={uploadHandler}
-          />
-        </>
-      )}
-    </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   )
 }

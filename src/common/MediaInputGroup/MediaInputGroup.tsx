@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react'
 import {
-  Box,
   Checkbox,
   FormControlLabel,
-  Paper,
   TextField,
   Typography,
 } from '@mui/material'
-import { ImageInputWithPreview } from '../ImageInputWithPreview/ImageInputWithPreview'
+import { ImageInputWithPreview } from '../ImageInputWithPreview'
 import { checkFileSize } from '../../services/checkFileSize'
 import { useAppDispatch } from '../../state/store'
+import s from './MediaInputGroup.module.css'
+import { AnimatePresence } from 'framer-motion'
 
 type MediaInputPropsType = {
   title: string
@@ -40,7 +40,7 @@ export const MediaInputGroup = ({
   }
 
   const handleFileInput = (file: File) =>
-    checkFileSize(file, setInputImage, dispatch)
+    checkFileSize(file, setInputImage, dispatch, 300)
 
   const resetImage = () => {
     setInputImage('')
@@ -50,21 +50,12 @@ export const MediaInputGroup = ({
   }
 
   return (
-    <Paper sx={{ p: 1 }}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
+    <div className={s.mediaGroupContainer}>
+      <div className={s.viewContainer}>
         <Typography sx={{ textTransform: 'capitalize' }} variant={'h6'}>
           {title}
         </Typography>
-        <Box
-          sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
-        >
+        <div className={s.headerGroup}>
           <FormControlLabel
             control={
               <Checkbox
@@ -76,8 +67,8 @@ export const MediaInputGroup = ({
             }
             label="Add image"
           />
-        </Box>
-      </Box>
+        </div>
+      </div>
 
       <TextField
         label={`${title} text`}
@@ -86,14 +77,19 @@ export const MediaInputGroup = ({
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
       />
-      {value.some((i) => i === 'image') && (
-        <ImageInputWithPreview
-          title={`Upload ${title} image`}
-          deleteImage={resetImage}
-          avatar={inputImage}
-          handleFileInput={handleFileInput}
-        />
-      )}
-    </Paper>
+      <div className={s.mediaInputContiner}>
+        <AnimatePresence>
+          {value.some((i) => i === 'image') && (
+            <ImageInputWithPreview
+              key={'image'}
+              title={`Upload ${title} image`}
+              deleteImage={resetImage}
+              avatar={inputImage}
+              handleFileInput={handleFileInput}
+            />
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
   )
 }

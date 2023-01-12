@@ -12,25 +12,26 @@ import s from '../../../../../assets/styles/Table.module.css'
 import { userIdSelector } from '../../../../../state/selectors'
 import { rememberPack } from '../../../../cards/BLL/cardsSlice'
 import { PackType } from '../../../API/types'
-import { isPacksPending, packsSelector } from '../../../BLL/selectorsPacks'
+import { pendingPacks, packsSelector } from '../../../BLL/selectorsPacks'
 import { packsTableActionsCreator } from '../PacksTableActions/PacksTableActionsCreator/PacksTableActionsCreator'
 import { Typography } from '@mui/material'
-import s2 from './PacksTable.module.css'
+import cx from 'classnames'
 import { packsActions } from '../../../BLL/packsSlice'
 
 type PacksTablePropsType = {
-  columnPropsNames: string[]
+  columnsPropsNames: Array<keyof PackType>
 }
 
-export function PacksTable({ columnPropsNames }: PacksTablePropsType) {
+export function PacksTable({ columnsPropsNames }: PacksTablePropsType) {
   const packs = useAppSelector(packsSelector)
-  const pending = useAppSelector(isPacksPending)
+  const pending = useAppSelector(pendingPacks)
   const userID = useAppSelector(userIdSelector)
   const [searchParams, setSearchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
+  //query params
   const updateParams = (newParams: { [param: string]: string }) => {
     setSearchParams(
       createSearchParams({ ...params, ...newParams, page: '1' }),
@@ -38,13 +39,14 @@ export function PacksTable({ columnPropsNames }: PacksTablePropsType) {
     )
   }
 
+  //react-tables
   const productsData = useMemo(() => [...(packs as never[])], [packs])
   const productsColumns = useMemo(() => {
     return PacksTableColumnsRender(
       packs,
       updateParams,
       params,
-      columnPropsNames
+      columnsPropsNames
     )
   }, [packs])
 
@@ -58,6 +60,7 @@ export function PacksTable({ columnPropsNames }: PacksTablePropsType) {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance
 
+  //handlers
   const cellClickHandler = (cell: unknown, row: unknown) => {
     const typedRow = row as { original: PackType }
     const typedCell = cell as { column: { id: string } }
@@ -66,7 +69,7 @@ export function PacksTable({ columnPropsNames }: PacksTablePropsType) {
       navigate(`/${PATH.USER}/${typedRow.original.user_id}`)
       return
     }
-    if (typedCell.column.id !== 'Edit') {
+    if (typedCell.column.id !== 'Actions') {
       dispatch(rememberPack({ ...typedRow.original }))
       navigate(`/${PATH.CARDS}/${typedRow.original._id}`)
     }
@@ -74,12 +77,7 @@ export function PacksTable({ columnPropsNames }: PacksTablePropsType) {
 
   return (
     <>
-      <div
-        className={s2.packsTableContainer}
-        style={{
-          opacity: pending ? '0.4' : '1',
-        }}
-      >
+      <div className={cx({ [s.tableContainer]: true, pending: pending })}>
         <table className={s.table} {...getTableProps()}>
           <thead className={s.tableHead}>
             {headerGroups.map((headerGroup) => {

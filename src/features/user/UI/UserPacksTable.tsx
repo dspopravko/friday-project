@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Paper } from '@mui/material'
 import { PacksTable } from '../../packs/UI/Table/PacksTable/PacksTable'
-import { TablePagination } from '../../../common/TablePagination/TablePagination'
+import { TablePagination } from '../../../common'
 import { useAppDispatch, useAppSelector } from '../../../state/store'
 import {
   currentPageSelector,
@@ -24,7 +24,7 @@ export const UserPacksTable = ({ id }: { id: string }) => {
   return (
     <Paper className={s.userPacksTableContainer}>
       <PacksTable
-        columnPropsNames={['deckCover', 'name', 'cardsCount', 'updated', '_id']}
+        columnsPropsNames={['deckCover', 'name', 'cardsCount', 'updated']}
       />
       <TablePagination
         page={currentPage}

@@ -1,0 +1,22 @@
+.profileContainer {
+    width: 413px;
+    height: 400px;
+    margin: 60px 0 0 0;
+    padding: 35px;
+}
+
+.title {
+    padding: 30px 0;
+}
+
+.name {
+    padding: 15px 0;
+}
+
+.email {
+    opacity: 0.5;
+}
+
+.btn:hover {
+    background-color: var(--shade-b-16);
+}

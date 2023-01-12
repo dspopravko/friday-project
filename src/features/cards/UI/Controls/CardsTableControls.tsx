@@ -15,15 +15,13 @@ export const CardsTableControls = () => {
     )
 
   return (
-    <div className={s.controlWrapper}>
-      <div className={s.controlBlock} style={{ flexGrow: 1 }}>
-        <Typography>Search:</Typography>
-        <DebouncedInput
-          onDebouncedChange={(input) => updateParams([{ cardQuestion: input }])}
-          value={params.packName}
-          placeholder={'Search in questions'}
-        />
-      </div>
+    <div className={s.controlBlock} style={{ flexGrow: 1 }}>
+      <Typography>Search:</Typography>
+      <DebouncedInput
+        onDebouncedChange={(input) => updateParams([{ cardQuestion: input }])}
+        value={params.packName}
+        placeholder={'Search in questions'}
+      />
     </div>
   )
 }

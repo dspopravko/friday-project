@@ -3,35 +3,43 @@ import { useTable } from 'react-table'
 import { CardsTableColumnsRender } from '../CardsTableColumnsRender/CardsTableColumnsRender'
 import { createSearchParams, useSearchParams } from 'react-router-dom'
 import { useAppSelector } from '../../../../../state/store'
-import { selectCards } from '../../../BLL/selectorsCards'
+import { pendingCards, selectCards } from '../../../BLL/selectorsCards'
 import s from '../../../../../assets/styles/Table.module.css'
 import { CircularProgress, Typography } from '@mui/material'
 import { userIdSelector } from '../../../../../state/selectors'
 import { cardsTableActionsCreator } from '../CardsTableActions/CardsTableActionsCreator/CardsTableActionsCreator'
+import { CardType } from '../../../API/types'
+import cx from 'classnames'
 
-export function CardsTable() {
+type CardsTablePropsType = {
+  columnsPropsNames: Array<keyof CardType>
+}
+
+export function CardsTable({ columnsPropsNames }: CardsTablePropsType) {
   const cards = useAppSelector(selectCards)
-  const pending = useAppSelector((state) => state.cards.pending)
+  const pending = useAppSelector(pendingCards)
   const userID = useAppSelector(userIdSelector)
   const [searchParams, setSearchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
 
+  //query params
   const updateParams = (newParams: { [param: string]: string }) =>
     setSearchParams(createSearchParams({ ...params, ...newParams }), {
       replace: true,
     })
 
+  //react-tables
   const productsData = useMemo(() => [...(cards as Array<never>)], [cards])
   const productsColumns = useMemo(() => {
-    return CardsTableColumnsRender(cards, updateParams, params)
+    return CardsTableColumnsRender(
+      cards,
+      updateParams,
+      params,
+      columnsPropsNames
+    )
   }, [cards])
 
-  let isOwnUser
-  if (cards[0]) {
-    isOwnUser = cards[0].user_id === userID
-  } else {
-    isOwnUser = false
-  }
+  const isOwnUser = cards[0] && cards[0].user_id === userID
 
   const tableInstance = useTable(
     {
@@ -44,15 +52,7 @@ export function CardsTable() {
     tableInstance
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        width: '100%',
-        overflowX: 'auto',
-        opacity: pending ? '0.4' : '1',
-      }}
-    >
+    <div className={cx({ [s.tableContainer]: true, pending: pending })}>
       {cards[0] ? (
         <table className={s.table} {...getTableProps()}>
           <thead className={s.tableHead}>
@@ -92,15 +92,7 @@ export function CardsTable() {
           </tbody>
         </table>
       ) : (
-        <div
-          style={{
-            width: '200px',
-            height: '120px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <div className={s.progressContainer}>
           {pending ? (
             <CircularProgress />
           ) : (

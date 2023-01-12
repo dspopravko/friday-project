@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography } from '@mui/material'
 import { NavLink } from 'react-router-dom'
-import { theme } from '../../../../assets/mui-theme'
+import { theme } from '../../assets/mui-theme'
 
 type SuggestPropsType = {
   question: string

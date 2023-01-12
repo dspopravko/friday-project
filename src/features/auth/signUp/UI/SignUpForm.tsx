@@ -8,7 +8,7 @@ import s from './SignUpForm.module.css'
 import { defaultSchema } from '../../common/validation/validationSchema'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { isAuthFetching } from '../../common/selectors/selectorsAuth'
-import { signUp } from '../services/signUpThunk'
+import { signUp } from '../BLL/signUpThunk'
 
 type RegistrationType = {
   email: string

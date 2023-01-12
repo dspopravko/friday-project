@@ -14,15 +14,14 @@ type TableActionButtonsPropsType = {
   packId: string
   isOwnUser: boolean
   packName: string
-  cardName: string
   packType: boolean
 }
 
 export const PacksTableActionButtons = ({
   isEmpty,
+  packId,
   isOwnUser,
   packName,
-  packId,
   packType,
 }: TableActionButtonsPropsType) => {
   const navigate = useNavigate()

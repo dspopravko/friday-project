@@ -25,9 +25,11 @@ export const Cards = () => {
   const params = Object.fromEntries(searchParams)
   const dispatch = useAppDispatch()
   useGoBackButton(goBackButtonTitles.back)
+
   useEffect(() => {
     dispatch(cardsActions.resetPack())
   }, [])
+
   useEffect(() => {
     id && dispatch(getCards({ cardsPack_id: id, ...params }))
   }, [id, searchParams])
@@ -37,10 +39,13 @@ export const Cards = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0, duration: 0.2 }}
-      style={{ marginTop: 60, width: '1000px' }}>
+      style={{ marginTop: 60, width: '1000px' }}
+    >
       <CardsHeader id={id || ''} />
       <CardsTableControls />
-      <CardsTable />
+      <CardsTable
+        columnsPropsNames={['question', 'answer', 'updated', 'grade']}
+      />
       <TablePagination
         page={currentPage}
         maxPage={maxPage}

@@ -6,7 +6,7 @@ const initialState = {
   isAuth: false,
 }
 
-export const loginSlice = createSlice({
+const loginSlice = createSlice({
   name: 'login',
   initialState: initialState,
   reducers: {
@@ -54,6 +54,4 @@ export const loginSlice = createSlice({
 })
 
 export const loginReducer = loginSlice.reducer
-
-export type AppReducerStateType = typeof initialState
-export const appReducer = loginSlice.reducer
+export const loginActions = loginSlice.actions

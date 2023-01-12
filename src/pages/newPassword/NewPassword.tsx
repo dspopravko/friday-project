@@ -4,7 +4,7 @@ import { Card, Typography } from '@mui/material'
 import { useAppSelector } from '../../state/store'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
 import { NewPasswordForm } from '../../features/auth/newPassword/UI/NewPasswordForm'
-import { SuccessBig } from '../../features/auth/common/components/successBig'
+import { SuccessBlock } from '../../common'
 import { PATH } from '../../data/paths'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
 import { theme } from '../../assets/mui-theme'
@@ -23,7 +23,7 @@ export const NewPassword = () => {
     <Card className={'loginCanvas'}>
       {isSet ? (
         <>
-          <SuccessBig
+          <SuccessBlock
             title={'Your password has been successfully updated'}
             email={'You can now login'}
             description={'👇'}
@@ -33,7 +33,7 @@ export const NewPassword = () => {
             }}
           >
             <DoneAllIcon />
-          </SuccessBig>
+          </SuccessBlock>
         </>
       ) : (
         <>

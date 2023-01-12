@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { Box, Card, Typography } from '@mui/material'
-import s from './profile.module.css'
+import s from './Profile.module.css'
 import { logout } from '../../features/auth/login/BLL/loginThunks'
 import { UpdateProfileContainer } from '../../features/auth/profile/UI/updateProfileContainer'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'

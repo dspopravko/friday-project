@@ -7,7 +7,7 @@ const initialState = {
   errors: '',
 }
 
-export const signUpSlice = createSlice({
+const signUpSlice = createSlice({
   name: 'reg',
   initialState: initialState,
   reducers: {
@@ -32,4 +32,4 @@ export const signUpSlice = createSlice({
 })
 
 export const regReducer = signUpSlice.reducer
-export const { setReg } = signUpSlice.actions
+export const signUpActions = signUpSlice.actions

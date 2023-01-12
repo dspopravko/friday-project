@@ -2,13 +2,23 @@ import { Rating } from '@mui/material'
 import React from 'react'
 import { TableDateColumn } from '../../../../../common'
 import { CardType } from '../../../API/types'
+import s from './CardsTableColumnsRender.module.css'
+
+/**
+ * Iterates over columnsPropsNames and overrides default cell and/or header rendering
+ * @param cards - memoized data
+ * @param sort - setter for query params
+ * @param params - actual query params
+ * @param columnsPropsNames - keys from cards to be drawn in the table
+ */
 
 export const CardsTableColumnsRender = (
   cards: CardType[],
   sort: (newParams: { [param: string]: string }) => void,
-  params: unknown
+  params: unknown,
+  columnsPropsNames: string[]
 ) => {
-  return ['question', 'answer', 'updated', 'grade'].map((key) => {
+  return columnsPropsNames.map((key) => {
     switch (true) {
       case key === 'updated':
         return TableDateColumn(params, ['0updated', '1updated'], sort, key)
@@ -32,14 +42,9 @@ export const CardsTableColumnsRender = (
               e.row.original.questionImg.startsWith('data:image')
             ) {
               return (
-                <div style={{ height: '45px', width: '100px' }}>
+                <div className={s.deckCoverContainer}>
                   <img
                     alt={`image for question: ${e.value}`}
-                    style={{
-                      height: '100%',
-                      width: '100%',
-                      objectFit: 'cover',
-                    }}
                     src={e.row.original.questionImg}
                   />
                 </div>
@@ -59,14 +64,9 @@ export const CardsTableColumnsRender = (
               e.row.original.answerImg.startsWith('data:image')
             ) {
               return (
-                <div style={{ height: '45px', width: '100px' }}>
+                <div className={s.deckCoverContainer}>
                   <img
                     alt={`image for answer: ${e.value}`}
-                    style={{
-                      height: '100%',
-                      width: '100%',
-                      objectFit: 'cover',
-                    }}
                     src={e.row.original.answerImg}
                   />
                 </div>

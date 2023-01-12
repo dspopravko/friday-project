@@ -7,7 +7,7 @@ const initialState = {
   errors: '',
 }
 
-export const newPasswordSlice = createSlice({
+const newPasswordSlice = createSlice({
   name: 'newPassword',
   initialState: initialState,
   reducers: {
@@ -36,3 +36,4 @@ export const newPasswordSlice = createSlice({
 })
 
 export const newPasswordReducer = newPasswordSlice.reducer
+export const newPasswordActions = newPasswordSlice.actions

@@ -3,13 +3,13 @@ import { Typography } from '@mui/material'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { PATH } from '../../data/paths'
 import { useSetHeaderTitle } from '../../hooks/setHeaderTitle'
-import { SuccessBig } from '../../features/auth/common/components/successBig'
+import { SuccessBlock, SuggestBlock } from '../../common'
 import { Email } from '@mui/icons-material'
 import { RestoreForm } from '../../features/auth/restore/UI/restoreForm'
-import { SuggestBlock } from '../../features/auth/common/components/suggestBlock'
 import { theme } from '../../assets/mui-theme'
 import { resPassActions } from '../../features/auth/restore/BLL/restorePasswordSlice'
 import { motion } from 'framer-motion'
+import s from './PasswordRestore.module.css'
 
 export const PasswordRestore = () => {
   useSetHeaderTitle('Restore password')
@@ -19,7 +19,7 @@ export const PasswordRestore = () => {
     errors: serverErrors,
     isFetching,
     email,
-  } = useAppSelector((state) => state.res)
+  } = useAppSelector((state) => state.resPass)
 
   return (
     <motion.div
@@ -30,22 +30,24 @@ export const PasswordRestore = () => {
     >
       {restored ? (
         <>
-          <SuccessBig
+          <SuccessBlock
             GoTo={{ title: 'Sign In', path: '/' + PATH.LOGIN.MAIN }}
             email={email}
           >
             <Email />
-          </SuccessBig>
+          </SuccessBlock>
         </>
       ) : (
         <>
           <Typography variant={'h5'}>Forgot your password?</Typography>
           <RestoreForm isFetching={isFetching} />
-          <SuggestBlock
-            question={'Did you remember your password?'}
-            suggestion={'Try logging in'}
-            path={'/' + PATH.LOGIN.MAIN}
-          />
+          <div className={s.suggestContainer}>
+            <SuggestBlock
+              question={'Did you remember your password?'}
+              suggestion={'Try logging in'}
+              path={'/' + PATH.LOGIN.MAIN}
+            />
+          </div>
         </>
       )}
       <Typography

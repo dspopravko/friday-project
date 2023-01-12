@@ -2,6 +2,15 @@ import React, { useState } from 'react'
 import { PacksType } from '../../../BLL/packsSlice'
 import cardsBlank from '../../../../../assets/cardsBlank.svg'
 import { TableDateColumn } from '../../../../../common'
+import s from './PacksTableComlumnsRender.module.css'
+
+/**
+ * Iterates over columnsPropsNames and overrides default cell and/or header rendering
+ * @param packs - memoized data
+ * @param sort - setter for query params
+ * @param params - actual query params
+ * @param columnsPropsNames - keys from packs to be drawn in the table
+ */
 
 export const PacksTableColumnsRender = (
   packs: PacksType[],
@@ -19,22 +28,15 @@ export const PacksTableColumnsRender = (
           Cell: ({ value }: { value: string }) => {
             const [image, setImage] = useState(value)
             return (
-              <div style={{ width: '48px', height: '48px' }}>
+              <div className={s.deckCoverContainer}>
                 <img
                   alt={'pack_cover'}
                   onError={() => setImage(cardsBlank)}
-                  style={{
-                    borderRadius: '20%',
-                    height: '100%',
-                    width: '100%',
-                    objectFit: 'cover',
-                  }}
                   src={image || cardsBlank}
                 />
               </div>
             )
           },
-          maxWidth: 70,
         }
       case key === 'name':
         return {
@@ -76,15 +78,6 @@ export const PacksTableColumnsRender = (
         }
       case key === 'updated':
         return TableDateColumn(params, ['0updated', '1updated'], sort, key)
-      case key === '_id':
-        // render method for id column removed here. this id column data is needed to be aviliable for the table action buttons
-        if (key === '_id') {
-          return {
-            Header: '',
-            accessor: key,
-            Cell: () => null,
-          }
-        }
     }
     return { Header: key, accessor: key }
   })

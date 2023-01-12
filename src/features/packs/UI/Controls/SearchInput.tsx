@@ -3,18 +3,16 @@ import { InputAdornment, TextField } from '@mui/material'
 import { SearchSharp } from '@mui/icons-material'
 
 export type DebouncedInputPropsType = {
-  onChangeText?: (value: string) => void
-  onEnter?: () => void
-  spanClassName?: string
   value: string
-  placeholder?: string
+  onChangeText?: (value: string) => void
   onDebouncedChange?: (value: string) => void
+  placeholder?: string
 }
 
 export const DebouncedInput = ({
-  onDebouncedChange,
-  onChangeText,
   value,
+  onChangeText,
+  onDebouncedChange,
   placeholder = 'Search...',
 }: DebouncedInputPropsType) => {
   const [timerId, setTimerId] = useState<number | undefined>(undefined)

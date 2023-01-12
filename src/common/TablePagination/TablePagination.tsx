@@ -26,6 +26,7 @@ export const TablePagination = ({
 }: TablePaginationPropsType) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
+
   const handleChange = (value: number, param: string) =>
     setSearchParams(
       createSearchParams({ ...params, [param]: value.toString() }),

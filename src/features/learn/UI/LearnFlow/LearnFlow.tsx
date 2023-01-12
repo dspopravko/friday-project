@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../../../state/store'
 import { LinearProgress, Paper } from '@mui/material'
 import { setGrade } from '../../BLL/learnThunk'
 import { LearnForm } from '../LearnForm/LearnForm'
-import { SuccessBig } from '../../../auth/common/components/successBig'
+import { SuccessBlock } from '../../../../common'
 import { PATH } from '../../../../data/paths'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
 import { CardType } from '../../../cards/API/types'
@@ -17,12 +17,14 @@ export const LearnFlow = () => {
   const [total, setTotal] = useState<number | null>(null)
   const [currentCard, setCurrentCard] = useState<CardType | null>(null)
   const dispatch = useAppDispatch()
+
   useEffect(() => {
     setCurrentCard(getRandomCard())
     return () => {
       dispatch(learnActions.resetSlice())
     }
   }, [])
+
   useEffect(() => {
     setCardsLeft(cards.length)
     if (total) {
@@ -31,6 +33,7 @@ export const LearnFlow = () => {
       setTotal(cards.length)
     }
   }, [cards])
+
   const handleFeedback = (grade: number) => {
     if (!currentCard) {
       return
@@ -40,12 +43,14 @@ export const LearnFlow = () => {
     }
     dispatch(setGrade({ grade, card_id: currentCard._id }))
   }
+
   const handleNext = (grade: number) => {
     if (currentCard) {
       handleFeedback(grade)
       setCurrentCard(getRandomCard())
     }
   }
+
   const getRandomCard = () => {
     const remainCards = cards.filter((card) => card._id !== currentCard?._id)
     if (remainCards.length === 0) {
@@ -61,6 +66,7 @@ export const LearnFlow = () => {
     }
     return currentCard
   }
+
   const normalise = () => {
     if (total && cardsLeft) {
       return ((total - cardsLeft) * 100) / total
@@ -68,11 +74,12 @@ export const LearnFlow = () => {
       return 0
     }
   }
+
   return (
     <motion.div
-      initial={{x: 100, opacity: 0}}
-      animate={{x: 0,opacity: 1}}
-      transition={{delay: 0, duration: 0.2}}
+      initial={{ x: 100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ delay: 0, duration: 0.2 }}
     >
       {!isCompleted && (
         <LinearProgress variant="determinate" value={normalise()} />
@@ -95,7 +102,7 @@ export const LearnFlow = () => {
           />
         )}
         {isCompleted && (
-          <SuccessBig
+          <SuccessBlock
             title={'You have successfully learned all the tables!'}
             email={''}
             description={'👇'}
@@ -105,7 +112,7 @@ export const LearnFlow = () => {
             }}
           >
             <DoneAllIcon />
-          </SuccessBig>
+          </SuccessBlock>
         )}
       </Paper>
     </motion.div>

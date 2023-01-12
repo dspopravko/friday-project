@@ -5,4 +5,5 @@ export const ownerIDSelector = (state: AppRootStateType) =>
 export const profileSelector = (state: AppRootStateType) => state.profile
 export const isAuthSelector = (state: AppRootStateType) => state.auth.isAuth
 export const isAuthFetching = (state: AppRootStateType) => state.auth.isFetching
-export const newPasswordStateSelector = (state: AppRootStateType) => state.new
+export const newPasswordStateSelector = (state: AppRootStateType) =>
+  state.newPass

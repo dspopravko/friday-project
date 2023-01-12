@@ -29,6 +29,7 @@
   --container-shadow: 0 0px 4px rgba(0, 0, 0, 0.15);
   --header-shadow: 0 -2px 8px rgba(0, 0, 0, 0.35);
   --footer-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --paper-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
 }
 
 .bg-1 {
@@ -71,7 +72,10 @@ a.active {
   border-radius: 2px;
   margin: 60px auto 0  auto;
   padding: 35px 38px 33px 38px;
-  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+  box-shadow: var(--paper-shadow)
+}
+.pending {
+  opacity: 0.4;
 }
 @media only screen and (max-width: 600px)  {
   .loginCanvas {
