@@ -65,9 +65,6 @@ export const DoubleSliderWithInputs = ({
     //set limit on initialization
     if (!isNaN(border[1]) && !initialized) {
       setLocalValue({ min: current[0] || 0, max: border[1] })
-      setTimeout(() => {
-        setInitialized(true)
-      }, 100)
     }
   }, [border])
 
