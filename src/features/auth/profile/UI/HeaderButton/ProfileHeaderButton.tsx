@@ -14,11 +14,11 @@ export const ProfileHeaderButton = () => {
   const navigate = useNavigate()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const openMui = Boolean(anchorEl)
+
+  //handlers
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) =>
     setAnchorEl(event.currentTarget)
-
   const handleClose = () => setAnchorEl(null)
-
   const handleLogout = () => dispatch(logout())
 
   return (

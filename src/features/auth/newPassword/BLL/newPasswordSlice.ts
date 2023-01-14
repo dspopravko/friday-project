@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { newPassword } from './newPasswordThunk'
+import { logout } from '../../login/BLL/loginThunks'
 
 const initialState = {
   isFetching: false,
@@ -14,10 +15,8 @@ const newPasswordSlice = createSlice({
     setRestorePassword(state, action: PayloadAction<boolean>) {
       state.isSet = action.payload
     },
-    reset(state) {
-      state.isFetching = false
-      state.isSet = false
-      state.errors = ''
+    resetState() {
+      return initialState
     },
   },
   extraReducers: (builder) => {
@@ -31,6 +30,9 @@ const newPasswordSlice = createSlice({
     builder.addCase(newPassword.rejected, (state, action) => {
       state.errors = JSON.stringify(action.payload)
       state.isFetching = false
+    })
+    builder.addCase(logout.fulfilled, () => {
+      return initialState
     })
   },
 })

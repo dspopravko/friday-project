@@ -16,13 +16,12 @@ import { pendingPacks, packsSelector } from '../../../BLL/selectorsPacks'
 import { packsTableActionsCreator } from '../PacksTableActions/PacksTableActionsCreator/PacksTableActionsCreator'
 import { Typography } from '@mui/material'
 import cx from 'classnames'
-import { packsActions } from '../../../BLL/packsSlice'
+import { userActions } from '../../../../user/BLL/userSlice'
 
 type PacksTablePropsType = {
   columnsPropsNames: Array<keyof PackType>
 }
-
-export function PacksTable({ columnsPropsNames }: PacksTablePropsType) {
+export const PacksTable = ({ columnsPropsNames }: PacksTablePropsType) => {
   const packs = useAppSelector(packsSelector)
   const pending = useAppSelector(pendingPacks)
   const userID = useAppSelector(userIdSelector)
@@ -65,7 +64,9 @@ export function PacksTable({ columnsPropsNames }: PacksTablePropsType) {
     const typedRow = row as { original: PackType }
     const typedCell = cell as { column: { id: string } }
     if (typedCell.column.id === 'user_name') {
-      dispatch(packsActions.resetState())
+      dispatch(
+        userActions.setUserProperty({ name: typedRow.original.user_name })
+      )
       navigate(`/${PATH.USER}/${typedRow.original.user_id}`)
       return
     }

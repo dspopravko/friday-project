@@ -1,5 +1,5 @@
 import { UserType } from '../../users/API/types'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getUser } from './userThunk'
 
 const initialState = {
@@ -10,6 +10,9 @@ const userSlice = createSlice({
   name: 'user',
   initialState: initialState,
   reducers: {
+    setUserProperty(state, action: PayloadAction<Partial<UserType>>) {
+      state.user = action.payload as UserType
+    },
     resetState() {
       return initialState
     },

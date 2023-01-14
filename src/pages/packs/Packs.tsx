@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { PacksTableControls } from '../../features/packs/UI/Controls/PacksTableControls'
 import { PacksTable } from '../../features/packs/UI/Table/PacksTable/PacksTable'
-import { getPacks } from '../../features/packs/BLL/packsThunk'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { useSearchParams } from 'react-router-dom'
 import { TablePagination } from '../../common'
@@ -15,6 +14,8 @@ import { goBackButtonTitles } from '../../layout/Header/Header'
 import { useGoBackButton } from '../../hooks/useGoBackButton'
 import { motion } from 'framer-motion'
 import s from './Packs.module.css'
+import { packsActions } from '../../features/packs/BLL/packsSlice'
+import { getPacks } from '../../features/packs/BLL/packsThunk'
 
 export const Packs = () => {
   useSetHeaderTitle('Packs')
@@ -22,8 +23,19 @@ export const Packs = () => {
   const maxPage = useAppSelector(maxPageSelector)
   const [searchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
-  const dispatch = useAppDispatch()
   useGoBackButton(goBackButtonTitles.none)
+  const dispatch = useAppDispatch()
+
+  //state managing
+  const resetState = useCallback(() => {
+    dispatch(packsActions.resetState())
+  }, [searchParams])
+
+  useEffect(() => {
+    return () => {
+      resetState()
+    }
+  }, [])
 
   useEffect(() => {
     dispatch(getPacks(params))

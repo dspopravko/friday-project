@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { DoubleSliderWithInputs } from '../../../packs/UI/Controls/Slider/DoubleSliderWithInputs'
 import { DebouncedInput } from '../../../packs/UI/Controls/SearchInput'
 import { createSearchParams, useSearchParams } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../../../../state/store'
-import { getUsers } from '../../BLL/usersThunk'
+import { useAppSelector } from '../../../../state/store'
 import { IconButton, Typography } from '@mui/material'
 import s from './UsersFilter.module.css'
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff'
@@ -20,18 +19,17 @@ export const UsersFilter = () => {
   const usersPage = useAppSelector(usersCurrentPage)
   const [searchParams, setSearchParams] = useSearchParams()
   const params = Object.fromEntries(searchParams)
-  const dispatch = useAppDispatch()
+
   const updateParams = (newParams: { [param: string]: string }[]) =>
     setSearchParams(
       createSearchParams({ ...params, ...Object.assign({}, ...newParams) }),
       { replace: true }
     )
+
   const clearParams = () => {
     setSearchParams(createSearchParams({}), { replace: true })
   }
-  useEffect(() => {
-    dispatch(getUsers(params))
-  }, [searchParams])
+
   return (
     <div className={s.usersFilterContainer}>
       <div className={s.controlBlock}>

@@ -4,35 +4,30 @@ import { Avatar, Typography } from '@mui/material'
 import s from './UserItem.module.css'
 import { useNavigate } from 'react-router-dom'
 import { PATH } from '../../../../../data/paths'
-import { packsActions } from '../../../../packs/BLL/packsSlice'
 import { useAppDispatch } from '../../../../../state/store'
+import { userActions } from '../../../../user/BLL/userSlice'
 
-export const UserItem = ({
-  _id,
-  name,
-  publicCardPacksCount,
-  avatar,
-}: UserType) => {
-  const dispatch = useAppDispatch()
+export const UserItem = (user: UserType) => {
   const navigate = useNavigate()
+  const dispacth = useAppDispatch()
 
   const userClickHandler = () => {
-    dispatch(packsActions.resetState())
-    _id && navigate(`/${PATH.USER}/${_id}`)
+    dispacth(userActions.setUserProperty(user))
+    user._id && navigate(`/${PATH.USER}/${user._id}`)
   }
 
   return (
     <div className={s.userContainer} onClick={userClickHandler}>
       <div style={{ marginLeft: '4px' }}>
-        <Avatar sx={{ width: 76, height: 76 }} src={avatar} />
+        <Avatar sx={{ width: 76, height: 76 }} src={user.avatar} />
       </div>
-      {name && (
+      {user.name && (
         <div className={s.textContainer}>
           <div>
-            <Typography>{name}</Typography>
+            <Typography>{user.name}</Typography>
           </div>
           <div>
-            <Typography>Packs: {publicCardPacksCount}</Typography>
+            <Typography>Packs: {user.publicCardPacksCount}</Typography>
           </div>
         </div>
       )}

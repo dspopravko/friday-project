@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { updateProfile } from './profileThunk'
-import { authMe, login } from '../../login/BLL/loginThunks'
+import { authMe, login, logout } from '../../login/BLL/loginThunks'
 
 const initialState = {
   pending: false,
@@ -28,17 +28,11 @@ const profileSlice = createSlice({
     setUser(state, action: PayloadAction<userType>) {
       state.user = { ...state.user, ...action.payload }
     },
-    resetUser(state) {
-      state.user = {
-        _id: '',
-        name: '',
-        email: '',
-        publicCardPacksCount: 0,
-        avatar: '',
-      }
-    },
     setProfilePhoto(state, action: PayloadAction<string>) {
       state.user.avatar = action.payload
+    },
+    resetState() {
+      return initialState
     },
   },
   extraReducers: (builder) => {
@@ -63,8 +57,8 @@ const profileSlice = createSlice({
         publicCardPacksCount: action.payload.publicCardPacksCount,
       }
     })
-    builder.addCase(authMe.rejected, (state) => {
-      profileSlice.caseReducers.resetUser(state)
+    builder.addCase(authMe.rejected, () => {
+      return initialState
     })
     builder.addCase(login.fulfilled, (state, action) => {
       state.pending = false
@@ -76,8 +70,11 @@ const profileSlice = createSlice({
         publicCardPacksCount: action.payload.publicCardPacksCount,
       }
     })
-    builder.addCase(login.rejected, (state) => {
-      profileSlice.caseReducers.resetUser(state)
+    builder.addCase(login.rejected, () => {
+      profileSlice.caseReducers.resetState()
+    })
+    builder.addCase(logout.fulfilled, () => {
+      return initialState
     })
   },
 })

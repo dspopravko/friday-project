@@ -26,9 +26,8 @@ const cardsSlice = createSlice({
     setPending(state, action: PayloadAction<boolean>) {
       state.pending = action.payload
     },
-    resetPack(state) {
-      state.cardsPage.packUserId = ''
-      state.cardsCurrent = []
+    resetState() {
+      return initialState
     },
   },
   extraReducers: (builder) => {

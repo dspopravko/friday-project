@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import s from './Header.module.css'
 import { HeaderContext } from '../../context/context'
-import { useAppDispatch, useAppSelector } from '../../state/store'
+import { useAppSelector } from '../../state/store'
 import { ProfileHeaderButton } from '../../features/auth/profile/UI/HeaderButton/ProfileHeaderButton'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { PATH } from '../../data/paths'
@@ -9,8 +9,6 @@ import { Button, Fab, IconButton } from '@mui/material'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 import { isAuthSelector } from '../../features/auth/common/selectors/selectorsAuth'
 import Groups2Icon from '@mui/icons-material/Groups2'
-import { packsActions } from '../../features/packs/BLL/packsSlice'
-import { cardsActions } from '../../features/cards/BLL/cardsSlice'
 
 export enum goBackButtonTitles {
   none = '',
@@ -19,7 +17,6 @@ export enum goBackButtonTitles {
 }
 
 export const Header = () => {
-  const dispatch = useAppDispatch()
   const { goBackButtonTitle } = useContext(HeaderContext)
   const isAuth = useAppSelector(isAuthSelector)
   const navigate = useNavigate()
@@ -31,8 +28,6 @@ export const Header = () => {
           {goBackButtonTitle && (
             <Fab
               onClick={() => {
-                dispatch(cardsActions.resetPack())
-                dispatch(packsActions.resetState())
                 if (goBackButtonTitle === 'Go back to packs lists') {
                   navigate(`/${PATH.PACKS}`)
                 } else {
@@ -62,11 +57,13 @@ export const Header = () => {
         <div className={s.buttonGroup}>
           {isAuth ? (
             <>
+              {/*Link to Users*/}
               <NavLink className={s.usersNavlink} to={`/${PATH.USERS}`}>
                 <IconButton>
                   <Groups2Icon fontSize="large" color="action" />
                 </IconButton>
               </NavLink>
+              {/*Owner profile button*/}
               <ProfileHeaderButton />
             </>
           ) : (

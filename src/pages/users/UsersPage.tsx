@@ -13,10 +13,11 @@ export const UsersPage = () => {
 
   return (
     <motion.div
-      initial={{opacity: 0}}
-      animate={{opacity: 1}}
-      transition={{delay: 0, duration: 0.2}}
-      className={s.usersPageContainer}>
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0, duration: 0.2 }}
+      className={s.usersPageContainer}
+    >
       <UsersList />
       <UsersFilter />
     </motion.div>

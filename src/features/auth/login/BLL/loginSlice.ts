@@ -40,9 +40,8 @@ const loginSlice = createSlice({
       state.isFetching = false
       state.isAuth = false
     })
-    builder.addCase(logout.fulfilled, (state) => {
-      state.isFetching = false
-      state.isAuth = false
+    builder.addCase(logout.fulfilled, () => {
+      return initialState
     })
     builder.addCase(logout.pending, (state) => {
       state.isFetching = true

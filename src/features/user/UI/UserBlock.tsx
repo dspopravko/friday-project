@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Avatar, CircularProgress, Paper, Typography } from '@mui/material'
 import s from './UserBlock.module.css'
 import { useAppDispatch, useAppSelector } from '../../../state/store'
@@ -10,12 +10,25 @@ import { userActions } from '../BLL/userSlice'
 export const UserBlock = ({ id }: { id: string }) => {
   const user = useAppSelector(userSelector)
   const dispatch = useAppDispatch()
-  useEffect(() => {
-    dispatch(userActions.resetState())
-    setTimeout(() => {
-      dispatch(getUser({ id }))
-    }, 1500)
+
+  //state managing
+  const stateManager = useCallback(() => {
+    !user.created &&
+      setTimeout(() => {
+        dispatch(getUser({ id }))
+      }, 1500)
+    return () => {
+      dispatch(userActions.resetState())
+    }
   }, [])
+
+  useEffect(() => {
+    const resetState = stateManager()
+    return () => {
+      resetState()
+    }
+  }, [])
+
   return (
     <Paper className={s.userContainer}>
       <div className={s.avatarContainer}>

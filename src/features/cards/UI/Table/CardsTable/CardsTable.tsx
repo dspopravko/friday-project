@@ -15,7 +15,7 @@ type CardsTablePropsType = {
   columnsPropsNames: Array<keyof CardType>
 }
 
-export function CardsTable({ columnsPropsNames }: CardsTablePropsType) {
+export const CardsTable = ({ columnsPropsNames }: CardsTablePropsType) => {
   const cards = useAppSelector(selectCards)
   const pending = useAppSelector(pendingCards)
   const userID = useAppSelector(userIdSelector)

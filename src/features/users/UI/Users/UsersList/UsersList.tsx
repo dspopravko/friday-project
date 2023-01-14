@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { UserItem } from '../UserItem/UserItem'
-import { useAppSelector } from '../../../../../state/store'
+import { useAppDispatch, useAppSelector } from '../../../../../state/store'
 import {
   usersCurrentPageCount,
   usersMaxPageSelector,
@@ -9,21 +9,40 @@ import {
 } from '../../../BLL/selectorsUsers'
 import { CircularProgress, Typography } from '@mui/material'
 import { TablePagination } from '../../../../../common'
-import { UseSearchParamsObject } from '../../../../../hooks/useSearchParamsObject'
 import s from './UsersList.module.css'
+import { useSearchParams } from 'react-router-dom'
+import { getUsers } from '../../../BLL/usersThunk'
+import { usersActions } from '../../../BLL/usersSlice'
 
 export const UsersList = () => {
   const users = useAppSelector(usersSelector)
   const currentPage = useAppSelector(usersCurrentPageCount)
   const maxPage = useAppSelector(usersMaxPageSelector)
   const pending = useAppSelector(usersPendingSelector)
-  const params = UseSearchParamsObject()
+  const dispatch = useAppDispatch()
+
+  const [searchParams] = useSearchParams()
+  const params = Object.fromEntries(searchParams)
+
+  //state managing
+  const stateManager = useCallback(() => {
+    dispatch(usersActions.resetState())
+  }, [searchParams])
+
+  useEffect(() => {
+    return () => {
+      stateManager()
+    }
+  }, [])
+
+  useEffect(() => {
+    dispatch(getUsers(params))
+  }, [searchParams])
+
   return (
     <div className={s.userListContainer}>
       <div className={s.listContainer} style={{ opacity: pending ? 0.4 : 1 }}>
-        {users.map((u) => (
-          <UserItem key={u._id} {...u} />
-        ))}
+        {users.length && users.map((u) => <UserItem key={u._id} {...u} />)}
       </div>
       {pending && (
         <div style={{ margin: '110px' }}>

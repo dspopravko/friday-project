@@ -11,7 +11,11 @@ const initialState = {
 const usersSlice = createSlice({
   name: 'users',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    resetState() {
+      return initialState
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getUsers.fulfilled, (state, action) => {
       state.pending = false

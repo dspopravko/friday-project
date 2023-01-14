@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../state/store'
 import { getCards } from '../../features/cards/BLL/cardsThunk'
@@ -26,12 +26,19 @@ export const Cards = () => {
   const dispatch = useAppDispatch()
   useGoBackButton(goBackButtonTitles.back)
 
-  useEffect(() => {
-    dispatch(cardsActions.resetPack())
-  }, [])
+  //state managing
+  const stateManager = useCallback(() => {
+    id && dispatch(getCards({ cardsPack_id: id, ...params }))
+    return () => {
+      dispatch(cardsActions.resetState())
+    }
+  }, [id, searchParams])
 
   useEffect(() => {
-    id && dispatch(getCards({ cardsPack_id: id, ...params }))
+    const resetState = stateManager()
+    return () => {
+      resetState()
+    }
   }, [id, searchParams])
 
   return (
