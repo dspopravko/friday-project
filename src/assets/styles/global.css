@@ -30,6 +30,7 @@
   --header-shadow: 0 -2px 8px rgba(0, 0, 0, 0.35);
   --footer-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
   --paper-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+  --active-shadow: 0px 0px 5px 0px rgba(0,0,0,0.24);
 }
 
 .bg-1 {
@@ -62,6 +63,7 @@
   --form-field-color: hsl(228, 8%, 12%);
   --link-color: hsl(206, 89%, 45%);
   --appWidth: 1080px;
+  --transition: 0.2s ease
 }
 a.active {
   color: red;

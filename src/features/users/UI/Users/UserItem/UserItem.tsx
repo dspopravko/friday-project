@@ -6,8 +6,15 @@ import { useNavigate } from 'react-router-dom'
 import { PATH } from '../../../../../data/paths'
 import { useAppDispatch } from '../../../../../state/store'
 import { userActions } from '../../../../user/BLL/userSlice'
+import { motion } from 'framer-motion'
 
-export const UserItem = (user: UserType) => {
+export const UserItem = ({
+  user,
+  index,
+}: {
+  user: UserType
+  index: number
+}) => {
   const navigate = useNavigate()
   const dispacth = useAppDispatch()
 
@@ -17,7 +24,22 @@ export const UserItem = (user: UserType) => {
   }
 
   return (
-    <div className={s.userContainer} onClick={userClickHandler}>
+    <motion.div
+      initial={{
+        scale: 0.98,
+        opacity: 0,
+        y: -30,
+      }}
+      animate={{
+        scale: 1,
+        y: 0,
+        opacity: 1,
+        transition: { delay: index * 0.1, duration: 0.1 },
+      }}
+      exit={'exit'}
+      className={s.userContainer}
+      onClick={userClickHandler}
+    >
       <div style={{ marginLeft: '4px' }}>
         <Avatar sx={{ width: 76, height: 76 }} src={user.avatar} />
       </div>
@@ -31,6 +53,6 @@ export const UserItem = (user: UserType) => {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   )
 }

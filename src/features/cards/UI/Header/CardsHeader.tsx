@@ -58,7 +58,7 @@ export const CardsHeader = ({ id }: { id: string }) => {
       )}
       {/*Pack owner*/}
       <div className={s.block} style={{ flexGrow: 1 }}>
-        <UserItem {...user} />
+        <UserItem user={user} index={1} />
       </div>
       {/*Pack controls*/}
       <div className={s.block} style={{ justifyContent: 'space-evenly' }}>

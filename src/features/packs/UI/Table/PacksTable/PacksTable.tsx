@@ -17,6 +17,7 @@ import { packsTableActionsCreator } from '../PacksTableActions/PacksTableActions
 import { Typography } from '@mui/material'
 import cx from 'classnames'
 import { userActions } from '../../../../user/BLL/userSlice'
+import { AnimatePresence, motion } from 'framer-motion'
 
 type PacksTablePropsType = {
   columnsPropsNames: Array<keyof PackType>
@@ -98,32 +99,54 @@ export const PacksTable = ({ columnsPropsNames }: PacksTablePropsType) => {
             })}
           </thead>
           <tbody className={s.tableBody} {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row)
-              const { key, ...restProps } = row.getRowProps()
-              return (
-                <tr className={s.tableRow} key={key} {...restProps}>
-                  {row.cells.map((cell) => {
-                    const { key, ...restProps } = cell.getCellProps()
-                    return (
-                      <td
-                        title={
-                          cell.column.id === 'user_name'
-                            ? 'Show this user packs'
-                            : ''
-                        }
-                        onClick={() => cellClickHandler(cell, row)}
-                        className={s.tableCell}
-                        key={key}
-                        {...restProps}
-                      >
-                        <>{cell.render('Cell')}</>
-                      </td>
-                    )
-                  })}
-                </tr>
-              )
-            })}
+            <AnimatePresence>
+              {rows.map((row) => {
+                prepareRow(row)
+                const { key, ...restProps } = row.getRowProps()
+                const originalId = row.original as { _id: string }
+                return (
+                  <motion.tr
+                    initial={{
+                      scale: 0.98,
+                      opacity: 0,
+                      y: -30,
+                    }}
+                    animate={{
+                      scale: 1,
+                      y: 0,
+                      opacity: 1,
+                      transition: { delay: row.index * 0.1, duration: 0.1 },
+                    }}
+                    className={[s.tableRow, s.clickable].join(' ')}
+                    key={originalId._id}
+                    {...restProps}
+                  >
+                    {row.cells.map((cell) => {
+                      const { key, ...restProps } = cell.getCellProps()
+                      return (
+                        <motion.td
+                          // variants={tableCellVariants}
+                          // initial={'invisible'}
+                          // animate={'idle'}
+                          // exit={'exit'}
+                          title={
+                            cell.column.id === 'user_name'
+                              ? 'Show this user packs'
+                              : ''
+                          }
+                          onClick={() => cellClickHandler(cell, row)}
+                          className={s.tableCell}
+                          key={cell.value}
+                          {...restProps}
+                        >
+                          <>{cell.render('Cell')}</>
+                        </motion.td>
+                      )
+                    })}
+                  </motion.tr>
+                )
+              })}
+            </AnimatePresence>
           </tbody>
         </table>
         {!packs[0] && !pending && (

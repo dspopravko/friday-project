@@ -11,9 +11,14 @@
   align-items: center;
   gap: 12px;
   cursor: pointer;
+  transition: var(--transition);
+  will-change: scale;
 }
 .userContainer:hover {
-  background-color: #f8f8f8;
+  box-shadow: var(--active-shadow);
+}
+.userContainer:active {
+  transform: scale(0.99);
 }
 .textContainer {
   text-align: left;

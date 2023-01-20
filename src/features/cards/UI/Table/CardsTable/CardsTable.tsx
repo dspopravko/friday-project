@@ -10,6 +10,7 @@ import { userIdSelector } from '../../../../../state/selectors'
 import { cardsTableActionsCreator } from '../CardsTableActions/CardsTableActionsCreator/CardsTableActionsCreator'
 import { CardType } from '../../../API/types'
 import cx from 'classnames'
+import { AnimatePresence, motion } from 'framer-motion'
 
 type CardsTablePropsType = {
   columnsPropsNames: Array<keyof CardType>
@@ -73,22 +74,43 @@ export const CardsTable = ({ columnsPropsNames }: CardsTablePropsType) => {
             })}
           </thead>
           <tbody className={s.tableBody} {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row)
-              const { key, ...restProps } = row.getRowProps()
-              return (
-                <tr className={s.tableRow} key={key} {...restProps}>
-                  {row.cells.map((cell) => {
-                    const { key, ...restProps } = cell.getCellProps()
-                    return (
-                      <td className={s.tableCell} key={key} {...restProps}>
-                        <>{cell.render('Cell')}</>
-                      </td>
-                    )
-                  })}
-                </tr>
-              )
-            })}
+            <AnimatePresence>
+              {rows.map((row) => {
+                prepareRow(row)
+                const { key, ...restProps } = row.getRowProps()
+                return (
+                  <motion.tr
+                    initial={{
+                      scale: 0.98,
+                      opacity: 0,
+                      y: -30,
+                    }}
+                    animate={{
+                      scale: 1,
+                      y: 0,
+                      opacity: 1,
+                      transition: { delay: row.index * 0.1, duration: 0.1 },
+                    }}
+                    className={s.tableRow}
+                    key={key}
+                    {...restProps}
+                  >
+                    {row.cells.map((cell) => {
+                      const { key, ...restProps } = cell.getCellProps()
+                      return (
+                        <motion.td
+                          className={s.tableCell}
+                          key={key}
+                          {...restProps}
+                        >
+                          <>{cell.render('Cell')}</>
+                        </motion.td>
+                      )
+                    })}
+                  </motion.tr>
+                )
+              })}
+            </AnimatePresence>
           </tbody>
         </table>
       ) : (

@@ -13,6 +13,7 @@ import s from './UsersList.module.css'
 import { useSearchParams } from 'react-router-dom'
 import { getUsers } from '../../../BLL/usersThunk'
 import { usersActions } from '../../../BLL/usersSlice'
+import { AnimatePresence } from 'framer-motion'
 
 export const UsersList = () => {
   const users = useAppSelector(usersSelector)
@@ -42,7 +43,10 @@ export const UsersList = () => {
   return (
     <div className={s.userListContainer}>
       <div className={s.listContainer} style={{ opacity: pending ? 0.4 : 1 }}>
-        {users.length && users.map((u) => <UserItem key={u._id} {...u} />)}
+        <AnimatePresence mode={'sync'}>
+          {users.length &&
+            users.map((u, i) => <UserItem index={i} user={u} key={u._id} />)}
+        </AnimatePresence>
       </div>
       {pending && (
         <div style={{ margin: '110px' }}>
