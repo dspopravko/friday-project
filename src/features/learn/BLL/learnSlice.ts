@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, isAnyOf, PayloadAction } from '@reduxjs/toolkit'
 import { getAllCards, setGrade } from './learnThunk'
 import { CardType } from '../../cards/API/types'
 
@@ -32,27 +32,26 @@ const learnSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getAllCards.fulfilled, (state, action) => {
-      state.cards = action.payload.cards
-      state.packName = action.payload.packName
-      state.pending = false
-      state.loaded = true
-    })
-    builder.addCase(getAllCards.pending, (state) => {
-      state.pending = true
-    })
-    builder.addCase(getAllCards.rejected, (state) => {
-      state.pending = false
-    })
-    builder.addCase(setGrade.fulfilled, (state) => {
-      state.pending = false
-    })
-    builder.addCase(setGrade.pending, (state) => {
-      state.pending = true
-    })
-    builder.addCase(setGrade.rejected, (state) => {
-      state.pending = false
-    })
+    builder
+      .addCase(getAllCards.fulfilled, (state, action) => {
+        state.cards = action.payload.cards
+        state.packName = action.payload.packName
+        state.loaded = true
+      })
+      .addMatcher(isAnyOf(getAllCards.pending, setGrade.pending), (state) => {
+        state.pending = true
+      })
+      .addMatcher(
+        isAnyOf(
+          getAllCards.fulfilled,
+          getAllCards.rejected,
+          setGrade.fulfilled,
+          setGrade.rejected
+        ),
+        (state) => {
+          state.pending = false
+        }
+      )
   },
 })
 

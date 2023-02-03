@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, isAnyOf, PayloadAction } from '@reduxjs/toolkit'
 import { authMe, login, logout } from './loginThunks'
 
 const initialState = {
@@ -18,37 +18,34 @@ const loginSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(authMe.fulfilled, (state) => {
-      state.isAuth = true
-      state.isFetching = false
-    })
-    builder.addCase(authMe.pending, (state) => {
-      state.isFetching = true
-    })
-    builder.addCase(authMe.rejected, (state) => {
-      state.isFetching = false
-      state.isAuth = false
-    })
-    builder.addCase(login.fulfilled, (state) => {
-      state.isFetching = false
-      state.isAuth = true
-    })
-    builder.addCase(login.pending, (state) => {
-      state.isFetching = true
-    })
-    builder.addCase(login.rejected, (state) => {
-      state.isFetching = false
-      state.isAuth = false
-    })
-    builder.addCase(logout.fulfilled, () => {
-      return initialState
-    })
-    builder.addCase(logout.pending, (state) => {
-      state.isFetching = true
-    })
-    builder.addCase(logout.rejected, (state) => {
-      state.isFetching = false
-    })
+    builder
+      .addCase(logout.fulfilled, () => {
+        return initialState
+      })
+      .addMatcher(isAnyOf(authMe.fulfilled, login.fulfilled), (state) => {
+        state.isAuth = true
+      })
+      .addMatcher(isAnyOf(authMe.rejected, login.rejected), (state) => {
+        state.isAuth = false
+      })
+      .addMatcher(
+        isAnyOf(authMe.pending, login.pending, logout.pending),
+        (state) => {
+          state.isFetching = true
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          authMe.fulfilled,
+          authMe.rejected,
+          login.fulfilled,
+          login.rejected,
+          logout.rejected
+        ),
+        (state) => {
+          state.isFetching = false
+        }
+      )
   },
 })
 

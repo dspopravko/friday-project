@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, isAnyOf, PayloadAction } from '@reduxjs/toolkit'
 import { updateProfile } from './profileThunk'
 import { authMe, login, logout } from '../../login/BLL/loginThunks'
 
@@ -36,46 +36,52 @@ const profileSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(updateProfile.fulfilled, (state) => {
-      state.pending = false
-    })
-    builder.addCase(updateProfile.pending, (state) => {
-      state.pending = true
-      state.errors = ''
-    })
-    builder.addCase(updateProfile.rejected, (state, action) => {
-      state.pending = false
-      state.errors = JSON.stringify(action.payload)
-    })
-    builder.addCase(authMe.fulfilled, (state, action) => {
-      state.pending = false
-      state.user = {
-        _id: action.payload._id,
-        name: action.payload.name,
-        avatar: action.payload.avatar,
-        email: action.payload.email,
-        publicCardPacksCount: action.payload.publicCardPacksCount,
-      }
-    })
-    builder.addCase(authMe.rejected, () => {
-      return initialState
-    })
-    builder.addCase(login.fulfilled, (state, action) => {
-      state.pending = false
-      state.user = {
-        _id: action.payload._id,
-        name: action.payload.name,
-        avatar: action.payload.avatar,
-        email: action.payload.email,
-        publicCardPacksCount: action.payload.publicCardPacksCount,
-      }
-    })
-    builder.addCase(login.rejected, () => {
-      profileSlice.caseReducers.resetState()
-    })
-    builder.addCase(logout.fulfilled, () => {
-      return initialState
-    })
+    builder
+      .addCase(updateProfile.pending, (state) => {
+        state.pending = true
+        state.errors = ''
+      })
+      .addCase(updateProfile.rejected, (state, action) => {
+        state.errors = JSON.stringify(action.payload)
+      })
+      .addCase(authMe.fulfilled, (state, action) => {
+        state.user = {
+          _id: action.payload._id,
+          name: action.payload.name,
+          avatar: action.payload.avatar,
+          email: action.payload.email,
+          publicCardPacksCount: action.payload.publicCardPacksCount,
+        }
+      })
+      .addCase(authMe.rejected, () => {
+        return initialState
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.user = {
+          _id: action.payload._id,
+          name: action.payload.name,
+          avatar: action.payload.avatar,
+          email: action.payload.email,
+          publicCardPacksCount: action.payload.publicCardPacksCount,
+        }
+      })
+      .addCase(login.rejected, () => {
+        profileSlice.caseReducers.resetState()
+      })
+      .addCase(logout.fulfilled, () => {
+        return initialState
+      })
+      .addMatcher(
+        isAnyOf(
+          updateProfile.fulfilled,
+          updateProfile.rejected,
+          authMe.fulfilled,
+          login.fulfilled
+        ),
+        (state) => {
+          state.pending = false
+        }
+      )
   },
 })
 

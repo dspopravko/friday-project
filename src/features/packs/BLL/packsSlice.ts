@@ -26,22 +26,23 @@ const packsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getPacks.fulfilled, (state, action) => {
-      state.packs = action.payload.cardPacks
-      state.packsPage = action.payload.packsPage
-      state.pending = false
-    })
-    builder.addCase(getPacks.pending, (state) => {
-      state.pending = true
-    })
-    builder.addCase(getPacks.rejected, (state) => {
-      state.pending = false
-    })
-    builder.addCase(deletePack.fulfilled, (state, action) => {
-      state.packs = state.packs.filter(
-        (pack) => pack._id !== action.payload.deletedCardsPack._id
-      )
-    })
+    builder
+      .addCase(getPacks.fulfilled, (state, action) => {
+        state.packs = action.payload.cardPacks
+        state.packsPage = action.payload.packsPage
+        state.pending = false
+      })
+      .addCase(getPacks.pending, (state) => {
+        state.pending = true
+      })
+      .addCase(getPacks.rejected, (state) => {
+        state.pending = false
+      })
+      .addCase(deletePack.fulfilled, (state, action) => {
+        state.packs = state.packs.filter(
+          (pack) => pack._id !== action.payload.deletedCardsPack._id
+        )
+      })
   },
 })
 

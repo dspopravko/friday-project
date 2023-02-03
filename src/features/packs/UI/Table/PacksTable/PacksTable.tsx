@@ -125,10 +125,6 @@ export const PacksTable = ({ columnsPropsNames }: PacksTablePropsType) => {
                       const { key, ...restProps } = cell.getCellProps()
                       return (
                         <motion.td
-                          // variants={tableCellVariants}
-                          // initial={'invisible'}
-                          // animate={'idle'}
-                          // exit={'exit'}
                           title={
                             cell.column.id === 'user_name'
                               ? 'Show this user packs'
@@ -136,7 +132,7 @@ export const PacksTable = ({ columnsPropsNames }: PacksTablePropsType) => {
                           }
                           onClick={() => cellClickHandler(cell, row)}
                           className={s.tableCell}
-                          key={cell.value}
+                          key={key}
                           {...restProps}
                         >
                           <>{cell.render('Cell')}</>

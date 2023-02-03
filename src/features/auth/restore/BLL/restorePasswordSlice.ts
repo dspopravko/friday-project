@@ -25,17 +25,18 @@ const restorePasswordSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(restorePassword.fulfilled, (state) => {
-      state.restored = true
-      state.isFetching = false
-    })
-    builder.addCase(restorePassword.pending, (state) => {
-      state.isFetching = true
-    })
-    builder.addCase(restorePassword.rejected, (state, action) => {
-      state.errors = JSON.stringify(action.payload)
-      state.isFetching = false
-    })
+    builder
+      .addCase(restorePassword.fulfilled, (state) => {
+        state.restored = true
+        state.isFetching = false
+      })
+      .addCase(restorePassword.pending, (state) => {
+        state.isFetching = true
+      })
+      .addCase(restorePassword.rejected, (state, action) => {
+        state.errors = JSON.stringify(action.payload)
+        state.isFetching = false
+      })
   },
 })
 
