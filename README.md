@@ -1,22 +1,7 @@
 # Hello! This is our team project.
 
-Build with [Create React App](https://github.com/facebook/create-react-app). 🐢
+Deployed at [Vercel](cards-lovat-eight.vercel.app). ▲
 
-## Scripts:
+![image](https://user-images.githubusercontent.com/102243756/214954182-4772717d-c771-4c0f-8491-b8fc3e264f39.png)
 
-- `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-- `yarn test`
-
-Launches the test runner in the interactive watch mode.
-
-- `yarn build`
-
-Builds the app for production to the `build` folder.
-
-- `yarn deploy`
-
-Deploys the app to the gh-pages.
+### Cards is an app that uses [spaced repetition technique](https://en.wikipedia.org/wiki/Spaced_repetition) for you to quickly memorize things. In the app, you can create packs of cards, fill them with cards with text or pictures, learn them, as well as search and study packs of other users.
