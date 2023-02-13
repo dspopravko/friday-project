@@ -9,4 +9,12 @@
   flex-direction: column;
   gap: 12px;
   padding: 12px;
+  position: relative;
+}
+.loaderContainer {
+  margin-top: 20px;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

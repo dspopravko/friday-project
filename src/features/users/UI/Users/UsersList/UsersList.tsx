@@ -47,12 +47,12 @@ export const UsersList = () => {
           {users.length &&
             users.map((u, i) => <UserItem index={i} user={u} key={u._id} />)}
         </AnimatePresence>
+        {pending && (
+          <div className={s.loaderContainer}>
+            <CircularProgress />
+          </div>
+        )}
       </div>
-      {pending && (
-        <div style={{ margin: '110px' }}>
-          <CircularProgress />
-        </div>
-      )}
       {!users[0] && !pending && (
         <div style={{ margin: '10px' }}>
           <Typography>no users found</Typography>
